@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import { BackgroundImage, BackgroundImageSrc } from '@patternfly/react-core';
+import React, { Component, ReactNode } from 'react';
+import { BackgroundImage, BackgroundImageSrc, Page } from '@patternfly/react-core';
+import AppHeader from './appHeader';
 import xs from '@pf4-assets/images/pfbg_576.jpg';
 import xs2x from '@pf4-assets/images/pfbg_576@2x.jpg';
 import sm from '@pf4-assets/images/pfbg_768.jpg';
@@ -22,9 +23,11 @@ export default class App extends Component {
   };
   public render() {
     const { isShowing } = this.state;
+   
     return (
       <React.Fragment>
         <BackgroundImage src={images} />
+        <Page header={<AppHeader/>}/>
       </React.Fragment>
     );
   }

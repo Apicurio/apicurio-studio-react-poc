@@ -273,6 +273,11 @@
   resolved "https://registry.yarnpkg.com/@patternfly/react-icons/-/react-icons-3.0.1.tgz#47d0184f40686f3fb6a0b9b0e835013d95320f06"
   integrity sha512-A/ACY0zCpIvNR8bzR21hKghqFTkFNIUX4pksDoMH8MY2tdCkJVZwkGAVy9jQ98H9DnyMnaNDd4KZuaoyicmlug==
 
+"@patternfly/react-icons@^3.3.1":
+  version "3.7.1"
+  resolved "https://registry.yarnpkg.com/@patternfly/react-icons/-/react-icons-3.7.1.tgz#86fe0b75e871ddaeefb21c2d09f520eb6e88f1ea"
+  integrity sha512-Q7MDYKy+/4SjMR4UVK35Dg1srE2i4zwFiMA8UpuKqfqPaE5DsfpJALLeedxIiuMjhVC2XwoEwiQQkNczB2ejQQ==
+
 "@patternfly/react-styles@^2.3.2":
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/@patternfly/react-styles/-/react-styles-2.3.2.tgz#b2dd4d0e202bbdda7ceaceb6beced9c1419d2d87"
@@ -728,6 +733,13 @@ anymatch@^2.0.0:
   dependencies:
     micromatch "^3.1.4"
     normalize-path "^2.1.1"
+
+apicurio-ts-core@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/apicurio-ts-core/-/apicurio-ts-core-0.1.3.tgz#797a1147499319035b6adc4de21ec2b8b309be67"
+  integrity sha512-vX0kbdScBiM45Aru3OATOeC3m3YtOWCf9YEjH+OoX3ZKlYBXU2uY/c9mDxy1S9hsbbkDrvwvYEfWLLPCIAVbqw==
+  dependencies:
+    core-js "2.6.5"
 
 append-transform@^1.0.0:
   version "1.0.0"
@@ -2143,6 +2155,11 @@ copy-descriptor@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
   integrity sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
+
+core-js@2.6.5:
+  version "2.6.5"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.5.tgz#44bc8d249e7fb2ff5d00e0341a7ffb94fbf67895"
+  integrity sha512-klh/kDpwX8hryYL14M9w/xei6vrv6sE8gTHDG7/T/+SEovB/G4ejwcfE/CBzO6Edsu+OETZMZ3wcX/EjUkrl5A==
 
 core-js@^2.4.0, core-js@^2.4.1, core-js@^2.5.0:
   version "2.6.3"

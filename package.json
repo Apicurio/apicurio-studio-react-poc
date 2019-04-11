@@ -1,9 +1,9 @@
 {
-  "name": "patternfly-seed",
+  "name": "apicurio-react",
   "version": "0.0.1",
-  "description": "An open source build scaffolding utility for web apps.",
+  "description": "Apicurio web-based SPA",
   "main": "index.js",
-  "repository": "https://github.com/patternfly/patternfly-react-seed.git",
+  "repository": "https://github.com/dlabaj/apicurio-studio-react-poc.git",
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -17,7 +17,6 @@
     "clean": "rimraf dist"
   },
   "devDependencies": {
-    "@patternfly/react-core": "^2.1.4",
     "@types/enzyme": "^3.9.0",
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/jest": "^24.0.9",
@@ -38,9 +37,6 @@
     "prettier": "^1.15.2",
     "prop-types": "^15.6.1",
     "raw-loader": "^1.0.0",
-    "react": "^16.8.0",
-    "react-axe": "^3.1.0",
-    "react-dom": "^16.8.0",
     "regenerator-runtime": "^0.13.1",
     "rimraf": "^2.6.2",
     "style-loader": "^0.23.1",
@@ -60,5 +56,12 @@
     "webpack-dev-server": "^3.1.10",
     "webpack-merge": "^4.1.4"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@patternfly/react-core": "^2.1.4",
+    "@patternfly/react-icons": "^3.3.1",
+    "apicurio-ts-core": "^0.1.3",
+    "react": "^16.8.0",
+    "react-axe": "^3.1.0",
+    "react-dom": "^16.8.0"
+  }
 }
