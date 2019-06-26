@@ -1,15 +1,14 @@
 import React from 'react';
 import {Avatar, Brand, PageHeader } from '@patternfly/react-core';
 import {AppToolbar} from './appToolbar';
-import brandImg from '../../assets/APIDesigner.svg';
+import brandImg from '../../assets/images/apicurio_logo_darkbkg_200px.png';
 
 const showNavToogle: boolean = false;
 
 export const AppHeader: React.FunctionComponent<any> = (props) => {
     return (<PageHeader
-        logo={<Brand src={ brandImg } alt="Patternfly Logo" />}
+        logo={<Brand src={ brandImg } alt="Apicurio" />}
         toolbar={AppToolbar}
-        avatar={<Avatar alt="Avatar image" />}
         showNavToggle = {showNavToogle}
       />);
 }

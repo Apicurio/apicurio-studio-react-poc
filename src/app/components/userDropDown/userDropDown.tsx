@@ -6,14 +6,28 @@ let isDropdownOpen: boolean = false;
 const userDropdownItems: ReactNode[] = [];
 
 export class UserDropdown extends React.Component {
+  public state: {
+    isOpen: boolean;
+  };
+
   public constructor(props: any) {
     super(props);
     this.state = {
       isOpen: false
     };
   }
-  
-  private onSelect = (isOpen: boolean) => {};
+
+  private onToggle = (isOpen: boolean) => {
+    this.setState({
+      isOpen
+    });
+  };
+
+  private onSelect = () => {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  };
 
   public render() {
     return (
@@ -21,7 +35,7 @@ export class UserDropdown extends React.Component {
         isPlain={true}
         position="right"
         onSelect={() => {}}
-        isOpen={isDropdownOpen}
+        isOpen={this.state.isOpen}
         toggle={<DropdownToggle onToggle={() => {}}>User</DropdownToggle>}
         dropdownItems={userDropdownItems}
       />
