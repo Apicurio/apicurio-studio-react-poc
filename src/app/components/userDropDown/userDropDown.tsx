@@ -1,9 +1,9 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { Dropdown, DropdownItem, DropdownToggle } from "@patternfly/react-core";
 
-let isDropdownOpen: boolean = false;
-
-const userDropdownItems: ReactNode[] = [];
+const userDropdownItems: React.ReactNode[] = [
+  <DropdownItem key="action">Logout</DropdownItem>
+];
 
 export class UserDropdown extends React.Component {
   public state: {
@@ -34,9 +34,9 @@ export class UserDropdown extends React.Component {
       <Dropdown
         isPlain={true}
         position="right"
-        onSelect={() => {}}
+        onSelect={this.onSelect}
         isOpen={this.state.isOpen}
-        toggle={<DropdownToggle onToggle={() => {}}>User</DropdownToggle>}
+        toggle={<DropdownToggle onToggle={this.onToggle}>User</DropdownToggle>}
         dropdownItems={userDropdownItems}
       />
     );

@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import {Button, ButtonVariant, Dropdown, DropdownToggle, Toolbar, ToolbarGroup, ToolbarItem} from '@patternfly/react-core';
+import {UserDropdown} from './components/userDropDown'
 import { CogIcon} from '@patternfly/react-icons';
 //TODO: Need to add accessibility to the toolbar (see: http://patternfly-react.surge.sh/patternfly-4/demos/pagelayout)
  
@@ -19,14 +20,7 @@ export const AppToolbar = (
         </ToolbarGroup>
         <ToolbarGroup>
         <ToolbarItem>
-          <Dropdown
-            isPlain = {true}
-            position="right"
-            onSelect={()=>{}}
-            isOpen={isDropdownOpen}
-            toggle={<DropdownToggle onToggle={()=>{}}>User</DropdownToggle>}
-            dropdownItems={userDropdownItems}
-          />
+          <UserDropdown/>
         </ToolbarItem>
       </ToolbarGroup>
     </Toolbar>
