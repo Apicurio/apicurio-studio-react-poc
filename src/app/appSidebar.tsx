@@ -7,6 +7,7 @@ import {
   NavProps,
   PageSidebar
 } from "@patternfly/react-core";
+import {Link} from 'react-router-dom';
 
 interface AppSidebarProps extends NavProps {
   activeMenuGroup: string;
@@ -27,7 +28,7 @@ export const AppSidebar: React.FunctionComponent<AppSidebarProps> = ({
           itemId="grp-1_itm-1"
           isActive={activeMenuGroupItem === "grp-1_itm-1"}
         >
-          Dashboard
+         <Link to="/dashboard"> Dashboard </Link>
         </NavItem>
         <NavExpandable
           title="APIs"
@@ -39,21 +40,21 @@ export const AppSidebar: React.FunctionComponent<AppSidebarProps> = ({
             itemId="grp-2_itm-1"
             isActive={activeMenuGroupItem === "grp-2_itm-1"}
           >
-            View All APIs
+            <Link to="/apis">View All APIs</Link>
           </NavItem>
           <NavItem
             groupId="grp-2"
             itemId="grp-2_itm-2"
             isActive={activeMenuGroupItem === "grp-2_itm-2"}
           >
-            Create New API
+            <Link to="/apis/create">Create New API</Link>
           </NavItem>
           <NavItem
             groupId="grp-3"
             itemId="grp-2_itm-3"
             isActive={activeMenuGroupItem === "grp-2_itm-3"}
           >
-            Import API
+            <Link to="/apis/import">Import API</Link>
           </NavItem>
         </NavExpandable>
         <NavExpandable
@@ -66,21 +67,21 @@ export const AppSidebar: React.FunctionComponent<AppSidebarProps> = ({
             itemId="grp-3_itm-1"
             isActive={activeMenuGroupItem === "grp-3_itm-1"}
           >
-            User Profile
+            <Link to="/settings/profile">User Profile</Link>
           </NavItem>
           <NavItem
             groupId="grp-3"
             itemId="grp-3_itm-2"
             isActive={activeMenuGroupItem === "grp-3_itm-2"}
           >
-            Linked Accounts
+            <Link to="/settings/accounts">Linked Accounts</Link>
           </NavItem>
           <NavItem
             groupId="grp-3"
             itemId="grp-3_itm-3"
             isActive={activeMenuGroupItem === "grp-3_itm-3"}
           >
-            Validation
+            <Link to="/settings/validation">Validation</Link>
           </NavItem>
         </NavExpandable>
       </NavList>
