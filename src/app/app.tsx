@@ -2,13 +2,12 @@ import React, { Component, ReactNode } from "react";
 import {
   Page,
   PageSectionVariants,
-  PageSection,
-  TextContent,
-  Text
+  PageSection
 } from "@patternfly/react-core";
 import AppHeader from "./appHeader";
 import AppSidebar from "./appSidebar";
-
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import * as Pages from './pages';
 export default class App extends Component {
   public state = {
     activeMenuGroup: "",
@@ -20,14 +19,18 @@ export default class App extends Component {
 
     const section = (
       <PageSection variant={PageSectionVariants.light}>
-        <TextContent>
-          <Text component="h1">Dashboard</Text>
-          <Text component="p">Content goes here...</Text>
-        </TextContent>
+         <Route path='/' exact={true} component={Pages.Dashboard}/>
+         <Route path='/dashboard' exact={true} component={Pages.Dashboard}/>
+         <Route path='/apis' exact={true}  component={Pages.ViewApis}/>
+         <Route path='/apis/create' exact={true} component={Pages.CreateAPI}/>
+         <Route path='/apis/import' exact={true} component={Pages.ImportAPI}/>
+         <Route path='/settings/profile' exact={true} component={Pages.UserProfile}/>
+         <Route path='/settings/accounts' exact={true} component={Pages.LinkedAccounts}/>
+         <Route path='/settings/validation' exact={true} component={Pages.Validations}/>
       </PageSection>
     );
     return (
-      <React.Fragment>
+       <Router>
         <Page
           isManagedSidebar={true}
           header={<AppHeader />}
@@ -41,7 +44,7 @@ export default class App extends Component {
         >
           {section}
         </Page>
-      </React.Fragment>
+        </Router>
     );
   }
 
