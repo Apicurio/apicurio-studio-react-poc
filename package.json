@@ -8,7 +8,9 @@
       "packages/*"
     ],
     "nohoist": [
-      "@patternfly/react-styles"
+      "**/@patternfly/react-core",
+      "**/@patternfly/react-core/**",
+      "**/patternfly"
     ]
   },
   "scripts": {
