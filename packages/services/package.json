@@ -1,19 +1,21 @@
 {
-  "name": "@apicurio/models",
+  "name": "@apicurio/services",
   "version": "1.0.0",
   "description": "Apicurio models for use when developing client applications.",
   "main": "dist/js/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/js/index.d.ts",
   "scripts": {
-    "build": " tsc && tsc -m es6 --outDir ./dist/esm && webpack --config webpack.config.js",
+    "buildxxx": " tsc && tsc -m es6 --outDir ./dist/esm && webpack --config webpack.config.js",
     "clean": "rimraf dist",
     "prebuild": "yarn clean",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Red Hat",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "@apicurio/models": "1.0.0"
+  },
   "devDependencies": {
     "rimraf": "^2.6.2",
     "ts-loader": "^6.0.4",

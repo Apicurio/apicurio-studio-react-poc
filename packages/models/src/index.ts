@@ -27,4 +27,5 @@ export * from './source-code-branch.model';
 export * from './storageError.model';
 export * from './update-codegen-project.model';
 export * from './update-collaborator.model';
+export * from './user.model';
 export * from './validation.model';
