@@ -3,6 +3,9 @@
 # dependencies
 node_modules
 
+#generated files:
+generated
+
 # testing
 coverage
 

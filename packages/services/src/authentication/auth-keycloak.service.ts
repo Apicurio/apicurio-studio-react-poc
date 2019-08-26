@@ -15,9 +15,9 @@
  * limitations under the License.
  */
 
-import {IAuthenticationService} from "../auth.service";
+import {IAuthenticationService} from "./auth.service";
 import {User} from "@apicurio/models";
-import {ConfigService} from "../../config/config.service";
+import {ConfigService} from "../config/config.service";
 import {Topic} from "apicurio-ts-core";
 
 /**
