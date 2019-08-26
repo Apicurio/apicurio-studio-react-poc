@@ -15,10 +15,9 @@
  * limitations under the License.
  */
 
-import {IAuthenticationService} from "./auth.service";
+import {IAuthenticationService} from "../auth.service";
 import {User} from "@apicurio/models";
-import {ConfigService} from "./config.service";
-import {HttpClient} from "@angular/common/http";
+import {ConfigService} from "../../config/config.service";
 import {Topic} from "apicurio-ts-core";
 
 /**
@@ -27,32 +26,31 @@ import {Topic} from "apicurio-ts-core";
  */
 export class KeycloakAuthenticationService extends IAuthenticationService {
 
-    private _authenticated: Topic<boolean> = new Topic<boolean>();
-    private _user: User;
+    private authenticatedTopic: Topic<boolean> = new Topic<boolean>();
+    private user: User;
 
     private keycloak: any;
 
     /**
      * Constructor.
-     * @param http
      * @param config
      */
-    constructor(private http: HttpClient, private config: ConfigService) {
+    constructor(private config: ConfigService) {
         super();
-        let w: any = window;
-        this.keycloak = w["keycloak"];
+        const w: any = window;
+        this.keycloak = w.keycloak;
 
         // console.info("Token: %s", JSON.stringify(this.keycloak.tokenParsed, null, 2));
         // console.info("ID Token: %s", JSON.stringify(this.keycloak.idTokenParsed, null, 2));
         // console.info("Access Token: %s", this.keycloak.token);
 
-        let user: User = new User();
+        const user: User = new User();
         user.name = this.keycloak.tokenParsed.name;
         user.login = this.keycloak.tokenParsed.preferred_username;
         user.email = this.keycloak.tokenParsed.email;
 
-        this._authenticated.send(true);
-        this._user = user;
+        this.authenticatedTopic.send(true);
+        this.user = user;
 
         // Periodically refresh the token
         // TODO run this outsize NgZone using zone.runOutsideAngular() : https://angular.io/api/core/NgZone
@@ -66,7 +64,7 @@ export class KeycloakAuthenticationService extends IAuthenticationService {
      * 
      */
     public isAuthenticated(): boolean {
-        return this._authenticated.getValue();
+        return this.authenticatedTopic.getValue();
     }
 
     /**
@@ -74,14 +72,14 @@ export class KeycloakAuthenticationService extends IAuthenticationService {
      * 
      */
     public getAuthenticatedUserNow(): User {
-        return this._user;
+        return this.user;
     }
 
     /**
      * Returns the topic to listen for auth changes.
      */
     public authenticated(): Topic<boolean> {
-        return this._authenticated;
+        return this.authenticatedTopic;
     }
 
     /**
@@ -105,8 +103,8 @@ export class KeycloakAuthenticationService extends IAuthenticationService {
      * @param headers
      */
     public injectAuthHeaders(headers: {[header: string]: string}): void {
-        let authHeader: string = "bearer " + this.keycloak.token;
-        headers["Authorization"] = authHeader;
+        const authHeader: string = "bearer " + this.keycloak.token;
+        headers.Authorization = authHeader;
     }
 
     /**
