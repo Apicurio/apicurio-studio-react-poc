@@ -4,7 +4,9 @@
 node_modules
 
 #generated files:
-generated
+config.js
+keycloak.js
+keycloak.json
 
 # testing
 coverage

@@ -24,6 +24,7 @@
     "@types/react": "^16.8.6",
     "@types/react-dom": "^16.8.2",
     "@types/webpack": "^4.4.25",
+    "copy-webpack-plugin": "^5.0.4",
     "css-loader": "^1.0.1",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
