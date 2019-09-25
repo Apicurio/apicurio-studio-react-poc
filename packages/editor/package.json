@@ -1,0 +1,38 @@
+{
+  "name": "@apicurio/editor",
+  "version": "1.0.0",
+  "description": "Apicurio models for use when developing client applications.",
+  "main": "dist/js/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/js/index.d.ts",
+  "scripts": {
+    "build": " tsc && tsc -m es6 --outDir ./dist/esm && webpack --config webpack.config.js",
+    "clean": "rimraf dist",
+    "prebuild": "yarn clean",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Red Hat",
+  "license": "Apache",
+  "dependencies": {
+    "@apicurio/models": "^1.0.0",
+    "@apicurio/services": "^1.0.0",
+    "@patternfly/react-core": "^3.38.1",
+    "@patternfly/react-icons": "^3.10.6",
+    "apicurio-data-models": "^1.0.4",
+    "apicurio-ts-core": "^0.1.3",
+    "react": "^16.8.0",
+    "react-ace": "^7.0.2",
+    "react-axe": "^3.1.0",
+    "react-dom": "^16.8.0"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.2",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.3",
+    "webpack": "^4.25.1",
+    "webpack-bundle-analyzer": "^3.0.3",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10",
+    "webpack-merge": "^4.1.4"
+  }
+}
