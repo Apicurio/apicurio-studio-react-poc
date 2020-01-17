@@ -1,11 +1,12 @@
 import React from "react";
-import { Text, TextContent } from "@patternfly/react-core";
+import {AppEmptyState} from '../../appEmptyState';
+import {AppDataList} from '../../appDataList';
 
 export const Dashboard: React.FunctionComponent<any> = () => {
   return (
-    <TextContent>
-      <Text component="h1">Dashboard</Text>
-      <Text component="p">Coming Soon...</Text>
-    </TextContent>
+    <React.Fragment>
+      <AppEmptyState></AppEmptyState>
+      <AppDataList></AppDataList>
+    </React.Fragment>
   );
 };

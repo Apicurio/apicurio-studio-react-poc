@@ -60,7 +60,7 @@
   "dependencies": {
     "@apicurio/models": "^1.0.0",
     "@apicurio/services": "^1.0.0",
-    "@patternfly/react-core": "^3.38.1",
+    "@patternfly/react-core": "^3.129.3",
     "@patternfly/react-icons": "^3.10.6",
     "@types/react-router": "^5.0.3",
     "@types/react-router-dom": "^4.3.4",

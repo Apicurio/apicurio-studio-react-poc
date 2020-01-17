@@ -5,6 +5,7 @@ import {
   PageSection
 } from "@patternfly/react-core";
 import AppHeader from "./appHeader";
+//import AppToolbar from "./appToolbar";
 import AppSidebar from "./appSidebar";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import * as Pages from './pages';
@@ -17,8 +18,14 @@ export default class App extends Component {
   public render() {
     const { activeMenuGroup, activeMenuGroupItem } = this.state;
 
-    const section = (
+    const sectionOne = (
       <PageSection variant={PageSectionVariants.light}>
+        APIs
+      </PageSection>
+    );
+
+    const section = (
+      <PageSection>
          <Route path='/' exact={true} component={Pages.Dashboard}/>
          <Route path='/dashboard' exact={true} component={Pages.Dashboard}/>
          <Route path='/apis' exact={true}  component={Pages.ViewApis}/>
@@ -34,14 +41,18 @@ export default class App extends Component {
         <Page
           isManagedSidebar={true}
           header={<AppHeader />}
-          sidebar={
-            <AppSidebar
-              activeMenuGroup={activeMenuGroup}
-              activeMenuGroupItem={activeMenuGroupItem}
-              onSelect={this.onNavSelect}
-            />
-          }
+          // sidebar={
+          //   <AppSidebar
+          //     activeMenuGroup={activeMenuGroup}
+          //     activeMenuGroupItem={activeMenuGroupItem}
+          //     onSelect={this.onNavSelect}
+          //   />
+          // }
         >
+          {sectionOne}
+          <PageSection variant={PageSectionVariants.light}>
+            {/* {AppToolbar} */}
+          </PageSection>
           {section}
         </Page>
         </Router>

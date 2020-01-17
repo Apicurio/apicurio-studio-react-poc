@@ -4,7 +4,7 @@ import "@patternfly/react-core/dist/styles/base.css";
 import App from './app/app';
 import './app/app.css';
 //import './config.js';
-import Keycloak from './keycloak';
+//import Keycloak from './keycloak';
 import './version.js';
 
 // Handle login via keycloak
