@@ -1,9 +1,5 @@
 import React, { Component, ReactNode } from "react";
-import {
-  Page,
-  PageSectionVariants,
-  PageSection
-} from "@patternfly/react-core";
+import { Button, Level, LevelItem, Page, PageSectionVariants, PageSection, Title } from "@patternfly/react-core";
 import AppHeader from "./appHeader";
 //import AppToolbar from "./appToolbar";
 import AppSidebar from "./appSidebar";
@@ -20,7 +16,21 @@ export default class App extends Component {
 
     const sectionOne = (
       <PageSection variant={PageSectionVariants.light}>
-        APIs
+        <Level>
+          <LevelItem>
+            <Title headingLevel="h1" size="3xl">
+              APIs
+            </Title>
+          </LevelItem>
+          <LevelItem>
+            <Button variant="secondary">
+              Import API
+            </Button>
+            <Button variant="primary">
+              Create new API
+            </Button>
+          </LevelItem>
+        </Level>
       </PageSection>
     );
 

@@ -1,6 +1,8 @@
 import React, { ReactNode } from 'react';
 import { Button, DataListItem, DataListItemCells, DataListItemRow, DataListCell, DataListCheck, DataListAction, Dropdown, DropdownItem, DropdownPosition, KebabToggle} from '@patternfly/react-core';
+import {AppDropdownKebab} from './appDropdownKebab';
 import ApicurioIcon from './assets/apicurio-icon.png';
+import './app.css'
 //import {UserDropdown} from './components/userDropDown'
 
 //let isDropdownOpen: boolean = false;
@@ -16,10 +18,10 @@ export const AppDataListItem = ({
       <DataListCheck/>
       <DataListItemCells
         dataListCells={[
-          <DataListCell isIcon key="">
-            {ApicurioIcon}
+          <DataListCell isIcon>
+            <img src={ApicurioIcon}/>
           </DataListCell>,
-          <DataListCell key="">
+          <DataListCell>
             <div>
               {apiName}
             </div>
@@ -30,9 +32,9 @@ export const AppDataListItem = ({
         ]}
         />
       <DataListAction>
-        <Button variant="link">View Details</Button>
-        <Button variant="secondary">Edit API</Button>
-        {/* Kebab goes here */}
+          <Button variant="link">View Details</Button>
+          <Button variant="secondary">Edit API</Button>
+          <AppDropdownKebab />
       </DataListAction>
     </DataListItemRow>
   </DataListItem>
