@@ -21,3 +21,40 @@
 .pf-c-data-list__cell.pf-m-icon > img {
   max-width: unset;
 }
+
+.app-api-title {
+  color: var(--pf-global--primary-color--100);
+}
+
+.app-api-description {
+  padding-top: calc(var(--pf-global--spacer--xs)/2);
+  font-size: var(--pf-global--FontSize--sm);
+}
+
+.app-api-tag-group {
+  padding-top: var(--pf-global--spacer--md);
+}
+
+.app-api-tag-group > *:not(:last-child) {
+  margin-right: var(--pf-global--spacer--sm);
+}
+
+.app-tag {
+  padding-right: var(--pf-global--spacer--sm);
+  padding-left: var(--pf-global--spacer--sm);
+  background-color: var(--pf-global--BackgroundColor--300);
+  font-size: var(--pf-global--FontSize--xs);
+  border-radius: var(--pf-global--BorderRadius--lg);
+}
+
+.app-card-view-card-body {
+  font-size: var(--pf-global--FontSize--sm);
+}
+
+.app-card-view-card-header {
+  font-weight: var(--pf-global--FontWeight--normal) !important;
+}
+
+.app-data-toolbar-button-control.pf-m-selected {
+  color: var(--pf-global--active-color--100);
+}

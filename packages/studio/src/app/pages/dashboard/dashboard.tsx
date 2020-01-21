@@ -1,12 +1,17 @@
 import React from "react";
 import {AppEmptyState} from '../../appEmptyState';
-import {AppDataList} from '../../appDataList';
+import AppDataList from '../../appDataList';
+import {AppCardView} from '../../appCardView';
 
 export const Dashboard: React.FunctionComponent<any> = () => {
+  const apiCount = 1; // update this value to count, if you want to see empty state set to 0
   return (
-    <React.Fragment>
-      <AppEmptyState></AppEmptyState>
-      <AppDataList></AppDataList>
-    </React.Fragment>
+    <div>
+      {apiCount === 0 ? (
+        <AppEmptyState />
+      ) : (
+        <AppDataList />
+      )}
+    </div>
   );
 };

@@ -1,7 +1,7 @@
 import React, { Component, ReactNode } from "react";
 import { Button, Level, LevelItem, Page, PageSectionVariants, PageSection, Title } from "@patternfly/react-core";
 import AppHeader from "./appHeader";
-//import AppToolbar from "./appToolbar";
+import AppToolbar from "./appToolbar";
 import AppSidebar from "./appSidebar";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import * as Pages from './pages';
@@ -61,7 +61,7 @@ export default class App extends Component {
         >
           {sectionOne}
           <PageSection variant={PageSectionVariants.light}>
-            {/* {AppToolbar} */}
+            <AppToolbar></AppToolbar>
           </PageSection>
           {section}
         </Page>
