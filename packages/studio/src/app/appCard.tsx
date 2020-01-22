@@ -14,7 +14,7 @@ class AppCard extends React.Component {
     };
   }
   render() {
-    const { apiName, apiDescription, apiTag1, apiTag2 } = this.props
+    const { apiName, apiDescription, apiTag1, apiTag2 } = this.props;
     return (
       <Card>
         <CardHead>

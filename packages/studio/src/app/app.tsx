@@ -8,11 +8,12 @@ import * as Pages from './pages';
 export default class App extends Component {
   public state = {
     activeMenuGroup: "",
-    activeMenuGroupItem: ""
+    activeMenuGroupItem: "",
+    listorCardView: "list"
   };
 
   public render() {
-    const { activeMenuGroup, activeMenuGroupItem } = this.state;
+    const { activeMenuGroup, activeMenuGroupItem, listorCardView} = this.state;
 
     const sectionOne = (
       <PageSection variant={PageSectionVariants.light}>
@@ -36,14 +37,17 @@ export default class App extends Component {
 
     const section = (
       <PageSection>
-         <Route path='/' exact={true} component={Pages.Dashboard}/>
-         <Route path='/dashboard' exact={true} component={Pages.Dashboard}/>
-         <Route path='/apis' exact={true}  component={Pages.ViewApis}/>
-         <Route path='/apis/create' exact={true} component={Pages.CreateAPI}/>
-         <Route path='/apis/import' exact={true} component={Pages.ImportAPI}/>
-         <Route path='/settings/profile' exact={true} component={Pages.UserProfile}/>
-         <Route path='/settings/accounts' exact={true} component={Pages.LinkedAccounts}/>
-         <Route path='/settings/validation' exact={true} component={Pages.Validations}/>
+        <Route path='/' exact={true} component={Pages.Dashboard}/>
+        <Route 
+          path='/dashboard' exact={true}
+          render={(props) => <Pages.Dashboard listorCard="card" {...props} />}
+        />
+        <Route path='/apis' exact={true}  component={Pages.ViewApis}/>
+        <Route path='/apis/create' exact={true} component={Pages.CreateAPI}/>
+        <Route path='/apis/import' exact={true} component={Pages.ImportAPI}/>
+        <Route path='/settings/profile' exact={true} component={Pages.UserProfile}/>
+        <Route path='/settings/accounts' exact={true} component={Pages.LinkedAccounts}/>
+        <Route path='/settings/validation' exact={true} component={Pages.Validations}/>
       </PageSection>
     );
     return (

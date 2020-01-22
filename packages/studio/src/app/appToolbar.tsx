@@ -12,9 +12,9 @@ import './app.css'
 //const userDropdownItems: ReactNode[] = [];
 
 export class AppToolbar extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+  }
   
   render() {
     return (
