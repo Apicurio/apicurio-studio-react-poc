@@ -39,9 +39,7 @@ export default class App extends Component {
       <PageSection>
         <Route path='/' exact={true} component={Pages.Dashboard}/>
         <Route 
-          path='/dashboard' exact={true}
-          render={(props) => <Pages.Dashboard listorCard="card" {...props} />}
-        />
+          path='/dashboard' component={Pages.Dashboard}/>
         <Route path='/apis' exact={true}  component={Pages.ViewApis}/>
         <Route path='/apis/create' exact={true} component={Pages.CreateAPI}/>
         <Route path='/apis/import' exact={true} component={Pages.ImportAPI}/>

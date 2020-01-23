@@ -4,15 +4,13 @@ import { DataToolbar , DataToolbarItem, DataToolbarContent } from '@patternfly/r
 import { Button, ButtonVariant, InputGroup, TextInput } from '@patternfly/react-core';
 import {ThIcon, ListIcon} from '@patternfly/react-icons';
 import './app.css'
-//TODO: Need to add accessibility to the toolbar (see: http://patternfly-react.surge.sh/patternfly-4/demos/pagelayout)
- 
 
-//let isDropdownOpen: boolean = false;
+type AppToolbarProps = {
+}
 
-//const userDropdownItems: ReactNode[] = [];
 
-export class AppToolbar extends React.Component {
-  constructor(props) {
+export class AppToolbar extends React.Component<AppToolbarProps> {
+  constructor(props: AppToolbarProps) {
     super(props);
   }
   

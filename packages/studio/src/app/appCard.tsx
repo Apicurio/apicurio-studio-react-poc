@@ -6,15 +6,21 @@ import './app.css'
 //let isDropdownOpen: boolean = false;
 //const userDropdownItems: ReactNode[] = [];
 
-class AppCard extends React.Component {
-  constructor(props) {
+type AppCardProps = {
+  apiName: string,
+  apiDescription: string,
+  apiTag1: string,
+  apiTag2: string
+}
+
+class AppCard extends React.Component<AppCardProps> {
+  constructor(props: AppCardProps) {
     super(props);
     this.state = {
       check: false
     };
   }
   render() {
-    const { apiName, apiDescription, apiTag1, apiTag2 } = this.props;
     return (
       <Card>
         <CardHead>
@@ -23,18 +29,18 @@ class AppCard extends React.Component {
           </CardActions>
         </CardHead>
         <CardHeader className="app-card-view-card-header">
-          {apiName}
+          {this.props.apiName}
         </CardHeader>
         <CardBody className="app-card-view-card-body">
-          {apiDescription}
+          {this.props.apiDescription}
         </CardBody>
         <CardFooter>
-          <div class="app-api-tag-group">
+          <div className="app-api-tag-group">
             <AppTag
-              text={apiTag1}
+              text={this.props.apiTag1}
             />
             <AppTag
-              text={apiTag2}
+              text={this.props.apiTag2}
             />
           </div>
         </CardFooter>
