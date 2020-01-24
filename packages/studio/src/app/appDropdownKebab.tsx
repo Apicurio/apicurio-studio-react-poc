@@ -18,13 +18,13 @@ export class AppDropdownKebab extends React.Component<AppDropdownKebabProps, App
     };
   }
 
-  public onToggle = (isOpen: boolean) => {
+  onToggle = (isOpen: boolean) => {
     this.setState({
       isOpen
     });
   };
   
-  public onSelect = (event: React.SyntheticEvent<HTMLDivElement, Event>) => {
+  onSelect = (event: React.SyntheticEvent<HTMLDivElement, Event>) => {
       this.setState({
         isOpen: !this.state.isOpen
       });

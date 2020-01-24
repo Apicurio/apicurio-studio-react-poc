@@ -36,7 +36,7 @@ export default class App extends Component {
     );
 
     const section = (
-      <PageSection>
+      <PageSection noPadding={true}>
         <Route path='/' exact={true} component={Pages.Dashboard}/>
         <Route 
           path='/dashboard' component={Pages.Dashboard}/>

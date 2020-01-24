@@ -17,7 +17,7 @@ class AppDataList extends React.Component<AppDataListProps, AppDataListState> {
     };
   }
 
-  public onSelectDataListItem = (id: string) => {
+  onSelectDataListItem = (id: string) => {
     this.setState({ selectedDataListItemId: id });
   }
 

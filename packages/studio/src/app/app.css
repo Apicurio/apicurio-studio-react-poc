@@ -58,3 +58,15 @@
 .app-data-toolbar-button-control.pf-m-selected {
   color: var(--pf-global--active-color--100);
 }
+
+.app-drawer-content {
+  padding: var(--pf-global--spacer--lg); /* remove this when new drawer styles in pf are added */
+}
+
+.app-drawer-panel-content {
+  padding: 0 !important;
+}
+
+.pf-c-drawer__panel-body {
+  padding: 0;
+}
