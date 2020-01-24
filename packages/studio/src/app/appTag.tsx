@@ -1,13 +1,15 @@
 import React, { ReactNode } from 'react';
 import './app.css'
-//import {UserDropdown} from './components/userDropDown'
-//let isDropdownOpen: boolean = false;
-//const userDropdownItems: ReactNode[] = [];
 
-export const AppTag = ({
+type AppTagProps = {
+  text: string
+}
+
+
+export const AppTag: React.FC<AppTagProps> = ({
   text
 }) => (
-  <span class="app-tag">
+  <span className="app-tag">
     {text}
   </span>
 );
