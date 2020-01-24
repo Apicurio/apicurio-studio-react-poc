@@ -3,8 +3,6 @@ import { Card, CardHead, CardHeader, CardBody, CardFooter, CardActions } from '@
 import {AppTag} from './appTag';
 import ApicurioIcon from './assets/apicurio-icon.png';
 import './app.css'
-//let isDropdownOpen: boolean = false;
-//const userDropdownItems: ReactNode[] = [];
 
 type AppCardProps = {
   apiName: string,
