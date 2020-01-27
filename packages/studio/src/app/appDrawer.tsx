@@ -7,6 +7,7 @@ import {AppDrawerPanelContent} from './appDrawerPanelContent';
 import './app.css'
 
 type AppDrawerProps = {
+  apiView: string
 }
 
 type AppDrawerState = {
@@ -30,6 +31,7 @@ class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
 
  render() {
    const { isExpanded } = this.state;
+   console.log('what is this' + this.props.apiView);
 
    return (
     <React.Fragment>
@@ -37,8 +39,11 @@ class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
       <Drawer isExpanded={isExpanded} isInline>
         <DrawerContent>
           <div className="app-drawer-content">
-            <AppDataList/>
+            { this.props.apiView === 'list' ?
+              <AppDataList/>
+            :
             <AppCardView/>
+          }
           </div>
         </DrawerContent>
         <DrawerPanelContent>

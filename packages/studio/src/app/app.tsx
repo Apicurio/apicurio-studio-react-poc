@@ -2,18 +2,40 @@ import React, { Component, ReactNode } from "react";
 import { Button, Level, LevelItem, Page, PageSectionVariants, PageSection, Title } from "@patternfly/react-core";
 import AppHeader from "./appHeader";
 import AppToolbar from "./appToolbar";
-import AppSidebar from "./appSidebar";
+//import AppSidebar from "./appSidebar";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import * as Pages from './pages';
+// import * as Pages from './pages';
+import Dashboard from './pages';
+import './app.css';
+
 export default class App extends Component {
-  public state = {
-    activeMenuGroup: "",
-    activeMenuGroupItem: "",
-    listorCardView: "list"
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      apiView: "list",
+      activeMenuGroup: "",
+      activeMenuGroupItem: ""
+    };
+
+    this.apiViewChange = this.apiViewChange.bind(this);
+  }
+
+  // public state = {
+  //   activeMenuGroup: "",
+  //   activeMenuGroupItem: "",
+  //   apiView: "list"
+  // };
+
+  apiViewChange(event) {
+    this.setState({
+      apiView: "list"
+    })
+    console.log(this.state.apiView);
+  }
 
   public render() {
-    const { activeMenuGroup, activeMenuGroupItem, listorCardView} = this.state;
+    const { activeMenuGroup, activeMenuGroupItem} = this.state;
+    console.log(this.state.apiView);
 
     const sectionOne = (
       <PageSection variant={PageSectionVariants.light}>
@@ -23,7 +45,7 @@ export default class App extends Component {
               APIs
             </Title>
           </LevelItem>
-          <LevelItem>
+          <LevelItem className="app-button-group-md">
             <Button variant="secondary">
               Import API
             </Button>
@@ -37,15 +59,7 @@ export default class App extends Component {
 
     const section = (
       <PageSection noPadding={true}>
-        <Route path='/' exact={true} component={Pages.Dashboard}/>
-        <Route 
-          path='/dashboard' component={Pages.Dashboard}/>
-        <Route path='/apis' exact={true}  component={Pages.ViewApis}/>
-        <Route path='/apis/create' exact={true} component={Pages.CreateAPI}/>
-        <Route path='/apis/import' exact={true} component={Pages.ImportAPI}/>
-        <Route path='/settings/profile' exact={true} component={Pages.UserProfile}/>
-        <Route path='/settings/accounts' exact={true} component={Pages.LinkedAccounts}/>
-        <Route path='/settings/validation' exact={true} component={Pages.Validations}/>
+        <Dashboard></Dashboard>
       </PageSection>
     );
     return (
@@ -63,7 +77,7 @@ export default class App extends Component {
         >
           {sectionOne}
           <PageSection variant={PageSectionVariants.light}>
-            <AppToolbar></AppToolbar>
+            <AppToolbar buttonClick={this.apiViewChange}></AppToolbar>
           </PageSection>
           {section}
         </Page>

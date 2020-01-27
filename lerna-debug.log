@@ -1,22 +1,23 @@
 0 silly argv { _: [ 'run' ],
 0 silly argv   scope: '@apicurio/studio',
-0 silly argv   lernaVersion: '3.15.0',
+0 silly argv   lernaVersion: '3.20.2',
 0 silly argv   '$0':
 0 silly argv    '/Users/cmolloy/Documents/repos/apicurio-studio-react-poc/node_modules/.bin/lerna',
 0 silly argv   script: 'start' }
-1 notice cli v3.15.0
+1 notice cli v3.20.2
 2 verbose rootPath /Users/cmolloy/Documents/repos/apicurio-studio-react-poc
-3 info filter [ '@apicurio/studio' ]
-4 info Executing command in 1 package: "yarn run start"
-5 silly npmRunScript start [] @apicurio/studio
-6 silly getExecOpts /Users/cmolloy/Documents/repos/apicurio-studio-react-poc/packages/studio undefined
-7 error MaxBufferError: stderr maxBuffer exceeded
-7 error     at PassThrough.stream.on (/Users/cmolloy/Documents/repos/apicurio-studio-react-poc/node_modules/get-stream/index.js:41:19)
-7 error     at PassThrough.emit (events.js:187:15)
-7 error     at addChunk (_stream_readable.js:283:12)
-7 error     at readableAddChunk (_stream_readable.js:260:13)
-7 error     at PassThrough.Readable.push (_stream_readable.js:219:10)
-7 error     at PassThrough.Transform.push (_stream_transform.js:151:32)
-7 error     at PassThrough.afterTransform (_stream_transform.js:92:10)
-7 error     at PassThrough._transform (_stream_passthrough.js:42:3)
-7 error     at PassThrough.Transform._read (_stream_transform.js:190:10)
+3 notice filter including "@apicurio/studio"
+4 info filter [ '@apicurio/studio' ]
+5 info Executing command in 1 package: "yarn run start"
+6 silly npmRunScript start [] @apicurio/studio
+7 silly getExecOpts /Users/cmolloy/Documents/repos/apicurio-studio-react-poc/packages/studio undefined
+8 error MaxBufferError: stderr maxBuffer exceeded
+8 error     at PassThrough.stream.on (/Users/cmolloy/Documents/repos/apicurio-studio-react-poc/node_modules/get-stream/index.js:41:19)
+8 error     at PassThrough.emit (events.js:187:15)
+8 error     at addChunk (_stream_readable.js:283:12)
+8 error     at readableAddChunk (_stream_readable.js:260:13)
+8 error     at PassThrough.Readable.push (_stream_readable.js:219:10)
+8 error     at PassThrough.Transform.push (_stream_transform.js:151:32)
+8 error     at PassThrough.afterTransform (_stream_transform.js:92:10)
+8 error     at PassThrough._transform (_stream_passthrough.js:42:3)
+8 error     at PassThrough.Transform._read (_stream_transform.js:190:10)

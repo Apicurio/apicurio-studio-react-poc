@@ -70,3 +70,11 @@
 .pf-c-drawer__panel-body {
   padding: 0;
 }
+
+.app-button-group-sm > *:not(:last-child) {
+  margin-right: var(--pf-global--spacer--sm); /* remove this when action group is added or we use utility classes */
+}
+
+.app-button-group-md > *:not(:last-child) {
+  margin-right: var(--pf-global--spacer--md); /* remove this when action group is added or we use utility classes */
+}

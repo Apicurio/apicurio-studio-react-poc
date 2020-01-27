@@ -3,7 +3,7 @@ import { Button, Card, CardActions, CardHead, CardHeader, CardBody, CardFooter, 
 import {TimesIcon, EyeIcon} from '@patternfly/react-icons';
 import ApicurioIcon from './assets/apicurio-icon.png';
 import AppTabs from './appTabs';
-
+import './app.css'
 
 export const AppDrawerPanelContent = ({ }) => (
   <Card>
@@ -21,13 +21,15 @@ export const AppDrawerPanelContent = ({ }) => (
       </CardActions>
     </CardHead>
     <CardBody>
-      <Button variant="tertiary">
-        <EyeIcon/>
-        Preview documentation
-      </Button>
-      <Button variant="secondary">
-        Edit API
-      </Button>
+      <div className="app-button-group-sm">
+        <Button variant="tertiary" className="pf-u-mr-sm">
+          <EyeIcon/>
+          Preview documentation
+        </Button>
+        <Button variant="secondary">
+          Edit API
+        </Button>
+      </div>
     </CardBody>
     <AppTabs/>
   </Card>
