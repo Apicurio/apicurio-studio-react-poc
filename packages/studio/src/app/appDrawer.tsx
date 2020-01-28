@@ -31,16 +31,14 @@ class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
 
  render() {
    const { isExpanded } = this.state;
-   console.log('what is this' + this.props.apiView);
 
    return (
     <React.Fragment>
-      <Button onClick={this.onClick}>Toggle Drawer</Button>
       <Drawer isExpanded={isExpanded} isInline>
         <DrawerContent>
           <div className="app-drawer-content">
             { this.props.apiView === 'list' ?
-              <AppDataList/>
+              <AppDataList viewDetails={this.onClick}/>
             :
             <AppCardView/>
           }

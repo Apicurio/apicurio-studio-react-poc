@@ -3,10 +3,7 @@ import {AppEmptyState} from '../../appEmptyState';
 import AppDrawer from '../../appDrawer';
 
 type DashboardProps = {
-  apiName: string,
-  apiDescription: string,
-  apiTag1: string,
-  apiTag2: string
+  apiView: string
 }
 
 export class Dashboard extends React.Component<DashboardProps> {

@@ -8,33 +8,31 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import {Dashboard} from './pages';
 import './app.css';
 
-export default class App extends Component {
-  constructor(props) {
+type AppState = {
+  apiView: string
+}
+
+type AppProps = {
+
+}
+
+export default class App extends Component<AppProps, AppState> {
+  constructor(props: AppProps) {
     super(props);
     this.state = {
-      apiView: "list",
-      activeMenuGroup: "",
-      activeMenuGroupItem: ""
+      apiView: "list"
     };
 
     this.apiViewChange = this.apiViewChange.bind(this);
   }
 
-  // public state = {
-  //   activeMenuGroup: "",
-  //   activeMenuGroupItem: "",
-  //   apiView: "list"
-  // };
-
-  apiViewChange(event) {
-    this.setState({
-      apiView: "card"
-    })
-    console.log(this.state.apiView);
+  apiViewChange() {
+    this.setState(prevState => ({ 
+      apiView: prevState.apiView === "list" ? "card" : "list"
+    }))
   }
 
-  public render() {
-    // const { activeMenuGroup, activeMenuGroupItem} = this.state;
+  render() {
     const sectionOne = (
       <PageSection variant={PageSectionVariants.light}>
         <Level>
@@ -75,7 +73,7 @@ export default class App extends Component {
         >
           {sectionOne}
           <PageSection variant={PageSectionVariants.light}>
-            <AppToolbar buttonClick={this.apiViewChange}></AppToolbar>
+            <AppToolbar buttonClick={this.apiViewChange} buttonSelected={this.state.apiView}></AppToolbar>
           </PageSection>
           {section}
         </Page>
@@ -83,10 +81,10 @@ export default class App extends Component {
     );
   }
 
-  private onNavSelect = ({ groupId, itemId }: any) => {
-    this.setState({
-      activeMenuGroup: groupId,
-      activeMenuGroupItem: itemId
-    });
-  };
+  // private onNavSelect = ({ groupId, itemId }: any) => {
+  //   this.setState({
+  //     activeMenuGroup: groupId,
+  //     activeMenuGroupItem: itemId
+  //   });
+  // };
 }

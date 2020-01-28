@@ -10,7 +10,8 @@ type AppDataListItemProps = {
   apiDescription: string,
   apiTag1: string,
   apiTag2: string,
-  rowid: string
+  rowid: string,
+  onClick: (ev: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 class AppDataListItem extends React.Component<AppDataListItemProps> {
@@ -46,7 +47,7 @@ class AppDataListItem extends React.Component<AppDataListItemProps> {
             ]}
             />
           <DataListAction aria-labelledby={`data-list-item-${this.props.rowid}`} id={`data-list-item-${this.props.rowid}`} aria-label="Actions">
-              <Button variant="link">View Details</Button>
+              <Button variant="link" onClick={this.props.onClick}>View Details</Button>
               <Button variant="secondary">Edit API</Button>
               <AppDropdownKebab />
           </DataListAction>

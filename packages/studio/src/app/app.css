@@ -18,6 +18,16 @@
   height: 100vh;
 }
 
+.pf-c-page__main-section {
+  border-bottom: 1px solid var(--pf-global--BorderColor--100);
+}
+
+.pf-c-drawer__panel {
+  height: 100vh;
+}
+
+
+
 .pf-c-data-list__cell.pf-m-icon > img {
   max-width: unset;
 }
@@ -55,8 +65,8 @@
   font-weight: var(--pf-global--FontWeight--normal) !important;
 }
 
-.app-data-toolbar-button-control.pf-m-selected {
-  color: var(--pf-global--active-color--100);
+.pf-m-selected {
+  color: var(--pf-global--active-color--100) !important;
 }
 
 .app-drawer-content {
@@ -77,4 +87,9 @@
 
 .app-button-group-md > *:not(:last-child) {
   margin-right: var(--pf-global--spacer--md); /* remove this when action group is added or we use utility classes */
+}
+
+.app-toolbar-api-total {
+  font-size: var(--pf-global--FontSize--sm);
+  color: var(--pf-global--Color--100);
 }

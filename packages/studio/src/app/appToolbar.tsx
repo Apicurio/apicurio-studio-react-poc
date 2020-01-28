@@ -6,7 +6,8 @@ import {ThIcon, ListIcon} from '@patternfly/react-icons';
 import './app.css'
 
 type AppToolbarProps = {
-  buttonClick: (ev) => void;
+  buttonClick: (ev: React.MouseEvent<HTMLButtonElement>) => void,
+  buttonSelected: string
 }
 
 
@@ -18,20 +19,24 @@ export class AppToolbar extends React.Component<AppToolbarProps> {
   render() {
     return (
       <DataToolbar>
-        <DataToolbarItem>
-          This is where the Data Toolbar should go
-        </DataToolbarItem>
-        <DataToolbarItem>
-          <Button onClick={this.props.buttonClick} className="app-data-toolbar-button-control" variant="plain">
-            <ThIcon/>
-          </Button>
-          <Button onClick={this.props.buttonClick} className="app-data-toolbar-button-control pf-m-selected" variant="plain">
-            <ListIcon/>
-          </Button>
-        </DataToolbarItem>
+        <DataToolbarContent>
+          <DataToolbarItem>
+            This is where the Data Toolbar should go
+          </DataToolbarItem>
+          <DataToolbarItem variant="pagination">
+            <Button onClick={this.props.buttonClick} className={'app-data-toolbar-button-control ' + (this.props.buttonSelected === "card" ? "pf-m-selected" : "")} variant="plain">
+              <ThIcon/>
+            </Button>
+            <Button onClick={this.props.buttonClick} className={'app-data-toolbar-button-control ' + (this.props.buttonSelected === "list" ? "pf-m-selected" : "")} variant="plain">
+              <ListIcon/>
+            </Button>
+            <span className="app-toolbar-api-total">
+              4 APIs found
+            </span>
+          </DataToolbarItem>
+        </DataToolbarContent>
       </DataToolbar>
     )
-
   }
 }
 
