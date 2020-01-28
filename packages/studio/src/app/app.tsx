@@ -13,7 +13,6 @@ type AppState = {
 }
 
 type AppProps = {
-
 }
 
 export default class App extends Component<AppProps, AppState> {
@@ -22,7 +21,6 @@ export default class App extends Component<AppProps, AppState> {
     this.state = {
       apiView: "list"
     };
-
     this.apiViewChange = this.apiViewChange.bind(this);
   }
 
@@ -71,8 +69,10 @@ export default class App extends Component<AppProps, AppState> {
           //   />
           // }
         >
+          <Route path='/' exact={true} />
+          <Route path='/apis/create' exact={true}/>
           {sectionOne}
-          <PageSection variant={PageSectionVariants.light}>
+          <PageSection variant={PageSectionVariants.light} noPadding={true}>
             <AppToolbar buttonClick={this.apiViewChange} buttonSelected={this.state.apiView}></AppToolbar>
           </PageSection>
           {section}
