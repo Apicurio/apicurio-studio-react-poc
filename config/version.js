@@ -1,5 +1,5 @@
 var ApicurioStudioInfo = {
-    version: "DEV",
+    version: "React POC",
     builtOn: new Date(),
     url: "http://www.apicur.io/"
 };
