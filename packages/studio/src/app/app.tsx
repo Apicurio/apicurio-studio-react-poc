@@ -5,7 +5,7 @@ import AppToolbar from "./appToolbar";
 //import AppSidebar from "./appSidebar";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 // import * as Pages from './pages';
-import Dashboard from './pages';
+import {Dashboard} from './pages';
 import './app.css';
 
 export default class App extends Component {
@@ -28,15 +28,13 @@ export default class App extends Component {
 
   apiViewChange(event) {
     this.setState({
-      apiView: "list"
+      apiView: "card"
     })
     console.log(this.state.apiView);
   }
 
   public render() {
-    const { activeMenuGroup, activeMenuGroupItem} = this.state;
-    console.log(this.state.apiView);
-
+    // const { activeMenuGroup, activeMenuGroupItem} = this.state;
     const sectionOne = (
       <PageSection variant={PageSectionVariants.light}>
         <Level>
@@ -59,7 +57,7 @@ export default class App extends Component {
 
     const section = (
       <PageSection noPadding={true}>
-        <Dashboard></Dashboard>
+        <Dashboard apiView={this.state.apiView}></Dashboard>
       </PageSection>
     );
     return (

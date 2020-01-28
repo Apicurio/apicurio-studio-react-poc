@@ -25,7 +25,7 @@ export class AppToolbar extends React.Component<AppToolbarProps> {
           <Button onClick={this.props.buttonClick} className="app-data-toolbar-button-control" variant="plain">
             <ThIcon/>
           </Button>
-          <Button className="app-data-toolbar-button-control pf-m-selected" variant="plain">
+          <Button onClick={this.props.buttonClick} className="app-data-toolbar-button-control pf-m-selected" variant="plain">
             <ListIcon/>
           </Button>
         </DataToolbarItem>
