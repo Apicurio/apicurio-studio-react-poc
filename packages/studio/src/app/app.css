@@ -97,3 +97,16 @@
 .pf-c-form {
   width: 600px;
 }
+
+.app-form-helper-text {
+  font-size: var(--pf-global--FontSize--sm);
+  color: var(--pf-global--Color--200);
+}
+
+.app-form-helper-text-asterisk {
+  color: var(--pf-global--danger-color--100);
+}
+
+.app-card-import-api {
+  width: 475px;
+}

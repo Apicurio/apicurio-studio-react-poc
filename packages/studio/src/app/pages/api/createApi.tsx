@@ -24,7 +24,7 @@ export class CreateApi extends React.Component<CreateApiProps, CreateApiState> {
     this.onChange = this.onChange.bind(this);
   }
 
-  onChange = (apiType, event) => {
+  onChange = (apiType: string, event) => {
     this.setState({apiType});
   };
 
@@ -53,6 +53,7 @@ export class CreateApi extends React.Component<CreateApiProps, CreateApiState> {
         </PageSection>
         <PageSection>
           <Form>
+            <p className="app-form-helper-text">Fields marked with <span className="app-form-helper-text-asterisk">*</span> are required.</p>
             <FormGroup
               label="Name"
               isRequired
