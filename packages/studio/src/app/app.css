@@ -93,3 +93,7 @@
   font-size: var(--pf-global--FontSize--sm);
   color: var(--pf-global--Color--100);
 }
+
+.pf-c-form {
+  width: 600px;
+}
