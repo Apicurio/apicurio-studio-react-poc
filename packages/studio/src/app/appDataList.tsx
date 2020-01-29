@@ -3,7 +3,8 @@ import {DataList} from '@patternfly/react-core';
 import AppDataListItem from './appDataListItem';
 
 export interface AppDataListProps {
-  viewDetails: (ev: React.MouseEvent<HTMLButtonElement>) => void
+  viewDetails: (ev: React.MouseEvent<HTMLButtonElement>) => void,
+  selectItem: (ev: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 export interface AppDataListState {
@@ -20,6 +21,7 @@ class AppDataList extends React.Component<AppDataListProps, AppDataListState> {
 
   onSelectDataListItem = (id: string) => {
     this.setState({ selectedDataListItemId: id });
+    this.props.selectItem(id);
   }
 
   render() {

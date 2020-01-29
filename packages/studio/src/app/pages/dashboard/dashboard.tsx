@@ -1,9 +1,10 @@
 import React from "react";
 import { Button, Level, LevelItem, Title, PageSection, PageSectionVariants } from '@patternfly/react-core';
-import {AppEmptyState} from '../../appEmptyState';
+import AppEmptyState from '../../appEmptyState';
 import AppToolbar from "../../appToolbar";
 import AppDrawer from '../../appDrawer';
-import '../../app.css'
+import '../../app.css';
+import {Link} from 'react-router-dom';
 
 type DashboardProps = {
 }
@@ -31,7 +32,7 @@ export class Dashboard extends React.Component<DashboardProps, DashboardState> {
     var apiCount = 1; // update this value to count, if you want to see empty state set to 0
     return (
       <React.Fragment>
-        <PageSection variant={PageSectionVariants.light}>
+        <PageSection variant={PageSectionVariants.light} className="app-page-section-border-bottom">
           <Level>
             <LevelItem>
               <Title headingLevel="h1" size="3xl">
@@ -39,17 +40,21 @@ export class Dashboard extends React.Component<DashboardProps, DashboardState> {
               </Title>
             </LevelItem>
             <LevelItem className="app-button-group-md">
-              <Button variant="secondary">
-                Import API
-              </Button>
-              <Button variant="primary">
-                Create new API
-              </Button>
+              <Link to="/import-api">
+                <Button variant="secondary">
+                  Import API
+                </Button>
+              </Link>
+              <Link to="/create-api">
+                <Button variant="primary">
+                  Create new API
+                </Button>
+              </Link>
             </LevelItem>
           </Level>
         </PageSection>
 
-        <PageSection variant={PageSectionVariants.light} noPadding={true}>
+        <PageSection variant={PageSectionVariants.light} noPadding={true} className="app-page-section-border-bottom">
           <AppToolbar buttonClick={this.apiViewChange} buttonSelected={this.state.apiView}></AppToolbar>
         </PageSection>
 

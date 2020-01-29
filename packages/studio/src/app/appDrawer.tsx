@@ -38,7 +38,7 @@ class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
         <DrawerContent>
           <div className="app-drawer-content">
             { this.props.apiView === 'list' ?
-              <AppDataList viewDetails={this.onClick}/>
+              <AppDataList selectItem={this.onClick} viewDetails={this.onClick}/>
             :
             <AppCardView/>
           }

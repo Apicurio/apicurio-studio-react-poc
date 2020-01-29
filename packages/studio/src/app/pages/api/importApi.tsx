@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Button, Card, CardBody, Form, FormGroup, Split, SplitItem, TextInput, TextArea, FormSelectOption, FormSelect, ActionGroup, Title, PageSection, PageSectionVariants } from '@patternfly/react-core';
+import { Breadcrumb, BreadcrumbItem, Button, Card, CardBody, Form, FormGroup, Split, SplitItem, TextInput, TextArea, FormSelectOption, FormSelect, ActionGroup, Title, PageSection, PageSectionVariants } from '@patternfly/react-core';
 import '../../app.css'
 
 type ImportApiProps = {
@@ -39,13 +39,23 @@ export class ImportApi extends React.Component<ImportApiProps, ImportApiState> {
 
     return (
       <React.Fragment>
+        <PageSection variant={PageSectionVariants.light} className="app-page-section-breadcrumb">
+          <Breadcrumb>
+            <BreadcrumbItem to="/">
+              APIs
+            </BreadcrumbItem>
+            <BreadcrumbItem isActive>
+              Import API
+            </BreadcrumbItem>
+          </Breadcrumb>
+        </PageSection>
         <PageSection variant={PageSectionVariants.light}>
           <Title headingLevel="h1" size="3xl">
             Import an existing API
           </Title>
         </PageSection>
         <PageSection>
-          <Split>
+          <Split className="app-import-api-split-layout">
             <SplitItem>
               <Form>
                 <p className="app-form-helper-text">Fields marked with <span className="app-form-helper-text-asterisk">*</span> are required.</p>
@@ -84,7 +94,7 @@ export class ImportApi extends React.Component<ImportApiProps, ImportApiState> {
                   />
                 </FormGroup>
                 <ActionGroup>
-                  <Button variant="primary">Create API</Button>
+                  <Button variant="primary">Import API</Button>
                 </ActionGroup>
               </Form>
             </SplitItem>
