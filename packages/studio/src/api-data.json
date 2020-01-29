@@ -1,0 +1,44 @@
+{
+  "apis": [
+    {
+      "id": 0,
+      "name": "Pet Store API",
+      "description": "A sample API that uses a pet store as an example to demonstrate features in the OpenAPI 3.0 specification.",
+      "type": "Open API 3.0.2",
+      "template": "Blank API",
+      "date": "January 29, 2020",
+      "author": "cmolloy@redhat.com",
+      "collaborators": "0"
+    },
+    {
+      "id": 1,
+      "name": "Sports Store API",
+      "description": "A sample API that uses a pet store as an example to demonstrate features in the OpenAPI 3.0 specification.",
+      "type": "Open API 3.0.2",
+      "template": "Blank API",
+      "date": "January 29, 2020",
+      "author": "dlabaj@redhat.com",
+      "collaborators": "2"
+    },
+    {
+      "id": 2,
+      "name": "Clothes Store API",
+      "description": "A sample API that uses a pet store as an example to demonstrate features in the OpenAPI 3.0 specification.",
+      "type": "Open API 3.0.2",
+      "template": "Blank API",
+      "date": "January 29, 2020",
+      "author": "cmolloy@redhat.com",
+      "collaborators": "4"
+    },
+    {
+      "id": 3,
+      "name": "Weather API",
+      "description": "A sample API that uses a pet store as an example to demonstrate features in the OpenAPI 3.0 specification.",
+      "type": "Open API 3.0.2",
+      "template": "Blank API",
+      "date": "January 29, 2020",
+      "author": "dlabaj@redhat.com",
+      "collaborators": "6"
+    }
+  ]
+}

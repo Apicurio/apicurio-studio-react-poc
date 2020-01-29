@@ -3,22 +3,27 @@ import { Drawer, DrawerPanelContent, DrawerContent } from '@patternfly/react-cor
 import { Button } from '@patternfly/react-core';
 import AppDataList from './appDataList';
 import {AppCardView} from './appCardView';
-import {AppDrawerPanelContent} from './appDrawerPanelContent';
-import './app.css'
+import AppDrawerPanelContent from './appDrawerPanelContent';
+import './app.css';
+import data from '../api-data.json';
 
 type AppDrawerProps = {
   apiView: string
 }
 
 type AppDrawerState = {
-  isExpanded: boolean
+  isExpanded: boolean,
+  currentAPIId: number
 }
+
+const apiData = data.apis;
 
 class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
   constructor(props: AppDrawerProps) {
    super(props);
    this.state = {
-     isExpanded: false
+     isExpanded: false,
+     currentAPIId: 0
    };
   }
 
@@ -29,8 +34,15 @@ class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
     });
   };
 
+  findKey = (key) => {
+    const keyListItem = key;
+    this.setState({
+      currentAPIId: keyListItem
+    })
+  }
+
  render() {
-   const { isExpanded } = this.state;
+   const { isExpanded, currentAPIId } = this.state;
 
    return (
     <React.Fragment>
@@ -38,14 +50,14 @@ class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
         <DrawerContent>
           <div className="app-drawer-content">
             { this.props.apiView === 'list' ?
-              <AppDataList selectItem={this.onClick} viewDetails={this.onClick}/>
+              <AppDataList keyListItem={this.findKey} selectItem={this.onClick} viewDetails={this.onClick}/>
             :
             <AppCardView/>
           }
           </div>
         </DrawerContent>
         <DrawerPanelContent>
-          <AppDrawerPanelContent/>
+          <AppDrawerPanelContent drawerContent={apiData[currentAPIId]}/>
         </DrawerPanelContent>
       </Drawer>
     </React.Fragment>
