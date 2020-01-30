@@ -16,8 +16,6 @@ type AppDrawerState = {
   currentAPIId: number
 }
 
-const apiData = data.apis;
-
 class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
   constructor(props: AppDrawerProps) {
    super(props);
@@ -34,8 +32,9 @@ class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
     });
   };
 
-  findKey = (key) => {
-    const keyListItem = key;
+  findKey = (id) => {
+    console.log('what is id here' + id)
+    const keyListItem = id;
     this.setState({
       currentAPIId: keyListItem
     })
@@ -57,7 +56,7 @@ class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
           </div>
         </DrawerContent>
         <DrawerPanelContent>
-          <AppDrawerPanelContent drawerContent={apiData[currentAPIId]}/>
+          <AppDrawerPanelContent currentAPIId={currentAPIId}/>
         </DrawerPanelContent>
       </Drawer>
     </React.Fragment>

@@ -4,23 +4,33 @@ import {TimesIcon, EyeIcon} from '@patternfly/react-icons';
 import ApicurioIcon from './assets/apicurio-icon.png';
 import AppTabs from './appTabs';
 import './app.css'
+import data from '../api-data.json';
+import { variance } from '../../../../node_modules/@babel/types';
 
 type AppDrawerPanelContentProps = {
   drawerContent: string
 }
 
-class AppDrawerPanelContent extends React.Component<> {
-  constructor(props) {
+class AppDrawerPanelContent extends React.Component<AppDrawerPanelContentProps> {
+  constructor(props: AppDrawerPanelContentProps) {
     super(props);
   }
+
   render() {
+    const name;
+    data.apis.map((api) => {
+      if(api.id === this.props.currentAPIId) {
+        name = api.name;
+      }
+    });
+
     return (
       <Card>
         <CardHead>
           <span>
             <img src={ApicurioIcon}/>
             <Title headingLevel="h3" size="xl">
-              {this.props.drawerContent}
+              {name}
             </Title>
           </span>
           <CardActions>

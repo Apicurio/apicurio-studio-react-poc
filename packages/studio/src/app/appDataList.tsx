@@ -22,10 +22,11 @@ class AppDataList extends React.Component<AppDataListProps, AppDataListState> {
     };
   }
 
-  onSelectDataListItem = (id: string, key: number) => {
+  onSelectDataListItem = (id: string) => {
     this.setState({ selectedDataListItemId: id });
     this.props.selectItem(id);
-    this.props.keyListItem(key);
+    this.props.keyListItem(id);
+    console.log('is there a key here' + key);
   }
 
   render() {
@@ -36,7 +37,7 @@ class AppDataList extends React.Component<AppDataListProps, AppDataListState> {
         apiTag1="Tag"
         apiTag2="Another tag"
         rowid={index}
-        key={api.id}
+        id={api.id}
         onClick={this.props.viewDetails}
       />
     );
