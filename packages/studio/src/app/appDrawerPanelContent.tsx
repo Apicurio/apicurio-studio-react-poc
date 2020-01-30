@@ -18,9 +18,13 @@ class AppDrawerPanelContent extends React.Component<AppDrawerPanelContentProps> 
 
   render() {
     const name;
+    const date;
+    const author;
     data.apis.map((api) => {
       if(api.id === this.props.currentAPIId) {
         name = api.name;
+        date = api.date;
+        author = api.author;
       }
     });
 
@@ -50,7 +54,7 @@ class AppDrawerPanelContent extends React.Component<AppDrawerPanelContentProps> 
             </Button>
           </div>
         </CardBody>
-        <AppTabs/>
+        <AppTabs date={date} author={author}/>
       </Card>
     )
   };

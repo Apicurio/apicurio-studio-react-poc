@@ -37,7 +37,8 @@ class AppTabs extends React.Component<AppTabsProps> {
         </Tabs>
         <div>
           <TabContent eventKey={0} id="refTab1Section" ref={this.contentRef1} aria-label="Tab item 1">
-            Tab 1 section
+            {this.props.date}
+            {this.props.author}
           </TabContent>
           <TabContent eventKey={1} id="refTab12ection" ref={this.contentRef2} aria-label="Tab item 2">
             Tab 2 section
