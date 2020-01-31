@@ -35,7 +35,7 @@ class AppDrawerPanelContent extends React.Component<AppDrawerPanelContentProps> 
           <span>
             <img src={ApicurioIcon}/>
             <Title headingLevel="h3" size="xl">
-              {name}xw
+              {name}
             </Title>
           </span>
           <CardActions>
