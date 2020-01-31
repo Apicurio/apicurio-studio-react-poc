@@ -8,10 +8,9 @@ import './app.css'
 type AppDataListItemProps = {
   apiName: string,
   apiDescription: string,
-  apiTag1: string,
-  apiTag2: string,
-  rowid: number,
-  id: number,
+  apiTag: string,
+  id: string,
+  key: number,
   onClick: (ev: React.MouseEvent<HTMLButtonElement>) => void
 }
 
@@ -21,15 +20,15 @@ class AppDataListItem extends React.Component<AppDataListItemProps> {
   }
   render() {
     return (
-      <DataListItem key={this.props.id} id={this.props.rowid} aria-labelledby={`data-list-item-${this.props.rowid}`}>
+      <DataListItem key={this.props.key} id={this.props.id} aria-labelledby={`data-list-item-${this.props.id}`}>
         <DataListItemRow>
-          <DataListCheck aria-labelledby={`data-list-item-${this.props.rowid}`} name={`data-list-item-check-${this.props.rowid}`}/>
+          <DataListCheck aria-labelledby={`data-list-item-${this.props.id}`} name={`data-list-item-check-${this.props.id}`}/>
           <DataListItemCells
             dataListCells={[
-              <DataListCell isIcon key={`primary content ${this.props.rowid}`}>
+              <DataListCell isIcon key={`primary content ${this.props.id}`}>
                 <img src={ApicurioIcon}/>
               </DataListCell>,
-              <DataListCell key={`secondary content ${this.props.rowid}`}>
+              <DataListCell key={`secondary content ${this.props.id}`}>
                 <div className="app-api-title">
                   {this.props.apiName}
                 </div>
@@ -38,16 +37,16 @@ class AppDataListItem extends React.Component<AppDataListItemProps> {
                 </div>
                 <div className="app-api-tag-group">
                 <AppTag
-                  text={this.props.apiTag1}
+                  text={this.props.apiTag}
                 />
                 <AppTag
-                  text={this.props.apiTag2}
+                  text={this.props.apiTag}
                 />
                 </div>
               </DataListCell>
             ]}
             />
-          <DataListAction aria-labelledby={`data-list-item-${this.props.rowid}`} id={`data-list-item-${this.props.rowid}`} aria-label="Actions">
+          <DataListAction aria-labelledby={`data-list-item-${this.props.id}`} id={`data-list-item-${this.props.id}`} aria-label="Actions">
               <Button variant="link" onClick={this.props.onClick}>View Details</Button>
               <Button variant="secondary">Edit API</Button>
               <AppDropdownKebab />

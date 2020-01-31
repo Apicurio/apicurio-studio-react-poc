@@ -13,7 +13,7 @@ type AppDrawerProps = {
 
 type AppDrawerState = {
   isExpanded: boolean,
-  currentAPIId: number
+  currentAPIId: string
 }
 
 class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
@@ -21,19 +21,18 @@ class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
    super(props);
    this.state = {
      isExpanded: false,
-     currentAPIId: 0
+     currentAPIId: ""
    };
   }
 
-  onClick = () => {
+  openDrawer = () => {
     const isExpanded = !this.state.isExpanded;
     this.setState({
       isExpanded
     });
   };
 
-  findKey = (id) => {
-    console.log('what is id here' + id)
+  findKey = (id: string) => {
     const keyListItem = id;
     this.setState({
       currentAPIId: keyListItem
@@ -49,7 +48,7 @@ class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
         <DrawerContent>
           <div className="app-drawer-content">
             { this.props.apiView === 'list' ?
-              <AppDataList keyListItem={this.findKey} selectItem={this.onClick} viewDetails={this.onClick}/>
+              <AppDataList keyListItem={this.findKey} selectItem={this.openDrawer} viewDetails={this.openDrawer}/>
             :
             <AppCardView/>
           }

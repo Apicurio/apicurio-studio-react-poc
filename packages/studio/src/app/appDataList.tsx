@@ -4,8 +4,9 @@ import AppDataListItem from './appDataListItem';
 import data from '../api-data.json';
 
 export interface AppDataListProps {
-  viewDetails: (ev: React.MouseEvent<HTMLButtonElement>) => void,
-  selectItem: (ev: React.MouseEvent<HTMLButtonElement>) => void
+  viewDetails: (ev: React.MouseEvent<HTMLElement>) => void,
+  selectItem: (ev: React.MouseEvent<HTMLElement>) => void,
+  keyListItem: (ev: React.MouseEvent<HTMLElement>) => void
 }
 
 export interface AppDataListState {
@@ -26,18 +27,16 @@ class AppDataList extends React.Component<AppDataListProps, AppDataListState> {
     this.setState({ selectedDataListItemId: id });
     this.props.selectItem(id);
     this.props.keyListItem(id);
-    console.log('is there a key here' + key);
   }
 
   render() {
     const listItems = apiData.map((api, index) =>
       <AppDataListItem
+        id={api.id}
         apiName={api.name}
         apiDescription={api.description}
-        apiTag1="Tag"
-        apiTag2="Another tag"
-        rowid={index}
-        id={api.id}
+        apiTag={api.tags}
+        key={index}
         onClick={this.props.viewDetails}
       />
     );

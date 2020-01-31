@@ -8,7 +8,7 @@ import data from '../api-data.json';
 import { variance } from '../../../../node_modules/@babel/types';
 
 type AppDrawerPanelContentProps = {
-  drawerContent: string
+  currentAPIId: string
 }
 
 class AppDrawerPanelContent extends React.Component<AppDrawerPanelContentProps> {
@@ -17,14 +17,15 @@ class AppDrawerPanelContent extends React.Component<AppDrawerPanelContentProps> 
   }
 
   render() {
-    const name;
-    const date;
-    const author;
+    var name;
+    var createdOn;
+    var createdBy;
     data.apis.map((api) => {
+      console.log('what is' + api.id + 'what is' + this.props.currentAPIId);
       if(api.id === this.props.currentAPIId) {
         name = api.name;
-        date = api.date;
-        author = api.author;
+        createdOn = api.createdOn;
+        createdBy = api.createdBy;
       }
     });
 
@@ -34,7 +35,7 @@ class AppDrawerPanelContent extends React.Component<AppDrawerPanelContentProps> 
           <span>
             <img src={ApicurioIcon}/>
             <Title headingLevel="h3" size="xl">
-              {name}
+              {name}xw
             </Title>
           </span>
           <CardActions>
@@ -54,7 +55,7 @@ class AppDrawerPanelContent extends React.Component<AppDrawerPanelContentProps> 
             </Button>
           </div>
         </CardBody>
-        <AppTabs date={date} author={author}/>
+        <AppTabs date={createdOn} author={createdBy}/>
       </Card>
     )
   };

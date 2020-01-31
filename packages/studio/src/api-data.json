@@ -1,40 +1,40 @@
 {
   "apis": [
     {
-      "id": 0,
+      "id": "0",
       "name": "Pet Store API",
       "description": "A sample API that uses a pet store as an example to demonstrate features in the OpenAPI 3.0 specification.",
-      "type": "Open API 3.0.2",
-      "template": "Blank API",
-      "date": "January 29, 2020",
-      "author": "cmolloy@redhat.com"
+      "createdOn": "January 29, 2020",
+      "createdBy": "cmolloy@redhat.com",
+      "tags": "Pet store tag",
+      "type": "Open API 3.0.2"
     },
     {
-      "id": 1,
+      "id": "1",
       "name": "Sports Store API",
       "description": "A sample API that uses a pet store as an example to demonstrate features in the OpenAPI 3.0 specification.",
-      "type": "Open API 3.0.2",
-      "template": "Blank API",
-      "date": "January 29, 2020",
-      "author": "dlabaj@redhat.com"
+      "createdOn": "January 30, 2020",
+      "createdBy": "dlabaj@redhat.com",
+      "tags": "Sports store tag",
+      "type": "Open API 3.0.2"
     },
     {
-      "id": 2,
-      "name": "Clothes Store API",
-      "description": "A sample API that uses a pet store as an example to demonstrate features in the OpenAPI 3.0 specification.",
-      "type": "Open API 3.0.2",
-      "template": "Blank API",
-      "date": "January 29, 2020",
-      "author": "cmolloy@redhat.com"
-    },
-    {
-      "id": 3,
+      "id": "2",
       "name": "Weather API",
       "description": "A sample API that uses a pet store as an example to demonstrate features in the OpenAPI 3.0 specification.",
-      "type": "Open API 3.0.2",
-      "template": "Blank API",
-      "date": "January 29, 2020",
-      "author": "dlabaj@redhat.com"
+      "createdOn": "January 18, 2020",
+      "createdBy": "cmolloy@redhat.com",
+      "tags": "Weather store tag",
+      "type": "Open API 3.0.2"
+    },
+    {
+      "id": "3",
+      "name": "Clothes Store API",
+      "description": "A sample API that uses a pet store as an example to demonstrate features in the OpenAPI 3.0 specification.",
+      "createdOn": "January 24, 2020",
+      "createdBy": "dlabaj@redhat.com",
+      "tags": "Clothes store tag",
+      "type": "Open API 3.0.2"
     }
   ]
 }
