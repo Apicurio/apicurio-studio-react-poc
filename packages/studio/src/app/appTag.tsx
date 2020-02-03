@@ -5,7 +5,6 @@ type AppTagProps = {
   text: string
 }
 
-
 export const AppTag: React.FC<AppTagProps> = ({
   text
 }) => (

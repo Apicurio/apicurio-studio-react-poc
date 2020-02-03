@@ -4,7 +4,6 @@ import AppDataList from './appDataList';
 import {AppCardView} from './appCardView';
 import AppDrawerPanelContent from './appDrawerPanelContent';
 import './app.css';
-import data from '../api-data.json';
 
 interface AppDrawerProps {
   apiView: string

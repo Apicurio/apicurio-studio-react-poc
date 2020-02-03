@@ -9,7 +9,7 @@ interface AppCardProps {
   name: string,
   description: string,
   tags: string[],
-  type: string
+  type?: string
 }
 
 export const AppCard: React.FunctionComponent<AppCardProps> = ({ name, description, tags = []}: AppCardProps) => {

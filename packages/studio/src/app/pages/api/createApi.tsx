@@ -1,5 +1,5 @@
 import React from 'react';
-import { Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, TextInput, TextArea, FormSelectOption, FormSelect, Checkbox, ActionGroup, Radio, Title, PageSection, PageSectionVariants } from '@patternfly/react-core';
+import { Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, TextInput, TextArea, FormSelectOption, FormSelect, ActionGroup, Title, PageSection, PageSectionVariants } from '@patternfly/react-core';
 import '../../app.css'
 
 interface CreateApiProps {
@@ -16,32 +16,32 @@ export class CreateApi extends React.Component<CreateApiProps, CreateApiState> {
   constructor(props: CreateApiProps) {
     super(props);
     this.state = {
-      name: '',
+      apiType: 'please choose',
       description: '',
-      apiType: 'please choose'
+      name: ''
     };
     this.handleTextInputChangeName = this.handleTextInputChangeName.bind(this);
     this.handleTextInputChangeDescription = this.handleTextInputChangeDescription.bind(this);
     this.onChange = this.onChange.bind(this);
   }
 
-  onChange = (apiType: string) => {
-    this.setState({apiType});
-  };
-
-  handleTextInputChangeName = (name: string) => {
-    this.setState({ name });
-  };
-
-  handleTextInputChangeDescription = (description: string) => {
-    this.setState({ description });
-  };
-
   // TO DO: Add more options here
   options = [
     { value: 'Please choose', label: 'Please choose', disabled: false },
     { value: 'Open API 3.0.2', label: 'Open API 3.0.2', disabled: false }
   ];
+
+  private onChange = (apiType: string) => {
+    this.setState({apiType});
+  };
+
+  private handleTextInputChangeName = (name: string) => {
+    this.setState({ name });
+  };
+
+  private handleTextInputChangeDescription = (description: string) => {
+    this.setState({ description });
+  };
 
   render() {
     const { name, description } = this.state;

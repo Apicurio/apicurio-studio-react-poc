@@ -9,7 +9,7 @@ interface AppDataListItemProps {
   id: string,
   name: string,
   description: string,
-  createdOn: Date,
+  createdOn?: Date,
   tags: string[],
   type: string
   key: number,

@@ -1,14 +1,18 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Button, Card, CardBody, Form, FormGroup, Split, SplitItem, TextInput, TextArea, FormSelectOption, FormSelect, ActionGroup, Title, PageSection, PageSectionVariants } from '@patternfly/react-core';
 import '../../app.css'
+
+interface ImportApiProps {
+  isActive: true
+}
 
 interface ImportApiState {
   importType: string,
   url: string
 }
 
-export class ImportApi extends React.Component<{}, ImportApiState> {
-  constructor(props) {
+export class ImportApi extends React.Component<ImportApiProps, ImportApiState> {
+  constructor(props: ImportApiProps) {
     super(props);
     this.state = {
       importType: '',

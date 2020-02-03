@@ -10,13 +10,10 @@ interface AppDropdownKebabState {
 }
 
 
-export class AppDropdownKebab extends React.Component<AppDropdownKebabProps, AppDropdownKebabState> {
-  constructor(props: AppDropdownKebabProps) {
-    super(props);
-    this.state = {
-      isOpen: false
-    };
-  }
+export class AppDropdownKebab extends React.Component<undefined, AppDropdownKebabState> {
+  state = {
+    isOpen: false
+  };
 
   private onToggle = (isOpen: boolean) => {
     this.setState({
@@ -24,7 +21,7 @@ export class AppDropdownKebab extends React.Component<AppDropdownKebabProps, App
     });
   };
   
-  private onSelect = (event: React.SyntheticEvent<HTMLDivElement, Event>) => {
+  private onSelect = (event: React.MouseEvent) => {
       this.setState({
         isOpen: !this.state.isOpen
       });

@@ -1,11 +1,10 @@
-import React, { ReactNode } from 'react';
-//import {UserDropdown} from './components/userDropDown'
+import React from 'react';
 import { DataToolbar , DataToolbarItem, DataToolbarContent } from '@patternfly/react-core/dist/esm/experimental';
-import { Button, ButtonVariant, InputGroup, TextInput } from '@patternfly/react-core';
+import { Button } from '@patternfly/react-core';
 import {ThIcon, ListIcon} from '@patternfly/react-icons';
 import './app.css'
 
-type AppToolbarProps = {
+interface AppToolbarProps {
   buttonClick: (ev: React.MouseEvent<HTMLButtonElement>) => void,
   buttonSelected: string
 }
@@ -15,7 +14,7 @@ export class AppToolbar extends React.Component<AppToolbarProps> {
   constructor(props: AppToolbarProps) {
     super(props);
   }
-  
+
   render() {
     return (
       <DataToolbar>

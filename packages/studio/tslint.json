@@ -5,8 +5,9 @@
       "**/node_modules/**/*.ts"
     ]
   },
+  "member-access": false,
   "rules": {
     "ordered-imports": [false],
-    "interface-name": false
+    "interface-name": false,
   }
 }
