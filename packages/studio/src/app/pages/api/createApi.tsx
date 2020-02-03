@@ -1,18 +1,18 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, TextInput, TextArea, FormSelectOption, FormSelect, Checkbox, ActionGroup, Radio, Title, PageSection, PageSectionVariants } from '@patternfly/react-core';
 import '../../app.css'
 
-type CreateApiProps = {
+interface CreateApiProps {
 }
 
-type CreateApiState = {
+interface CreateApiState {
   name: string,
   description: string,
   apiType: string
 }
 
 export class CreateApi extends React.Component<CreateApiProps, CreateApiState> {
-  constructor(props: CreateApiProps) {
+  constructor(props) {
     super(props);
     this.state = {
       name: '',
@@ -62,7 +62,7 @@ export class CreateApi extends React.Component<CreateApiProps, CreateApiState> {
           </Title>
         </PageSection>
         <PageSection>
-          <Form className="create-api-form">
+          <Form className="app-create-api-form">
             <p className="app-form-helper-text">Fields marked with <span className="app-form-helper-text-asterisk">*</span> are required.</p>
             <FormGroup
               label="Name"

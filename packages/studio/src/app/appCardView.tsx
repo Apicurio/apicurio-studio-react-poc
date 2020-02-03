@@ -1,17 +1,17 @@
-import React, { ReactNode } from 'react';
-import { Gallery, GalleryItem } from '@patternfly/react-core';
-import AppCard from './appCard';
+import React from 'react';
+import { Gallery } from '@patternfly/react-core';
+import {AppCard} from './appCard';
 import data from '../api-data.json';
 
 export const AppCardView: React.FunctionComponent<any> = (props) => {
   const apiData = data.apis;
-
-  const cardList = apiData.map((api) =>
+  const cardList = apiData.map((api, index) =>
     <AppCard
-      apiName={api.name}
-      apiDescription={api.description}
-      apiTag1="Tag 1"
-      apiTag2="Another tag"
+      key={index}
+      id={api.id}
+      name={api.name}
+      description={api.description}
+      tags={api.tags}
     />
   );
 

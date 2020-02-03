@@ -1,14 +1,13 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { Button, Card, CardActions, CardHead, CardHeader, CardBody, CardFooter, Title } from '@patternfly/react-core';
 import {TimesIcon, EyeIcon} from '@patternfly/react-icons';
 import ApicurioIcon from './assets/apicurio-icon.png';
 import AppTabs from './appTabs';
 import './app.css'
 import data from '../api-data.json';
-import { variance } from '../../../../node_modules/@babel/types';
 
 type AppDrawerPanelContentProps = {
-  currentAPIId: string
+  currentApiId: string
 }
 
 class AppDrawerPanelContent extends React.Component<AppDrawerPanelContentProps> {
@@ -17,17 +16,17 @@ class AppDrawerPanelContent extends React.Component<AppDrawerPanelContentProps> 
   }
 
   render() {
-    var name;
-    var createdOn;
-    var createdBy;
-    data.apis.map((api) => {
-      console.log('what is' + api.id + 'what is' + this.props.currentAPIId);
-      if(api.id === this.props.currentAPIId) {
-        name = api.name;
-        createdOn = api.createdOn;
-        createdBy = api.createdBy;
+    function findId(array: string[], id: string) {
+      var apiTemp = array.find(api => api.id === id);
+      if (apiTemp != undefined) {
+        return apiTemp;
       }
-    });
+      else {
+        return Error;
+      }
+    }
+
+    var apiObject = findId(data.apis, this.props.currentApiId);
 
     return (
       <Card>
@@ -35,7 +34,7 @@ class AppDrawerPanelContent extends React.Component<AppDrawerPanelContentProps> 
           <span>
             <img src={ApicurioIcon}/>
             <Title headingLevel="h3" size="xl">
-              {name}
+              {apiObject.name}
             </Title>
           </span>
           <CardActions>
@@ -55,7 +54,7 @@ class AppDrawerPanelContent extends React.Component<AppDrawerPanelContentProps> 
             </Button>
           </div>
         </CardBody>
-        <AppTabs date={createdOn} author={createdBy}/>
+        <AppTabs date={apiObject.createdBy} author={apiObject.createdBy}/>
       </Card>
     )
   };

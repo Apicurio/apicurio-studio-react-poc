@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 export const AppEmptyState: React.FunctionComponent<any> = (props) => {
 
   return (
-  <EmptyState variant={EmptyStateVariant.full}>
+  <EmptyState variant={EmptyStateVariant.full} className="app-empty-state">
     <EmptyStateIcon icon={PlusCircleIcon} />
     <Title headingLevel="h5" size="lg">
       You have no APIs yet!

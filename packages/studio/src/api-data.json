@@ -6,7 +6,7 @@
       "description": "A sample API that uses a pet store as an example to demonstrate features in the OpenAPI 3.0 specification.",
       "createdOn": "January 29, 2020",
       "createdBy": "cmolloy@redhat.com",
-      "tags": "Pet store tag",
+      "tags": ["Pet store tag", "Another tag", "Tag one"],
       "type": "Open API 3.0.2"
     },
     {
@@ -15,7 +15,7 @@
       "description": "A sample API that uses a pet store as an example to demonstrate features in the OpenAPI 3.0 specification.",
       "createdOn": "January 30, 2020",
       "createdBy": "dlabaj@redhat.com",
-      "tags": "Sports store tag",
+      "tags": ["Sports store tag", "Another tag", "Tag two"],
       "type": "Open API 3.0.2"
     },
     {
@@ -24,7 +24,7 @@
       "description": "A sample API that uses a pet store as an example to demonstrate features in the OpenAPI 3.0 specification.",
       "createdOn": "January 18, 2020",
       "createdBy": "cmolloy@redhat.com",
-      "tags": "Weather store tag",
+      "tags": ["Weather store tag", "Another tag", "Tag three"],
       "type": "Open API 3.0.2"
     },
     {
@@ -33,7 +33,7 @@
       "description": "A sample API that uses a pet store as an example to demonstrate features in the OpenAPI 3.0 specification.",
       "createdOn": "January 24, 2020",
       "createdBy": "dlabaj@redhat.com",
-      "tags": "Clothes store tag",
+      "tags": ["Clothes store tag", "Another tag", "Tag four"],
       "type": "Open API 3.0.2"
     }
   ]

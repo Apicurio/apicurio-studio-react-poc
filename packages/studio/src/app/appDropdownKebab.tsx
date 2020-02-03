@@ -2,10 +2,10 @@ import React, { ReactNode } from 'react';
 import{ Dropdown, DropdownItem, DropdownSeparator, DropdownPosition, KebabToggle } from '@patternfly/react-core';
 import './app.css'
 
-type AppDropdownKebabProps = {
+interface AppDropdownKebabProps {
 }
 
-type AppDropdownKebabState = {
+interface AppDropdownKebabState {
   isOpen: boolean
 }
 
@@ -18,19 +18,21 @@ export class AppDropdownKebab extends React.Component<AppDropdownKebabProps, App
     };
   }
 
-  onToggle = (isOpen: boolean) => {
+  private onToggle = (isOpen: boolean) => {
     this.setState({
       isOpen
     });
   };
   
-  onSelect = (event: React.SyntheticEvent<HTMLDivElement, Event>) => {
+  private onSelect = (event: React.SyntheticEvent<HTMLDivElement, Event>) => {
       this.setState({
         isOpen: !this.state.isOpen
       });
+      // TO DO: Add in the focus function
       // this.onFocus();
     };
 
+  // TO DO: Add in the focus function
   // public onFocus = () => {
   //   const element = document.getElementById('toggle-id-1');
   //   element.focus();
@@ -64,11 +66,11 @@ export class AppDropdownKebab extends React.Component<AppDropdownKebabProps, App
     ];
     return (
       <Dropdown
-        //onSelect={this.onSelect}
+        // TO DO: onSelect={this.onSelect}
         position={DropdownPosition.right}
         toggle={<KebabToggle onToggle={this.onToggle} id="toggle-id-1" />}
         isOpen={isOpen}
-        isPlain
+        isPlain={true}
         dropdownItems={dropdownItems}
       />
     );

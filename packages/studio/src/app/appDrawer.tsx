@@ -1,46 +1,45 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { Drawer, DrawerPanelContent, DrawerContent } from '@patternfly/react-core/dist/esm/experimental';
-import { Button } from '@patternfly/react-core';
 import AppDataList from './appDataList';
 import {AppCardView} from './appCardView';
 import AppDrawerPanelContent from './appDrawerPanelContent';
 import './app.css';
 import data from '../api-data.json';
 
-type AppDrawerProps = {
+interface AppDrawerProps {
   apiView: string
 }
 
-type AppDrawerState = {
-  isExpanded: boolean,
-  currentAPIId: string
+interface AppDrawerState {
+  readonly currentApiId: string,
+  readonly isExpanded: boolean
 }
 
 class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
   constructor(props: AppDrawerProps) {
-   super(props);
-   this.state = {
-     isExpanded: false,
-     currentAPIId: ""
-   };
+    super(props);
+    this.state = {
+      currentApiId: "",
+      isExpanded: false
+    };
   }
 
-  openDrawer = () => {
+  private openDrawer = () => {
     const isExpanded = !this.state.isExpanded;
     this.setState({
       isExpanded
     });
   };
 
-  findKey = (id: string) => {
+  private findKey = (id: string) => {
     const keyListItem = id;
     this.setState({
-      currentAPIId: keyListItem
+      currentApiId: keyListItem
     })
   }
 
  render() {
-   const { isExpanded, currentAPIId } = this.state;
+   const { isExpanded, currentApiId } = this.state;
 
    return (
     <React.Fragment>
@@ -54,8 +53,8 @@ class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
           }
           </div>
         </DrawerContent>
-        <DrawerPanelContent>
-          <AppDrawerPanelContent currentAPIId={currentAPIId}/>
+        <DrawerPanelContent className="app-drawer-panel-body">
+          <AppDrawerPanelContent currentApiId={currentApiId}/>
         </DrawerPanelContent>
       </Drawer>
     </React.Fragment>

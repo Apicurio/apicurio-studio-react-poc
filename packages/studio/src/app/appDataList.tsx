@@ -1,15 +1,15 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import {DataList} from '@patternfly/react-core';
 import AppDataListItem from './appDataListItem';
 import data from '../api-data.json';
 
-export interface AppDataListProps {
+interface AppDataListProps {
   viewDetails: (ev: React.MouseEvent<HTMLElement>) => void,
   selectItem: (ev: React.MouseEvent<HTMLElement>) => void,
   keyListItem: (ev: React.MouseEvent<HTMLElement>) => void
 }
 
-export interface AppDataListState {
+interface AppDataListState {
   selectedDataListItemId: string
 }
 
@@ -32,11 +32,11 @@ class AppDataList extends React.Component<AppDataListProps, AppDataListState> {
   render() {
     const listItems = apiData.map((api, index) =>
       <AppDataListItem
-        id={api.id}
-        apiName={api.name}
-        apiDescription={api.description}
-        apiTag={api.tags}
         key={index}
+        id={api.id}
+        name={api.name}
+        description={api.description}
+        tags={api.tags}
         onClick={this.props.viewDetails}
       />
     );
