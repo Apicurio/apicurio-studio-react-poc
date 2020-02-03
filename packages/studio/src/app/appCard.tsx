@@ -8,7 +8,6 @@ interface AppCardProps {
   id: string,
   name: string,
   description: string,
-  createdOn: Date,
   tags: string[],
   type: string
 }

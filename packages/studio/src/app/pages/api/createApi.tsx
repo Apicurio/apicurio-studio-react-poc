@@ -3,6 +3,7 @@ import { Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, TextInput, TextAre
 import '../../app.css'
 
 interface CreateApiProps {
+  isActive: true
 }
 
 interface CreateApiState {
@@ -12,7 +13,7 @@ interface CreateApiState {
 }
 
 export class CreateApi extends React.Component<CreateApiProps, CreateApiState> {
-  constructor(props) {
+  constructor(props: CreateApiProps) {
     super(props);
     this.state = {
       name: '',
@@ -24,7 +25,7 @@ export class CreateApi extends React.Component<CreateApiProps, CreateApiState> {
     this.onChange = this.onChange.bind(this);
   }
 
-  onChange = (apiType: string, event) => {
+  onChange = (apiType: string) => {
     this.setState({apiType});
   };
 
@@ -36,7 +37,7 @@ export class CreateApi extends React.Component<CreateApiProps, CreateApiState> {
     this.setState({ description });
   };
 
-  /* Add more options here */
+  // TO DO: Add more options here
   options = [
     { value: 'Please choose', label: 'Please choose', disabled: false },
     { value: 'Open API 3.0.2', label: 'Open API 3.0.2', disabled: false }

@@ -2,16 +2,13 @@ import React, { ReactNode } from 'react';
 import { Breadcrumb, BreadcrumbItem, Button, Card, CardBody, Form, FormGroup, Split, SplitItem, TextInput, TextArea, FormSelectOption, FormSelect, ActionGroup, Title, PageSection, PageSectionVariants } from '@patternfly/react-core';
 import '../../app.css'
 
-type ImportApiProps = {
-}
-
-type ImportApiState = {
+interface ImportApiState {
   importType: string,
   url: string
 }
 
-export class ImportApi extends React.Component<ImportApiProps, ImportApiState> {
-  constructor(props: ImportApiProps) {
+export class ImportApi extends React.Component<{}, ImportApiState> {
+  constructor(props) {
     super(props);
     this.state = {
       importType: '',
@@ -21,7 +18,7 @@ export class ImportApi extends React.Component<ImportApiProps, ImportApiState> {
     this.handleTextInputChangeURL = this.handleTextInputChangeURL.bind(this);
   }
 
-  onChange = (importType: string, event) => {
+  onChange = (importType: string) => {
     this.setState({importType});
   };
 
