@@ -9,6 +9,7 @@
     "build": " tsc && tsc -m es6 --outDir ./dist/esm && webpack --config webpack.config.js",
     "clean": "rimraf dist",
     "prebuild": "yarn clean",
+    "lint": "tslint -c ./tslint.json --project .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Red Hat",
