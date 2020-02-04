@@ -1,7 +1,7 @@
 import React from 'react';
 import './app.css'
 
-type AppTagProps = {
+interface AppTagProps {
   text: string
 }
 

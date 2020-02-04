@@ -4,9 +4,9 @@ import AppDataListItem from './appDataListItem';
 import data from '../api-data.json';
 
 interface AppDataListProps {
-  viewDetails: string,
-  selectItem: string,
-  keyListItem: string
+  viewDetails: React.MouseEventHandler,
+  selectItem: React.MouseEventHandler,
+  keyListItem: React.MouseEventHandler
 }
 
 interface AppDataListState {

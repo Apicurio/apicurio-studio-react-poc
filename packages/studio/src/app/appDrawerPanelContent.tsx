@@ -16,7 +16,7 @@ class AppDrawerPanelContent extends React.Component<AppDrawerPanelContentProps> 
   }
 
   render() {
-    function findId(array: {}, id: string) {
+    function findId(array: Array<any>, id: string) {
       var apiTemp = array.find(api => api.id === id);
       if (apiTemp != undefined) {
         return apiTemp;

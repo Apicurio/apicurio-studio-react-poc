@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, DataListItem, DataListItemCells, DataListItemRow, DataListCell, DataListCheck, DataListAction } from '@patternfly/react-core';
-import {AppDropdownKebab} from './appDropdownKebab';
+import AppDropdownKebab from './appDropdownKebab';
 import {AppTag} from './appTag';
 import ApicurioIcon from './assets/apicurio-icon.png';
 import './app.css'
@@ -11,10 +11,9 @@ interface AppDataListItemProps {
   description: string,
   createdOn?: Date,
   tags: string[],
-  type: string
+  type?: string,
   key: number,
-  onClick: (ev: React.MouseEvent<HTMLButtonElement>) => void,
-  keyListItem: (ev: React.MouseEvent<HTMLButtonElement>) => void
+  onClick: (ev: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 class AppDataListItem extends React.Component<AppDataListItemProps> {
@@ -49,7 +48,7 @@ class AppDataListItem extends React.Component<AppDataListItemProps> {
           <DataListAction aria-labelledby={`data-list-item-${this.props.id}`} id={`data-list-item-${this.props.id}`} aria-label="Actions">
               <Button variant="link" onClick={this.props.onClick}>View Details</Button>
               <Button variant="secondary">Edit API</Button>
-              <AppDropdownKebab />
+              <AppDropdownKebab/>
           </DataListAction>
         </DataListItemRow>
       </DataListItem>

@@ -4,7 +4,6 @@ import {PlusCircleIcon} from '@patternfly/react-icons';
 import {Link} from 'react-router-dom';
 
 export const AppEmptyState: React.FunctionComponent<any> = (props) => {
-
   return (
   <EmptyState variant={EmptyStateVariant.full} className="app-empty-state">
     <EmptyStateIcon icon={PlusCircleIcon} />

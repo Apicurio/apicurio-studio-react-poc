@@ -1,14 +1,10 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import{ Dropdown, DropdownItem, DropdownSeparator, DropdownPosition, KebabToggle } from '@patternfly/react-core';
 import './app.css'
 
-interface AppDropdownKebabProps {
-}
-
 interface AppDropdownKebabState {
-  isOpen: boolean
+  readonly isOpen: boolean
 }
-
 
 export class AppDropdownKebab extends React.Component<undefined, AppDropdownKebabState> {
   state = {
