@@ -24,7 +24,7 @@ class AppDataListItem extends React.Component<AppDataListItemProps> {
     return (
       <DataListItem key={this.props.key} id={this.props.id} aria-labelledby={`data-list-item-${this.props.id}`}>
         <DataListItemRow>
-          <DataListCheck aria-labelledby={`data-list-item-${this.props.id}`} name={`data-list-item-check-${this.props.id}`}/>
+          <DataListCheck checked={false} aria-labelledby={`data-list-item-${this.props.id}`} name={`data-list-item-check-${this.props.id}`}/>
           <DataListItemCells
             dataListCells={[
               <DataListCell isIcon className="app-data-list-cell" key={`primary content ${this.props.id}`}>
