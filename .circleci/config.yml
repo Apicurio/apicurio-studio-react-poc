@@ -35,3 +35,4 @@ jobs:
       # build library
       - run: ./init-dev.sh
       - run: yarn build
+      - run: yarn test
