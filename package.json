@@ -16,7 +16,9 @@
   "scripts": {
     "clean": "lerna run clean",
     "build": "lerna run build",
-    "start:studio": "lerna run start --scope=@apicurio/studio"
+    "lint": "lerna run lint",
+    "start:studio": "lerna run start --scope=@apicurio/studio",
+    "test": "echo \"TODO: Add tests\" && exit 0 "
   },
   "devDependencies": {
     "lerna": "^3.15.0"
