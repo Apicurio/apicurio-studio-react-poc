@@ -1,42 +1,32 @@
-import React from 'react';
-import { DataToolbar , DataToolbarItem, DataToolbarContent } from '@patternfly/react-core/dist/esm/experimental';
-import { Button } from '@patternfly/react-core';
-import {ThIcon, ListIcon} from '@patternfly/react-icons';
-import './app.css'
-
-interface AppToolbarProps {
-  buttonClick: (ev: React.MouseEvent<HTMLButtonElement>) => void,
-  buttonSelected: string
-}
+import React, { ReactNode } from 'react';
+import {Button, ButtonVariant, Dropdown, DropdownToggle, Toolbar, ToolbarGroup, ToolbarItem} from '@patternfly/react-core';
+import {UserDropdown} from './components/userDropDown'
+import { CogIcon, HelpIcon} from '@patternfly/react-icons';
+import HelpDropdown from './components/helpDropDown/helpDropDown';
+//TODO: Need to add accessibility to the toolbar (see: http://patternfly-react.surge.sh/patternfly-4/demos/pagelayout)
 
 
-export class AppToolbar extends React.Component<AppToolbarProps> {
-  constructor(props: AppToolbarProps) {
-    super(props);
-  }
+let isDropdownOpen: boolean = false;
 
-  render() {
-    return (
-      <DataToolbar>
-        <DataToolbarContent>
-          <DataToolbarItem>
-            This is where the Data Toolbar should go
-          </DataToolbarItem>
-          <DataToolbarItem variant="pagination">
-            <Button onClick={this.props.buttonClick} className={'app-data-toolbar-button-control ' + (this.props.buttonSelected === "card" ? "pf-m-selected" : "")} variant="plain">
-              <ThIcon/>
+const userDropdownItems: ReactNode[] = [];
+
+export const AppToolbar = (
+    <Toolbar>
+        <ToolbarGroup>
+            <ToolbarItem>
+              <HelpDropdown />
+            </ToolbarItem>
+            <ToolbarItem> 
+            <Button id="simple-example-uid-02" aria-label="Settings actions" variant={ButtonVariant.plain}>
+                <CogIcon />
             </Button>
-            <Button onClick={this.props.buttonClick} className={'app-data-toolbar-button-control ' + (this.props.buttonSelected === "list" ? "pf-m-selected" : "")} variant="plain">
-              <ListIcon/>
-            </Button>
-            <span className="app-toolbar-api-total">
-              4 APIs found
-            </span>
-          </DataToolbarItem>
-        </DataToolbarContent>
-      </DataToolbar>
-    )
-  }
-}
-
-export default AppToolbar;
+          </ToolbarItem>
+        </ToolbarGroup>
+        <ToolbarGroup>
+        <ToolbarItem>
+          <UserDropdown/>
+        </ToolbarItem>
+      </ToolbarGroup>
+    </Toolbar>
+  );
+  export default AppToolbar;
