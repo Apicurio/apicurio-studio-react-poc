@@ -13,7 +13,102 @@
   flex: 0 1 auto;
 }
 
-.pf-c-page {
-  width: 100%;
+.app-page {
   height: 100vh;
+}
+
+.app-page-section-border-bottom {
+  border-bottom: 1px solid var(--pf-global--BorderColor--100);
+}
+
+.app-page-section-breadcrumb {
+  padding-bottom: 0;
+}
+
+.app-data-list-cell.pf-m-icon > img {
+  max-width: unset;
+}
+
+.app-api-title {
+  color: var(--pf-global--primary-color--100);
+}
+
+.app-api-description {
+  padding-top: calc(var(--pf-global--spacer--xs)/2);
+  font-size: var(--pf-global--FontSize--sm);
+}
+
+.app-api-tag-group {
+  padding-top: var(--pf-global--spacer--md);
+}
+
+.app-api-tag-group > *:not(:last-child) {
+  margin-right: var(--pf-global--spacer--sm);
+}
+
+.app-tag {
+  padding-right: var(--pf-global--spacer--sm);
+  padding-left: var(--pf-global--spacer--sm);
+  background-color: var(--pf-global--BackgroundColor--300);
+  font-size: var(--pf-global--FontSize--xs);
+  border-radius: var(--pf-global--BorderRadius--lg);
+}
+
+.app-card-view-card-body {
+  font-size: var(--pf-global--FontSize--sm);
+}
+
+.app-card-view-card-header {
+  font-weight: var(--pf-global--FontWeight--normal) !important;
+}
+
+.pf-m-selected {
+  color: var(--pf-global--active-color--100) !important;
+}
+
+.app-drawer-content {
+  padding: var(--pf-global--spacer--lg); /* remove this when new drawer styles in pf are added */
+}
+
+.app-drawer-panel-content {
+  padding: 0 !important;
+}
+
+.app-drawer-panel-body .pf-c-drawer__panel-body {
+  padding: 0;
+}
+
+.app-button-group-sm > *:not(:last-child) {
+  margin-right: var(--pf-global--spacer--sm); /* remove this when action group is added or we use utility classes */
+}
+
+.app-button-group-md > *:not(:last-child) {
+  margin-right: var(--pf-global--spacer--md); /* remove this when action group is added or we use utility classes */
+}
+
+.app-toolbar-api-total {
+  font-size: var(--pf-global--FontSize--sm);
+  color: var(--pf-global--Color--100);
+}
+
+.app-create-api-form {
+  width: 50%;
+}
+
+.app-form-helper-text {
+  font-size: var(--pf-global--FontSize--sm);
+  color: var(--pf-global--Color--200);
+}
+
+.app-form-helper-text-asterisk {
+  color: var(--pf-global--danger-color--100);
+}
+
+.app-import-api-split-layout > .pf-l-split__item {
+  width: 50%;
+  margin-right: var(--pf-global--spacer--xl);
+}
+
+.app-empty-state > a > .pf-c-button.pf-m-primary, .app-empty-state .pf-c-empty-state__primary {
+  margin-top: var(--pf-c-empty-state--c-button--MarginTop);
 }

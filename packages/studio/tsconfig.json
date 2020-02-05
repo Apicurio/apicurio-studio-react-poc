@@ -18,6 +18,9 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "resolveJsonModule": true,
+    "plugins": [
+      { "name": "typescript-tslint-plugin" }
+    ],
     "paths": {
       "@pf4-assets/*": ["node_modules/@patternfly/react-core/dist/styles/assets/*"]
     },
