@@ -9,6 +9,7 @@ import './version.js';
 
 //Handle login via keycloak
 const keycloak = Keycloak();
+console.log('what is keycloak' + keycloak);
 keycloak.init({onLoad: 'login-required'}).success((authenticated: any) => {
     if (authenticated) {
         (window as any).keycloak = keycloak;
