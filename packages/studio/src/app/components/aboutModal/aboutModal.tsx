@@ -1,17 +1,24 @@
 import React from 'react';
 import { AboutModal, Button, TextContent, TextList, TextListItem, DropdownItem, Dropdown } from '@patternfly/react-core';
-import brandImg from './apicurioBrand.png';
+import brandImg from './../../../../assets/images/apicurio_gray.png';
 
-class SimpleAboutModal extends React.Component {
+interface IModalState {
+  isModalOpen: boolean;
+}
 
-    public state: {
-        isModalOpen: boolean;
-      };
+class SimpleAboutModal extends React.Component<{}, IModalState> {
+  public handleModalToggle: () => void;
     
-  constructor(props: any) {
+  constructor(props) {
     super(props);
     this.state = {
       isModalOpen: false
+    };
+
+    this.handleModalToggle = () => {
+      this.setState(({ isModalOpen }) => ({
+        isModalOpen: !isModalOpen
+      }));
     };
   }
 
@@ -21,9 +28,7 @@ class SimpleAboutModal extends React.Component {
     return (
       <React.Fragment>
         <Button onClick={this.handleModalToggle}>
-          <DropdownItem>
           About
-          </DropdownItem>
         </Button>
         <AboutModal
           isOpen={this.state.isModalOpen}
@@ -35,31 +40,22 @@ class SimpleAboutModal extends React.Component {
         >
           <TextContent>
             <TextList component="dl">
-              <TextListItem component="dt">CFME Version</TextListItem>
-              <TextListItem component="dd">5.5.3.4.20102789036450</TextListItem>
-              <TextListItem component="dt">Cloudforms Version</TextListItem>
-              <TextListItem component="dd">4.1</TextListItem>
-              <TextListItem component="dt">Server Name</TextListItem>
-              <TextListItem component="dd">40DemoMaster</TextListItem>
-              <TextListItem component="dt">User Name</TextListItem>
-              <TextListItem component="dd">Administrator</TextListItem>
-              <TextListItem component="dt">User Role</TextListItem>
-              <TextListItem component="dd">EvmRole-super_administrator</TextListItem>
-              <TextListItem component="dt">Browser Version</TextListItem>
-              <TextListItem component="dd">601.2</TextListItem>
-              <TextListItem component="dt">Browser OS</TextListItem>
-              <TextListItem component="dd">Mac</TextListItem>
+              <TextListItem component="dt">Version</TextListItem>
+              <TextListItem component="dd">0.2.30.Final</TextListItem>
+              <TextListItem component="dt">Built On</TextListItem>
+              <TextListItem component="dd">July 16, 2019</TextListItem>
+              <TextListItem component="dt">Edition</TextListItem>
+              <TextListItem component="dd">CLIv7</TextListItem>
+              <TextListItem component="dt">Project URL</TextListItem>
+              <TextListItem component="dd" href={'http://apicur.io/'}>link</TextListItem>
+              <TextListItem component="dt">Project Roadmap</TextListItem>
+              <TextListItem component="dd" onClick={event => window.location.href="http://apicur.io/roadmap"} >asdas</TextListItem>
             </TextList>
           </TextContent>
         </AboutModal>
       </React.Fragment>
     );
   }
-  public handleModalToggle = () => {
-    this.setState((isModalOpen: boolean) => ({
-      isModalOpen: !this.state.isModalOpen
-    }));
-  };
 }
 
 export default SimpleAboutModal;

@@ -8,25 +8,26 @@ const gsUrl =
 const csUrl = 'https://access.redhat.com/support';
 
 const helpDropdownItems: React.ReactNode[] = [
-  <DropdownItem key="separated link" href={gsUrl}>Getting Started</DropdownItem>,
-  <DropdownItem key="separated link" href={csUrl}>Customer Support</DropdownItem>,
+  <DropdownItem key="separated link 1" href={gsUrl}>Getting Started</DropdownItem>,
+  <DropdownItem key="separated link 2" href={csUrl}>Customer Support</DropdownItem>,
   <DropdownSeparator key="separator" />,
-  // <DropdownItem key="separated action" component="button"> About </DropdownItem>,
+  // <DropdownItem key="separated action">
+  //   About
+  // </DropdownItem>,
   <SimpleAboutModal key="modal" />
+
   
 ];
  
 export class HelpDropdown extends React.Component {
   public state: {
     isOpen: boolean;
-    showAboutModal: boolean;
   };
 
   public constructor(props: any) {
     super(props);
     this.state = {
       isOpen: false,
-      showAboutModal: false
     };
   }
 
