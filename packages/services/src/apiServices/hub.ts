@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 import {IAuthenticationService} from "./auth.service";
 import {ConfigService} from "./config.service";
 import {HttpClient, HttpEvent, HttpResponse} from "@angular/common/http";
