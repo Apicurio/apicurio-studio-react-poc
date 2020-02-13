@@ -34,33 +34,33 @@ export class AbstractHubService {
    * @param params
    * 
    */
-//   protected endpoint(path: string, params?: any, queryParams?: any): string {
-//       if (params) {
-//           for (let key in params) {
-//               let value: string = encodeURIComponent(params[key]);
-//               path = path.replace(":" + key, value);
-//           }
-//       }
-//       let rval: string = this.apiBaseHref + path;
-//       if (queryParams) {
-//           let first: boolean = true;
-//           for (let key in queryParams) {
-//               if (queryParams[key]) {
-//                   let value: string = encodeURIComponent(queryParams[key]);
-//                   if (first) {
-//                       rval = rval + "?" + key;
-//                   } else {
-//                       rval = rval + "&" + key;
-//                   }
-//                   if (value != null && value != undefined) {
-//                       rval = rval + "=" + value;
-//                   }
-//                   first = false;
-//               }
-//           }
-//       }
-//       return rval;
-//   }
+  protected endpoint(path: string, params?: any, queryParams?: any): string {
+      if (params) {
+          for (let key in params) {
+              let value: string = encodeURIComponent(params[key]);
+              path = path.replace(":" + key, value);
+          }
+      }
+      let rval: string = this.apiBaseHref + path;
+      if (queryParams) {
+          let first: boolean = true;
+          for (let key in queryParams) {
+              if (queryParams[key]) {
+                  let value: string = encodeURIComponent(queryParams[key]);
+                  if (first) {
+                      rval = rval + "?" + key;
+                  } else {
+                      rval = rval + "&" + key;
+                  }
+                  if (value != null && value != undefined) {
+                      rval = rval + "=" + value;
+                  }
+                  first = false;
+              }
+          }
+      }
+      return rval;
+  }
 
     /**
      * Creates an editing endpoint from the given relative path and params.
