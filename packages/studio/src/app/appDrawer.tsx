@@ -5,7 +5,7 @@ import {AppCardView} from './appCardView';
 import AppDrawerPanelContent from './appDrawerPanelContent';
 import './app.css';
 import { string } from 'prop-types';
-import {ApisService} from '../services/api-services/api-function';
+import {ApisService} from '../../../services/src/api-services/api-functions';
 
 interface AppDrawerProps {
   apiView: string
