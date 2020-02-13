@@ -1,2 +1,2 @@
-export * from './api-functions';
+export * from './api-services';
 export * from './hub';

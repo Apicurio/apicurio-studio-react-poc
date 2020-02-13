@@ -25,5 +25,8 @@
     "typescript": "^3.7.5",
     "typescript-tslint-plugin": "^0.5.5"
   },
-  "name": "apicurio-studio-react-poc"
+  "name": "apicurio-studio-react-poc",
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
 }

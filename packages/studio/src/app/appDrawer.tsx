@@ -5,7 +5,7 @@ import {AppCardView} from './appCardView';
 import AppDrawerPanelContent from './appDrawerPanelContent';
 import './app.css';
 import { string } from 'prop-types';
-import {ApisService} from '../../../services/src/api-services/api-functions';
+import {ApisService} from '../../../services/src/api-services/api-services';
 
 interface AppDrawerProps {
   apiView: string
@@ -26,13 +26,17 @@ class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
     };
   }
 
-  // componentDidMount() {
-  //   console.log('did it get here');
-  //   this.loadAsyncPageData();
-  // }
+  componentDidMount() {
+    console.log('did it get here');
+    this.loadAsyncPageData();
+  }
+
+  loadAsyncPageData() {
+    console.log(ApisService.getApis());
+  }
 
   // loadAsyncPageData() {
-  //   this.apis.getApis().then( apis => {
+  //   ApisService.getApis().then( apis => {
   //     this.setState({allApis: apis});
   //   }).catch( error => {
   //     this.error(error);

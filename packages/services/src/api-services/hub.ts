@@ -6,27 +6,27 @@ import {User} from "../models/user.model";
 import {HttpUtils} from "../util/common";
 
 // Base class for all Hub-API based services.
-export abstract class AbstractHubService {
+export class AbstractHubService {
 
-  private apiBaseHref: string;
-  private editingBaseHref: string;
+//   private apiBaseHref: string;
+//   private editingBaseHref: string;
 
   /**
    * Constructor.
    * @param http
    * @param authService
    */
-  constructor(protected http: HttpClient, protected authService: IAuthenticationService, protected config: ConfigService) {
-      this.apiBaseHref = this.config.hubUrl();
-      this.editingBaseHref = this.config.editingUrl();
-  }
+//   constructor(protected http: HttpClient, protected authService: IAuthenticationService, protected config: ConfigService) {
+//       this.apiBaseHref = this.config.hubUrl();
+//       this.editingBaseHref = this.config.editingUrl();
+//   }
 
   /**
    * Gets the current user.
    */
-  protected user(): User {
-      return this.authService.getAuthenticatedUserNow();
-  }
+//   protected user(): User {
+//       return this.authService.getAuthenticatedUserNow();
+//   }
 
   /**
    * Creates a hub API endpoint from the api path and params.
@@ -34,33 +34,33 @@ export abstract class AbstractHubService {
    * @param params
    * 
    */
-  protected endpoint(path: string, params?: any, queryParams?: any): string {
-      if (params) {
-          for (let key in params) {
-              let value: string = encodeURIComponent(params[key]);
-              path = path.replace(":" + key, value);
-          }
-      }
-      let rval: string = this.apiBaseHref + path;
-      if (queryParams) {
-          let first: boolean = true;
-          for (let key in queryParams) {
-              if (queryParams[key]) {
-                  let value: string = encodeURIComponent(queryParams[key]);
-                  if (first) {
-                      rval = rval + "?" + key;
-                  } else {
-                      rval = rval + "&" + key;
-                  }
-                  if (value != null && value != undefined) {
-                      rval = rval + "=" + value;
-                  }
-                  first = false;
-              }
-          }
-      }
-      return rval;
-  }
+//   protected endpoint(path: string, params?: any, queryParams?: any): string {
+//       if (params) {
+//           for (let key in params) {
+//               let value: string = encodeURIComponent(params[key]);
+//               path = path.replace(":" + key, value);
+//           }
+//       }
+//       let rval: string = this.apiBaseHref + path;
+//       if (queryParams) {
+//           let first: boolean = true;
+//           for (let key in queryParams) {
+//               if (queryParams[key]) {
+//                   let value: string = encodeURIComponent(queryParams[key]);
+//                   if (first) {
+//                       rval = rval + "?" + key;
+//                   } else {
+//                       rval = rval + "&" + key;
+//                   }
+//                   if (value != null && value != undefined) {
+//                       rval = rval + "=" + value;
+//                   }
+//                   first = false;
+//               }
+//           }
+//       }
+//       return rval;
+//   }
 
     /**
      * Creates an editing endpoint from the given relative path and params.
@@ -68,15 +68,15 @@ export abstract class AbstractHubService {
      * @param params
      * 
      */
-    protected editingEndpoint(path: string, params?: any): string {
-        if (params) {
-            for (let key in params) {
-                let value: string = encodeURIComponent(params[key]);
-                path = path.replace(":" + key, value);
-            }
-        }
-        return this.editingBaseHref + path;
-    }
+    // protected editingEndpoint(path: string, params?: any): string {
+    //     if (params) {
+    //         for (let key in params) {
+    //             let value: string = encodeURIComponent(params[key]);
+    //             path = path.replace(":" + key, value);
+    //         }
+    //     }
+    //     return this.editingBaseHref + path;
+    // }
 
     /**
      * Creates the request options used by the HTTP service when making
@@ -85,7 +85,7 @@ export abstract class AbstractHubService {
      * @param authenticated
      * 
      */
-    protected options(headers: {[header: string]: string}, authenticated: boolean = true): any {
+    private options(headers: {[header: string]: string}, authenticated: boolean = true): any {
         let options = {
             headers: headers
         };
@@ -166,17 +166,17 @@ export abstract class AbstractHubService {
      * @param options
      * 
      */
-    protected httpPostWithReturn<I, O>(url: string, body: I, options: any, successCallback?: (data: O) => O): Promise<O> {
-        options["observe"] = "response";
-        return HttpUtils.mappedPromise(this.http.post<HttpResponse<any>>(url, body, options).toPromise(), response => {
-            let data: O = response.body;
-            if (successCallback) {
-                return successCallback(data);
-            } else {
-                return response.body;
-            }
-        });
-    }
+    // protected httpPostWithReturn<I, O>(url: string, body: I, options: any, successCallback?: (data: O) => O): Promise<O> {
+    //     options["observe"] = "response";
+    //     return HttpUtils.mappedPromise(this.http.post<HttpResponse<any>>(url, body, options).toPromise(), response => {
+    //         let data: O = response.body;
+    //         if (successCallback) {
+    //             return successCallback(data);
+    //         } else {
+    //             return response.body;
+    //         }
+    //     });
+    // }
 
     /**
      * Performs an HTTP PUT operation to the given URL with the given body and options.  Returns
@@ -186,15 +186,15 @@ export abstract class AbstractHubService {
      * @param options
      * 
      */
-    protected httpPut<I>(url: string, body: I, options: any, successCallback?: () => void): Promise<void> {
-        options["observe"] = "response";
-        return HttpUtils.mappedPromise(this.http.put<HttpResponse<any>>(url, body, options).toPromise(), () => {
-            if (successCallback) {
-                successCallback();
-            }
-            return null;
-        });
-    }
+    // protected httpPut<I>(url: string, body: I, options: any, successCallback?: () => void): Promise<void> {
+    //     options["observe"] = "response";
+    //     return HttpUtils.mappedPromise(this.http.put<HttpResponse<any>>(url, body, options).toPromise(), () => {
+    //         if (successCallback) {
+    //             successCallback();
+    //         }
+    //         return null;
+    //     });
+    // }
 
     /**
      * Performs an HTTP PUT operation to the given URL with the given body and options.  Returns
@@ -204,17 +204,17 @@ export abstract class AbstractHubService {
      * @param options
      * 
      */
-    protected httpPutWithReturn<I, O>(url: string, body: I, options: any, successCallback?: (data: O) => O): Promise<O> {
-        options["observe"] = "response";
-        return HttpUtils.mappedPromise(this.http.put<HttpResponse<any>>(url, body, options).toPromise(), response => {
-            let data: O = response.body;
-            if (successCallback) {
-                return successCallback(data);
-            } else {
-                return response.body;
-            }
-        });
-    }
+    // protected httpPutWithReturn<I, O>(url: string, body: I, options: any, successCallback?: (data: O) => O): Promise<O> {
+    //     options["observe"] = "response";
+    //     return HttpUtils.mappedPromise(this.http.put<HttpResponse<any>>(url, body, options).toPromise(), response => {
+    //         let data: O = response.body;
+    //         if (successCallback) {
+    //             return successCallback(data);
+    //         } else {
+    //             return response.body;
+    //         }
+    //     });
+    // }
 
     /**
      * Performs an HTTP DELETE operation to the given URL with the given body and options.
@@ -222,14 +222,14 @@ export abstract class AbstractHubService {
      * @param options
      * 
      */
-    protected httpDelete(url: string, options: any, successCallback?: () => void): Promise<void> {
-        options["observe"] = "response";
-        return HttpUtils.mappedPromise(this.http.delete<HttpResponse<any>>(url, options).toPromise(), () => {
-            if (successCallback) {
-                successCallback();
-            }
-            return null;
-        });
-    }
+    // protected httpDelete(url: string, options: any, successCallback?: () => void): Promise<void> {
+    //     options["observe"] = "response";
+    //     return HttpUtils.mappedPromise(this.http.delete<HttpResponse<any>>(url, options).toPromise(), () => {
+    //         if (successCallback) {
+    //             successCallback();
+    //         }
+    //         return null;
+    //     });
+    // }
 
 }
