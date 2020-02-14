@@ -1,32 +1,31 @@
 import axios from 'axios';
-import {IAuthenticationService} from "./auth.service";
-import {ConfigService} from "./config.service";
-import {HttpClient, HttpEvent, HttpResponse} from "@angular/common/http";
-import {User} from "../models/user.model";
-import {HttpUtils} from "../util/common";
+import {IAuthenticationService} from "../authentication/auth.service";
+import {ConfigService} from "../config/config.service";
+import {User} from "../../../models/src/user.model";
+// import {HttpUtils} from "../util/common";
 
 // Base class for all Hub-API based services.
 export class AbstractHubService {
 
-//   private apiBaseHref: string;
-//   private editingBaseHref: string;
+  private apiBaseHref: string;
+  private editingBaseHref: string;
 
   /**
    * Constructor.
    * @param http
    * @param authService
    */
-//   constructor(protected http: HttpClient, protected authService: IAuthenticationService, protected config: ConfigService) {
-//       this.apiBaseHref = this.config.hubUrl();
-//       this.editingBaseHref = this.config.editingUrl();
-//   }
+  constructor(protected authService: IAuthenticationService, protected config: ConfigService) {
+      this.apiBaseHref = this.config.hubUrl();
+      this.editingBaseHref = this.config.editingUrl();
+  }
 
   /**
    * Gets the current user.
    */
-//   protected user(): User {
-//       return this.authService.getAuthenticatedUserNow();
-//   }
+  protected user(): User {
+      return this.authService.getAuthenticatedUserNow();
+  }
 
   /**
    * Creates a hub API endpoint from the api path and params.
@@ -34,13 +33,20 @@ export class AbstractHubService {
    * @param params
    * 
    */
-  protected endpoint(path: string, params?: any, queryParams?: any): string {
-      if (params) {
-          for (let key in params) {
-              let value: string = encodeURIComponent(params[key]);
-              path = path.replace(":" + key, value);
-          }
+   protected endpoint(path: string, params?: any, queryParams?: any) {
+    if (params) {
+      Object.keys(params).forEach(key => {
+        const value = encodeURIComponent(params[key]);
+        path = path.replace(":" + key, value);
+      })
       }
+      // if (params) {
+      //     for (let key in params) {
+      //         let value: string = encodeURIComponent(params[key]);
+      //         path = path.replace(":" + key, value);
+      //     }
+      // }
+
       let rval: string = this.apiBaseHref + path;
       if (queryParams) {
           let first: boolean = true;
@@ -85,7 +91,7 @@ export class AbstractHubService {
      * @param authenticated
      * 
      */
-    private options(headers: {[header: string]: string}, authenticated: boolean = true): any {
+    protected options(headers: {[header: string]: string}, authenticated: boolean = true): any {
         let options = {
             headers: headers
         };
@@ -100,16 +106,22 @@ export class AbstractHubService {
      * Performs an HTTP GET operation to the given URL with the given options.  Returns
      * a Promise to the HTTP response data.
      */
-    httpGet(url: string, options: any, successCallback?: () => void) {
+    protected httpGet<T>(url: string, options: any, successCallback?: (value: T) => T) {
       options["observe"] = "response"; // not sure what this does?
       axios({
         method: 'get',
         url: url,
-        options: options
+        data: {
+          options: options
+        }
       })
-      .then(response => {
+      .then(function(response) {
         if (successCallback) {
+          console.log('what is this ?' + response)
           return successCallback(response.body);
+        }
+        else {
+          return response.body;
         }
       })
       .catch(error => console.log(error)); // handle error state
@@ -132,21 +144,21 @@ export class AbstractHubService {
      * a Promise to null (no response data expected).
      * 
      */
-    httpPost(url: string, body: I, options: any, successCallback?: () => void) {
-      options["observe"] = "response";
-      axios({
-        method: 'post',
-        url: url,
-        data: body,
-        options: options
-      })
-      .then (response => {
-        if (successCallback) {
-          successCallback();
-        }
-      })
-      .catch(err => next(err));
-    }
+    // httpPost(url: string, body: I, options: any, successCallback?: () => void) {
+    //   options["observe"] = "response";
+    //   axios({
+    //     method: 'post',
+    //     url: url,
+    //     data: body,
+    //     options: options
+    //   })
+    //   .then (response => {
+    //     if (successCallback) {
+    //       successCallback();
+    //     }
+    //   })
+    //   .catch(err => next(err));
+    // }
     
     // protected httpPost<I>(url: string, body: I, options: any, successCallback?: () => void): Promise<void> {
     //     options["observe"] = "response";

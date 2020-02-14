@@ -4,7 +4,6 @@ import AppDataList from './appDataList';
 import {AppCardView} from './appCardView';
 import AppDrawerPanelContent from './appDrawerPanelContent';
 import './app.css';
-import { string } from 'prop-types';
 import {ApisService} from '../../../services/src/api-services/api-services';
 
 interface AppDrawerProps {
@@ -32,16 +31,16 @@ class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
   }
 
   loadAsyncPageData() {
-    console.log(ApisService.getApis());
+    new Promise((resolve, reject) => {
+      ApisService.getApis()
+      .then(() =>
+        resolve({
+          // this.setState({allApis: Response});
+        })
+      )
+      .catch(reject);
+    })
   }
-
-  // loadAsyncPageData() {
-  //   ApisService.getApis().then( apis => {
-  //     this.setState({allApis: apis});
-  //   }).catch( error => {
-  //     this.error(error);
-  //   })
-  // }
 
   private openDrawer = () => {
     const isExpanded = !this.state.isExpanded;
