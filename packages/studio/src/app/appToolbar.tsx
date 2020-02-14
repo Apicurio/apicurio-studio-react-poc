@@ -4,12 +4,7 @@ import {UserDropdown} from './components/userDropDown'
 import { CogIcon, HelpIcon} from '@patternfly/react-icons';
 import HelpDropdown from './components/helpDropDown/helpDropDown';
 //TODO: Need to add accessibility to the toolbar (see: http://patternfly-react.surge.sh/patternfly-4/demos/pagelayout)
-
-
-let isDropdownOpen: boolean = false;
-
-const userDropdownItems: ReactNode[] = [];
-
+ 
 export const AppToolbar = (
     <Toolbar>
         <ToolbarGroup>
