@@ -7,16 +7,18 @@ const gsUrl =
       'https://access.redhat.com/products/red-hat-integration/';
 const csUrl = 'https://access.redhat.com/support';
 
-class HelpDropdown extends React.Component<{}, {isModalOpen: boolean; isOpen: boolean}> {
+class HelpDropdown extends React.Component<{}, {isAboutClicked: boolean; isModalOpen: boolean; isOpen: boolean}> {
 
   public onToggle: (isOpen: any) => void;
   public onSelect: (event: any) => void;
-  public handleModalToggle: () => void;
   public aboutModal: () => JSX.Element;
+  public handleModalToggle: () => void;
+  public onFocus: () => void;
 
   constructor(props) {
     super(props);
     this.state = {
+      isAboutClicked: false,
       isModalOpen: false,
       isOpen: false
     };
@@ -32,12 +34,18 @@ class HelpDropdown extends React.Component<{}, {isModalOpen: boolean; isOpen: bo
         isModalOpen: true,
         isOpen: !this.state.isOpen
       });
+      this.onFocus();
     };
 
     this.handleModalToggle = () => {
-      this.setState(({ isModalOpen }) => ({
-        isModalOpen: !isModalOpen
+      this.setState(prevState => ({
+        isAboutClicked: !prevState.isAboutClicked
       }));
+    }
+
+    this.onFocus = () => {
+      const element = document.getElementById('toggle-id-7');
+      element.focus();
     };
 
     this.aboutModal = () => (
@@ -79,17 +87,17 @@ class HelpDropdown extends React.Component<{}, {isModalOpen: boolean; isOpen: bo
 
   public render() {
 
-    const { isOpen } = this.state;
+    const { isOpen, isAboutClicked } = this.state;
 
     const dropdownItems = [
       <DropdownItem key="separated link 1" href={gsUrl}>Getting Started</DropdownItem>,
       <DropdownItem key="separated link 2" href={csUrl}>Customer Support</DropdownItem>,
       <DropdownSeparator key="separator" />,
-      <DropdownItem key="about" component="button">
+      <DropdownItem key="about" component="button" onClick={this.handleModalToggle}>
        About
-      </DropdownItem>    
+      </DropdownItem>
     ];
-    
+
     return (
       <React.Fragment>
         <Dropdown
@@ -108,7 +116,7 @@ class HelpDropdown extends React.Component<{}, {isModalOpen: boolean; isOpen: bo
           isPlain={true}
           dropdownItems={dropdownItems}
         />
-        {this.aboutModal()}
+        {isAboutClicked ? this.aboutModal() : ""}
       </React.Fragment>
     );
   }
