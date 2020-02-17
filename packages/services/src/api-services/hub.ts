@@ -8,7 +8,6 @@ import {User} from "../../../models/src/user.model";
 export class AbstractHubService {
 
   private apiBaseHref: string;
-  private editingBaseHref: string;
 
   /**
    * Constructor.
@@ -17,7 +16,6 @@ export class AbstractHubService {
    */
   constructor(protected authService: IAuthenticationService, protected config: ConfigService) {
       this.apiBaseHref = this.config.hubUrl();
-      this.editingBaseHref = this.config.editingUrl();
   }
 
   /**
@@ -33,19 +31,19 @@ export class AbstractHubService {
    * @param params
    * 
    */
-   protected endpoint(path: string, params?: any, queryParams?: any) {
+  public endpoint(path: string, params?: any, queryParams?: any): string {
+    // if (params) {
+    //   Object.keys(params).forEach(key => {
+    //     const value = encodeURIComponent(params[key]);
+    //     path = path.replace(":" + key, value);
+    //   })
+    //   }
     if (params) {
-      Object.keys(params).forEach(key => {
-        const value = encodeURIComponent(params[key]);
-        path = path.replace(":" + key, value);
-      })
-      }
-      // if (params) {
-      //     for (let key in params) {
-      //         let value: string = encodeURIComponent(params[key]);
-      //         path = path.replace(":" + key, value);
-      //     }
-      // }
+      for (let key in params) {
+          let value: string = encodeURIComponent(params[key]);
+            path = path.replace(":" + key, value);
+        }
+    }
 
       let rval: string = this.apiBaseHref + path;
       if (queryParams) {
@@ -92,7 +90,7 @@ export class AbstractHubService {
      * 
      */
     protected options(headers: {[header: string]: string}, authenticated: boolean = true): any {
-        let options = {
+        const options = {
             headers: headers
         };
         if (authenticated) {
@@ -106,24 +104,25 @@ export class AbstractHubService {
      * Performs an HTTP GET operation to the given URL with the given options.  Returns
      * a Promise to the HTTP response data.
      */
-    protected httpGet<T>(url: string, options: any, successCallback?: (value: T) => T) {
+    protected httpGet<T>(url: string, options: any, successCallback?: (value: T) => T): Promise<any> {
       options["observe"] = "response"; // not sure what this does?
-      axios({
+      
+      const request = axios({
         method: 'get',
         url: url,
         data: {
           options: options
         }
       })
-      .then(function(response) {
-        if (successCallback) {
-          console.log('what is this ?' + response)
-          return successCallback(response.body);
-        }
-        else {
-          return response.body;
-        }
-      })
+      return request
+      .then(result => console.log(result))
+        // if (successCallback) {
+        //   console.log('what is this ?' + response)
+        //   return response;
+        // }
+        // else {
+        //   return response;
+        // }
       .catch(error => console.log(error)); // handle error state
     }
 

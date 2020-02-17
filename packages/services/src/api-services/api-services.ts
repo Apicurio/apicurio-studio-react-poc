@@ -23,27 +23,27 @@ import {ApiMock, MockReference} from "../../../models/src/mock-api.model";
 // import {HttpUtils} from "../util/common";
 import {StorageError} from "../../../models/src/storageError.model";
 import {DeferredAction} from "../../../models/src/deferred.model";
+import React from "react";
 // import {SharingConfiguration} from "../../../models/src/sharing-config.model";
 // import {UpdateSharingConfiguration} from "../../../models/src/update-sharing-config.model";
 
+// export interface IConnectionHandler {
+//     // Called when the connection is established.
+//     onConnected(): void;
+//     // Called when the connection is closed properly.
+//     onClosed(): void;
+//     // Called when the connection drops unexpectedly.
+//     onDisconnected(closeCode: number): void;
+// }
 
-export interface IConnectionHandler {
-    // Called when the connection is established.
-    onConnected(): void;
-    // Called when the connection is closed properly.
-    onClosed(): void;
-    // Called when the connection drops unexpectedly.
-    onDisconnected(closeCode: number): void;
-}
-
-export interface ICommandHandler {
-    onCommand(command: OtCommand): void;
-    onAck(ack: VersionedAck): void;
-    onDeferredAction(deferred: DeferredAction): void;
-    onStorageError(storageError: StorageError): void;
-    onUndo(contentVersion: number): void;
-    onRedo(contentVersion: number): void;
-}
+// export interface ICommandHandler {
+//     onCommand(command: OtCommand): void;
+//     onAck(ack: VersionedAck): void;
+//     onDeferredAction(deferred: DeferredAction): void;
+//     onStorageError(storageError: StorageError): void;
+//     onUndo(contentVersion: number): void;
+//     onRedo(contentVersion: number): void;
+// }
 
 // export interface IActivityHandler {
 //     onJoin(user: ApiEditorUser): void;
@@ -66,13 +66,14 @@ export class ApisService extends AbstractHubService {
    * @param authService
    * @param config
    */
-  constructor(authService: IAuthenticationService, config: ConfigService) {
-      super(authService, config);
-  }
+  // constructor(authService: IAuthenticationService, config: ConfigService) {
+  //     super(authService, config);
+  // }
 
   // New getApis function in React
-  public getApis() {
+  public getApis(): Promise<Api[]> {
     console.info("[ApisService] Getting all APIs");
+    console.log('did it make it here??');
 
     const listApisUrl = this.endpoint("/designs");
     const options = this.options({ "Accept": "application/json"});
