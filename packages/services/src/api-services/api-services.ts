@@ -1,29 +1,31 @@
+import axios from 'axios';
+import * as React from 'react';
 import {Api, ApiDefinition, EditableApiDefinition} from "../../../models/src/api.model";
-import {ApiContributor, ApiContributors} from "../../../models/src/api-contributors.model";
-import {NewApi} from "../../../models/src/new-api.model";
-import {ImportApi} from "../../../models/src/import-api.model";
-import {ICommand, MarshallCompat, OtCommand} from "apicurio-data-models";
-import {VersionedAck} from "../../../models/src/ack.model";
-import {ApiCollaborator} from "../../../models/src/api-collaborator.model";
-import {Invitation} from "../../../models/src/invitation.model";
-import {ApiEditorUser} from "../../../models/src/editor-user.model";
-import {ApiDesignChange} from "../../../models/src/api-design-change.model";
-import {AbstractHubService} from "./hub";
-import {PublishApi} from "../../../models/src/publish-api.model";
+// import {IAuthenticationService} from "../authentication/auth.service";
+// import ConfigService from "../config/config.service";
+// import {User} from "../../../models/src/user.model";
+// import {ApiContributor, ApiContributors} from "../../../models/src/api-contributors.model";
+// import {NewApi} from "../../../models/src/new-api.model";
+// import {ImportApi} from "../../../models/src/import-api.model";
+// import {ICommand, MarshallCompat, OtCommand} from "apicurio-data-models";
+// import {VersionedAck} from "../../../models/src/ack.model";
+// import {ApiCollaborator} from "../../../models/src/api-collaborator.model";
+// import {Invitation} from "../../../models/src/invitation.model";
+// import {ApiEditorUser} from "../../../models/src/editor-user.model";
+// import {ApiDesignChange} from "../../../models/src/api-design-change.model";
+// import {AbstractHubService} from "./hub";
+// import {PublishApi} from "../../../models/src/publish-api.model";
 // import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
-import {ConfigService} from "../config/config.service";
-import {IAuthenticationService} from "../authentication/auth.service";
-import {CodegenProject} from "../../../models/src/codegen-project.model";
-import {NewCodegenProject} from "../../../models/src/new-codegen-project.model";
-import {UpdateCodegenProject} from "../../../models/src/update-codegen-project.model";
+// import {CodegenProject} from "../../../models/src/codegen-project.model";
+// import {NewCodegenProject} from "../../../models/src/new-codegen-project.model";
+// import {UpdateCodegenProject} from "../../../models/src/update-codegen-project.model";
 // import {Injectable} from "@angular/core";
-import {ApiPublication} from "../../../models/src/api-publication.model";
-import {UpdateCollaborator} from "../../../models/src/update-collaborator.model";
-import {ApiMock, MockReference} from "../../../models/src/mock-api.model";
+// import {ApiPublication} from "../../../models/src/api-publication.model";
+// import {UpdateCollaborator} from "../../../models/src/update-collaborator.model";
+// import {ApiMock, MockReference} from "../../../models/src/mock-api.model";
 // import {HttpUtils} from "../util/common";
-import {StorageError} from "../../../models/src/storageError.model";
-import {DeferredAction} from "../../../models/src/deferred.model";
-import React from "react";
+// import {StorageError} from "../../../models/src/storageError.model";
+// import {DeferredAction} from "../../../models/src/deferred.model";
 // import {SharingConfiguration} from "../../../models/src/sharing-config.model";
 // import {UpdateSharingConfiguration} from "../../../models/src/update-sharing-config.model";
 
@@ -56,34 +58,115 @@ import React from "react";
  * to store and retrieve relevant information for the user.
  */
 
-export class ApisService extends AbstractHubService {
+// interface ApisServiceProps {
 
-  private cachedApis: Api[] = null;
+// }
 
-  /**
-   * Constructor.
-   * @param http
-   * @param authService
-   * @param config
-   */
-  // constructor(authService: IAuthenticationService, config: ConfigService) {
-  //     super(authService, config);
-  // }
+// export class ApisService extends React.Component<ApisServiceProps> {
+//   constructor(props: ApisServiceProps) {
+//     super(props);
+
+//     this.apiBaseHref = this.config.hubUrl();
+// }
+
+  // protected authService: IAuthenticationService;
+  // protected config: ConfigService;
+
+  // private cachedApis: Api[] = null;
+  // private apiBaseHref: string;
+
+  export const ApiServices: React.FunctionComponent = props => {
+
+  const endpoint = (path: string, params?: any, queryParams?: any): string => {
+    // const apiBaseHref = ConfigService.hubUrl();
+    const apiBaseHref = '';
+    // if (params) {
+    //   Object.keys(params).forEach(key => {
+    //     const value = encodeURIComponent(params[key]);
+    //     path = path.replace(":" + key, value);
+    //   })
+    //   }
+    if (params) {
+      for (let key in params) {
+          let value: string = encodeURIComponent(params[key]);
+            path = path.replace(":" + key, value);
+        }
+    }
+
+      let rval: string = apiBaseHref + path;
+      if (queryParams) {
+          let first: boolean = true;
+          for (let key in queryParams) {
+              if (queryParams[key]) {
+                  let value: string = encodeURIComponent(queryParams[key]);
+                  if (first) {
+                      rval = rval + "?" + key;
+                  } else {
+                      rval = rval + "&" + key;
+                  }
+                  if (value != null && value != undefined) {
+                      rval = rval + "=" + value;
+                  }
+                  first = false;
+              }
+          }
+      }
+      return rval;
+  }
+
+  const optionsFunc = (headers: {[header: string]: string}, authenticated: boolean = true): any  => {
+    const options = {
+        headers: headers
+    };
+    if (authenticated) {
+      return options;
+        // this.authService.injectAuthHeaders(options.headers);
+    }
+    return options;
+}
+
+  const httpGet = <T>(url: string, options: any, successCallback?: (value: T) => T): Promise<any> => {
+  options["observe"] = "response"; // not sure what this does?
+  
+  const request = axios({
+    method: 'get',
+    url: url,
+    data: {
+      options: options
+    }
+  })
+  return request
+  .then(result => console.log(result))
+    // if (successCallback) {
+    //   console.log('what is this ?' + response)
+    //   return response;
+    // }
+    // else {
+    //   return response;
+    // }
+  .catch(error => console.log(error)); // handle error state
+}
 
   // New getApis function in React
-  public getApis(): Promise<Api[]> {
+  const getApis = (): Promise<Api[]> => {
+    var cachedApis = [];
     console.info("[ApisService] Getting all APIs");
     console.log('did it make it here??');
 
-    const listApisUrl = this.endpoint("/designs");
-    const options = this.options({ "Accept": "application/json"});
+    const listApisUrl = endpoint("/designs");
+    const options = optionsFunc({ "Accept": "application/json"});
 
     console.info("[ApisService] Fetching API list: %s", listApisUrl);
-    return this.httpGet<Api[]>(listApisUrl, options, (apis) => {
-      this.cachedApis = apis;
+    return httpGet<Api[]>(listApisUrl, options, (apis) => {
+      cachedApis = apis;
       return apis;
     })
   }
+
+// export function user(): User {
+//   return;
+//   // return this.authService.getAuthenticatedUserNow();
+// }
 
   // /**
   //  * @see ApisService.getApis
@@ -100,4 +183,5 @@ export class ApisService extends AbstractHubService {
   //       return apis;
   //   });
   // }
-}
+// }
+  }

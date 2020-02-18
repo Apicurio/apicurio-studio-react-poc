@@ -4,7 +4,7 @@ import AppDataList from './appDataList';
 import {AppCardView} from './appCardView';
 import AppDrawerPanelContent from './appDrawerPanelContent';
 import './app.css';
-import {ApisService} from '../../../services/src/api-services/api-services';
+import { ApiServices } from '../../../services/src/api-services/api-services';
 
 interface AppDrawerProps {
   apiView: string
@@ -32,6 +32,7 @@ class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
 
   loadAsyncPageData() {
     new Promise((resolve, reject) => {
+      // console.log('get here?' + ApisService.getApis())
       ApisService.getApis()
       .then(() =>
         resolve({
