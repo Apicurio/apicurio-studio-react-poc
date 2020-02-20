@@ -4,7 +4,7 @@ import AppDataList from './appDataList';
 import {AppCardView} from './appCardView';
 import AppDrawerPanelContent from './appDrawerPanelContent';
 import './app.css';
-import { ApiServices } from '../../../services/src/api-services/api-services';
+import { getApis } from '../../../services/src/api-services/api-services';
 
 interface AppDrawerProps {
   apiView: string
@@ -30,17 +30,14 @@ class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
     this.loadAsyncPageData();
   }
 
-  loadAsyncPageData() {
-    new Promise((resolve, reject) => {
-      // console.log('get here?' + ApisService.getApis())
-      ApisService.getApis()
-      .then(() =>
-        resolve({
-          // this.setState({allApis: Response});
-        })
-      )
-      .catch(reject);
-    })
+  loadAsyncPageData(): void {
+    getApis()
+      .then( apis => {
+        return apis;
+      })
+      .catch(error => {
+        console.error("error getting API" + error);
+      });
   }
 
   private openDrawer = () => {

@@ -1,8 +1,8 @@
 import axios from 'axios';
-import * as React from 'react';
-import {Api, ApiDefinition, EditableApiDefinition} from "../../../models/src/api.model";
+import React from 'react';
+import {Api} from "../../../models/src/api.model";
+import configService from "../config/config.service";
 // import {IAuthenticationService} from "../authentication/auth.service";
-// import ConfigService from "../config/config.service";
 // import {User} from "../../../models/src/user.model";
 // import {ApiContributor, ApiContributors} from "../../../models/src/api-contributors.model";
 // import {NewApi} from "../../../models/src/new-api.model";
@@ -75,90 +75,82 @@ import {Api, ApiDefinition, EditableApiDefinition} from "../../../models/src/api
   // private cachedApis: Api[] = null;
   // private apiBaseHref: string;
 
-  export const ApiServices: React.FunctionComponent = props => {
+  const apiBaseHref = configService.hubURL();
 
-  const endpoint = (path: string, params?: any, queryParams?: any): string => {
-    // const apiBaseHref = ConfigService.hubUrl();
-    const apiBaseHref = '';
-    // if (params) {
-    //   Object.keys(params).forEach(key => {
-    //     const value = encodeURIComponent(params[key]);
-    //     path = path.replace(":" + key, value);
-    //   })
-    //   }
+  function endpoint (path: string, params?: any, queryParams?: any): string {
     if (params) {
-      for (let key in params) {
-          let value: string = encodeURIComponent(params[key]);
-            path = path.replace(":" + key, value);
-        }
-    }
+      Object.keys(params).forEach(key => {
+        let value: string = encodeURIComponent(params[key]);
+        path = path.replace(":" + key, value);
+      })
+      }
 
       let rval: string = apiBaseHref + path;
-      if (queryParams) {
+        if (queryParams) {
           let first: boolean = true;
-          for (let key in queryParams) {
-              if (queryParams[key]) {
-                  let value: string = encodeURIComponent(queryParams[key]);
-                  if (first) {
-                      rval = rval + "?" + key;
-                  } else {
-                      rval = rval + "&" + key;
-                  }
-                  if (value != null && value != undefined) {
-                      rval = rval + "=" + value;
-                  }
-                  first = false;
-              }
-          }
-      }
+          Object.keys(queryParams).forEach(key => {
+            if(queryParams[key]) {
+              let value: string = encodeURIComponent(queryParams[key]);
+                if (first) {
+                    rval = rval + "?" + key;
+                } else {
+                    rval = rval + "&" + key;
+                }
+                if (value != null && value != undefined) {
+                    rval = rval + "=" + value;
+                }
+                first = false;
+            }
+          })
+        }
       return rval;
   }
 
-  const optionsFunc = (headers: {[header: string]: string}, authenticated: boolean = true): any  => {
+  function optionsFunc(headers: {[header: string]: string}, authenticated: boolean = true): any {
     const options = {
         headers: headers
     };
-    if (authenticated) {
-      return options;
-        // this.authService.injectAuthHeaders(options.headers);
-    }
+    // if (authenticated) {
+    //   this.authService.injectAuthHeaders(options.headers);
+    // }
     return options;
 }
 
-  const httpGet = <T>(url: string, options: any, successCallback?: (value: T) => T): Promise<any> => {
-  options["observe"] = "response"; // not sure what this does?
+  function httpGet<T>(url: string, options: any, successCallback?: (value: T) => T): Promise<any> {
+    options["observe"] = "response"; // not sure what this does?
   
-  const request = axios({
-    method: 'get',
-    url: url,
-    data: {
-      options: options
-    }
-  })
-  return request
-  .then(result => console.log(result))
-    // if (successCallback) {
-    //   console.log('what is this ?' + response)
-    //   return response;
-    // }
-    // else {
-    //   return response;
-    // }
-  .catch(error => console.log(error)); // handle error state
-}
+    const request = axios({
+      method: 'get',
+      url: url,
+      data: {
+        options: options
+      }
+    })
+    return request
+    .then(result => {
+      if (successCallback) {
+        console.log('what is this ?' + result)
+        return result;
+      }
+      else {
+        return result;
+      }
+    })
+    .catch(error => console.log(error)); // handle error state
+  }
 
   // New getApis function in React
-  const getApis = (): Promise<Api[]> => {
-    var cachedApis = [];
+  export function getApis(): Promise<Api[]> {
+    // var cachedApis = [];
     console.info("[ApisService] Getting all APIs");
     console.log('did it make it here??');
 
-    const listApisUrl = endpoint("/designs");
-    const options = optionsFunc({ "Accept": "application/json"});
+    const listApisUrl: string = endpoint("/designs");
+    const options: any = optionsFunc({ "Accept": "application/json"});
 
     console.info("[ApisService] Fetching API list: %s", listApisUrl);
     return httpGet<Api[]>(listApisUrl, options, (apis) => {
-      cachedApis = apis;
+      // cachedApis = apis;
       return apis;
     })
   }
@@ -184,4 +176,4 @@ import {Api, ApiDefinition, EditableApiDefinition} from "../../../models/src/api
   //   });
   // }
 // }
-  }
+
