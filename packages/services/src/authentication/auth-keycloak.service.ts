@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2019 Red Hat
+ * Copyright 2017 JBoss Inc
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,9 @@
  */
 
 import {IAuthenticationService} from "./auth.service";
-import {User} from "@apicurio/models";
+import {User} from "../../..//models/src/user.model";
 import {ConfigService} from "../config/config.service";
+// import {HttpClient} from "@angular/common/http";
 import {Topic} from "apicurio-ts-core";
 
 /**
@@ -26,31 +27,32 @@ import {Topic} from "apicurio-ts-core";
  */
 export class KeycloakAuthenticationService extends IAuthenticationService {
 
-    private authenticatedTopic: Topic<boolean> = new Topic<boolean>();
-    private user: User;
+    private _authenticated: Topic<boolean> = new Topic<boolean>();
+    private _user: User;
 
     private keycloak: any;
 
     /**
      * Constructor.
+     * @param http
      * @param config
      */
     constructor(private config: ConfigService) {
         super();
-        const w: any = window;
-        this.keycloak = w.keycloak;
+        let w: any = window;
+        this.keycloak = w["keycloak"];
 
         // console.info("Token: %s", JSON.stringify(this.keycloak.tokenParsed, null, 2));
         // console.info("ID Token: %s", JSON.stringify(this.keycloak.idTokenParsed, null, 2));
         // console.info("Access Token: %s", this.keycloak.token);
 
-        const user: User = new User();
+        let user: User = new User();
         user.name = this.keycloak.tokenParsed.name;
         user.login = this.keycloak.tokenParsed.preferred_username;
         user.email = this.keycloak.tokenParsed.email;
 
-        this.authenticatedTopic.send(true);
-        this.user = user;
+        this._authenticated.send(true);
+        this._user = user;
 
         // Periodically refresh the token
         // TODO run this outsize NgZone using zone.runOutsideAngular() : https://angular.io/api/core/NgZone
@@ -64,7 +66,7 @@ export class KeycloakAuthenticationService extends IAuthenticationService {
      * 
      */
     public isAuthenticated(): boolean {
-        return this.authenticatedTopic.getValue();
+        return this._authenticated.getValue();
     }
 
     /**
@@ -72,14 +74,14 @@ export class KeycloakAuthenticationService extends IAuthenticationService {
      * 
      */
     public getAuthenticatedUserNow(): User {
-        return this.user;
+        return this._user;
     }
 
     /**
      * Returns the topic to listen for auth changes.
      */
     public authenticated(): Topic<boolean> {
-        return this.authenticatedTopic;
+        return this._authenticated;
     }
 
     /**
@@ -103,8 +105,8 @@ export class KeycloakAuthenticationService extends IAuthenticationService {
      * @param headers
      */
     public injectAuthHeaders(headers: {[header: string]: string}): void {
-        const authHeader: string = "bearer " + this.keycloak.token;
-        headers.Authorization = authHeader;
+        let authHeader: string = "bearer " + this.keycloak.token;
+        headers["Authorization"] = authHeader;
     }
 
     /**
@@ -114,5 +116,4 @@ export class KeycloakAuthenticationService extends IAuthenticationService {
     public getAuthenticationSecret(): string {
         return this.keycloak.token;
     }
-
 }
