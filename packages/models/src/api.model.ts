@@ -26,62 +26,63 @@ export class Api {
     tags: string[];
     type: string;
 
-    // constructor() {
-    //     this.id = "";
-    //     this.name = "";
-    //     this.description = "";
-    //     this.createdOn = new Date();
-    //     this.createdBy = "";
-    //     this.tags = null;
-    //     this.type = "";
-    // }
+    constructor() {
+        this.id = "";
+        this.name = "";
+        this.description = "";
+        this.createdOn = new Date();
+        this.createdBy = "";
+        this.tags = null;
+        this.type = "";
+    }
+
 }
 
 
-// export class ApiDefinition extends Api {
+export class ApiDefinition extends Api {
 
-//     spec: any;
+    spec: any;
 
-//     constructor() {
-//         super();
-//         this.spec = {};
-//     }
+    constructor() {
+        super();
+        this.spec = {};
+    }
 
-//     public static fromApi(api: Api): ApiDefinition {
-//         let apiDef: ApiDefinition = new ApiDefinition();
-//         apiDef.id = api.id;
-//         apiDef.name = api.name;
-//         apiDef.description = api.description;
-//         apiDef.createdOn = api.createdOn;
-//         apiDef.createdBy = api.createdBy;
+    public static fromApi(api: Api): ApiDefinition {
+        let apiDef: ApiDefinition = new ApiDefinition();
+        apiDef.id = api.id;
+        apiDef.name = api.name;
+        apiDef.description = api.description;
+        apiDef.createdOn = api.createdOn;
+        apiDef.createdBy = api.createdBy;
 
-//         return apiDef;
-//     }
+        return apiDef;
+    }
 
-// }
+}
 
 
-// export class EditableApiDefinition extends ApiDefinition {
+export class EditableApiDefinition extends ApiDefinition {
 
-//     editingSessionUuid: string;
-//     contentVersion: number;
+    editingSessionUuid: string;
+    contentVersion: number;
 
-//     constructor() {
-//         super();
-//         this.editingSessionUuid = null;
-//         this.contentVersion = 0;
-//     }
+    constructor() {
+        super();
+        this.editingSessionUuid = null;
+        this.contentVersion = 0;
+    }
 
-//     public static fromApi(api: Api): EditableApiDefinition {
-//         let apiDef: EditableApiDefinition = new EditableApiDefinition();
-//         apiDef.id = api.id;
-//         apiDef.name = api.name;
-//         apiDef.description = api.description;
-//         apiDef.createdOn = api.createdOn;
-//         apiDef.createdBy = api.createdBy;
-//         apiDef.type = api.type;
+    public static fromApi(api: Api): EditableApiDefinition {
+        let apiDef: EditableApiDefinition = new EditableApiDefinition();
+        apiDef.id = api.id;
+        apiDef.name = api.name;
+        apiDef.description = api.description;
+        apiDef.createdOn = api.createdOn;
+        apiDef.createdBy = api.createdBy;
+        apiDef.type = api.type;
 
-//         return apiDef;
-//     }
+        return apiDef;
+    }
 
-// }
+}
