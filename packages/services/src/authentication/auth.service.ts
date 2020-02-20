@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import {User} from "../../..//models/src/user.model";
+import {User} from "@apicurio/models";
 import {Topic} from "apicurio-ts-core";
 
 
@@ -24,41 +24,41 @@ export abstract class IAuthenticationService {
     /**
      * Topic to listen for changes to authentication status.
      */
-    abstract authenticated(): Topic<boolean>;
+    public abstract authenticated(): Topic<boolean>;
 
     /**
      * A way for consumers to subscribe to the current authentication status of the user/app.
      */
-    abstract isAuthenticated(): boolean;
+    public abstract isAuthenticated(): boolean;
 
     /**
      * Immediately gets the current authenticated user (if any).  Returns null if no user is
      * currently authenticated.
      * 
      */
-    abstract getAuthenticatedUserNow(): User;
+    public abstract getAuthenticatedUserNow(): User;
 
     /**
      * Called to authenticate a user.
      * @param user
      * @param credential
      */
-    abstract login(user:string, credential:any): Promise<User>;
+    public abstract login(user:string, credential:any): Promise<User>;
 
     /**
      * Called to log out the current user.
      */
-    abstract logout(): void;
+    public abstract logout(): void;
 
     /**
      * Called to inject authentication headers into an API REST call.
      * @param headers
      */
-    abstract injectAuthHeaders(headers: {[header: string]: string}): void;
+    public abstract injectAuthHeaders(headers: {[header: string]: string}): void;
 
     /**
      * Called to return an authentication secret (e.g. the auth access token).
      * 
      */
-    abstract getAuthenticationSecret(): string;
+    public abstract getAuthenticationSecret(): string;
 }
