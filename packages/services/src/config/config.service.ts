@@ -18,24 +18,44 @@
 import { User } from "@apicurio/models";
 import { ConfigType } from './config.type';
 
-const DEFAULT_CONFIG: ConfigType = {
-  apis: {
-    editingUrl: "http://localhost:8080/api-editing",
-    hubUrl: "http://localhost:8080/api-hub",
-    type: "hub"
-  },
-  auth: {
-    type: "keycloakjs"
-  },
-  features: {
-    microcks: true
-  },
-  mode: "dev",
-  ui: {
-    uiUrl: "http://localhost:8080/studio/"
-  },
-  user: undefined
+
+const DEFAULT_CONFIG: ConfigType = 
+  {
+    apis: {
+      editingUrl: "wss://studio-ws.apicur.io/",
+      hubUrl: "https://studio-api.apicur.io/",
+      type: "hub"
+    },
+    auth: {
+        type: "keycloakjs"
+    },
+    features: {
+        microcks: true
+    },
+    mode: "dev",
+    ui: {
+        url: "http://localhost:8888/"
+    },
+    user: undefined
 };
+// const DEFAULT_CONFIG: ConfigType = {
+//   apis: {
+//     editingUrl: "http://localhost:8080/api-editing",
+//     hubUrl: "http://localhost:8080/api-hub",
+//     type: "hub"
+//   },
+//   auth: {
+//     type: "keycloakjs"
+//   },
+//   features: {
+//     microcks: true
+//   },
+//   mode: "dev",
+//   ui: {
+//     uiUrl: "http://localhost:8080/studio/"
+//   },
+//   user: undefined
+// };
 
 /**
  * A simple configuration service.  Reads information from a global "ApicurioStudioConfig" variable

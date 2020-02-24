@@ -1,4 +1,4 @@
-import {Api} from "../../../models/src/api.model";
+import {Api} from "@apicurio/models";
 // import {ApiContributor, ApiContributors} from "../models/api-contributors.model";
 // import {NewApi} from "../models/new-api.model";
 // import {ImportApi} from "../models/import-api.model";
