@@ -20,7 +20,6 @@ class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
   constructor(private apis: ApisService, props: AppDrawerProps) {
     super(props);
     this.state = {
-      // allApis: string[],
       currentApiId: "",
       isExpanded: false
     };
