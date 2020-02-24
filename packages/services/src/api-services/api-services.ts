@@ -45,7 +45,7 @@ export class ApisService extends AbstractHubService {
     public getApis(): Promise<Api[]> {
       console.info("[ApisService] Getting all APIs");
   
-      const listApisUrl: string = this.endpoint("apis");
+      const listApisUrl: string = this.endpoint("designs");
       const options: any = this.options({ "Accept": "application/json"});
   
       console.info("[ApisService] Fetching API list: %s", listApisUrl);

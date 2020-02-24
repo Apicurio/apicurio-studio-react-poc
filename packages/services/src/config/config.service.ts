@@ -22,8 +22,8 @@ import { ConfigType } from './config.type';
 const DEFAULT_CONFIG: ConfigType = 
   {
     apis: {
-      editingUrl: "wss://studio-ws.apicur.io/",
-      hubUrl: "https://studio.apicur.io/",
+      editingUrl: "wss://studio-ws.apicur.io/api-editing",
+      hubUrl: "https://studio.apicur.io/api-hub",
       type: "hub"
     },
     auth: {
@@ -36,7 +36,7 @@ const DEFAULT_CONFIG: ConfigType =
     ui: {
         url: "http://localhost:8888/"
     },
-    user: undefined
+    user: undefined,
 };
 // const DEFAULT_CONFIG: ConfigType = {
 //   apis: {

@@ -105,10 +105,10 @@ export abstract class AbstractHubService {
   
     const request = axios({
       method: 'get',
-      url: url,
+      url: 'https://cors-anywhere.herokuapp.com/' + url,
       data: {
         options: options
-      }
+      },
     })
     return request
     .then(result => {

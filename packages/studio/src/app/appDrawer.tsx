@@ -38,7 +38,7 @@ class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
 
   loadAsyncPageData(): void {
     this.apisService.getApis().then( apis => {
-      debugger;
+      console.log('what happened here' + JSON.stringify(apis));
       this.allApis = apis;
       })
       .catch(error => {
