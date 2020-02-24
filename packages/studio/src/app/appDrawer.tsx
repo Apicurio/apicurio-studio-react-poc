@@ -4,8 +4,9 @@ import AppDataList from './appDataList';
 import {AppCardView} from './appCardView';
 import AppDrawerPanelContent from './appDrawerPanelContent';
 import './app.css';
-import {Api} from "../../../models/src/api.model";
-import {ApisService} from '../../../services/src/api-services/api-services';
+import { Services } from './common'
+import {Api} from "@apicurio/models";
+import { ApisService } from '@apicurio/services';
 
 interface AppDrawerProps {
   apiView: string
@@ -17,9 +18,12 @@ interface AppDrawerState {
 }
 
 class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
-  constructor(private apis: ApisService, props: AppDrawerProps) {
+  private apisService: ApisService;
+  constructor(props: AppDrawerProps) {
     super(props);
+    this.apisService = Services.getInstance().apisService;
     this.state = {
+      //allApis: string[],
       currentApiId: "",
       isExpanded: false
     };
@@ -33,7 +37,8 @@ class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
   }
 
   loadAsyncPageData(): void {
-    this.apis.getApis().then( apis => {
+    this.apisService.getApis().then( apis => {
+      debugger;
       this.allApis = apis;
       })
       .catch(error => {

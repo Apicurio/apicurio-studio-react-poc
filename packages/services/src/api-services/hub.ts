@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {IAuthenticationService} from "../authentication/auth.service";
 import {ConfigService} from "../config/config.service";
-import {User} from "../../../models/src/user.model";
+import {User} from '@apicurio/models';
 
 /**
  * Base class for all Hub-API based services.

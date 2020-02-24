@@ -1,4 +1,4 @@
-import {Api} from "../../../models/src/api.model";
+import {Api} from "@apicurio/models";
 // import {ApiContributor, ApiContributors} from "../models/api-contributors.model";
 // import {NewApi} from "../models/new-api.model";
 // import {ImportApi} from "../models/import-api.model";
@@ -45,7 +45,7 @@ export class ApisService extends AbstractHubService {
     public getApis(): Promise<Api[]> {
       console.info("[ApisService] Getting all APIs");
   
-      const listApisUrl: string = this.endpoint("/designs");
+      const listApisUrl: string = this.endpoint("apis");
       const options: any = this.options({ "Accept": "application/json"});
   
       console.info("[ApisService] Fetching API list: %s", listApisUrl);
