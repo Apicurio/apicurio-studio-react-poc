@@ -98,7 +98,7 @@ export abstract class AbstractHubService {
    * Performs an HTTP GET operation to the given URL with the given options.  Returns
    * a Promise to the HTTP response data.
    */
-  protected httpGet<T>(url: string, options: AxiosRequestConfig, successCallback?: (value: T) => T): Promise<any> {
+  protected httpGet<T>(url: string, options: AxiosRequestConfig, successCallback?: (value: any) => any): Promise<any> {
   
     const config: AxiosRequestConfig = {...{
       method: 'get',
@@ -107,15 +107,14 @@ export abstract class AbstractHubService {
 
     return axios.request(config)
     .then(response => {
-        console.log(response);
+        // console.log(response);
+        // return response;
+      if (successCallback) {
+       return successCallback(response);
+      }
+      else {
         return response;
-    //   if (successCallback) {
-    //     console.log('what is this ?' + result)
-    //    // return successCallback(result);
-    //   }
-    //   else {
-    //     return response;
-    //  }
+     }
     })
     .catch(error => console.log(error)); // handle error state
   }

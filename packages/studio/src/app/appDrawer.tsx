@@ -23,7 +23,6 @@ class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
     super(props);
     this.apisService = Services.getInstance().apisService;
     this.state = {
-      //allApis: string[],
       currentApiId: "",
       isExpanded: false
     };
@@ -38,8 +37,17 @@ class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
 
   loadAsyncPageData(): void {
     this.apisService.getApis().then( apis => {
-      console.log('what happened here' + JSON.stringify(apis));
-      this.allApis = apis;
+      console.log('what happened here' + JSON.stringify(apis.data));
+      apis.data.forEach(api => this.allApis.push({
+        id: api.id,
+        name: api.name,
+        description: api.description,
+        createdOn: api.createdOn,
+        createdBy: api.createdBy,
+        tags: api.tag,
+        type: api.type
+      }))
+      console.log(this.allApis);
       })
       .catch(error => {
         console.error("error getting API" + error);
