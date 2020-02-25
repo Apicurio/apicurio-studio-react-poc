@@ -114,7 +114,7 @@ export abstract class AbstractHubService {
     .then(result => {
       if (successCallback) {
         console.log('what is this ?' + result)
-        return result;
+        return successCallback(result);
       }
       else {
         return result;

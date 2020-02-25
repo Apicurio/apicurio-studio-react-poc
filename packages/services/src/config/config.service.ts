@@ -22,8 +22,8 @@ import { ConfigType } from './config.type';
 const DEFAULT_CONFIG: ConfigType = 
   {
     apis: {
-      editingUrl: "wss://studio-ws.apicur.io/api-editing",
-      hubUrl: "https://studio.apicur.io/api-hub",
+      editingUrl: "https://studio-api.apicur.io/api-editing",
+      hubUrl: "https://studio-api.apicur.io/",
       type: "hub"
     },
     auth: {
