@@ -13,6 +13,7 @@ import {AbstractHubService} from "./hub";
 // import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {ConfigService} from "../config/config.service";
 import {IAuthenticationService} from "../authentication/auth.service";
+import { AxiosRequestConfig } from "axios";
 // import {CodegenProject} from "../models/codegen-project.model";
 // import {NewCodegenProject} from "../models/new-codegen-project.model";
 // import {UpdateCodegenProject} from "../models/update-codegen-project.model";
@@ -46,7 +47,7 @@ export class ApisService extends AbstractHubService {
       console.info("[ApisService] Getting all APIs");
   
       const listApisUrl: string = this.endpoint("designs");
-      const options: any = this.options({ "Accept": "application/json"});
+      const options: AxiosRequestConfig = this.options({ "Accept": "application/json", 'Access-Control-Allow-Origin': '*'});
   
       console.info("[ApisService] Fetching API list: %s", listApisUrl);
       return this.httpGet<Api[]>(listApisUrl, options, (apis) => {

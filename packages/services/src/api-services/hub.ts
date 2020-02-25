@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import {IAuthenticationService} from "../authentication/auth.service";
 import {ConfigService} from "../config/config.service";
 import {User} from '@apicurio/models';
@@ -86,10 +86,8 @@ export abstract class AbstractHubService {
    * @param authenticated
    * 
    */
-  protected options(headers: {[header: string]: string}, authenticated: boolean = true): any {
-      let options = {
-          headers: headers
-      };
+  protected options(headers: {[header: string]: string}, authenticated: boolean = true): AxiosRequestConfig {
+      const options: AxiosRequestConfig = {headers};
       if (authenticated) {
           this.authService.injectAuthHeaders(options.headers);
       }
@@ -100,25 +98,24 @@ export abstract class AbstractHubService {
    * Performs an HTTP GET operation to the given URL with the given options.  Returns
    * a Promise to the HTTP response data.
    */
-  protected httpGet<T>(url: string, options: any, successCallback?: (value: T) => T): Promise<any> {
-    options["observe"] = "response"; // not sure what this does?
+  protected httpGet<T>(url: string, options: AxiosRequestConfig, successCallback?: (value: T) => T): Promise<any> {
   
-    const request = axios({
+    const config: AxiosRequestConfig = {...{
       method: 'get',
-      url: 'https://cors-anywhere.herokuapp.com/' + url,
-      data: {
-        options: options
-      },
-    })
-    return request
-    .then(result => {
-      if (successCallback) {
-        console.log('what is this ?' + result)
-        return successCallback(result);
-      }
-      else {
-        return result;
-      }
+      url
+    }, ...options}
+
+    return axios.request(config)
+    .then(response => {
+        console.log(response);
+        return response;
+    //   if (successCallback) {
+    //     console.log('what is this ?' + result)
+    //    // return successCallback(result);
+    //   }
+    //   else {
+    //     return response;
+    //  }
     })
     .catch(error => console.log(error)); // handle error state
   }
