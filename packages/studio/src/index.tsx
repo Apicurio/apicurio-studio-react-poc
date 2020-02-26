@@ -6,10 +6,11 @@ import './app/app.css';
 import './config.js';
 import Keycloak from 'keycloak-js';
 import './version.js';
+import { StoreProvider } from './../src/context/StoreContext';
 
 //Handle login via keycloak
 const keycloak = Keycloak();
-console.log('what is keycloak' + keycloak);
+
 keycloak.init({onLoad: 'login-required'}).success((authenticated: any) => {
     if (authenticated) {
         (window as any).keycloak = keycloak;
@@ -18,7 +19,11 @@ keycloak.init({onLoad: 'login-required'}).success((authenticated: any) => {
         //   const axe = require("react-axe");
         //   axe(React, ReactDOM, 1000);
         // }
-        ReactDOM.render(<App />, document.getElementById("root") as HTMLElement);
+        ReactDOM.render(
+            <StoreProvider>
+                <App />
+            </StoreProvider>,
+            document.getElementById("root") as HTMLElement);
     }
 }).error(() => {
     alert('Failed to initialize authentication subsystem.');

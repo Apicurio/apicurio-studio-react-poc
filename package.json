@@ -30,6 +30,8 @@
   "name": "apicurio-studio-react-poc",
   "dependencies": {
     "axios": "^0.19.2",
-    "babel-preset-es2015": "^6.24.1"
+    "babel-preset-es2015": "^6.24.1",
+    "react": "^16.8.0-alpha.1",
+    "react-dom": "^16.8.0-alpha.1"
   }
 }
