@@ -1,4 +1,8 @@
-const initialState = {
+export interface IState {
+    techList: string[]
+}
+
+const initialState: IState = {
     techList: ["TypeScript", "React Hooks"]
 };
 
