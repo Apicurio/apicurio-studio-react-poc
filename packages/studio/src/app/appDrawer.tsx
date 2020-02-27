@@ -8,7 +8,7 @@ import { Services } from './common'
 import {Api} from "@apicurio/models";
 import { ApisService } from '@apicurio/services';
 // import { StoreContext } from './../context/StoreContext';
-import {fetchApis} from './../functions/fetchApis';
+import {storeApis} from './../functions/fetchApis';
 
 interface AppDrawerProps {
   apiView: string
@@ -49,7 +49,7 @@ class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
         type: api.type
       }))
       console.log(this.allApis);
-      fetchApis(this.allApis);
+      storeApis(this.allApis);
       })
       .catch(error => {
         console.error("error getting API" + error);
