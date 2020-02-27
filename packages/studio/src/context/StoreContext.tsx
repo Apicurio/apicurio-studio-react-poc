@@ -9,12 +9,13 @@ interface IContextProps {
     dispatch: ({type}:{type:string}) => void
 }
 
-const StoreProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(reducer, initialState);
-    const actions = useActions(state, dispatch);
+const StoreProvider = ({ value, children }) => {
+    console.log('this is the value passed to store provider' + value);
+    // const [state, dispatch] = useReducer(reducer, initialState);
+    // const actions = useActions(state, dispatch);
 
-    useEffect(() => console.log({ newState: state }), [state]);
-    const value = { state, dispatch, actions };
+    // useEffect(() => console.log({ newState: state }), [state]);
+    // const value = { state, dispatch, actions };
 
     return (
         <StoreContext.Provider value={value}>

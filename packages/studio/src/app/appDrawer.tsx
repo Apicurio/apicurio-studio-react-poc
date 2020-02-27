@@ -7,7 +7,8 @@ import './app.css';
 import { Services } from './common'
 import {Api} from "@apicurio/models";
 import { ApisService } from '@apicurio/services';
-import { StoreContext } from './../context/StoreContext';
+// import { StoreContext } from './../context/StoreContext';
+import {fetchApis} from './../functions/fetchApis';
 
 interface AppDrawerProps {
   apiView: string
@@ -27,8 +28,6 @@ class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
       currentApiId: "",
       isExpanded: false
     };
-
-    const { state, dispatch, actions } = useContext(StoreContext);
   }
 
   public allApis: Api[] = [];
@@ -40,7 +39,7 @@ class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
   fetchDataAction = async () => {
     this.apisService.getApis().then( apis => {
       console.log('what happened here' + JSON.stringify(apis.data));
-      apis.data.forEach(api => this.state.push({
+      apis.data.forEach(api => this.allApis.push({
         id: api.id,
         name: api.name,
         description: api.description,
@@ -50,6 +49,7 @@ class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
         type: api.type
       }))
       console.log(this.allApis);
+      fetchApis(this.allApis);
       })
       .catch(error => {
         console.error("error getting API" + error);

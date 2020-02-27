@@ -1,21 +1,23 @@
+import {Api} from "@apicurio/models";
+
 export interface IState {
-    techList: string[]
+    apiData: Api[]
 }
 
 const initialState: IState = {
-    techList: ["TypeScript", "React Hooks"]
+    apiData: []
 };
 
 const types = {
-    ADD_TO_TECH_LIST: "ADD_TO_TECH_LIST"
+    FETCH_API_DATA: 'FETCH_API_DATA'
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case types.ADD_TO_TECH_LIST:
+        case types.FETCH_API_DATA:
             return {
                 ...state,   
-                techList: action.payload
+                apiData: action.payload.apiData
             };
         default:
             throw new Error("Unexpected action");
