@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, DataListItem, DataListItemCells, DataListItemRow, DataListCell, DataListCheck, DataListAction } from '@patternfly/react-core';
 import AppDropdownKebab from './appDropdownKebab';
 import {AppTag} from './appTag';
@@ -17,7 +17,8 @@ export const AppDataListItem: React.FunctionComponent<AppDataListItemProps> = (o
 
   const apisService = Services.getInstance().apisService;
   const allApis: Api[] = [];
-  const { state, dispatch, actions } = useContext(StoreContext);
+  const { state, dispatch } = useContext(StoreContext);
+  const storedApis = useState(['']);
 
   const fetchDataAction = async () => {
     apisService.getApis()
@@ -32,10 +33,10 @@ export const AppDataListItem: React.FunctionComponent<AppDataListItemProps> = (o
         tags: api.tag,
         type: api.type
       }))
-      console.log(allApis);
+      console.log('what is allApis' + JSON.stringify(allApis));
       dispatch({
         type: 'FETCH_API_DATA',
-        payload: allApis.apiData
+        payload: allApis
     })
       })
       .catch(error => {
@@ -43,10 +44,13 @@ export const AppDataListItem: React.FunctionComponent<AppDataListItemProps> = (o
       });
    }
 
+   React.useEffect(() => {
+    fetchDataAction();
+  });
+
     function DataList() {
-      fetchDataAction();
       return (
-        state.apiData.map(apis => {
+        this.state.storedApis.map(apis => {
       <DataListItem id={apis.id} aria-labelledby={`data-list-item-${apis.id}`}>
       <DataListItemRow>
         <DataListCheck checked={false} aria-labelledby={`data-list-item-${apis.id}`} name={`data-list-item-check-${apis.id}`}/>
