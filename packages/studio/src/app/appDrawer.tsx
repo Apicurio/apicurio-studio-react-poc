@@ -4,11 +4,6 @@ import AppDataList from './appDataList';
 import {AppCardView} from './appCardView';
 import AppDrawerPanelContent from './appDrawerPanelContent';
 import './app.css';
-import { Services } from './common'
-import {Api} from "@apicurio/models";
-import { ApisService } from '@apicurio/services';
-// import { StoreContext } from './../context/StoreContext';
-import {storeApis} from './../functions/fetchApis';
 
 interface AppDrawerProps {
   apiView: string
@@ -20,60 +15,13 @@ interface AppDrawerState {
 }
 
 class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
-  private apisService: ApisService;
   constructor(props: AppDrawerProps) {
     super(props);
-    this.apisService = Services.getInstance().apisService;
     this.state = {
       currentApiId: "",
       isExpanded: false
     };
   }
-
-  public allApis: Api[] = [];
-
-  componentDidMount() {
-    this.fetchDataAction();
-  }
-
-  fetchDataAction = async () => {
-    this.apisService.getApis().then( apis => {
-      console.log('what happened here' + JSON.stringify(apis.data));
-      apis.data.forEach(api => this.allApis.push({
-        id: api.id,
-        name: api.name,
-        description: api.description,
-        createdOn: api.createdOn,
-        createdBy: api.createdBy,
-        tags: api.tag,
-        type: api.type
-      }))
-      console.log(this.allApis);
-      storeApis(this.allApis);
-      })
-      .catch(error => {
-        console.error("error getting API" + error);
-      });
-   }
-
-  // loadAsyncPageData(): void {
-  //   this.apisService.getApis().then( apis => {
-  //     console.log('what happened here' + JSON.stringify(apis.data));
-  //     apis.data.forEach(api => this.allApis.push({
-  //       id: api.id,
-  //       name: api.name,
-  //       description: api.description,
-  //       createdOn: api.createdOn,
-  //       createdBy: api.createdBy,
-  //       tags: api.tag,
-  //       type: api.type
-  //     }))
-  //     console.log(this.allApis);
-  //     })
-  //     .catch(error => {
-  //       console.error("error getting API" + error);
-  //     });
-  // }
 
   private openDrawer = () => {
     const isExpanded = !this.state.isExpanded;
