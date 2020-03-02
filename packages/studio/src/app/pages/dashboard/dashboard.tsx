@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Level, LevelItem, Title, PageSection, PageSectionVariants } from '@patternfly/react-core';
 import AppEmptyState from '../../appEmptyState';
-import ApiToolbar from "../../components/apiToolbar";
+import { ApiToolbar } from '../../components/apiToolbar/apiToolbar';
 import AppDrawer from '../../appDrawer';
 import '../../app.css';
 import {Link} from 'react-router-dom';
