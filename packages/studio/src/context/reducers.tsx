@@ -1,26 +1,20 @@
+import {useContext} from 'react';
 import {Api} from "@apicurio/models";
+import {StoreContext} from './StoreContext';
 
-export interface IState {
-    apiData: Api[]
-}
+const useStoreContext = () => {
+    const [state] = useContext(StoreContext);
 
-const initialState: IState = {
-    apiData: []
-};
-
-const types = {
-    FETCH_API_DATA: 'FETCH_API_DATA'
-};
-
-const reducer = (state = initialState, action) => {
-    switch (action.type) {
-        case types.FETCH_API_DATA:
-            return {
-                ...state,   
-                apiData: action.payload.apiData
-            };
-        default:
-            throw new Error("Unexpected action");
+    function storeData(newData: Api[]) {
+        const [setState] = useContext(StoreContext);
+        console.log('did it reach this point!' + JSON.stringify(newData));
+        setState({...state, apiData: newData});
     }
+
+    return {
+        ...state,
+        storeData
+    };
 };
-export { initialState, types, reducer };
+
+export { useStoreContext };

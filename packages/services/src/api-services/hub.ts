@@ -107,8 +107,6 @@ export abstract class AbstractHubService {
 
     return axios.request(config)
     .then(response => {
-        // console.log(response);
-        // return response;
       if (successCallback) {
        return successCallback(response);
       }

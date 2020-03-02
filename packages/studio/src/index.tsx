@@ -7,13 +7,13 @@ import './config.js';
 import Keycloak from 'keycloak-js';
 import './version.js';
 import { StoreProvider } from './../src/context/StoreContext';
-import { reducer, initialState } from './../src/context/reducers';
+// import { reducer, initialState } from './../src/context/reducers';
 
 function AppWithProvider() {
-    const [ state, dispatch ] = useReducer(reducer, initialState);
-    const value = { state, dispatch };
+    // const [ state, dispatch ] = useReducer(reducer, initialState);
+    // const value = { state, dispatch };
     return (
-        <StoreProvider value={value}>
+        <StoreProvider>
             <App />
         </StoreProvider>
     );

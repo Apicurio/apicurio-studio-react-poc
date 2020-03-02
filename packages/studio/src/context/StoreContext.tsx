@@ -1,27 +1,33 @@
-import React, { useEffect, useReducer } from 'react';
-import { IState, initialState, reducer } from './reducers'
+import React, { useState } from 'react';
+import {Api} from "@apicurio/models";
+// import { IState, initialState, reducer } from './reducers'
 
-export const StoreContext = React.createContext({} as IContextProps);
-import {useActions} from './actions';
+// export const StoreContext = React.createContext({} as IContextProps);
+const StoreContext = React.createContext({});
+// import {useActions} from './actions';
 
-interface IContextProps {
-    state: IState,
-    dispatch: ({type}:{type:string}) => void
+// interface IContextProps {
+//     state: IState,
+//     dispatch: ({type}:{type:string}) => void
+// }
+
+export interface IState {
+    apiData: Api[]
 }
 
-const StoreProvider = ({ value, children }) => {
-    console.log('this is the value passed to store provider' + value);
-    // const [state, dispatch] = useReducer(reducer, initialState);
-    // const actions = useActions(state, dispatch);
+const initialState: IState = {
+    apiData: []
+};
 
-    // useEffect(() => console.log({ newState: state }), [state]);
-    // const value = { state, dispatch, actions };
+const StoreProvider = ({ children }) => {
+    // console.log('this is the value passed to store provider' + value);
+    const [state, setState] = useState({ ...initialState });
 
     return (
-        <StoreContext.Provider value={value}>
+        <StoreContext.Provider value={[state, setState]}>
             {children}
         </StoreContext.Provider>
     );
 };
 
-export { StoreProvider };
+export { StoreProvider, StoreContext };

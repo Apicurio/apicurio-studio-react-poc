@@ -1,6 +1,6 @@
 import {ApisService, KeycloakAuthenticationService, ConfigService} from  '@apicurio/services';
 
-//Initialize services.
+// Initialize services.
 
 export class Services {
 
