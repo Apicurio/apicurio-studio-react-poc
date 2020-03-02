@@ -1,7 +1,5 @@
 import React from "react";
-import {
-  Button
-} from "@patternfly/react-core";
+import { Button } from "@patternfly/react-core";
 import {
   DataToolbar,
   DataToolbarItem,
@@ -15,38 +13,40 @@ export interface ApiToolbarProps {
   buttonSelected: string;
 }
 
-export const ApiToolbar: React.FunctionComponent<ApiToolbarProps> = ({ buttonClick, buttonSelected }: ApiToolbarProps) => {
-
-    return (
-      <DataToolbar>
-        <DataToolbarContent>
-          <DataToolbarItem>
-            This is where the Data Toolbar should go
-          </DataToolbarItem>
-          <DataToolbarItem variant="pagination">
-            <Button
-              onClick={buttonClick}
-              className={
-                "app-data-toolbar-button-control " +
-                (buttonSelected === "card" ? "pf-m-selected" : "")
-              }
-              variant="plain"
-            >
-              <ThIcon />
-            </Button>
-            <Button
-              onClick={buttonClick}
-              className={
-                "app-data-toolbar-button-control " +
-                (buttonSelected === "list" ? "pf-m-selected" : "")
-              }
-              variant="plain"
-            >
-              <ListIcon />
-            </Button>
-            <span className="app-toolbar-api-total">4 APIs found</span>
-          </DataToolbarItem>
-        </DataToolbarContent>
-      </DataToolbar>
-    );
-  }
+export const ApiToolbar: React.FunctionComponent<ApiToolbarProps> = ({
+  buttonClick,
+  buttonSelected
+}: ApiToolbarProps) => {
+  return (
+    <DataToolbar>
+      <DataToolbarContent>
+        <DataToolbarItem>
+          This is where the Data Toolbar should go
+        </DataToolbarItem>
+        <DataToolbarItem variant="pagination">
+          <Button
+            onClick={buttonClick}
+            className={
+              "app-data-toolbar-button-control " +
+              (buttonSelected === "card" ? "pf-m-selected" : "")
+            }
+            variant="plain"
+          >
+            <ThIcon />
+          </Button>
+          <Button
+            onClick={buttonClick}
+            className={
+              "app-data-toolbar-button-control " +
+              (buttonSelected === "list" ? "pf-m-selected" : "")
+            }
+            variant="plain"
+          >
+            <ListIcon />
+          </Button>
+          <span className="app-toolbar-api-total">4 APIs found</span>
+        </DataToolbarItem>
+      </DataToolbarContent>
+    </DataToolbar>
+  );
+};

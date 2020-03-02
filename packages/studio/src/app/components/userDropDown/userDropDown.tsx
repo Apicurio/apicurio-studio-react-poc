@@ -18,7 +18,6 @@ export class UserDropdown extends React.Component<
   {},
   { isAboutClicked: boolean; isModalOpen: boolean; isOpen: boolean }
 > {
-
   constructor(props: any) {
     super(props);
     this.state = {
@@ -34,7 +33,9 @@ export class UserDropdown extends React.Component<
     });
   };
 
-  onSelect = (event: React.SyntheticEvent<HTMLDivElement, Event> | undefined) => {
+  onSelect = (
+    event: React.SyntheticEvent<HTMLDivElement, Event> | undefined
+  ) => {
     this.setState({
       isModalOpen: true,
       isOpen: !this.state.isOpen
@@ -72,13 +73,23 @@ export class UserDropdown extends React.Component<
           <TextListItem component="dd">CLIv7</TextListItem>
           <TextListItem component="dt">Project URL</TextListItem>
           <TextListItem component="dd">
-            <Button component="a" variant="link" href="http://apicur.io/" isInline={true}>
+            <Button
+              component="a"
+              variant="link"
+              href="http://apicur.io/"
+              isInline={true}
+            >
               http://apicur.io/
             </Button>
           </TextListItem>
           <TextListItem component="dt">Project Roadmap</TextListItem>
           <TextListItem component="dd">
-            <Button component="a" variant="link" href="http://apicur.io/roadmap" isInline={true}>
+            <Button
+              component="a"
+              variant="link"
+              href="http://apicur.io/roadmap"
+              isInline={true}
+            >
               http://apicur.io/roadmap
             </Button>
           </TextListItem>
