@@ -30,23 +30,13 @@ class AppDataList extends React.Component<AppDataListProps, AppDataListState> {
   }
 
   render() {
-    const listItems = apiData.map((api, index) =>
-      <AppDataListItem
-        key={index}
-        id={api.id}
-        name={api.name}
-        description={api.description}
-        tags={api.tags}
-        onClick={this.props.viewDetails}
-      />
-    );
     return (
       <DataList 
         aria-label="selectable data list"
         selectedDataListItemId={this.state.selectedDataListItemId}
         onSelectDataListItem={this.onSelectDataListItem}
       >
-        {listItems}
+        <AppDataListItem/>
       </DataList>
     );
   }

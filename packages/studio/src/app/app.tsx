@@ -4,7 +4,6 @@ import AppHeader from "./appHeader";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import * as Pages from './pages';
 import './app.css';
-import { StoreContext } from './../context/StoreContext';
 
 export const App: React.FunctionComponent = () => {
 

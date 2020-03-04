@@ -1,15 +1,15 @@
-import React, { useContext, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Button, DataListItem, DataListItemCells, DataListItemRow, DataListCell, DataListCheck, DataListAction } from '@patternfly/react-core';
 import AppDropdownKebab from './appDropdownKebab';
 import {AppTag} from './appTag';
 import ApicurioIcon from './assets/apicurio-icon.png';
 import './app.css';
 import { Services } from './common';
-import { ApisService } from '@apicurio/services';
 import { StoreContext } from './../context/StoreContext';
 import {Api} from "@apicurio/models";
 // import {storeData} from './../context/reducers';
 import { useStoreContext } from './../context/reducers'
+
 
 interface AppDataListItemProps {
   onClick: (ev: React.MouseEvent<HTMLButtonElement>) => void
@@ -19,27 +19,32 @@ export const AppDataListItem = (onClick: AppDataListItemProps) => {
 
   const apisService = Services.getInstance().apisService;
   // const allApis: Api[] = [];
-  const { apiData, storeData } = useStoreContext();
+  const { apiData } = useStoreContext();
+  const [state, setState] = useContext(StoreContext);
 
   const fetchDataAction = async () => {
     apisService.getApis()
     .then( apis => {
-      const insideApis = apis.data;
+      const insideApis: Api[] = apis.data;
       console.log('data back from server:' + JSON.stringify(insideApis));
-      storeData(insideApis);
-      })
-      .catch(error => {
-        console.error("error getting API" + error);
-      });
+      return insideApis;
+    })
+    .then(function(insideApis) {
+        console.log('did it reach this point!' + JSON.stringify(insideApis));
+        setState({...state, apiData: insideApis});
+    })
+    .catch(error => {
+      console.error("error getting API" + error);
+    });
    }
 
-   React.useEffect(() => {
-     console.log('did it call fetch data');
+  useEffect(() => {
     fetchDataAction();
-  });
+  }, []);
     
     return (
         <React.Fragment>
+          {console.log('what is api data here' + JSON.stringify(apiData))}
           {apiData.map(apis => 
         <DataListItem id={apis.id} aria-labelledby={`data-list-item-${apis.id}`}>
         <DataListItemRow>
@@ -71,7 +76,7 @@ export const AppDataListItem = (onClick: AppDataListItemProps) => {
           </DataListAction>
         </DataListItemRow>
       </DataListItem>
-          )}
+      )}
       </React.Fragment>
     )
 };
