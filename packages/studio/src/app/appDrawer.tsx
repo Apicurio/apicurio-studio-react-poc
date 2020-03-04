@@ -6,12 +6,12 @@ import AppDrawerPanelContent from './appDrawerPanelContent';
 import './app.css';
 
 interface AppDrawerProps {
-  apiView: string
+  dashboardView: string
 }
 
 interface AppDrawerState {
   readonly currentApiId: string,
-  readonly isExpanded: boolean
+  readonly isExpanded: boolean,
 }
 
 class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
@@ -45,10 +45,12 @@ class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
       <Drawer isExpanded={isExpanded} isInline>
         <DrawerContent>
           <div className="app-drawer-content">
-            { this.props.apiView === 'list' ?
+            { 
+            this.props.dashboardView === 'list' ? (
               <AppDataList keyListItem={this.findKey} selectItem={this.openDrawer} viewDetails={this.openDrawer}/>
-            :
+             ) : (
             <AppCardView/>
+            )
           }
           </div>
         </DrawerContent>

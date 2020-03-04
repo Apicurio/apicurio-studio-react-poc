@@ -4,11 +4,13 @@ import {Api} from "@apicurio/models";
 const StoreContext = React.createContext({});
 
 export interface IState {
-    apiData: Api[]
+    apiData: Api[],
+    dashboardView: string
 }
 
 const initialState: IState = {
-    apiData: []
+    apiData: [],
+    dashboardView: 'list'
 };
 
 const StoreProvider = ({ children }) => {

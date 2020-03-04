@@ -7,31 +7,10 @@ import './app.css';
 import { Services } from './common';
 import { StoreContext } from './../context/StoreContext';
 import {Api} from "@apicurio/models";
-import { useStoreContext } from './../context/reducers'
+import { useStoreContext } from './../context/reducers';
 
 export const AppDataListItem = () => {
-
-  const apisService = Services.getInstance().apisService;
   const { apiData } = useStoreContext();
-  const [state, setState] = useContext(StoreContext);
-
-  const fetchDataAction = async () => {
-    apisService.getApis()
-    .then( apis => {
-      const insideApis: Api[] = apis.data;
-      return insideApis;
-    })
-    .then(function(insideApis) {
-        setState({...state, apiData: insideApis});
-    })
-    .catch(error => {
-      console.error("error getting API" + error);
-    });
-   }
-
-  useEffect(() => {
-    fetchDataAction();
-  }, []);
     
     return (
       <React.Fragment>
