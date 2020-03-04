@@ -1,7 +1,6 @@
 import React from 'react';
 import {DataList} from '@patternfly/react-core';
 import AppDataListItem from './appDataListItem';
-import data from '../api-data.json';
 
 interface AppDataListProps {
   viewDetails: React.MouseEventHandler,
@@ -12,8 +11,6 @@ interface AppDataListProps {
 interface AppDataListState {
   selectedDataListItemId: string
 }
-
-const apiData = data.apis;
 
 class AppDataList extends React.Component<AppDataListProps, AppDataListState> {
   constructor(props: AppDataListProps) {
