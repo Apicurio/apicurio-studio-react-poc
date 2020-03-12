@@ -1,42 +1,33 @@
-import React from 'react';
-import { DataToolbar , DataToolbarItem, DataToolbarContent } from '@patternfly/react-core/dist/esm/experimental';
-import { Button } from '@patternfly/react-core';
-import {ThIcon, ListIcon} from '@patternfly/react-icons';
-import './app.css'
+import React from "react";
+import {
+  Button,
+  ButtonVariant,
+  Toolbar,
+  ToolbarGroup,
+  ToolbarItem
+} from "@patternfly/react-core";
+import { UserDropdown } from "./components/userDropDown";
+import { CogIcon } from "@patternfly/react-icons";
+//TODO: Need to add accessibility to the toolbar (see: http://patternfly-react.surge.sh/patternfly-4/demos/pagelayout)
 
-interface AppToolbarProps {
-  buttonClick: (ev: React.MouseEvent<HTMLButtonElement>) => void,
-  buttonSelected: string
-}
-
-
-export class AppToolbar extends React.Component<AppToolbarProps> {
-  constructor(props: AppToolbarProps) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <DataToolbar>
-        <DataToolbarContent>
-          <DataToolbarItem>
-            This is where the Data Toolbar should go
-          </DataToolbarItem>
-          <DataToolbarItem variant="pagination">
-            <Button onClick={this.props.buttonClick} className={'app-data-toolbar-button-control ' + (this.props.buttonSelected === "card" ? "pf-m-selected" : "")} variant="plain">
-              <ThIcon/>
-            </Button>
-            <Button onClick={this.props.buttonClick} className={'app-data-toolbar-button-control ' + (this.props.buttonSelected === "list" ? "pf-m-selected" : "")} variant="plain">
-              <ListIcon/>
-            </Button>
-            <span className="app-toolbar-api-total">
-              4 APIs found
-            </span>
-          </DataToolbarItem>
-        </DataToolbarContent>
-      </DataToolbar>
-    )
-  }
-}
-
+export const AppToolbar = (
+  <Toolbar>
+    <ToolbarGroup>
+      <ToolbarItem>
+        <Button
+          id="simple-example-uid-02"
+          aria-label="Settings actions"
+          variant={ButtonVariant.plain}
+        >
+          <CogIcon />
+        </Button>
+      </ToolbarItem>
+    </ToolbarGroup>
+    <ToolbarGroup>
+      <ToolbarItem>
+        <UserDropdown />
+      </ToolbarItem>
+    </ToolbarGroup>
+  </Toolbar>
+);
 export default AppToolbar;

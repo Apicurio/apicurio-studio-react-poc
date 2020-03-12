@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Level, LevelItem, Title, PageSection, PageSectionVariants } from '@patternfly/react-core';
 import AppEmptyState from '../../appEmptyState';
-import AppToolbar from "../../appToolbar";
+import { ApiToolbar } from '../../components/apiToolbar/apiToolbar';
 import AppDrawer from '../../appDrawer';
 import '../../app.css';
 import {Link} from 'react-router-dom';
@@ -55,7 +55,7 @@ export class Dashboard extends React.Component<DashboardProps, DashboardState> {
         </PageSection>
 
         <PageSection variant={PageSectionVariants.light} noPadding={true} className="app-page-section-border-bottom">
-          <AppToolbar buttonClick={this.apiViewChange} buttonSelected={this.state.apiView}></AppToolbar>
+          <ApiToolbar buttonClick={this.apiViewChange} buttonSelected={this.state.apiView}></ApiToolbar>
         </PageSection>
 
         <PageSection noPadding={true}>
