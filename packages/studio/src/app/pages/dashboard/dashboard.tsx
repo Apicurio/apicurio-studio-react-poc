@@ -1,35 +1,40 @@
-import React from "react";
+import React, {useEffect, useContext} from "react";
 import { Button, Level, LevelItem, Title, PageSection, PageSectionVariants } from '@patternfly/react-core';
 import AppEmptyState from '../../appEmptyState';
 import { ApiToolbar } from '../../components/apiToolbar/apiToolbar';
 import AppDrawer from '../../appDrawer';
 import '../../app.css';
 import {Link} from 'react-router-dom';
+import { Services } from './../../common';
+import { StoreContext } from './../../../context/StoreContext';
+import {Api} from "@apicurio/models";
+import { useStoreContext } from './../../../context/reducers';
 
-type DashboardProps = {
-}
+export const Dashboard = () => {
 
-type DashboardState = {
-  apiView: string
-}
+  const { apiData, dashboardView } = useStoreContext();
+  const apisService = Services.getInstance().apisService;
+  const [state, setState] = useContext(StoreContext);
 
-export class Dashboard extends React.Component<DashboardProps, DashboardState> {
-  constructor(props: DashboardProps) {
-    super(props);
-    this.state = {
-      apiView: "list"
-    };
-    this.apiViewChange = this.apiViewChange.bind(this);
-  }
+  const fetchDataAction = async () => {
+    apisService.getApis()
+    .then( apis => {
+      const insideApis: Api[] = apis.data;
+      return insideApis;
+    })
+    .then(function(insideApis) {
+        setState({...state, apiData: insideApis});
+    })
+    .catch(error => {
+      console.error("error getting API" + error);
+    });
+   }
 
-  apiViewChange() {
-    this.setState(prevState => ({ 
-      apiView: prevState.apiView === "list" ? "card" : "list"
-    }))
-  }
+  useEffect(() => {
+    fetchDataAction();
+  }, []);
 
-  render() {
-    var apiCount = 1; // update this value to count, if you want to see empty state set to 0
+    var apiCount = apiData.length;
     return (
       <React.Fragment>
         <PageSection variant={PageSectionVariants.light} className="app-page-section-border-bottom">
@@ -53,19 +58,17 @@ export class Dashboard extends React.Component<DashboardProps, DashboardState> {
             </LevelItem>
           </Level>
         </PageSection>
-
         <PageSection variant={PageSectionVariants.light} noPadding={true} className="app-page-section-border-bottom">
-          <ApiToolbar buttonClick={this.apiViewChange} buttonSelected={this.state.apiView}></ApiToolbar>
+          <ApiToolbar/>
         </PageSection>
 
         <PageSection noPadding={true}>
-          {apiCount === 0 ? (
-              <AppEmptyState />
+          {apiCount >= 8 ? (
+            <AppEmptyState />
           ) : (
-            <AppDrawer apiView={this.state.apiView}/>
+            <AppDrawer dashboardView={dashboardView}/>
           )}
         </PageSection>
       </React.Fragment>
     );
   };
-}

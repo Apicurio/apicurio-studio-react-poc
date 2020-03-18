@@ -1,7 +1,6 @@
 import React from 'react';
 import {DataList} from '@patternfly/react-core';
 import AppDataListItem from './appDataListItem';
-import data from '../api-data.json';
 
 interface AppDataListProps {
   viewDetails: React.MouseEventHandler,
@@ -12,8 +11,6 @@ interface AppDataListProps {
 interface AppDataListState {
   selectedDataListItemId: string
 }
-
-const apiData = data.apis;
 
 class AppDataList extends React.Component<AppDataListProps, AppDataListState> {
   constructor(props: AppDataListProps) {
@@ -30,23 +27,13 @@ class AppDataList extends React.Component<AppDataListProps, AppDataListState> {
   }
 
   render() {
-    const listItems = apiData.map((api, index) =>
-      <AppDataListItem
-        key={index}
-        id={api.id}
-        name={api.name}
-        description={api.description}
-        tags={api.tags}
-        onClick={this.props.viewDetails}
-      />
-    );
     return (
       <DataList 
         aria-label="selectable data list"
         selectedDataListItemId={this.state.selectedDataListItemId}
         onSelectDataListItem={this.onSelectDataListItem}
       >
-        {listItems}
+        <AppDataListItem/>
       </DataList>
     );
   }
