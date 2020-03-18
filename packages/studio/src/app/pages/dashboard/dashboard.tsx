@@ -1,7 +1,7 @@
 import React, {useEffect, useContext} from "react";
 import { Button, Level, LevelItem, Title, PageSection, PageSectionVariants } from '@patternfly/react-core';
 import AppEmptyState from '../../appEmptyState';
-import AppToolbar from "../../appToolbar";
+import { ApiToolbar } from '../../components/apiToolbar/apiToolbar';
 import AppDrawer from '../../appDrawer';
 import '../../app.css';
 import {Link} from 'react-router-dom';
@@ -11,12 +11,6 @@ import {Api} from "@apicurio/models";
 import { useStoreContext } from './../../../context/reducers';
 
 export const Dashboard = () => {
-
-  // const apiViewChange = () => {
-  //   // this.setState(prevState => ({ 
-  //   //   apiView: prevState.apiView === "list" ? "card" : "list"
-  //   // }))
-  // }
 
   const { apiData, dashboardView } = useStoreContext();
   const apisService = Services.getInstance().apisService;
@@ -64,14 +58,13 @@ export const Dashboard = () => {
             </LevelItem>
           </Level>
         </PageSection>
-
         <PageSection variant={PageSectionVariants.light} noPadding={true} className="app-page-section-border-bottom">
-          <AppToolbar/>
+          <ApiToolbar/>
         </PageSection>
 
         <PageSection noPadding={true}>
           {apiCount >= 8 ? (
-              <AppEmptyState />
+            <AppEmptyState />
           ) : (
             <AppDrawer dashboardView={dashboardView}/>
           )}

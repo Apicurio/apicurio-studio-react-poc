@@ -38,6 +38,7 @@ const DEFAULT_CONFIG: ConfigType =
     },
     user: undefined,
 };
+// This is used for local development with a locally running server
 // const DEFAULT_CONFIG: ConfigType = {
 //   apis: {
 //     editingUrl: "http://localhost:8080/api-editing",
