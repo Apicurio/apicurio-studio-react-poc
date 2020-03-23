@@ -18,7 +18,7 @@ function AppWithProvider() {
 
 //Handle login via keycloak
 const keycloak = Keycloak();
-keycloak.init({onLoad: 'login-required'}).success((authenticated: any) => {
+keycloak.init({onLoad: 'login-required', "checkLoginIframe" : false}).success((authenticated: any) => {
     if (authenticated) {
         (window as any).keycloak = keycloak;
         // if (process.env.NODE_ENV !== "production") {
