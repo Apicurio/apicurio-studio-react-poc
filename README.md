@@ -13,7 +13,7 @@ Install development/build dependencies
 `yarn`
 
 Start the development server
-`yarn start`
+`yarn start:studio`
 
 Run a full build
 `yarn build`
