@@ -112,3 +112,12 @@
 .app-empty-state > a > .pf-c-button.pf-m-primary, .app-empty-state .pf-c-empty-state__primary {
   margin-top: var(--pf-c-empty-state--c-button--MarginTop);
 }
+
+.pf-c-drawer__content {
+  background-color: unset;
+}
+
+.app-drawer-drawer {
+  display: flex;
+  flex-direction: row;
+}

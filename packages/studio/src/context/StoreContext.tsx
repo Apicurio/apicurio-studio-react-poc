@@ -5,12 +5,14 @@ const StoreContext = React.createContext({});
 
 export interface IState {
     apiData: Api[],
-    dashboardView: string
+    dashboardView: string,
+    notificationDrawerExpanded: boolean
 }
 
 const initialState: IState = {
     apiData: [],
-    dashboardView: 'list'
+    dashboardView: 'list',
+    notificationDrawerExpanded: false
 };
 
 const StoreProvider = ({ children }) => {

@@ -9,11 +9,12 @@ import { Services } from './../../common';
 import { StoreContext } from './../../../context/StoreContext';
 import {Api} from "@apicurio/models";
 import { useStoreContext } from './../../../context/reducers';
+import { AppNotificationDrawer } from '../../components/appNotificationDrawer/appNotificationDrawer';
 
 export const Dashboard = () => {
 
-  const { apiData, dashboardView } = useStoreContext();
   const apisService = Services.getInstance().apisService;
+  const { apiData, dashboardView, notificationDrawerExpanded } = useStoreContext();
   const [state, setState] = useContext(StoreContext);
 
   const fetchDataAction = async () => {
@@ -35,15 +36,13 @@ export const Dashboard = () => {
   }, []);
 
   const panelContent = (
-    <DrawerPanelContent>
-      Hi
-    </DrawerPanelContent>
+    <AppNotificationDrawer/>
   );
 
     var apiCount = apiData.length;
     return (
       <React.Fragment>
-        <Drawer isExpanded={true}>
+        <Drawer isExpanded={notificationDrawerExpanded}>
             <DrawerContent panelContent={panelContent}>
               <DrawerContentBody>
                 <PageSection variant={PageSectionVariants.light} className="app-page-section-border-bottom">

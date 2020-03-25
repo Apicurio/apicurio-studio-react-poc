@@ -1,20 +1,40 @@
 import React from 'react';
-import { Drawer, DrawerContent } from '@patternfly/react-core/dist/esm/experimental';
-import PropTypes from 'prop-types';
+import { Button, DataList, DataListItem, DataListItemRow, DataListItemCells, DataListCell, DrawerHead, DrawerPanelBody, DrawerPanelContent, Title } from '@patternfly/react-core';
 
-export const AppNotificationDrawer = ({ isExpanded }) => {
+export const AppNotificationDrawer = () => {
 
     return (
-        <Drawer isExpanded={isExpanded}>
-            <DrawerContent>
-                HI
-            </DrawerContent>
-        </Drawer>
+        <DrawerPanelContent>
+            <DrawerHead>
+                <Title size="lg" headingLevel="h3">
+                    Recent Activity
+                </Title>
+            </DrawerHead>
+            <DrawerPanelBody noPadding>
+                <DataList isCompact>
+                    <DataListItem>
+                        <DataListItemRow>
+                        <DataListItemCells
+                            dataListCells={[
+                                <DataListCell key="1">
+                                    <Button>
+                                        Pet Store API
+                                    </Button>
+                                    <div>
+                                        In PetStore you added a new operation named..
+                                    </div>
+                                    <div>
+                                        Timestamp
+                                    </div>
+                                </DataListCell>
+                            ]}
+                            />
+                        </DataListItemRow>
+                    </DataListItem>
+                </DataList>
+            </DrawerPanelBody>
+        </DrawerPanelContent>
     )
-};
-
-AppNotificationDrawer.propTypes = {
-    isExpanded: PropTypes.any
 };
 
 export default AppNotificationDrawer;

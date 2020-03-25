@@ -42,7 +42,7 @@ class AppDrawer extends React.Component<AppDrawerProps, AppDrawerState> {
 
    return (
     <React.Fragment>
-      <Drawer isExpanded={isExpanded} isInline>
+      <Drawer isExpanded={isExpanded} isInline className="app-drawer-drawer">
         <DrawerContent>
           <div className="app-drawer-content">
             { 

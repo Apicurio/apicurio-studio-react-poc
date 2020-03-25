@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Avatar,
   Brand,
@@ -20,10 +20,20 @@ import spacingStyles from '@patternfly/react-styles/css/utilities/Spacing/spacin
 import { css } from '@patternfly/react-styles';
 import { UserDropdown } from '../../src/app/components/userDropDown';
 import { AppNotificationDrawer } from './components/appNotificationDrawer/appNotificationDrawer';
+import { useStoreContext } from './../../../studio/src/context/reducers';
+import { StoreContext } from './../../../studio/src/context/StoreContext';
 
 export const AppHeader = () => {
+
+  const [state, setState] = useContext(StoreContext);
+  const { notificationDrawerExpanded } = useStoreContext();
+
+  const setNotificationDrawerState = (notificationDrawerState: boolean) => {
+    setState({...state, notificationDrawerExpanded: !notificationDrawerState});
+  }
+
+  
     const [isKebabDropdownOpen, setKebabDropdown] = useState(false);
-    const [isNotificationDrawerOpen, setNotificationDrawer] = useState(false);
 
     const onKebabDropdownToggle = isKebabDropdownOpen => {
       setKebabDropdown(isKebabDropdownOpen)
@@ -33,9 +43,9 @@ export const AppHeader = () => {
       setKebabDropdown(!isKebabDropdownOpen)
     }
 
-    const onNotificationDrawerToggle = isNotificationDrawerOpen => {
-      setNotificationDrawer(!isNotificationDrawerOpen)
-    }
+    // const onNotificationDrawerToggle = isNotificationDrawerOpen => {
+    //   setNotificationDrawer(!isNotificationDrawerOpen)
+    // }
 
     const kebabDropdownItems = [
       <DropdownItem component="button">
@@ -52,7 +62,7 @@ export const AppHeader = () => {
       <Toolbar>
         <ToolbarGroup className={css(accessibleStyles.screenReader, accessibleStyles.visibleOnLg)}>
           <ToolbarItem>
-            <Button id="" aria-label="" variant={ButtonVariant.plain} onClick={onNotificationDrawerToggle}>
+            <Button id="" aria-label="" variant={ButtonVariant.plain} onClick={() => setNotificationDrawerState(notificationDrawerExpanded)}>
               <BellIcon />
             </Button>
           </ToolbarItem>
@@ -81,14 +91,11 @@ export const AppHeader = () => {
     );
 
     return (
-      <React.Fragment>
-        <PageHeader
-          logo={<Brand src={ brandImg } alt="Apicurio" />}
-          avatar={ <Avatar src={imgAvatar} alt="user image"/>}
-          toolbar={PageToolbar}
-        />
-        { isNotificationDrawerOpen && <AppNotificationDrawer isExpanded={true}/> }
-      </React.Fragment>
+      <PageHeader
+        logo={<Brand src={ brandImg } alt="Apicurio" />}
+        avatar={ <Avatar src={imgAvatar} alt="user image"/>}
+        toolbar={PageToolbar}
+      />
     );
 }
 
