@@ -5,6 +5,7 @@ import {
   Button,
   ButtonVariant,
   Dropdown,
+  DropdownItem,
   Toolbar,
   KebabToggle,
   ToolbarItem,
@@ -13,23 +14,45 @@ import {
 } from '@patternfly/react-core';
 import { BellIcon, CogIcon } from '@patternfly/react-icons';
 import brandImg from '../../assets/images/apicurio_logo_darkbkg_200px.png';
-import imgAvatar from '../../assets/images/avatar_image.svg';
+import imgAvatar from '../../assets/images/avatar_image.png';
 import accessibleStyles from '@patternfly/react-styles/css/utilities/Accessibility/accessibility';
 import spacingStyles from '@patternfly/react-styles/css/utilities/Spacing/spacing';
 import { css } from '@patternfly/react-styles';
+import { UserDropdown } from '../../src/app/components/userDropDown';
+import { AppNotificationDrawer } from './components/appNotificationDrawer/appNotificationDrawer';
 
 export const AppHeader = () => {
     const [isKebabDropdownOpen, setKebabDropdown] = useState(false);
+    const [isNotificationDrawerOpen, setNotificationDrawer] = useState(false);
 
-    const onKebabDropdownToggle = () => {
-      setKebabDropdown(true);
+    const onKebabDropdownToggle = isKebabDropdownOpen => {
+      setKebabDropdown(isKebabDropdownOpen)
     }
+
+    const onKebabDropdownSelect = event => {
+      setKebabDropdown(!isKebabDropdownOpen)
+    }
+
+    const onNotificationDrawerToggle = isNotificationDrawerOpen => {
+      setNotificationDrawer(!isNotificationDrawerOpen)
+    }
+
+    const kebabDropdownItems = [
+      <DropdownItem component="button">
+        <BellIcon />
+        Notifications
+      </DropdownItem>,
+      <DropdownItem component="button">
+        <CogIcon />
+        Settings
+      </DropdownItem>
+    ];
 
     const PageToolbar = (
       <Toolbar>
         <ToolbarGroup className={css(accessibleStyles.screenReader, accessibleStyles.visibleOnLg)}>
           <ToolbarItem>
-            <Button id="" aria-label="" variant={ButtonVariant.plain}>
+            <Button id="" aria-label="" variant={ButtonVariant.plain} onClick={onNotificationDrawerToggle}>
               <BellIcon />
             </Button>
           </ToolbarItem>
@@ -44,31 +67,29 @@ export const AppHeader = () => {
             <Dropdown
               isPlain
               position="right"
-              onSelect={this.onKebabDropdownSelect}
+              onSelect={onKebabDropdownSelect}
               toggle={<KebabToggle onToggle={onKebabDropdownToggle} />}
               isOpen={isKebabDropdownOpen}
               dropdownItems={kebabDropdownItems}
             />
           </ToolbarItem>
           <ToolbarItem className={css(accessibleStyles.screenReader, accessibleStyles.visibleOnMd)}>
-            <Dropdown
-              isPlain
-              position="right"
-              onSelect={this.onDropdownSelect}
-              isOpen={isDropdownOpen}
-              toggle={<DropdownToggle onToggle={this.onDropdownToggle}>Username</DropdownToggle>}
-              dropdownItems={userDropdownItems}
-            />
+            <UserDropdown/>
           </ToolbarItem>
         </ToolbarGroup>
       </Toolbar>
     );
 
-    return (<PageHeader
-        logo={<Brand src={ brandImg } alt="Apicurio" />}
-        avatar={ <Avatar src={imgAvatar} alt="user image"/>}
-        toolbar={PageToolbar}
-      />);
+    return (
+      <React.Fragment>
+        <PageHeader
+          logo={<Brand src={ brandImg } alt="Apicurio" />}
+          avatar={ <Avatar src={imgAvatar} alt="user image"/>}
+          toolbar={PageToolbar}
+        />
+        { isNotificationDrawerOpen && <AppNotificationDrawer isExpanded={true}/> }
+      </React.Fragment>
+    );
 }
 
 export default AppHeader;
