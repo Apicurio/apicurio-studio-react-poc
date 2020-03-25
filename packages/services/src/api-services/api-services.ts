@@ -1,4 +1,4 @@
-import {Api} from "@apicurio/models";
+import {Api, ApiDesignChange} from "@apicurio/models";
 // import {ApiContributor, ApiContributors} from "../models/api-contributors.model";
 // import {NewApi} from "../models/new-api.model";
 // import {ImportApi} from "../models/import-api.model";
@@ -7,7 +7,6 @@ import {Api} from "@apicurio/models";
 // import {ApiCollaborator} from "../models/api-collaborator.model";
 // import {Invitation} from "../models/invitation.model";
 // import {ApiEditorUser} from "../models/editor-user.model";
-// import {ApiDesignChange} from "../models/api-design-change.model";
 import {AbstractHubService} from "./hub";
 // import {PublishApi} from "../models/publish-api.model";
 // import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
@@ -43,11 +42,12 @@ export class ApisService extends AbstractHubService {
         super(authService, config);
     }
 
+    // Gets all APIs
     public getApis(): Promise<Api[]> {
       console.info("[ApisService] Getting all APIs");
   
       const listApisUrl: string = this.endpoint("designs");
-      const options: AxiosRequestConfig = this.options({ "Accept": "application/json", 'Access-Control-Allow-Origin': '*'});
+      const options: AxiosRequestConfig = this.options({ "Accept": "application/json", 'Access-Control-Allow-Origin': '*' });
   
       console.info("[ApisService] Fetching API list: %s", listApisUrl);
       return this.httpGet<Api[]>(listApisUrl, options, (apis) => {
@@ -55,4 +55,21 @@ export class ApisService extends AbstractHubService {
         return apis;
       })
     }
+
+    // Gets Activity for all APIs
+    public getActivity(apiId: string, start: number, end: number): Promise<ApiDesignChange[]> {
+      console.info("[ApisService] Getting all activity for API %s", apiId);
+
+      const activityUrl: string = this.endpoint("/designs/:designId/activity", {
+          designId: apiId
+      }, {
+          start: start,
+          end: end
+      });
+
+      const options: any = this.options({ "Accept": "application/json", 'Access-Control-Allow-Origin': '*' });
+
+      console.info("[ApisService] Fetching API design activity: %s", activityUrl);
+      return this.httpGet<ApiDesignChange[]>(activityUrl, options);
+  }
 }
