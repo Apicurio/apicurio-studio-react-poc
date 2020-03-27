@@ -1,5 +1,7 @@
-import {KeycloakAuthenticationService, ConfigService} from  '@apicurio/services';
-import {CurrentUserService} from '../../../../services/src/api-services/current-user-services';
+import {CurrentUserService, KeycloakAuthenticationService, ConfigService} from  '@apicurio/services';
+// import {KeycloakAuthenticationService} from '../../../../services/src/authentication/auth-keycloak.service';
+// import {ConfigService} from '../../../../services/src/config/config.service';
+// import {CurrentUserService} from '../../../../services/src/api-services/current-user-services';
 
 // Initialize services.
 

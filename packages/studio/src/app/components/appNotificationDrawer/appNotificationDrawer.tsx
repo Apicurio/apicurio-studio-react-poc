@@ -4,14 +4,16 @@ import { UserServices } from './../../common';
 import { ApiDesignChange } from "@apicurio/models";
 import { useStoreContext } from './../../../context/reducers';
 import { StoreContext } from './../../../context/StoreContext';
+import { PencilAltIcon } from '@patternfly/react-icons';
+import './AppNotificationDrawer.css';
+import { AppActivityItem } from '../appActivityItemComponent/appActivityItemComponent';
 
 export const AppNotificationDrawer = () => {
 
     const userService = UserServices.getInstance().currentUserApisService;
     const [state, setState] = useContext(StoreContext);
-    // const { recentActivityData } = useStoreContext();
+    const { recentActivityData } = useStoreContext();
 
-    // const activity: ApiDesignChange[] = [];
     const activityStart: number = 0;
     const activityEnd: number = 10;
     // const hasMoreActivity: boolean = false;
@@ -20,10 +22,11 @@ export const AppNotificationDrawer = () => {
     const fetchDataAction = async () => {
         userService.getActivity(activityStart, activityEnd)
         .then( activity => {
-          return activity;
+            const activityData: ApiDesignChange[] = activity.data;
+            return activityData;
         })
-        .then(function(activity) {
-            setState({...state, recentActivityData: activity});
+        .then(function(activityData) {
+            setState({...state, recentActivityData: activityData});
         })
         .catch(error => {
           console.error("error getting API" + error);
@@ -34,6 +37,8 @@ export const AppNotificationDrawer = () => {
         fetchDataAction();
       }, []);
 
+      console.log('what is recent activity' + JSON.stringify(recentActivityData));
+
     return (
         <DrawerPanelContent>
             <DrawerHead>
@@ -42,26 +47,41 @@ export const AppNotificationDrawer = () => {
                 </Title>
             </DrawerHead>
             <DrawerPanelBody noPadding>
-                <DataList isCompact>
-                    <DataListItem>
-                        <DataListItemRow>
-                        <DataListItemCells
-                            dataListCells={[
-                                <DataListCell key="1">
-                                    <Button>
-                                        Pet Store API
-                                    </Button>
-                                    <div>
-                                        In PetStore you added a new operation named..
-                                    </div>
-                                    <div>
-                                        Timestamp
-                                    </div>
-                                </DataListCell>
-                            ]}
-                            />
-                        </DataListItemRow>
-                    </DataListItem>
+                <DataList>
+                    <React.Fragment>
+                        { recentActivityData.map( activity =>
+                            <DataListItem>
+                                <DataListItemRow>
+                                <DataListItemCells
+                                    dataListCells={[
+                                        <DataListCell key="1">
+                                            {/* <div className="app-notification-drawer__icon-text">
+                                                <span>
+                                                    <PencilAltIcon/>
+                                                </span>
+                                                <Button variant="link" isInline>
+                                                    title
+                                                </Button>
+                                            </div>
+                                            <div>
+                                                In PetStore you added a new operation named..
+                                            </div>
+                                            <div>
+                                                date
+                                            </div> */}
+                                            <AppActivityItem
+                                                apiName={activity.apiName}
+                                                type={activity.type}
+                                                on={activity.on}
+                                                data={activity.data}
+                                            />
+                                        </DataListCell>
+                                    ]}
+                                    />
+                                </DataListItemRow>
+                            </DataListItem>
+                        )}
+                    </React.Fragment>
                 </DataList>
             </DrawerPanelBody>
         </DrawerPanelContent>
