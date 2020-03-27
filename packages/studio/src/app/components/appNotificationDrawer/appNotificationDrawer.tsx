@@ -1,19 +1,24 @@
 import React, { useEffect, useContext } from 'react';
 import { Button, DataList, DataListItem, DataListItemRow, DataListItemCells, DataListCell, DrawerHead, DrawerPanelBody, DrawerPanelContent, Title } from '@patternfly/react-core';
-import { Services } from './../../common';
-// import { ApiDesignChange } from "@apicurio/models";
+import { UserServices } from './../../common';
+import { ApiDesignChange } from "@apicurio/models";
 import { useStoreContext } from './../../../context/reducers';
 import { StoreContext } from './../../../context/StoreContext';
 
 export const AppNotificationDrawer = () => {
 
-    // fix all of this tomorrow 
-    const apisService = Services.getInstance().apisService;
+    const userService = UserServices.getInstance().currentUserApisService;
     const [state, setState] = useContext(StoreContext);
-    const { recentActivityData } = useStoreContext();
+    // const { recentActivityData } = useStoreContext();
+
+    // const activity: ApiDesignChange[] = [];
+    const activityStart: number = 0;
+    const activityEnd: number = 10;
+    // const hasMoreActivity: boolean = false;
+    // const gettingMoreActivity: boolean = false;
 
     const fetchDataAction = async () => {
-        apisService.getActivity(1, 20)
+        userService.getActivity(activityStart, activityEnd)
         .then( activity => {
           return activity;
         })

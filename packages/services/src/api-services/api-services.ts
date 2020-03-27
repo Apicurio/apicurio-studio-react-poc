@@ -1,30 +1,8 @@
-import {Api, ApiDesignChange} from "@apicurio/models";
-// import {ApiContributor, ApiContributors} from "../models/api-contributors.model";
-// import {NewApi} from "../models/new-api.model";
-// import {ImportApi} from "../models/import-api.model";
-// import {ICommand, MarshallCompat, OtCommand} from "apicurio-data-models";
-// import {VersionedAck} from "../models/ack.model";
-// import {ApiCollaborator} from "../models/api-collaborator.model";
-// import {Invitation} from "../models/invitation.model";
-// import {ApiEditorUser} from "../models/editor-user.model";
+import {Api} from "@apicurio/models";
 import {AbstractHubService} from "./hub";
-// import {PublishApi} from "../models/publish-api.model";
-// import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {ConfigService} from "../config/config.service";
 import {IAuthenticationService} from "../authentication/auth.service";
 import { AxiosRequestConfig } from "axios";
-// import {CodegenProject} from "../models/codegen-project.model";
-// import {NewCodegenProject} from "../models/new-codegen-project.model";
-// import {UpdateCodegenProject} from "../models/update-codegen-project.model";
-// import {Injectable} from "@angular/core";
-// import {ApiPublication} from "../models/api-publication.model";
-// import {UpdateCollaborator} from "../models/update-collaborator.model";
-// import {ApiMock, MockReference} from "../models/mock-api.model";
-// import {HttpUtils} from "../util/common";
-// import {StorageError} from "../models/storageError.model";
-// import {DeferredAction} from "../models/deferred.model";
-// import {SharingConfiguration} from "../models/sharing-config.model";
-// import {UpdateSharingConfiguration} from "../models/update-sharing-config.model";
 
 /**
  * An implementation of the APIs service that uses the Apicurio Studio back-end (Hub API) service
@@ -55,21 +33,4 @@ export class ApisService extends AbstractHubService {
         return apis;
       })
     }
-
-    // Gets Activity for all APIs
-    public getActivity(apiId: string, start: number, end: number): Promise<ApiDesignChange[]> {
-      console.info("[ApisService] Getting all activity for API %s", apiId);
-
-      const activityUrl: string = this.endpoint("/designs/:designId/activity", {
-          designId: apiId
-      }, {
-          start: start,
-          end: end
-      });
-
-      const options: any = this.options({ "Accept": "application/json", 'Access-Control-Allow-Origin': '*' });
-
-      console.info("[ApisService] Fetching API design activity: %s", activityUrl);
-      return this.httpGet<ApiDesignChange[]>(activityUrl, options);
-  }
 }
