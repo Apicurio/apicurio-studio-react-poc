@@ -1,11 +1,9 @@
 import React, { useEffect, useContext } from 'react';
-import { Button, DataList, DataListItem, DataListItemRow, DataListItemCells, DataListCell, DrawerHead, DrawerPanelBody, DrawerPanelContent, Title } from '@patternfly/react-core';
+import { DataList, DataListItem, DataListItemRow, DataListItemCells, DataListCell, DrawerHead, DrawerPanelBody, DrawerPanelContent, Title } from '@patternfly/react-core';
 import { UserServices } from './../../common';
 import { ApiDesignChange } from "@apicurio/models";
 import { useStoreContext } from './../../../context/reducers';
 import { StoreContext } from './../../../context/StoreContext';
-import { PencilAltIcon } from '@patternfly/react-icons';
-import './AppNotificationDrawer.css';
 import { AppActivityItem } from '../appActivityItemComponent/appActivityItemComponent';
 
 export const AppNotificationDrawer = () => {
@@ -55,25 +53,11 @@ export const AppNotificationDrawer = () => {
                                 <DataListItemCells
                                     dataListCells={[
                                         <DataListCell key="1">
-                                            {/* <div className="app-notification-drawer__icon-text">
-                                                <span>
-                                                    <PencilAltIcon/>
-                                                </span>
-                                                <Button variant="link" isInline>
-                                                    title
-                                                </Button>
-                                            </div>
-                                            <div>
-                                                In PetStore you added a new operation named..
-                                            </div>
-                                            <div>
-                                                date
-                                            </div> */}
                                             <AppActivityItem
-                                                apiName={activity.apiName}
-                                                type={activity.type}
-                                                on={activity.on}
-                                                data={activity.data}
+                                                activityApiName={activity.apiName}
+                                                activityType={activity.type}
+                                                activityOn={activity.on}
+                                                activityData={activity.data}
                                             />
                                         </DataListCell>
                                     ]}
