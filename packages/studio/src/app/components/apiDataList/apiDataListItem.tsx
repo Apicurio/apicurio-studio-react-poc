@@ -1,15 +1,12 @@
 import React, { useEffect, useContext } from 'react';
 import { Button, DataListItem, DataListItemCells, DataListItemRow, DataListCell, DataListCheck, DataListAction } from '@patternfly/react-core';
-import AppDropdownKebab from './appDropdownKebab';
-import {AppTag} from './appTag';
-import ApicurioIcon from './assets/apicurio-icon.png';
-import './app.css';
-import { Services } from './common';
-import { StoreContext } from './../context/StoreContext';
-import {Api} from "@apicurio/models";
-import { useStoreContext } from './../context/reducers';
+import AppDropdownKebab from '../api/apiDropDownKebab/apiDropdownKebab';
+import {ApiTag} from '../..';
+import ApicurioIcon from '../../assets/apicurio-icon.png';
+import './apiDataListItem.css';
+import { useStoreContext } from '../../../../context/reducers';
 
-export const AppDataListItem = () => {
+export const ApiDataListItem: React.FunctionComponent<any> = () => {
   const { apiData } = useStoreContext();
     
     return (
@@ -20,7 +17,7 @@ export const AppDataListItem = () => {
             <DataListCheck checked={false} aria-labelledby={`data-list-item-${apis.id}`} name={`data-list-item-check-${apis.id}`}/>
             <DataListItemCells
               dataListCells={[
-                <DataListCell isIcon className="app-data-list-cell" key={`primary content ${apis.id}`}>
+                <DataListCell isIcon className="api-data-list-cell" key={`primary content ${apis.id}`}>
                   <img src={ApicurioIcon}/>
                 </DataListCell>,
                 <DataListCell key={`secondary content ${apis.id}`}>
@@ -32,7 +29,7 @@ export const AppDataListItem = () => {
                   </div>
                   <div className="app-api-tag-group">
                     {apis.tags.map((tag, index) =>
-                      <AppTag key={index} text={tag}/>
+                      <ApiTag key={index} text={tag}/>
                     )}
                   </div>
                 </DataListCell>
@@ -50,4 +47,4 @@ export const AppDataListItem = () => {
   )
 };
 
-export default AppDataListItem;
+export default ApiDataListItem;

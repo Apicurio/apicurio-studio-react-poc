@@ -1,0 +1,7 @@
+.api-tag {
+    padding-right: var(--pf-global--spacer--sm);
+    padding-left: var(--pf-global--spacer--sm);
+    background-color: var(--pf-global--BackgroundColor--300);
+    font-size: var(--pf-global--FontSize--xs);
+    border-radius: var(--pf-global--BorderRadius--lg);
+  }

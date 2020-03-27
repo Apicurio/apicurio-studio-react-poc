@@ -1,0 +1,7 @@
+.api-card-view-card-body {
+    font-size: var(--pf-global--FontSize--sm);
+}
+  
+.api-card-view-card-header {
+    font-weight: var(--pf-global--FontWeight--normal) !important;
+}

@@ -1,24 +1,23 @@
 import React from 'react';
 import { Button, Card, CardActions, CardHead, CardBody, Title } from '@patternfly/react-core';
 import {TimesIcon, EyeIcon} from '@patternfly/react-icons';
-import ApicurioIcon from './assets/apicurio-icon.png';
-import AppTabs from './appTabs';
-import './app.css'
-import data from '../api-data.json';
+import ApicurioIcon from '../../../assets/apicurio-icon.png';
+import ApiTabs from '../apiTabs';
+import data from '../../../../api-data.json';
 
-interface AppDrawerPanelContentProps {
+export interface ApiDrawerPanelContentProps {
   currentApiId: string
 }
 
-class AppDrawerPanelContent extends React.Component<AppDrawerPanelContentProps> {
-  constructor(props: AppDrawerPanelContentProps) {
+export class ApiDrawerPanelContent extends React.Component<ApiDrawerPanelContentProps> {
+  constructor(props: ApiDrawerPanelContentProps) {
     super(props);
   }
 
   render() {
-    function findId(array: Array<any>, id: string) {
-      var apiTemp = array.find(api => api.id === id);
-      if (apiTemp != undefined) {
+    function findId(array: any[], id: string) {
+      const apiTemp = array.find(api => api.id === id);
+      if (apiTemp !== undefined) {
         return apiTemp;
       }
       else {
@@ -26,7 +25,7 @@ class AppDrawerPanelContent extends React.Component<AppDrawerPanelContentProps> 
       }
     }
 
-    var apiObject = findId(data.apis, this.props.currentApiId);
+    const apiObject = findId(data.apis, this.props.currentApiId);
 
     return (
       <Card>
@@ -54,10 +53,10 @@ class AppDrawerPanelContent extends React.Component<AppDrawerPanelContentProps> 
             </Button>
           </div>
         </CardBody>
-        <AppTabs createdBy={apiObject.createdBy} createdOn={apiObject.createdOn}/>
+        <ApiTabs createdBy={apiObject.createdBy} createdOn={apiObject.createdOn}/>
       </Card>
     )
   };
 }
 
-export default AppDrawerPanelContent;
+export default ApiDrawerPanelContent;
