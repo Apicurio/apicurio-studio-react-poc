@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Card, CardActions, CardHead, CardBody, Title } from '@patternfly/react-core';
 import {TimesIcon, EyeIcon} from '@patternfly/react-icons';
 import ApicurioIcon from '../../../assets/apicurio-icon.png';
-import ApiTabs from '../apiTabs';
+import { ApiTabs } from '../apiTabs';
 import data from '../../../../api-data.json';
 
 export interface ApiDrawerPanelContentProps {
@@ -10,22 +10,13 @@ export interface ApiDrawerPanelContentProps {
 }
 
 export class ApiDrawerPanelContent extends React.Component<ApiDrawerPanelContentProps> {
+;
   constructor(props: ApiDrawerPanelContentProps) {
     super(props);
   }
 
   render() {
-    function findId(array: any[], id: string) {
-      const apiTemp = array.find(api => api.id === id);
-      if (apiTemp !== undefined) {
-        return apiTemp;
-      }
-      else {
-        return Error;
-      }
-    }
-
-    const apiObject = findId(data.apis, this.props.currentApiId);
+    const apiObject = this.findId(data.apis, this.props.currentApiId);
 
     return (
       <Card>
@@ -56,7 +47,16 @@ export class ApiDrawerPanelContent extends React.Component<ApiDrawerPanelContent
         <ApiTabs createdBy={apiObject.createdBy} createdOn={apiObject.createdOn}/>
       </Card>
     )
-  };
+  }
+   private findId = (array: any[], id: string): any => {
+    const apiTemp = array.find(api => api.id === id);
+    if (apiTemp !== undefined) {
+      return apiTemp;
+    }
+    else {
+      return Error;
+    }
+  }
 }
 
 export default ApiDrawerPanelContent;

@@ -15,7 +15,7 @@ export const ApiToolbar = () => {
   }
 
   return (
-    <DataToolbar>
+    <DataToolbar id="apiToolbar">
       <DataToolbarContent>
         <DataToolbarItem>
           This is where the Data Toolbar should go

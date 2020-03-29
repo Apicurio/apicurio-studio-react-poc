@@ -35,7 +35,6 @@
     "jest": "^24.1.0",
     "keycloak-js": "9.0.0",
     "mini-css-extract-plugin": "^0.4.5",
-    "nodemon": "2.0.2",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "prettier": "^1.15.2",
     "prop-types": "^15.6.1",
