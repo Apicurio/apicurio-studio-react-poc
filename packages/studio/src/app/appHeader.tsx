@@ -12,7 +12,7 @@ import {
   ToolbarGroup,
   PageHeader
 } from '@patternfly/react-core';
-import { BellIcon, CogIcon } from '@patternfly/react-icons';
+import { HistoryIcon, CogIcon } from '@patternfly/react-icons';
 import brandImg from '../../assets/images/apicurio_logo_darkbkg_200px.png';
 import imgAvatar from '../../assets/images/avatar_image.png';
 import accessibleStyles from '@patternfly/react-styles/css/utilities/Accessibility/accessibility';
@@ -48,8 +48,8 @@ export const AppHeader = () => {
     // }
 
     const kebabDropdownItems = [
-      <DropdownItem component="button">
-        <BellIcon />
+      <DropdownItem component="button" onClick={() => setNotificationDrawerState(notificationDrawerExpanded)}>
+        <HistoryIcon />
         Notifications
       </DropdownItem>,
       <DropdownItem component="button">
@@ -63,7 +63,7 @@ export const AppHeader = () => {
         <ToolbarGroup className={css(accessibleStyles.screenReader, accessibleStyles.visibleOnLg)}>
           <ToolbarItem>
             <Button id="" aria-label="" variant={ButtonVariant.plain} onClick={() => setNotificationDrawerState(notificationDrawerExpanded)}>
-              <BellIcon />
+              <HistoryIcon />
             </Button>
           </ToolbarItem>
           <ToolbarItem>

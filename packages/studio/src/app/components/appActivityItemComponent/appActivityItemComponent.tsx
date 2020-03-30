@@ -1,23 +1,25 @@
 import React from 'react';
 import { useStoreContext } from './../../../context/reducers';
-import {ApiDesignChange, MockReference, PublishApi} from "@apicurio/models";
-import {ICommand, MarshallCompat} from "apicurio-data-models";
+import { MockReference, PublishApi} from "@apicurio/models";
+import { ICommand, MarshallCompat } from "apicurio-data-models";
 import * as moment from "moment";
-// import './appActivityItemComponent.css';
+import './appActivityItemComponent.css';
 import { Button } from '@patternfly/react-core';
 
-{/* <div class="activity-item row">
-<div class="col-md-1 activity-item-icon"><span class="fa fa-fw fa-{{ icon() }}"></span></div>
-<div class="col-md-8 activity-item-description">
-    <span *ngIf="mode === 'user'">In <strong><a [routerLink]="[ '/apis', item.apiId ]" class="api-name">{{ apiName() }}</a></strong>, you</span>
-    <span *ngIf="mode !== 'user'"><strong class="by">{{ item.by }}</strong></span>
-    <span>&nbsp;</span>
-    <span>{{ description() }}</span>
-</div>
-<div class="col-md-3 activity-item-date" title="{{ item.on | date:'medium' }}">{{ on() }}</div>
-</div> */}
-
-{/* <activity-item *ngFor="let item of activity" [item]="item" [mode]="'user'"></activity-item> */}
+import { PlusIcon,
+    UserEditIcon,
+    EditIcon,
+    CopyrightIcon,
+    InfoCircleIcon,
+    PencilAltIcon,
+    TrashIcon, 
+    ServerIcon,
+    TagIcon,
+    CodeIcon,
+    ExchangeAltIcon,
+    QuestionIcon,
+    CloudUploadAltIcon
+} from '@patternfly/react-icons';
 
 export const AppActivityItem = ({activityApiName, activityType, activityOn, activityData}) => {
 
@@ -78,7 +80,7 @@ export const AppActivityItem = ({activityApiName, activityType, activityOn, acti
 
     // Command Icon
     const commandIcon = () => {
-        let rval: string = "user";
+        // let rval: string = "user";
         switch (command()["type"]()) {
             case "AddPathItemCommand":
             case "AddPathItemCommand_20":
@@ -89,23 +91,19 @@ export const AppActivityItem = ({activityApiName, activityType, activityOn, acti
             case "AddSecurityRequirementCommand":
             case "AddExampleCommand_30":
             case "AddParameterExampleCommand_30":
-                rval = "plus";
-                break;
+                return <PlusIcon/>
             case "ChangeContactCommand":
             case "ChangeContactCommand_20":
             case "ChangeContactCommand_30":
-                rval = "id-card-o";
-                break;
+                return <UserEditIcon/>
             case "ChangeDescriptionCommand":
             case "ChangeDescriptionCommand_20":
             case "ChangeDescriptionCommand_30":
-                rval = "pencil-square-o";
-                break;
+                return <EditIcon/>
             case "ChangeLicenseCommand":
             case "ChangeLicenseCommand_20":
             case "ChangeLicenseCommand_30":
-                rval = "copyright";
-                break;
+                return <CopyrightIcon/>
             case "ChangeMediaTypeTypeCommand":
             case "ChangeParameterDefinitionTypeCommand":
             case "ChangeParameterDefinitionTypeCommand_20":
@@ -121,8 +119,7 @@ export const AppActivityItem = ({activityApiName, activityType, activityOn, acti
             case "ChangeSchemaTypeCommand":
             case "ChangeResponseDefinitionTypeCommand":
             case "ChangeResponseDefinitionTypeCommand_20":
-                rval = "info";
-                break;
+                return <InfoCircleIcon/>
             case "ChangePropertyCommand":
             case "ChangePropertyCommand_20":
             case "ChangePropertyCommand_30":
@@ -142,8 +139,7 @@ export const AppActivityItem = ({activityApiName, activityType, activityOn, acti
             case "SetParameterExampleCommand_30":
             case "SetExtensionCommand":
             case "ReplaceSecurityRequirementCommand":
-                rval = "pencil";
-                break;
+                return <PencilAltIcon/>
             case "DeleteAllOperationsCommand":
             case "DeleteAllParametersCommand_20":
             case "DeleteAllParametersCommand_30":
@@ -196,8 +192,7 @@ export const AppActivityItem = ({activityApiName, activityType, activityOn, acti
             case "DeleteExampleCommand_30":
             case "DeleteParameterExampleCommand_30":
             case "DeleteExtensionCommand":
-                rval = "trash-o";
-                break;
+                <TrashIcon/>
             case "NewMediaTypeCommand":
             case "NewOperationCommand":
             case "NewOperationCommand_20":
@@ -226,16 +221,13 @@ export const AppActivityItem = ({activityApiName, activityType, activityOn, acti
             case "NewSecuritySchemeCommand":
             case "NewSecuritySchemeCommand_20":
             case "NewSecuritySchemeCommand_30":
-                rval = "plus";
-                break;
+                return <PlusIcon/>
             case "NewServerCommand":
-                rval = "server";
-                break;
+                return <ServerIcon/>
             case "NewTagCommand":
             case "NewTagCommand_20":
             case "NewTagCommand_30":
-                rval = "tag";
-                break;
+                return <TagIcon/>
             case "ReplaceOperationCommand":
             case "ReplaceOperationCommand_20":
             case "ReplaceOperationCommand_30":
@@ -246,8 +238,7 @@ export const AppActivityItem = ({activityApiName, activityType, activityOn, acti
             case "ReplaceSchemaDefinitionCommand_20":
             case "ReplaceSchemaDefinitionCommand_30":
             case "ReplaceDocumentCommand":
-                rval = "code";
-                break;
+                return <CodeIcon/>
             case "RenamePathItemCommand":
             case "RenameParameterCommand":
             case "RenameSchemaDefinitionCommand":
@@ -255,16 +246,14 @@ export const AppActivityItem = ({activityApiName, activityType, activityOn, acti
             case "RenameSchemaDefinitionCommand_30":
             case "RenameResponseDefinitionCommand_20":
             case "RenameResponseDefinitionCommand_30":
-                rval = "exchange";
-                break;
+                return <ExchangeAltIcon/>
 
             case "AggregateCommand":
-                rval = aggregateCommandIcon();
-                break;
+                return aggregateCommandIcon();
             default:
-                rval = "question";
+                return <QuestionIcon/>
         }
-        return rval;
+        return null;
     }
 
         // Aggregate Command Icon
@@ -289,7 +278,7 @@ export const AppActivityItem = ({activityApiName, activityType, activityOn, acti
     
         // Mock Icon
         const mockIcon = () => {
-            return "cloud-upload";
+            return <CloudUploadAltIcon/>;
         }
 
     const commandDescription = () => {
@@ -651,7 +640,7 @@ export const AppActivityItem = ({activityApiName, activityType, activityOn, acti
     return (
         <React.Fragment>
             <div className="app-notification-drawer__icon-text">
-                <span>
+                <span className="app-notification-drawer__icon">
                     { returnIcon(activityType) }
                 </span>
                 <Button variant="link" isInline>
@@ -659,9 +648,9 @@ export const AppActivityItem = ({activityApiName, activityType, activityOn, acti
                 </Button>
             </div>
             <div>
-                { returnDescription(activityType) }
+                In { returnApiName(activityApiName) }, you { returnDescription(activityType) }
             </div>
-            <div>
+            <div className="app-notification-drawer__time-stamp">
                 { returnTimeStamp(activityOn) }
             </div>
         </React.Fragment>
