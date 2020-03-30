@@ -1,12 +1,12 @@
 import React from 'react';
 import { Gallery } from '@patternfly/react-core';
-import {AppCard} from './appCard';
-import data from '../api-data.json';
+import {ApiCard} from './apiCard';
+import data from '../../../../api-data.json';
 
-export const AppCardView: React.FunctionComponent<any> = (props) => {
+export const ApiCardView: React.FunctionComponent<any> = (props) => {
   const apiData = data.apis;
   const cardList = apiData.map((api, index) =>
-    <AppCard
+    <ApiCard
       key={index}
       id={api.id}
       name={api.name}
@@ -22,4 +22,4 @@ export const AppCardView: React.FunctionComponent<any> = (props) => {
   );
 }
 
-export default AppCardView;
+export default ApiCardView;

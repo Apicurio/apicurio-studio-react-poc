@@ -1,6 +1,6 @@
 import React from 'react';
 import {DataList} from '@patternfly/react-core';
-import AppDataListItem from './appDataListItem';
+import ApiDataListItem from './apiDataListItem';
 
 interface AppDataListProps {
   viewDetails: React.MouseEventHandler,
@@ -33,7 +33,7 @@ class AppDataList extends React.Component<AppDataListProps, AppDataListState> {
         selectedDataListItemId={this.state.selectedDataListItemId}
         onSelectDataListItem={this.onSelectDataListItem}
       >
-        <AppDataListItem/>
+        <ApiDataListItem/>
       </DataList>
     );
   }

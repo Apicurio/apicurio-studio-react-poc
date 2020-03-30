@@ -1,9 +1,6 @@
 import React, {useEffect, useContext} from "react";
 import { Button, Level, LevelItem, Title, PageSection, PageSectionVariants } from '@patternfly/react-core';
-import AppEmptyState from '../../appEmptyState';
-import { ApiToolbar } from '../../components/apiToolbar/apiToolbar';
-import AppDrawer from '../../appDrawer';
-import '../../app.css';
+import { ApiDrawer, ApiEmptyState, ApiToolbar } from '../../components';
 import {Link} from 'react-router-dom';
 import { Services } from './../../common';
 import { StoreContext } from './../../../context/StoreContext';
@@ -22,7 +19,7 @@ export const Dashboard = () => {
       const insideApis: Api[] = apis.data;
       return insideApis;
     })
-    .then(function(insideApis) {
+    .then((insideApis) => {
         setState({...state, apiData: insideApis});
     })
     .catch(error => {
@@ -34,7 +31,7 @@ export const Dashboard = () => {
     fetchDataAction();
   }, []);
 
-    var apiCount = apiData.length;
+    const apiCount = apiData.length;
     return (
       <React.Fragment>
         <PageSection variant={PageSectionVariants.light} className="app-page-section-border-bottom">
@@ -64,9 +61,9 @@ export const Dashboard = () => {
 
         <PageSection noPadding={true}>
           {apiCount >= 8 ? (
-            <AppEmptyState />
+            <ApiEmptyState />
           ) : (
-            <AppDrawer dashboardView={dashboardView}/>
+            <ApiDrawer dashboardView={dashboardView}/>
           )}
         </PageSection>
       </React.Fragment>
