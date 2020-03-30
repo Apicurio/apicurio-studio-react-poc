@@ -34,6 +34,7 @@ export const AppHeader = () => {
 
   
     const [isKebabDropdownOpen, setKebabDropdown] = useState(false);
+    const [isKebabDropdownMdOpen, setKebabDropdownMd] = useState(false);
 
     const onKebabDropdownToggle = isKebabDropdownOpen => {
       setKebabDropdown(isKebabDropdownOpen)
@@ -43,18 +44,35 @@ export const AppHeader = () => {
       setKebabDropdown(!isKebabDropdownOpen)
     }
 
-    // const onNotificationDrawerToggle = isNotificationDrawerOpen => {
-    //   setNotificationDrawer(!isNotificationDrawerOpen)
-    // }
+    const onKebabDropdownMdToggle = isKebabDropdownMdOpen => {
+      setKebabDropdownMd(isKebabDropdownMdOpen)
+    }
+
+    const onKebabDropdownMdSelect = event => {
+      setKebabDropdownMd(!isKebabDropdownMdOpen)
+    }
 
     const kebabDropdownItems = [
       <DropdownItem component="button" onClick={() => setNotificationDrawerState(notificationDrawerExpanded)}>
-        <HistoryIcon />
         Notifications
       </DropdownItem>,
       <DropdownItem component="button">
-        <CogIcon />
         Settings
+      </DropdownItem>
+    ];
+
+    const kebabDropdownItemsMd = [
+      <DropdownItem component="button" onClick={() => setNotificationDrawerState(notificationDrawerExpanded)}>
+        Notifications
+      </DropdownItem>,
+      <DropdownItem component="button">
+        Settings
+      </DropdownItem>,
+      <DropdownItem component="button">
+        About
+      </DropdownItem>,
+      <DropdownItem component="button">
+        Logout
       </DropdownItem>
     ];
 
@@ -73,7 +91,17 @@ export const AppHeader = () => {
           </ToolbarItem>
         </ToolbarGroup>
         <ToolbarGroup>
-          <ToolbarItem className={css(accessibleStyles.hiddenOnLg, spacingStyles.mr_0)}>
+        <ToolbarItem className={css(accessibleStyles.hiddenOnMd, spacingStyles.mr_0)}>
+            <Dropdown
+              isPlain
+              position="right"
+              onSelect={onKebabDropdownMdSelect}
+              toggle={<KebabToggle onToggle={onKebabDropdownMdToggle} />}
+              isOpen={isKebabDropdownMdOpen}
+              dropdownItems={kebabDropdownItemsMd}
+            />
+          </ToolbarItem>
+          <ToolbarItem className={css(accessibleStyles.screenReader, accessibleStyles.visibleOnMd, accessibleStyles.hiddenOnLg, spacingStyles.mr_0)}>
             <Dropdown
               isPlain
               position="right"
