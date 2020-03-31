@@ -1,29 +1,14 @@
 import React from 'react';
 import{ Dropdown, DropdownItem, DropdownSeparator, DropdownPosition, KebabToggle } from '@patternfly/react-core';
-import './app.css'
 
-interface AppDropdownKebabState {
+interface ApiDropdownKebabState {
   readonly isOpen: boolean
 }
 
-export class AppDropdownKebab extends React.Component<undefined, AppDropdownKebabState> {
+export class ApiDropdownKebab extends React.Component<{}, ApiDropdownKebabState> {
   state = {
     isOpen: false
   };
-
-  private onToggle = (isOpen: boolean) => {
-    this.setState({
-      isOpen
-    });
-  };
-  
-  private onSelect = (event: React.MouseEvent) => {
-      this.setState({
-        isOpen: !this.state.isOpen
-      });
-      // TO DO: Add in the focus function
-      // this.onFocus();
-    };
 
   // TO DO: Add in the focus function
   // public onFocus = () => {
@@ -68,6 +53,20 @@ export class AppDropdownKebab extends React.Component<undefined, AppDropdownKeba
       />
     );
   }
+
+  private onToggle = (isOpen: boolean) => {
+    this.setState({
+      isOpen
+    });
+  };
+  
+  private onSelect = (event: React.MouseEvent) => {
+      this.setState({
+        isOpen: !this.state.isOpen
+      });
+      // TO DO: Add in the focus function
+      // this.onFocus();
+    };
 };
 
-export default AppDropdownKebab;
+export default ApiDropdownKebab;

@@ -15,6 +15,7 @@
   },
   "scripts": {
     "clean": "lerna run clean",
+    "prebuild": "./init-dev.sh",
     "build": "lerna run build",
     "lint": "lerna run lint",
     "start:studio": "lerna run start --scope=@apicurio/studio",

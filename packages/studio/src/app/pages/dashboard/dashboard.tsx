@@ -1,9 +1,14 @@
 import React, {useEffect, useContext} from "react";
+<<<<<<< HEAD
 import { Button, Drawer, DrawerContent, DrawerContentBody, DrawerPanelContent, Level, LevelItem, Title, PageSection, PageSectionVariants } from '@patternfly/react-core';
 import AppEmptyState from '../../appEmptyState';
 import { ApiToolbar } from '../../components/apiToolbar/apiToolbar';
 import AppDrawer from '../../appDrawer';
 import '../../app.css';
+=======
+import { Button, Level, LevelItem, Title, PageSection, PageSectionVariants } from '@patternfly/react-core';
+import { ApiDrawer, ApiEmptyState, ApiToolbar } from '../../components';
+>>>>>>> master
 import {Link} from 'react-router-dom';
 import { Services } from './../../common';
 import { StoreContext } from './../../../context/StoreContext';
@@ -23,7 +28,7 @@ export const Dashboard = () => {
       const insideApis: Api[] = apis.data;
       return insideApis;
     })
-    .then(function(insideApis) {
+    .then((insideApis) => {
         setState({...state, apiData: insideApis});
     })
     .catch(error => {
@@ -35,11 +40,15 @@ export const Dashboard = () => {
     fetchDataAction();
   }, []);
 
+<<<<<<< HEAD
   const panelContent = (
     <AppNotificationDrawer/>
   );
 
     var apiCount = apiData.length;
+=======
+    const apiCount = apiData.length;
+>>>>>>> master
     return (
       <React.Fragment>
         <Drawer isExpanded={notificationDrawerExpanded}>
@@ -70,6 +79,7 @@ export const Dashboard = () => {
                   <ApiToolbar/>
                 </PageSection>
 
+<<<<<<< HEAD
                 <PageSection noPadding={true}>
                   {apiCount >= 8 ? (
                     <AppEmptyState />
@@ -80,6 +90,15 @@ export const Dashboard = () => {
               </DrawerContentBody>
             </DrawerContent>
         </Drawer>
+=======
+        <PageSection noPadding={true}>
+          {apiCount >= 8 ? (
+            <ApiEmptyState />
+          ) : (
+            <ApiDrawer dashboardView={dashboardView}/>
+          )}
+        </PageSection>
+>>>>>>> master
       </React.Fragment>
     );
   };

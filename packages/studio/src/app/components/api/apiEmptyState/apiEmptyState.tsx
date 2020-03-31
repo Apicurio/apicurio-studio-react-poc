@@ -1,9 +1,9 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import {Button, EmptyState, EmptyStateIcon, EmptyStateVariant, EmptyStateBody, EmptyStateSecondaryActions, Title} from '@patternfly/react-core';
 import {PlusCircleIcon} from '@patternfly/react-icons';
 import {Link} from 'react-router-dom';
 
-export const AppEmptyState: React.FunctionComponent<any> = (props) => {
+export const ApiEmptyState: React.FunctionComponent<any> = (props) => {
   return (
   <EmptyState variant={EmptyStateVariant.full} className="app-empty-state">
     <EmptyStateIcon icon={PlusCircleIcon} />
@@ -29,4 +29,4 @@ export const AppEmptyState: React.FunctionComponent<any> = (props) => {
   );
 }
 
-export default AppEmptyState;
+export default ApiEmptyState;
