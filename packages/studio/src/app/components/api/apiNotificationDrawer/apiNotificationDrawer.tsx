@@ -1,39 +1,18 @@
 import React, { useEffect, useContext } from 'react';
 import { DataList, DataListItem, DataListItemRow, DataListItemCells, DataListCell, DrawerHead, DrawerPanelBody, DrawerPanelContent, Title } from '@patternfly/react-core';
-import { UserServices } from './../../common';
+import { Services } from './../../../common';
 import { ApiDesignChange } from "@apicurio/models";
-import { useStoreContext } from './../../../context/reducers';
-import { StoreContext } from './../../../context/StoreContext';
-import { AppActivityItem } from '../appActivityItemComponent/appActivityItemComponent';
+import { useStoreContext } from './../../../../context/reducers';
+import { StoreContext } from './../../../../context/StoreContext';
+import { ApiActivityItem } from '../ApiActivityItem/ApiActivityItem';
 
-export const AppNotificationDrawer = () => {
-
-    const userService = UserServices.getInstance().currentUserApisService;
+export const ApiNotificationDrawer = () => {
     const [state, setState] = useContext(StoreContext);
     const { recentActivityData } = useStoreContext();
 
-    const activityStart: number = 0;
-    const activityEnd: number = 10;
     // const hasMoreActivity: boolean = false;
     // const gettingMoreActivity: boolean = false;
-
-    const fetchDataAction = async () => {
-        userService.getActivity(activityStart, activityEnd)
-        .then( activity => {
-            const activityData: ApiDesignChange[] = activity.data;
-            return activityData;
-        })
-        .then(function(activityData) {
-            setState({...state, recentActivityData: activityData});
-        })
-        .catch(error => {
-          console.error("error getting API" + error);
-        });
-       }
     
-      useEffect(() => {
-        fetchDataAction();
-      }, []);
 
       console.log('what is recent activity' + JSON.stringify(recentActivityData));
 
@@ -53,7 +32,7 @@ export const AppNotificationDrawer = () => {
                                 <DataListItemCells
                                     dataListCells={[
                                         <DataListCell key="1">
-                                            <AppActivityItem
+                                            <ApiActivityItem
                                                 activityApiName={activity.apiName}
                                                 activityType={activity.type}
                                                 activityOn={activity.on}
@@ -72,4 +51,4 @@ export const AppNotificationDrawer = () => {
     )
 };
 
-export default AppNotificationDrawer;
+export default ApiNotificationDrawer;

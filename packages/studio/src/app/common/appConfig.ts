@@ -1,4 +1,4 @@
-import {ApisService, KeycloakAuthenticationService, ConfigService} from  '@apicurio/services';
+import {ApisService, CurrentUserService, KeycloakAuthenticationService, ConfigService} from  '@apicurio/services';
 
 // Initialize services.
 
@@ -15,4 +15,5 @@ export class Services {
     public configService: ConfigService = new ConfigService();
     public autheticationService : KeycloakAuthenticationService = new KeycloakAuthenticationService(this.configService);
     public apisService: ApisService = new ApisService(this.autheticationService, this.configService);
+    public currentUserService: CurrentUserService = new CurrentUserService(this.autheticationService, this.configService);
 }

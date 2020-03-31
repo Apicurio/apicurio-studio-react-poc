@@ -18,8 +18,7 @@ import imgAvatar from '../../assets/images/avatar_image.png';
 import accessibleStyles from '@patternfly/react-styles/css/utilities/Accessibility/accessibility';
 import spacingStyles from '@patternfly/react-styles/css/utilities/Spacing/spacing';
 import { css } from '@patternfly/react-styles';
-import { UserDropdown } from '../../src/app/components/userDropDown';
-import { AppNotificationDrawer } from './components/appNotificationDrawer/appNotificationDrawer';
+import { ApiUserDropdown } from './components/api/apiUserDropdown/apiUserDropDown';
 import { useStoreContext } from './../../../studio/src/context/reducers';
 import { StoreContext } from './../../../studio/src/context/StoreContext';
 
@@ -112,7 +111,7 @@ export const AppHeader = () => {
             />
           </ToolbarItem>
           <ToolbarItem className={css(accessibleStyles.screenReader, accessibleStyles.visibleOnMd)}>
-            <UserDropdown/>
+            <ApiUserDropdown/>
           </ToolbarItem>
         </ToolbarGroup>
       </Toolbar>

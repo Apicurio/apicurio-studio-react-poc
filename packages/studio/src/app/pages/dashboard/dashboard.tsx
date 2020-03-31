@@ -1,26 +1,23 @@
 import React, {useEffect, useContext} from "react";
-<<<<<<< HEAD
 import { Button, Drawer, DrawerContent, DrawerContentBody, DrawerPanelContent, Level, LevelItem, Title, PageSection, PageSectionVariants } from '@patternfly/react-core';
-import AppEmptyState from '../../appEmptyState';
-import { ApiToolbar } from '../../components/apiToolbar/apiToolbar';
-import AppDrawer from '../../appDrawer';
 import '../../app.css';
-=======
-import { Button, Level, LevelItem, Title, PageSection, PageSectionVariants } from '@patternfly/react-core';
 import { ApiDrawer, ApiEmptyState, ApiToolbar } from '../../components';
->>>>>>> master
 import {Link} from 'react-router-dom';
 import { Services } from './../../common';
 import { StoreContext } from './../../../context/StoreContext';
 import {Api} from "@apicurio/models";
 import { useStoreContext } from './../../../context/reducers';
-import { AppNotificationDrawer } from '../../components/appNotificationDrawer/appNotificationDrawer';
+import { ApiNotificationDrawer } from './../../components/api/apiNotificationDrawer/apiNotificationDrawer';
+import { ApiDesignChange } from "@apicurio/models";
 
 export const Dashboard = () => {
 
   const apisService = Services.getInstance().apisService;
+  const userService = Services.getInstance().currentUserService;
   const { apiData, dashboardView, notificationDrawerExpanded } = useStoreContext();
   const [state, setState] = useContext(StoreContext);
+  const activityStart: number = 0;
+  const activityEnd: number = 10;
 
   const fetchDataAction = async () => {
     apisService.getApis()
@@ -36,19 +33,31 @@ export const Dashboard = () => {
     });
    }
 
+  const fetchActivityAction = async () => {
+    userService.getActivity(activityStart, activityEnd)
+    .then( activity => {
+        const activityData: ApiDesignChange[] = activity.data;
+        return activityData;
+    })
+    .then(function(activityData) {
+        setState({...state, recentActivityData: activityData});
+    })
+    .catch(error => {
+      console.error("error getting API" + error);
+    });
+   }
+
   useEffect(() => {
     fetchDataAction();
+    fetchActivityAction();
   }, []);
 
-<<<<<<< HEAD
   const panelContent = (
-    <AppNotificationDrawer/>
+    <ApiNotificationDrawer/>
   );
 
-    var apiCount = apiData.length;
-=======
     const apiCount = apiData.length;
->>>>>>> master
+
     return (
       <React.Fragment>
         <Drawer isExpanded={notificationDrawerExpanded}>
@@ -78,27 +87,16 @@ export const Dashboard = () => {
                 <PageSection variant={PageSectionVariants.light} noPadding={true} className="app-page-section-border-bottom">
                   <ApiToolbar/>
                 </PageSection>
-
-<<<<<<< HEAD
-                <PageSection noPadding={true}>
-                  {apiCount >= 8 ? (
-                    <AppEmptyState />
-                  ) : (
-                    <AppDrawer dashboardView={dashboardView}/>
-                  )}
-                </PageSection>
-              </DrawerContentBody>
-            </DrawerContent>
+              <PageSection noPadding={true}>
+                {apiCount >= 8 ? (
+                  <ApiEmptyState />
+                ) : (
+                  <ApiDrawer dashboardView={dashboardView}/>
+                )}
+              </PageSection>
+            </DrawerContentBody>
+          </DrawerContent>
         </Drawer>
-=======
-        <PageSection noPadding={true}>
-          {apiCount >= 8 ? (
-            <ApiEmptyState />
-          ) : (
-            <ApiDrawer dashboardView={dashboardView}/>
-          )}
-        </PageSection>
->>>>>>> master
       </React.Fragment>
     );
   };

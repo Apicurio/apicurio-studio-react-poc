@@ -12,9 +12,9 @@ import {
   Button,
   TextVariants
 } from "@patternfly/react-core";
-import brandImg from "../../assets/apicurio_gray.png";
+import brandImg from "./../../../assets/apicurio_gray.png";
 
-export class UserDropdown extends React.Component<
+export class ApiUserDropdown extends React.Component<
   {},
   { isAboutClicked: boolean; isModalOpen: boolean; isOpen: boolean }
 > {

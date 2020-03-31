@@ -1,9 +1,9 @@
 import React from 'react';
-import { useStoreContext } from './../../../context/reducers';
+import { useStoreContext } from './../../../../context/reducers';
 import { MockReference, PublishApi} from "@apicurio/models";
 import { ICommand, MarshallCompat } from "apicurio-data-models";
 import * as moment from "moment";
-import './appActivityItemComponent.css';
+import './apiActivityItem.css';
 import { Button } from '@patternfly/react-core';
 
 import { PlusIcon,
@@ -21,7 +21,7 @@ import { PlusIcon,
     CloudUploadAltIcon
 } from '@patternfly/react-icons';
 
-export const AppActivityItem = ({activityApiName, activityType, activityOn, activityData}) => {
+export const ApiActivityItem = ({activityApiName, activityType, activityOn, activityData}) => {
 
     const { recentActivityData } = useStoreContext();
 
@@ -657,4 +657,4 @@ export const AppActivityItem = ({activityApiName, activityType, activityOn, acti
     )
 }
 
-export default AppActivityItem;
+export default ApiActivityItem;
