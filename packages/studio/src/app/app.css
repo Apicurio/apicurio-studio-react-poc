@@ -25,6 +25,10 @@
   padding-bottom: 0;
 }
 
+.app-page-section-height {
+  height: 100vh;
+}
+
 
 .app-api-title {
   color: var(--pf-global--primary-color--100);

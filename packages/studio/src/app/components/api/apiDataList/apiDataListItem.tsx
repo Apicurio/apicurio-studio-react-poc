@@ -6,13 +6,14 @@ import ApicurioIcon from '../../../assets/apicurio-icon.png';
 import './apiDataListItem.css';
 import { useStoreContext } from '../../../../context/reducers';
 
-export const ApiDataListItem: React.FunctionComponent<any> = () => {
+export const ApiDataListItem = () => {
+
   const { apiData } = useStoreContext();
-    
+
     return (
       <React.Fragment>
-        {apiData.map(apis => 
-          <DataListItem id={apis.id} key={apis.id} aria-labelledby={`data-list-item-${apis.id}`}>
+        {apiData.map((apis, index) => 
+          <DataListItem id={apis.id} key={index} aria-labelledby={`data-list-item-${apis.id}`}>
           <DataListItemRow>
             <DataListCheck checked={false} aria-labelledby={`data-list-item-${apis.id}`} name={`data-list-item-check-${apis.id}`}/>
             <DataListItemCells

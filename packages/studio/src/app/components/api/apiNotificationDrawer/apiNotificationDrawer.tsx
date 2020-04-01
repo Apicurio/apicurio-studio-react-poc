@@ -7,14 +7,7 @@ import { StoreContext } from './../../../../context/StoreContext';
 import { ApiActivityItem } from '../ApiActivityItem/ApiActivityItem';
 
 export const ApiNotificationDrawer = () => {
-    const [state, setState] = useContext(StoreContext);
     const { recentActivityData } = useStoreContext();
-
-    // const hasMoreActivity: boolean = false;
-    // const gettingMoreActivity: boolean = false;
-    
-
-      console.log('what is recent activity' + JSON.stringify(recentActivityData));
 
     return (
         <DrawerPanelContent>
@@ -24,10 +17,10 @@ export const ApiNotificationDrawer = () => {
                 </Title>
             </DrawerHead>
             <DrawerPanelBody noPadding>
-                <DataList>
+                <DataList aria-label="app-data-list-notification-drawer" key="notification-drawer">
                     <React.Fragment>
-                        { recentActivityData.map( activity =>
-                            <DataListItem>
+                        { recentActivityData.map((activity, index) =>
+                            <DataListItem aria-labelledby={`data-list-item-${index}`} key={index}>
                                 <DataListItemRow>
                                 <DataListItemCells
                                     dataListCells={[

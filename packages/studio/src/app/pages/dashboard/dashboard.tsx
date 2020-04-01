@@ -1,4 +1,4 @@
-import React, {useEffect, useContext} from "react";
+import React, {useEffect, useContext, useState} from "react";
 import { Button, Drawer, DrawerContent, DrawerContentBody, DrawerPanelContent, Level, LevelItem, Title, PageSection, PageSectionVariants } from '@patternfly/react-core';
 import '../../app.css';
 import { ApiDrawer, ApiEmptyState, ApiToolbar } from '../../components';
@@ -14,42 +14,39 @@ export const Dashboard = () => {
 
   const apisService = Services.getInstance().apisService;
   const userService = Services.getInstance().currentUserService;
-  const { apiData, dashboardView, notificationDrawerExpanded } = useStoreContext();
+  const { apiData, dashboardView, notificationDrawerExpanded, recentActivityData } = useStoreContext();
   const [state, setState] = useContext(StoreContext);
   const activityStart: number = 0;
   const activityEnd: number = 10;
+  const [hasMoreActivity, setHasMoreActivity] = useState(false);
 
-  const fetchDataAction = async () => {
-    apisService.getApis()
-    .then( apis => {
-      const insideApis: Api[] = apis.data;
-      return insideApis;
-    })
-    .then((insideApis) => {
-        setState({...state, apiData: insideApis});
-    })
-    .catch(error => {
-      console.error("error getting API" + error);
-    });
-   }
+  const loadAsyncPageData = async () => {
+    const apiState = await apisService.getApis()
+      .then( apis => {
+        const insideApis: Api[] = apis.data;
+        return insideApis;
+      })
+      .catch(error => {
+        console.error("error getting API" + error);
+      });
 
-  const fetchActivityAction = async () => {
-    userService.getActivity(activityStart, activityEnd)
-    .then( activity => {
+    const activitiyState = await userService.getActivity(activityStart, activityEnd)
+      .then( activity => {
         const activityData: ApiDesignChange[] = activity.data;
+        if(activityData && activityData.length >= 10) {
+          setHasMoreActivity(true);
+        }
         return activityData;
-    })
-    .then(function(activityData) {
-        setState({...state, recentActivityData: activityData});
-    })
-    .catch(error => {
-      console.error("error getting API" + error);
-    });
-   }
+      })
+      .catch(error => {
+        console.error("error getting API" + error);
+      });
+
+      setState({...state, apiData: apiState, recentActivityData: activitiyState});
+    }
 
   useEffect(() => {
-    fetchDataAction();
-    fetchActivityAction();
+    loadAsyncPageData();
   }, []);
 
   const panelContent = (
@@ -87,7 +84,7 @@ export const Dashboard = () => {
                 <PageSection variant={PageSectionVariants.light} noPadding={true} className="app-page-section-border-bottom">
                   <ApiToolbar/>
                 </PageSection>
-              <PageSection noPadding={true}>
+              <PageSection noPadding={true} className="app-page-section-height">
                 {apiCount >= 8 ? (
                   <ApiEmptyState />
                 ) : (
