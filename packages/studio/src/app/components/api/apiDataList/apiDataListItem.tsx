@@ -12,31 +12,31 @@ export const ApiDataListItem = () => {
 
     return (
       <React.Fragment>
-        {apiData.map((apis, index) => 
-          <DataListItem id={apis.id} key={index} aria-labelledby={`data-list-item-${apis.id}`}>
+        {apiData.map((api, index) => 
+          <DataListItem id={api.id} key={index} aria-labelledby={`data-list-item-${api.id}`}>
           <DataListItemRow>
-            <DataListCheck checked={false} aria-labelledby={`data-list-item-${apis.id}`} name={`data-list-item-check-${apis.id}`}/>
+            <DataListCheck checked={false} aria-labelledby={`data-list-item-${api.id}`} name={`data-list-item-check-${api.id}`}/>
             <DataListItemCells
               dataListCells={[
-                <DataListCell isIcon={true} className="api-data-list-cell" key={`primary content ${apis.id}`}>
+                <DataListCell isIcon={true} className="api-data-list-cell" key={`primary content ${api.id}`}>
                   <img src={ApicurioIcon}/>
                 </DataListCell>,
-                <DataListCell key={`secondary content ${apis.id}`}>
+                <DataListCell key={`secondary content ${api.id}`}>
                   <div className="app-api-title">
-                    {apis.name}
+                    {api.name}
                   </div>
                   <div className="app-api-description">
-                    {apis.description}
+                    {api.description}
                   </div>
                   <div className="app-api-tag-group">
-                    {apis.tags.map((tag, index) =>
+                    {api.tags.map((tag, index) =>
                       <ApiTag key={index} text={tag}/>
                     )}
                   </div>
                 </DataListCell>
               ]}
               />
-            <DataListAction aria-labelledby={`data-list-item-${apis.id}`} id={`data-list-item-${apis.id}`} aria-label="Actions">
+            <DataListAction aria-labelledby={`data-list-item-${api.id}`} id={`data-list-item-${api.id}`} aria-label="Actions">
                 <Button variant="link">View Details</Button>
                 <Button variant="secondary">Edit API</Button>
                 <ApiDropdownKebab/>
