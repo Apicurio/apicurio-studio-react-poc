@@ -1,10 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { DataList, DataListItem, DataListItemRow, DataListItemCells, DataListCell, DrawerHead, DrawerPanelBody, DrawerPanelContent, Title } from '@patternfly/react-core';
-import { Services } from './../../../common';
-import { ApiDesignChange } from "@apicurio/models";
 import { useStoreContext } from './../../../../context/reducers';
-import { StoreContext } from './../../../../context/StoreContext';
-import { ApiActivityItem } from '../ApiActivityItem/ApiActivityItem';
+import { ApiActivityItem } from '../apiActivityItem/ApiActivityItem';
 
 export const ApiNotificationDrawer = () => {
     const { recentActivityData } = useStoreContext();
