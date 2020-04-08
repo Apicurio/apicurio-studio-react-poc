@@ -25,6 +25,10 @@
   padding-bottom: 0;
 }
 
+.app-page-section-height {
+  height: 100vh;
+}
+
 
 .app-api-title {
   color: var(--pf-global--primary-color--100);
@@ -81,4 +85,13 @@
 
 .app-empty-state > a > .pf-c-button.pf-m-primary, .app-empty-state .pf-c-empty-state__primary {
   margin-top: var(--pf-c-empty-state--c-button--MarginTop);
+}
+
+.pf-c-drawer__content {
+  background-color: unset;
+}
+
+.app-drawer-drawer {
+  display: flex;
+  flex-direction: row;
 }

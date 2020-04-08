@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
-import {Api} from "@apicurio/models";
+import {Api, ApiDesignChange} from "@apicurio/models";
 
 const StoreContext = React.createContext({});
 
 export interface IState {
     apiData: Api[],
-    dashboardView: string
+    recentActivityData: ApiDesignChange[],
+    dashboardView: string,
+    notificationDrawerExpanded: boolean
 }
 
 const initialState: IState = {
     apiData: [],
-    dashboardView: 'list'
+    recentActivityData: [],
+    dashboardView: 'list',
+    notificationDrawerExpanded: false
 };
 
 const StoreProvider = ({ children }) => {
