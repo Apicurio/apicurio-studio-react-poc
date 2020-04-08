@@ -1,51 +1,68 @@
-import React from 'react';
-import { Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, TextInput, TextArea, FormSelectOption, FormSelect, ActionGroup, Title, PageSection, PageSectionVariants } from '@patternfly/react-core';
-import '../../app.css'
+import React, {useState} from 'react';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  Button,
+  Card,
+  CardBody,
+  Form,
+  FormGroup,
+  TextInput,
+  TextArea,
+  FormSelectOption,
+  FormSelect,
+  ActionGroup,
+  Title,
+  PageSection,
+  PageSectionVariants 
+} from '@patternfly/react-core';
+import '../../app.css';
+import { PlusCircleIcon } from '@patternfly/react-icons';
+import { PficonTemplateIcon } from '@patternfly/react-icons'
+import { Services } from './../../common';
+import './createApi.css';
 
-interface CreateApiProps {
-  isActive: true
-}
+// interface CreateApiProps {
+//   isActive: true
+// }
 
-interface CreateApiState {
-  name: string,
-  description: string,
-  apiType: string
-}
+// interface CreateApiState {
+//   name: string,
+//   description: string,
+//   apiType: string
+// }
 
-export class CreateApi extends React.Component<CreateApiProps, CreateApiState> {
-  constructor(props: CreateApiProps) {
-    super(props);
-    this.state = {
-      apiType: 'please choose',
-      description: '',
-      name: ''
-    };
-    this.handleTextInputChangeName = this.handleTextInputChangeName.bind(this);
-    this.handleTextInputChangeDescription = this.handleTextInputChangeDescription.bind(this);
-    this.onChange = this.onChange.bind(this);
-  }
+export const CreateApi = () => {
+
+  const [apiType, setApiType] = useState('Please choose');
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [cardSelected, setCardSelected] = useState(null);
 
   // TO DO: Add more options here
-  options = [
-    { value: 'Please choose', label: 'Please choose', disabled: false },
+  const typeOptions = [
+    { value: 'Open API 2.0 (Swagger)', label: 'Open API 2.0 (Swagger)', disabled: false },
     { value: 'Open API 3.0.2', label: 'Open API 3.0.2', disabled: false }
   ];
 
-  private onChange = (apiType: string) => {
-    this.setState({apiType});
+  const onChange = (apiType: string) => {
+    setApiType(apiType);
   };
 
-  private handleTextInputChangeName = (name: string) => {
-    this.setState({ name });
+  const handleTextInputChangeName = (name: string) => {
+    setName(name);
   };
 
-  private handleTextInputChangeDescription = (description: string) => {
-    this.setState({ description });
+  const handleTextInputChangeDescription = (description: string) => {
+    setDescription(description);
   };
 
-  render() {
-    const { name, description } = this.state;
-    return (
+  const onClickCard = event => {
+    const newSelected = event.currentTarget.id === cardSelected ? null : event.currentTarget.id
+    setCardSelected(newSelected);
+  };
+
+  return (
       <React.Fragment>
         <PageSection variant={PageSectionVariants.light} className="app-page-section-breadcrumb">
           <Breadcrumb>
@@ -63,7 +80,7 @@ export class CreateApi extends React.Component<CreateApiProps, CreateApiState> {
           </Title>
         </PageSection>
         <PageSection>
-          <Form className="app-create-api-form">
+          <Form className="app-create-api__form">
             <p className="app-form-helper-text">Fields marked with <span className="app-form-helper-text-asterisk">*</span> are required.</p>
             <FormGroup
               label="Name"
@@ -76,7 +93,7 @@ export class CreateApi extends React.Component<CreateApiProps, CreateApiState> {
                 id="api-create-name"
                 name="api-create-name"
                 value={name}
-                onChange={this.handleTextInputChangeName}
+                onChange={handleTextInputChangeName}
               />
             </FormGroup>
             <FormGroup
@@ -86,22 +103,22 @@ export class CreateApi extends React.Component<CreateApiProps, CreateApiState> {
               <TextArea
                 name="description-text-area"
                 value={description}
-                onChange={this.handleTextInputChangeDescription}
+                onChange={handleTextInputChangeDescription}
                 id="description-text-area"
                 aria-label="description"
               />
             </FormGroup>
             <FormGroup 
-              label="Your title"
+              label="Type"
               fieldId="horizontal-form-title"
             >
               <FormSelect
-                value={this.state.apiType}
-                onChange={this.onChange}
+                value={apiType}
+                onChange={onChange}
                 id="api-type-select"
                 name="api-type-select"
               >
-                {this.options.map((option, index) => (
+                {typeOptions.map((option, index) => (
                   <FormSelectOption
                     isDisabled={option.disabled}
                     key={index}
@@ -111,6 +128,40 @@ export class CreateApi extends React.Component<CreateApiProps, CreateApiState> {
                 ))}
               </FormSelect>
             </FormGroup>
+            <FormGroup>
+              <div className="app-create-api__form-card-group">
+                <Card id="card-blank-api" className="app-create-api__form-card" onClick={onClickCard} isSelected={cardSelected === 'card-blank-api'} isSelectable isCompact>
+                  <CardBody>
+                    <div className="app-create-api__form-card-text">
+                      <PlusCircleIcon/>
+                      <span>
+                        Blank API
+                      </span>
+                    </div>
+                  </CardBody>
+                </Card>
+                <Card id="card-pet-store-api" className="app-create-api__form-card" isSelectable isCompact>
+                  <CardBody>
+                    <div className="app-create-api__form-card-text">
+                      <PficonTemplateIcon/>
+                      <span>
+                        Pet Store example API
+                      </span>
+                    </div>
+                  </CardBody>
+                </Card>
+                <Card id="card-dataset-api" className="app-create-api__form-card" isSelectable isCompact>
+                  <CardBody>
+                    <div className="app-create-api__form-card-text">
+                      <PficonTemplateIcon/>
+                      <span>
+                        USPTO Dataset API
+                      </span>
+                    </div>
+                  </CardBody>
+                </Card>
+              </div>
+            </FormGroup>
             <ActionGroup>
               <Button variant="primary">Create API</Button>
             </ActionGroup>
@@ -118,5 +169,4 @@ export class CreateApi extends React.Component<CreateApiProps, CreateApiState> {
         </PageSection>
       </React.Fragment>
     );
-  }
 }

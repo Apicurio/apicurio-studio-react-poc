@@ -65,19 +65,6 @@
   color: var(--pf-global--Color--100);
 }
 
-.app-create-api-form {
-  width: 50%;
-}
-
-.app-form-helper-text {
-  font-size: var(--pf-global--FontSize--sm);
-  color: var(--pf-global--Color--200);
-}
-
-.app-form-helper-text-asterisk {
-  color: var(--pf-global--danger-color--100);
-}
-
 .app-import-api-split-layout > .pf-l-split__item {
   width: 50%;
   margin-right: var(--pf-global--spacer--xl);
