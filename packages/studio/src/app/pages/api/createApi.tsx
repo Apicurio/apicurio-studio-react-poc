@@ -32,6 +32,34 @@ import './createApi.css';
 //   apiType: string
 // }
 
+const apisService = Services.getInstance().apisService;
+apisService.createApi(api);
+
+// const loadAsyncPageData = async () => {
+//   const apiState = await apisService.getApis()
+//     .then( apis => {
+//       const insideApis: Api[] = apis.data;
+//       return insideApis;
+//     })
+//     .catch(error => {
+//       console.error("error getting API" + error);
+//     });
+
+//   const activitiyState = await userService.getActivity(activityStart, activityEnd)
+//   .then( activity => {
+//     const activityData: ApiDesignChange[] = activity.data;
+//     if(activityData && activityData.length >= 10) {
+//       setHasMoreActivity(true);
+//     }
+//     return activityData;
+//   })
+//   .catch(error => {
+//     console.error("error getting API" + error);
+//   });
+
+//   setState({...state, apiData: apiState, recentActivityData: activitiyState});
+// }
+
 export const CreateApi = () => {
 
   const [apiType, setApiType] = useState('Please choose');
@@ -42,7 +70,7 @@ export const CreateApi = () => {
   // TO DO: Add more options here
   const typeOptions = [
     { value: 'Open API 2.0 (Swagger)', label: 'Open API 2.0 (Swagger)', disabled: false },
-    { value: 'Open API 3.0.2', label: 'Open API 3.0.2', disabled: false }
+    { value: 'Open API 3.0.2', label: 'Open API 3.0.2', disabled: false, isPlaceholder: true  }
   ];
 
   const onChange = (apiType: string) => {
@@ -84,6 +112,7 @@ export const CreateApi = () => {
             <p className="app-form-helper-text">Fields marked with <span className="app-form-helper-text-asterisk">*</span> are required.</p>
             <FormGroup
               label="Name"
+              placeholder="Create the new API's name"
               isRequired
               fieldId="api-create-name"
             >
@@ -99,6 +128,7 @@ export const CreateApi = () => {
             <FormGroup
               label="Description"
               fieldId="description-text-area"
+              placeholder="Type a short description of the API"
             >
               <TextArea
                 name="description-text-area"
@@ -140,7 +170,7 @@ export const CreateApi = () => {
                     </div>
                   </CardBody>
                 </Card>
-                <Card id="card-pet-store-api" className="app-create-api__form-card" isSelectable isCompact>
+                <Card id="card-pet-store-api" className="app-create-api__form-card" onClick={onClickCard} isSelected={cardSelected === 'card-pet-store-api'} isSelectable isCompact>
                   <CardBody>
                     <div className="app-create-api__form-card-text">
                       <PficonTemplateIcon/>
@@ -150,7 +180,7 @@ export const CreateApi = () => {
                     </div>
                   </CardBody>
                 </Card>
-                <Card id="card-dataset-api" className="app-create-api__form-card" isSelectable isCompact>
+                <Card id="card-dataset-api" className="app-create-api__form-card" onClick={onClickCard} isSelected={cardSelected === 'card-dataset-api'} isSelectable isCompact>
                   <CardBody>
                     <div className="app-create-api__form-card-text">
                       <PficonTemplateIcon/>

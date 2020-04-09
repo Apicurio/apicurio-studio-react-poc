@@ -31,19 +31,19 @@ export const Dashboard = () => {
       });
 
     const activitiyState = await userService.getActivity(activityStart, activityEnd)
-      .then( activity => {
-        const activityData: ApiDesignChange[] = activity.data;
-        if(activityData && activityData.length >= 10) {
-          setHasMoreActivity(true);
-        }
-        return activityData;
-      })
-      .catch(error => {
-        console.error("error getting API" + error);
-      });
+    .then( activity => {
+      const activityData: ApiDesignChange[] = activity.data;
+      if(activityData && activityData.length >= 10) {
+        setHasMoreActivity(true);
+      }
+      return activityData;
+    })
+    .catch(error => {
+      console.error("error getting API" + error);
+    });
 
-      setState({...state, apiData: apiState, recentActivityData: activitiyState});
-    }
+    setState({...state, apiData: apiState, recentActivityData: activitiyState});
+  }
 
   useEffect(() => {
     loadAsyncPageData();
