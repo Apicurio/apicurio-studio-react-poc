@@ -6,13 +6,16 @@ import './app/app.css';
 import './config.js';
 import Keycloak from 'keycloak-js';
 import './version.js';
+import { GlobalContextProvider } from './context';
 import { StoreProvider } from './../src/context/StoreContext';
 
 function AppWithProvider() {
     return (
-        <StoreProvider>
-            <App />
-        </StoreProvider>
+        <GlobalContextProvider>
+            <StoreProvider>
+                <App />
+            </StoreProvider>
+        </GlobalContextProvider>
     );
 }
 
