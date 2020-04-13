@@ -25,16 +25,6 @@ import './createApi.css';
 import { NewApi, ImportApi, CreateApiFormData} from "@apicurio/models";
 import {Base64} from "js-base64";
 
-// interface CreateApiProps {
-//   isActive: true
-// }
-
-// interface CreateApiState {
-//   name: string,
-//   description: string,
-//   apiType: string
-// }
-
 export const CreateApi = () => {
 
   const apisService = Services.getInstance().apisService;
@@ -65,14 +55,21 @@ export const CreateApi = () => {
   const onClickCard = event => {
     const newSelected = event.currentTarget.id === cardSelected ? null : event.currentTarget.id
     setCardSelected(newSelected);
-  }; 
+  };
 
-  const onCreateApi = eventData => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('did it get here');
+    onCreateApi(event);
+  }
+
+  const onCreateApi = (eventData) => {
+    console.log('what is all the data' + eventData.target.type.value);
     if(!eventData.template) {
       let newApi: NewApi = new NewApi();
-      newApi.type = eventData.type;
-      newApi.name = eventData.name;
-      newApi.description = eventData.description;
+      newApi.type = eventData.target.type.value;
+      newApi.name = eventData.target.name.value;
+      newApi.description = eventData.target.description.value;
 
       console.log("[CreateApiPageComponent] Creating a new (blank) API: " + JSON.stringify(newApi));
       
@@ -139,7 +136,7 @@ export const CreateApi = () => {
           </Title>
         </PageSection>
         <PageSection>
-          <Form className="app-create-api__form">
+          <Form onSubmit={handleSubmit} className="app-create-api__form">
             <p className="app-form-helper-text">Fields marked with <span className="app-form-helper-text-asterisk">*</span> are required.</p>
             <FormGroup
               label="Name"
@@ -151,7 +148,7 @@ export const CreateApi = () => {
                 isRequired
                 type="text"
                 id="api-create-name"
-                name="api-create-name"
+                name="name"
                 value={name}
                 onChange={handleTextInputChangeName}
               />
@@ -162,7 +159,7 @@ export const CreateApi = () => {
               placeholder="Type a short description of the API"
             >
               <TextArea
-                name="description-text-area"
+                name="description"
                 value={description}
                 onChange={handleTextInputChangeDescription}
                 id="description-text-area"
@@ -178,14 +175,14 @@ export const CreateApi = () => {
                 value={apiType}
                 onChange={onChange}
                 id="api-type-select"
-                name="api-type-select"
+                name="type"
               >
                 {typeOptions.map((option, index) => (
                   <FormSelectOption
-                    isDisabled={option.disabled}
                     key={index}
                     value={option.value}
                     label={option.label}
+                    isPlaceholder={option.isPlaceholder}
                   />
                 ))}
               </FormSelect>
@@ -229,7 +226,7 @@ export const CreateApi = () => {
               </div>
             </FormGroup>
             <ActionGroup>
-              <Button type="submit" onSubmit={onCreateApi} variant="primary">Create API</Button>
+              <Button type="submit" variant="primary">Create API</Button>
             </ActionGroup>
           </Form>
         </PageSection>

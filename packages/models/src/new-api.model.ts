@@ -17,12 +17,12 @@
 
 export class NewApi {
 
-    specVersion: string;
+    type: string;
     name: string;
     description: string;
 
     constructor() {
-        this.specVersion = null;
+        this.type = null;
         this.name = "";
         this.description = "";
     }

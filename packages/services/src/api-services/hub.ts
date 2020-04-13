@@ -108,16 +108,16 @@ export abstract class AbstractHubService {
     return axios.request(config)
     .then(response => {
       if (successCallback) {
-       return successCallback(response.body);
+       return successCallback(response);
       }
       else {
-        return response.body;
+        return response;
      }
     })
     .catch(error => console.log(error)); // handle error state
   }
 
-    protected httpPostWithReturn<I, O>(url: string, body: I, options: AxiosRequestConfig, successCallback?: (data: O) => O): Promise<O> {
+    protected httpPostWithReturn<I, O>(url: string, body: I, options: AxiosRequestConfig, successCallback?: (data: any) => any): Promise<O> {
         
         const config: AxiosRequestConfig = {...{
             method: 'post',
@@ -127,18 +127,18 @@ export abstract class AbstractHubService {
 
         return axios.request(config)
         .then(response => {
-            let data: 0 = response.body;
+            let data = response;
             if(successCallback) {
                 return successCallback(data);
             }
             else {
-                return response.body;
+                return data;
             }
         })
         .catch(error => console.log(error));
     }
 
-    protected httpPutWithReturn<I, O>(url: string, body: I, options: any, successCallback?: (data: O) => O): Promise<O> {
+    protected httpPutWithReturn<I, O>(url: string, body: I, options: any, successCallback?: (data: any) => any): Promise<O> {
       
         const config: AxiosRequestConfig = {...{
             method: 'put',
@@ -148,12 +148,12 @@ export abstract class AbstractHubService {
 
         return axios.request(config)
         .then(response => {
-            let data: 0 = response.body;
+            let data = response;
             if(successCallback) {
                 return successCallback(data);
             }
             else {
-                return response.body;
+                return response;
             }
         })
         .catch(error => console.log(error));
