@@ -11,11 +11,13 @@ import { StoreProvider } from './../src/context/StoreContext';
 
 function AppWithProvider() {
     return (
+        <Store>
         <GlobalContextProvider>
             <StoreProvider>
                 <App />
             </StoreProvider>
         </GlobalContextProvider>
+        </Store>
     );
 }
 

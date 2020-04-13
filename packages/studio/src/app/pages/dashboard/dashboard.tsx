@@ -3,18 +3,24 @@ import { Button, Drawer, DrawerContent, DrawerContentBody, DrawerPanelContent, L
 import '../../app.css';
 import { ApiDrawer, ApiEmptyState, ApiToolbar } from '../../components';
 import {Link} from 'react-router-dom';
+import {} from '../../'
 import { Services } from './../../common';
 import { StoreContext } from './../../../context/StoreContext';
 import {Api} from "@apicurio/models";
 import { useStoreContext } from './../../../context/reducers';
 import { ApiNotificationDrawer } from './../../components/api/apiNotificationDrawer/apiNotificationDrawer';
 import { ApiDesignChange } from "@apicurio/models";
+import { ApiContext, ApiContextObj } from '../../../context';
 
 export const Dashboard = () => {
 
   const apisService = Services.getInstance().apisService;
   const userService = Services.getInstance().currentUserService;
-  const { apiData, dashboardView, notificationDrawerExpanded, recentActivityData } = useStoreContext();
+  const apiContext = useContext(ApiContext) as ApiContextObj;
+
+  apiContext.updateApi()
+
+  //const { apiData, dashboardView, notificationDrawerExpanded, recentActivityData } = useStoreContext();
   const [state, setState] = useContext(StoreContext);
   const activityStart: number = 0;
   const activityEnd: number = 10;

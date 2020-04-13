@@ -16,11 +16,17 @@ export interface GlobalContextObj {
 }
 
 const initialState: GlobalState = {
-    apiData: [],
-    recentActivityData: [],
+    // apiData: [],
+    // recentActivityData: [],
     dashboardView: 'list',
     notificationDrawerExpanded: false
 };
+
+const updateApi = (apis: Api[]) {
+
+}
+
+const updateDashboard = 
 
 export const GlobalContextProvider: React.FunctionComponent = ({children}) => {
     const [state, setState] = useState({ ...initialState });
@@ -31,6 +37,7 @@ export const GlobalContextProvider: React.FunctionComponent = ({children}) => {
         </GlobalContext.Provider>
     );
 };
+
 
 // import React from 'react';
 // import {Api, ApiDesignChange} from "@apicurio/models";
