@@ -138,16 +138,25 @@ export abstract class AbstractHubService {
         .catch(error => console.log(error));
     }
 
-    // protected httpPostWithReturn<I, O>(url: string, body: I, options: any, successCallback?: (data: O) => O): Promise<O> {
-    //     options["observe"] = "response";
-    //     return HttpUtils.mappedPromise(this.http.post<HttpResponse<any>>(url, body, options).toPromise(), response => {
-    //         let data: O = response.body;
-    //         if (successCallback) {
-    //             return successCallback(data);
-    //         } else {
-    //             return response.body;
-    //         }
-    //     });
-    // }
+    protected httpPutWithReturn<I, O>(url: string, body: I, options: any, successCallback?: (data: O) => O): Promise<O> {
+      
+        const config: AxiosRequestConfig = {...{
+            method: 'put',
+            url,
+            body
+        }, ...options}
+
+        return axios.request(config)
+        .then(response => {
+            let data: 0 = response.body;
+            if(successCallback) {
+                return successCallback(data);
+            }
+            else {
+                return response.body;
+            }
+        })
+        .catch(error => console.log(error));
+    }
 
 }

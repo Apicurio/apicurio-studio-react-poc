@@ -1,4 +1,4 @@
-import {Api, NewApi} from "@apicurio/models";
+import {Api, NewApi, ImportApi} from "@apicurio/models";
 import {AbstractHubService} from "./hub";
 import {ConfigService} from "../config/config.service";
 import {IAuthenticationService} from "../authentication/auth.service";
@@ -11,36 +11,41 @@ import { AxiosRequestConfig } from "axios";
 export class ApisService extends AbstractHubService {
     private cachedApis: Api[] = null;
 
-    /**
-     * Constructor.
-     * @param authService
-     * @param config
-     */
     constructor(authService: IAuthenticationService, config: ConfigService) {
         super(authService, config);
     }
 
-    // Gets all APIs
-    public getApis(): Promise<Api[]> {
-      console.info("[ApisService] Getting all APIs");
-  
-      const listApisUrl: string = this.endpoint("designs");
-      const options: AxiosRequestConfig = this.options({ "Accept": "application/json", 'Access-Control-Allow-Origin': '*' });
-  
-      console.info("[ApisService] Fetching API list: %s", listApisUrl);
-      return this.httpGet<Api[]>(listApisUrl, options, (apis) => {
-        this.cachedApis = apis;
-        return apis;
-      })
-    }
+  // Gets all APIs
+  public getApis(): Promise<Api[]> {
+    console.info("[ApisService] Getting all APIs");
 
-    public createApi(api: NewApi): Promise<Api> {
-      console.info("[ApisService] Creating the API via the hub API");
+    const listApisUrl: string = this.endpoint("designs");
+    const options: AxiosRequestConfig = this.options({ "Accept": "application/json", 'Access-Control-Allow-Origin': '*' });
 
-      let createApiUrl: string = this.endpoint("/designs");
-      let options: any = this.options({ "Accept": "application/json", "Content-Type": "application/json" });
+    console.info("[ApisService] Fetching API list: %s", listApisUrl);
+    return this.httpGet<Api[]>(listApisUrl, options, (apis) => {
+      this.cachedApis = apis;
+      return apis;
+    })
+  }
 
-      console.info("[ApisService] Creating an API Design: %s", createApiUrl);
-      return this.httpPostWithReturn<NewApi, Api>(createApiUrl, api, options);
+  public createApi(api: NewApi): Promise<Api> {
+    console.info("[ApisService] Creating the API via the hub API");
+
+    let createApiUrl: string = this.endpoint("/designs");
+    let options: any = this.options({ "Accept": "application/json", "Content-Type": "application/json" });
+
+    console.info("[ApisService] Creating an API Design: %s", createApiUrl);
+    return this.httpPostWithReturn<NewApi, Api>(createApiUrl, api, options);
+  }
+
+  public importApi(api: ImportApi): Promise<Api> {
+    console.info("[ApisService] Importing an API design via the hub API");
+
+    let importApiUrl: string = this.endpoint("/designs");
+    let options: any = this.options({ "Accept": "application/json", "Content-Type": "application/json" });
+
+    console.info("[ApisService] Importing an API Design: %s", importApiUrl);
+    return this.httpPutWithReturn<ImportApi, Api>(importApiUrl, api, options);
   }
 }
