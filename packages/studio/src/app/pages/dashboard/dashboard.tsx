@@ -5,9 +5,6 @@ import { ApiDrawer, ApiEmptyState, ApiToolbar } from '../../components';
 import {Link} from 'react-router-dom';
 import { GlobalContext, GlobalContextObj } from '../../../context';
 import { Services } from './../../common';
-import { StoreContext } from './../../../context/StoreContext';
-import {Api} from "@apicurio/models";
-import { useStoreContext } from './../../../context/reducers';
 import { ApiNotificationDrawer } from './../../components/api/apiNotificationDrawer/apiNotificationDrawer';
 import { ApiDesignChange } from "@apicurio/models";
 

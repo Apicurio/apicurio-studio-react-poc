@@ -4,15 +4,15 @@ import {ApiTag} from '../apiTag';
 import {ApiDropdownKebab} from '../apiDropDownKebab';
 import ApicurioIcon from '../../../assets/apicurio-icon.png';
 import './apiDataListItem.css';
-import { useStoreContext } from '../../../../context/reducers';
+import { GlobalContext } from '../../../../context';
 
 export const ApiDataListItem = () => {
 
-  const { apiData } = useStoreContext();
+  const { apis } = {... useContext(GlobalContext).store}
 
     return (
       <React.Fragment>
-        {apiData.map((api, index) => 
+        {apis.map((api, index) => 
           <DataListItem id={api.id} key={index} aria-labelledby={`data-list-item-${api.id}`}>
           <DataListItemRow>
             <DataListCheck checked={false} aria-labelledby={`data-list-item-${api.id}`} name={`data-list-item-check-${api.id}`}/>
