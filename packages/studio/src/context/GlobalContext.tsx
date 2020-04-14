@@ -1,80 +1,68 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {Api, ApiDesignChange} from "@apicurio/models";
 
-export const GlobalContext = React.createContext({});
-
 export interface GlobalState {
-    apiData: Api[],
-    recentActivityData: ApiDesignChange[],
-    dashboardView: string,
+    apis: Api[],
+    recentActivity: ApiDesignChange[],
+    dashboardView: DashboardViews,
     notificationDrawerExpanded: boolean
 }
 
-export interface GlobalContextObj {
-    state: GlobalState,
-    setState: React.Dispatch<React.SetStateAction<GlobalState>>
+/**
+ * List of views for the dashboard.
+ */
+export enum DashboardViews {
+    LIST='list',
+    CARD='card'
 }
 
 const initialState: GlobalState = {
-    // apiData: [],
-    // recentActivityData: [],
-    dashboardView: 'list',
-    notificationDrawerExpanded: false
+    apis: [],
+    dashboardView: DashboardViews.LIST,
+    notificationDrawerExpanded: false,
+    recentActivity: []
 };
 
-const updateApi = (apis: Api[]) {
-
-}
-
-const updateDashboard = 
-
-export const GlobalContextProvider: React.FunctionComponent = ({children}) => {
-    const [state, setState] = useState({ ...initialState });
-
-    return (
-        <GlobalContext.Provider value={{state, setState}}>
-            {children}
-        </GlobalContext.Provider>
-    );
+export interface GlobalContextObj {
+    store: GlobalState,
+    setDashboardView: (view: DashboardViews) => void,
+    setNotificationDrawerExpanded: (isExpanded: boolean) => void,
+    updateApis: (apis: Api[]) => void,
+    updateRecentActivity: (recentActivity: ApiDesignChange[]) => void
 };
 
-
-// import React from 'react';
-// import {Api, ApiDesignChange} from "@apicurio/models";
-// import {createStore} from './store';
-
-// export const GlobalContext = React.createContext({});
-
-// export interface GlobalState {
-//     // apiData: Api[],
-//     // recentActivityData: ApiDesignChange[],
-//     dashboardView: string,
-//     notificationDrawerExpanded: boolean
-// }
-
-// // const initialState: GlobalState = {
-// //     // apiData: [],
-// //     // recentActivityData: [],
-    
-// // };
-
-// const store = createStore({
-//     dashboardView: 'list',
-//     notificationDrawerExpanded: false
-// });
+export const GlobalContext = React.createContext({} as GlobalContextObj);
 
 
-// export const GlobalContextProvider = (children: React.ReactNode) => {
-//     //const [state, setState] = React.useState();
-//     const GlobalContextObject = {
-//         store: store.store,
-//         setDashboardView: (value: string) => {store.set('dashboardView', value)},
-//         setNotificationDrawerExpanded: (value: boolean) => {store.set('notificationDrawerExpanded', value)}
-//     }
+export class GlobalContextProvider extends React.Component<{}, GlobalState> {
+    state: GlobalState = initialState;
 
-//     return (
-//         <GlobalContext.Provider value={store}>
-//             {children}
-//         </GlobalContext.Provider>
-//     );
-// };
+    render() {
+        return (
+            <GlobalContext.Provider value={{
+                setDashboardView: this.setDashboardView,
+                setNotificationDrawerExpanded: this.setNotificationDrawerExpanded,
+                store: this.state,
+                updateApis: this.updateApis,
+                updateRecentActivity: this.updateRecentActivity
+            }}>
+                {this.props.children}
+            </GlobalContext.Provider>
+        );
+    }
+
+    private setDashboardView = (dashboardView: DashboardViews) => {
+        this.setState({dashboardView});
+    }
+
+    private setNotificationDrawerExpanded = (notificationDrawerExpanded: boolean) => {
+        this.setState({notificationDrawerExpanded})
+    }
+
+    private updateApis = (apis: Api[]) => {
+        this.setState({apis})
+    }
+    private updateRecentActivity = (recentActivity: ApiDesignChange[]) => {
+        this.setState({recentActivity})
+    }
+};

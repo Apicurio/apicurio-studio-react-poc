@@ -19,40 +19,38 @@ import accessibleStyles from '@patternfly/react-styles/css/utilities/Accessibili
 import spacingStyles from '@patternfly/react-styles/css/utilities/Spacing/spacing';
 import { css } from '@patternfly/react-styles';
 import { ApiUserDropdown } from './components/api/apiUserDropdown/apiUserDropDown';
-import { useStoreContext } from './../../../studio/src/context/reducers';
-import { StoreContext } from './../../../studio/src/context/StoreContext';
+import { GlobalContext, GlobalContextObj } from '../context';
 
 export const AppHeader = () => {
 
-  const [state, setState] = useContext(StoreContext);
-  const { notificationDrawerExpanded } = useStoreContext();
+  const globalContext: GlobalContextObj = useContext(GlobalContext);
 
   const setNotificationDrawerState = (notificationDrawerState: boolean) => {
-    setState({...state, notificationDrawerExpanded: !notificationDrawerState});
+    globalContext.setNotificationDrawerExpanded(!notificationDrawerState);
   }
 
   
     const [isKebabDropdownOpen, setKebabDropdown] = useState(false);
     const [isKebabDropdownMdOpen, setKebabDropdownMd] = useState(false);
 
-    const onKebabDropdownToggle = isKebabDropdownOpen => {
+    const onKebabDropdownToggle = (isKebabDropdownOpen: boolean) => {
       setKebabDropdown(isKebabDropdownOpen)
     }
 
-    const onKebabDropdownSelect = event => {
+    const onKebabDropdownSelect = (event: any) => {
       setKebabDropdown(!isKebabDropdownOpen)
     }
 
-    const onKebabDropdownMdToggle = isKebabDropdownMdOpen => {
+    const onKebabDropdownMdToggle = (isKebabDropdownMdOpen: boolean) => {
       setKebabDropdownMd(isKebabDropdownMdOpen)
     }
 
-    const onKebabDropdownMdSelect = event => {
+    const onKebabDropdownMdSelect = (event: any) => {
       setKebabDropdownMd(!isKebabDropdownMdOpen)
     }
 
     const kebabDropdownItems = [
-      <DropdownItem component="button" onClick={() => setNotificationDrawerState(notificationDrawerExpanded)}>
+      <DropdownItem component="button" onClick={() => setNotificationDrawerState(globalContext.store.notificationDrawerExpanded)}>
         Notifications
       </DropdownItem>,
       <DropdownItem component="button">
@@ -61,7 +59,7 @@ export const AppHeader = () => {
     ];
 
     const kebabDropdownItemsMd = [
-      <DropdownItem component="button" onClick={() => setNotificationDrawerState(notificationDrawerExpanded)}>
+      <DropdownItem component="button" onClick={() => setNotificationDrawerState(globalContext.store.notificationDrawerExpanded)}>
         Notifications
       </DropdownItem>,
       <DropdownItem component="button">
@@ -79,7 +77,7 @@ export const AppHeader = () => {
       <Toolbar>
         <ToolbarGroup className={css(accessibleStyles.screenReader, accessibleStyles.visibleOnLg)}>
           <ToolbarItem>
-            <Button id="" aria-label="" variant={ButtonVariant.plain} onClick={() => setNotificationDrawerState(notificationDrawerExpanded)}>
+            <Button id="" aria-label="" variant={ButtonVariant.plain} onClick={() => setNotificationDrawerState(globalContext.store.notificationDrawerExpanded)}>
               <HistoryIcon />
             </Button>
           </ToolbarItem>

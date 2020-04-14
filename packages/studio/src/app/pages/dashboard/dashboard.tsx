@@ -3,42 +3,35 @@ import { Button, Drawer, DrawerContent, DrawerContentBody, DrawerPanelContent, L
 import '../../app.css';
 import { ApiDrawer, ApiEmptyState, ApiToolbar } from '../../components';
 import {Link} from 'react-router-dom';
-import {} from '../../'
+import { GlobalContext, GlobalContextObj } from '../../../context';
 import { Services } from './../../common';
 import { StoreContext } from './../../../context/StoreContext';
 import {Api} from "@apicurio/models";
 import { useStoreContext } from './../../../context/reducers';
 import { ApiNotificationDrawer } from './../../components/api/apiNotificationDrawer/apiNotificationDrawer';
 import { ApiDesignChange } from "@apicurio/models";
-import { ApiContext, ApiContextObj } from '../../../context';
 
 export const Dashboard = () => {
 
   const apisService = Services.getInstance().apisService;
   const userService = Services.getInstance().currentUserService;
-  const apiContext = useContext(ApiContext) as ApiContextObj;
-
-  apiContext.updateApi()
-
-  //const { apiData, dashboardView, notificationDrawerExpanded, recentActivityData } = useStoreContext();
-  const [state, setState] = useContext(StoreContext);
+  const globalContext: GlobalContextObj = useContext(GlobalContext);
   const activityStart: number = 0;
   const activityEnd: number = 10;
   const [hasMoreActivity, setHasMoreActivity] = useState(false);
 
   const loadAsyncPageData = async () => {
-    const apiState = await apisService.getApis()
+     await apisService.getApis()
       .then( apis => {
-        const insideApis: Api[] = apis.data;
-        return insideApis;
+        globalContext.updateApis(apis);
       })
       .catch(error => {
         console.error("error getting API" + error);
       });
 
-    const activitiyState = await userService.getActivity(activityStart, activityEnd)
+    await userService.getActivity(activityStart, activityEnd)
       .then( activity => {
-        const activityData: ApiDesignChange[] = activity.data;
+        const activityData: ApiDesignChange[] = activity;
         if(activityData && activityData.length >= 10) {
           setHasMoreActivity(true);
         }
@@ -48,7 +41,6 @@ export const Dashboard = () => {
         console.error("error getting API" + error);
       });
 
-      setState({...state, apiData: apiState, recentActivityData: activitiyState});
     }
 
   useEffect(() => {
@@ -59,11 +51,11 @@ export const Dashboard = () => {
     <ApiNotificationDrawer/>
   );
 
-    const apiCount = apiData.length;
+    const apiCount = globalContext.store.apis.length;
 
     return (
       <React.Fragment>
-        <Drawer isExpanded={notificationDrawerExpanded}>
+        <Drawer isExpanded={globalContext.store.notificationDrawerExpanded}>
             <DrawerContent panelContent={panelContent}>
               <DrawerContentBody>
                 <PageSection variant={PageSectionVariants.light} className="app-page-section-border-bottom">
@@ -94,7 +86,7 @@ export const Dashboard = () => {
                 {apiCount >= 8 ? (
                   <ApiEmptyState />
                 ) : (
-                  <ApiDrawer dashboardView={dashboardView}/>
+                  <ApiDrawer dashboardView={globalContext.store.dashboardView}/>
                 )}
               </PageSection>
             </DrawerContentBody>
