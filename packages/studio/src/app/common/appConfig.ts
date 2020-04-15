@@ -21,5 +21,4 @@ export class Services {
     public autheticationService : KeycloakAuthenticationService = new KeycloakAuthenticationService(this.configService);
     public apisService: ApisService = new ApisService(this.autheticationService, this.configService);
     public currentUserService: CurrentUserService = new CurrentUserService(this.autheticationService, this.configService);
-    // public createApiService: CreateApiService = new CreateApiService(this.autheticationService, this.configService);
 }

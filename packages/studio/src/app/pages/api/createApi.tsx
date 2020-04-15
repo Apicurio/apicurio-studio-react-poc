@@ -20,9 +20,9 @@ import '../../app.css';
 import { PlusCircleIcon } from '@patternfly/react-icons';
 import { PficonTemplateIcon } from '@patternfly/react-icons'
 import { Services } from './../../common';
-// import {CreateApiFormData} from "@apicurio/models";
 import './createApi.css';
-import { NewApi, ImportApi, CreateApiFormData} from "@apicurio/models";
+import { NewApi, ImportApi} from "@apicurio/models";
+import { CreateApiFormData } from '../../../../../models/src/create-api-form-data.model';
 import {Base64} from "js-base64";
 
 export const CreateApi = () => {
@@ -36,7 +36,7 @@ export const CreateApi = () => {
 
   // TO DO: Add more options here
   const typeOptions = [
-    { value: 'Open API 2.0 (Swagger)', label: 'Open API 2.0 (Swagger)', disabled: false },
+    { value: "Open API 2.0 (Swagger)", label: "Open API 2.0 (Swagger)", disabled: false },
     { value: 'Open API 3.0.2', label: 'Open API 3.0.2', disabled: false, isPlaceholder: true  }
   ];
 
@@ -63,9 +63,9 @@ export const CreateApi = () => {
     onCreateApi(event);
   }
 
-  const onCreateApi = (eventData) => {
+  const onCreateApi = (eventData: CreateApiFormData) => {
     console.log('what is all the data' + eventData.target.type.value);
-    if(!eventData.template) {
+    if(!eventData.target.template.value) {
       let newApi: NewApi = new NewApi();
       newApi.type = eventData.target.type.value;
       newApi.name = eventData.target.name.value;
