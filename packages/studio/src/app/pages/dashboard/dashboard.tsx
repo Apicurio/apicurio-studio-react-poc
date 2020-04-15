@@ -28,6 +28,7 @@ export const Dashboard = () => {
 
     await userService.getActivity(activityStart, activityEnd)
       .then( activity => {
+        globalContext.updateRecentActivity(activity);
         const activityData: ApiDesignChange[] = activity;
         if(activityData && activityData.length >= 10) {
           setHasMoreActivity(true);

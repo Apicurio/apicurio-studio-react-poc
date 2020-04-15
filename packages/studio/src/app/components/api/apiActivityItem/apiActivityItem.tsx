@@ -24,7 +24,7 @@ interface ApiActiveItemProps {
     activityApiName: string;
     activityType: string;
     activityData: string;
-    activityOn: Date;
+    activityOn: string;
 }
 
 export const ApiActivityItem: React.FunctionComponent<ApiActiveItemProps> = ({activityApiName, activityType, activityOn, activityData}) => {
@@ -656,7 +656,7 @@ export const ApiActivityItem: React.FunctionComponent<ApiActiveItemProps> = ({ac
                 In { returnApiName(activityApiName) }, you { returnDescription(activityType) }
             </div>
             <div className="app-notification-drawer__time-stamp">
-                { returnTimeStamp(activityOn.toDateString()) }
+                { returnTimeStamp(activityOn) }
             </div>
         </React.Fragment>
     )
