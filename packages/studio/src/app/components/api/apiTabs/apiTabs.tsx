@@ -1,6 +1,7 @@
 import React from 'react';
-import { Tabs, Tab, TabContent } from '@patternfly/react-core';
-
+import { Grid, GridItem, Tabs, Tab, TabContent } from '@patternfly/react-core';
+import { ApiDetailsView } from '../apiDetailsView';
+import { ApiActivityView } from '../apiActivityView';
 
 export interface ApiTabsProps {
   createdBy: string,
@@ -13,8 +14,8 @@ interface ApiTabsState {
 
 export class ApiTabs extends React.Component<ApiTabsProps, ApiTabsState> {
 
-  private contentRef1 = React.createRef();
-  private contentRef2 = React.createRef();
+  private detailsContentRef = React.createRef();
+  private activityContentRef = React.createRef();
   constructor(props: ApiTabsProps) {
     super(props);
     this.state = {
@@ -27,17 +28,23 @@ export class ApiTabs extends React.Component<ApiTabsProps, ApiTabsState> {
     return (
       <React.Fragment>
         <Tabs isFilled={true} activeKey={this.state.activeTabKey} onSelect={this.handleTabClick}>
-          <Tab eventKey={0} title="Details" tabContentId="refTab1Section" tabContentRef={this.contentRef1}/>
-          <Tab eventKey={1} title="Activity" tabContentId="refTab2Section" tabContentRef={this.contentRef2}/>
+          <Tab eventKey={0} title="Details" tabContentId="apiDetails" tabContentRef={this.detailsContentRef}/>
+          <Tab eventKey={1} title="Activity" tabContentId="apiActivity" tabContentRef={this.activityContentRef}/>
         </Tabs>
         <div>
-          <TabContent eventKey={0} id="refTab1Section" ref={this.contentRef1} aria-label="Tab item 1">
-            Tab 1 section
-            {createdOn}
-            {createdBy}
+        <TabContent eventKey={0} id="apiDetails" ref={this.detailsContentRef} aria-label="API details tab">
+          <Grid>
+            <GridItem sm={12} md={12}>
+              <ApiDetailsView />
+            </GridItem>
+          </Grid>
           </TabContent>
-          <TabContent eventKey={1} id="refTab12ection" ref={this.contentRef2} aria-label="Tab item 2">
-            Tab 2 section
+          <TabContent eventKey={1} id="apiActivity" ref={this.activityContentRef} aria-label="API activity tab">
+          <Grid>
+            <GridItem sm={12} md={12}>
+              <ApiActivityView />
+            </GridItem>
+          </Grid>
           </TabContent>
         </div>
       </React.Fragment>
