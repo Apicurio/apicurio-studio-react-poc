@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Gallery } from '@patternfly/react-core';
 import {ApiCard} from './apiCard';
-import data from '../../../../api-data.json';
+import { GlobalContext } from '../../../../context';
 
 export const ApiCardView: React.FunctionComponent<any> = (props) => {
-  const apiData = data.apis;
-  const cardList = apiData.map((api, index) =>
+  const { apis } = {... useContext(GlobalContext).store}
+
+  const cardList = apis.map((api, index) =>
     <ApiCard
       key={index}
       id={api.id}
