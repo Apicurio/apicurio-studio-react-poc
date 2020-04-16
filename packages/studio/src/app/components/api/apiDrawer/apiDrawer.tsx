@@ -28,7 +28,7 @@ export class ApiDrawer extends React.Component<ApiDrawerProps, ApiDrawerState> {
 
    return (
     <React.Fragment>
-      <Drawer isExpanded={isExpanded} isInline className="app-drawer-drawer">
+      <Drawer isExpanded={isExpanded} isInline="true" className="app-drawer-drawer">
         <DrawerContent>
           <div className="api-drawer-content">
             { 

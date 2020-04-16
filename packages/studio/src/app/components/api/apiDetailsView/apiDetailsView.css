@@ -1,0 +1,11 @@
+.api-details-content {
+    padding-left: var(--pf-global--spacer--md); /* remove this when new drawer styles in pf are added */
+  }
+  
+  .api-details-content-body {
+    padding: 0 !important;
+  }
+  
+  .api-details-content-body .pf-c-drawer__panel-body {
+    padding: 0;
+  }

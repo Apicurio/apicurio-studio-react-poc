@@ -5,7 +5,8 @@ export interface GlobalState {
     apis: Api[],
     recentActivity: ApiDesignChange[],
     dashboardView: DashboardViews,
-    notificationDrawerExpanded: boolean
+    notificationDrawerExpanded: boolean,
+    selectedApiId: string
 }
 
 /**
@@ -20,7 +21,8 @@ const initialState: GlobalState = {
     apis: [],
     dashboardView: DashboardViews.list,
     notificationDrawerExpanded: false,
-    recentActivity: []
+    recentActivity: [],
+    selectedApiId: ""
 };
 
 export interface GlobalContextObj {
@@ -28,11 +30,11 @@ export interface GlobalContextObj {
     setDashboardView: (view: DashboardViews) => void,
     setNotificationDrawerExpanded: (isExpanded: boolean) => void,
     updateApis: (apis: Api[]) => void,
-    updateRecentActivity: (recentActivity: ApiDesignChange[]) => void
+    updateRecentActivity: (recentActivity: ApiDesignChange[]) => void,
+    setSelectedApiId: (selectedApiId: string) => void
 };
 
 export const GlobalContext = React.createContext({} as GlobalContextObj);
-
 
 export class GlobalContextProvider extends React.Component<{}, GlobalState> {
     state: GlobalState = initialState;
@@ -42,6 +44,7 @@ export class GlobalContextProvider extends React.Component<{}, GlobalState> {
             <GlobalContext.Provider value={{
                 setDashboardView: this.setDashboardView,
                 setNotificationDrawerExpanded: this.setNotificationDrawerExpanded,
+                setSelectedApiId: this.setSelectedApiId,
                 store: this.state,
                 updateApis: this.updateApis,
                 updateRecentActivity: this.updateRecentActivity
@@ -62,7 +65,12 @@ export class GlobalContextProvider extends React.Component<{}, GlobalState> {
     private updateApis = (apis: Api[]) => {
         this.setState({apis})
     }
+
     private updateRecentActivity = (recentActivity: ApiDesignChange[]) => {
         this.setState({recentActivity})
+    }
+
+    private setSelectedApiId = (selectedApiId: string) => {
+        this.setState({selectedApiId})
     }
 };
