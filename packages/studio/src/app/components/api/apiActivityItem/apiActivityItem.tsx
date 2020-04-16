@@ -1,11 +1,10 @@
 import React from 'react';
-import { useStoreContext } from './../../../../context/reducers';
 import { MockReference, PublishApi} from "@apicurio/models";
 import { ICommand, MarshallCompat } from "apicurio-data-models";
-import * as moment from "moment";
+import moment from "moment";
 import './apiActivityItem.css';
 import { Button } from '@patternfly/react-core';
-
+import { ApiDesignChange } from '@apicurio/models';
 import { PlusIcon,
     UserEditIcon,
     EditIcon,
@@ -21,31 +20,37 @@ import { PlusIcon,
     CloudUploadAltIcon
 } from '@patternfly/react-icons';
 
-export const ApiActivityItem = ({activityApiName, activityType, activityOn, activityData}) => {
+interface ApiActiveItemProps {
+    activityApiName: string;
+    activityType: string;
+    activityData: string;
+    activityOn: string;
+}
 
-    const { recentActivityData } = useStoreContext();
+export const ApiActivityItem: React.FunctionComponent<ApiActiveItemProps> = ({activityApiName, activityType, activityOn, activityData}) => {
 
-    var _command: ICommand = null;
-    var _publication: PublishApi;
-    var _mock: MockReference;
+    let _command: ICommand;
+    let _publication: PublishApi;
+    let _mock: MockReference;
+    
 
-    function command(): ICommand {
-        if (_command == null) {
+    function command(): any {
+        if (_command === undefined) {
             _command = MarshallCompat.unmarshallCommand(JSON.parse(activityData));
         }
         return _command;
     }
 
     function publication(): PublishApi {
-        if (_publication == null) {
-            _publication = JSON.parse(recentActivityData.data);
+        if (_publication === null) {
+            _publication = JSON.parse(activityData);
         }
         return _publication;
     }
 
     function mock(): MockReference {
         if (_mock == null) {
-            _mock = JSON.parse(recentActivityData.data);
+            _mock = JSON.parse(activityData);
         }
         return _mock;
     }

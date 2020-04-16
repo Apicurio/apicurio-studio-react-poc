@@ -28,9 +28,9 @@ export class ApisService extends AbstractHubService {
       const options: AxiosRequestConfig = this.options({ "Accept": "application/json", 'Access-Control-Allow-Origin': '*' });
   
       console.info("[ApisService] Fetching API list: %s", listApisUrl);
-      return this.httpGet<Api[]>(listApisUrl, options, (apis) => {
-        this.cachedApis = apis;
-        return apis;
+      return this.httpGet<Api[]>(listApisUrl, options, (resp) => {
+        this.cachedApis = resp.data as Api[];
+        return this.cachedApis;
       })
     }
 }
