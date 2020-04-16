@@ -1,22 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, Card, CardActions, CardHead, CardBody, Title } from '@patternfly/react-core';
 import {TimesIcon, EyeIcon} from '@patternfly/react-icons';
 import ApicurioIcon from '../../../assets/apicurio-icon.png';
 import { ApiTabs } from '../apiTabs';
-import data from '../../../../api-data.json';
+import { GlobalContext } from '../../../../context';
 
 export interface ApiDrawerPanelContentProps {
   currentApiId: string
 }
 
-export class ApiDrawerPanelContent extends React.Component<ApiDrawerPanelContentProps> {
-;
-  constructor(props: ApiDrawerPanelContentProps) {
-    super(props);
+function findId(array: any[], id: string) {
+  const apiTemp = array.find(api => api.id === id);
+  if (apiTemp !== undefined) {
+    return apiTemp;
   }
+  else {
+    return Error;
+  }
+}
 
-  render() {
-    const apiObject = this.findId(data.apis, this.props.currentApiId);
+export const ApiDrawerPanelContent: React.FunctionComponent<ApiDrawerPanelContentProps> = (props) => {
+  const { apis } = {... useContext(GlobalContext).store}
+
+    const apiObject = findId(apis, props.currentApiId);
 
     return (
       <Card>
@@ -48,15 +54,5 @@ export class ApiDrawerPanelContent extends React.Component<ApiDrawerPanelContent
       </Card>
     )
   }
-   private findId = (array: any[], id: string): any => {
-    const apiTemp = array.find(api => api.id === id);
-    if (apiTemp !== undefined) {
-      return apiTemp;
-    }
-    else {
-      return Error;
-    }
-  }
-}
 
 export default ApiDrawerPanelContent;
