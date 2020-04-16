@@ -15,10 +15,10 @@ export const ApiToolbar: React.FunctionComponent = () => {
           This is where the Data Toolbar should go
         </DataToolbarItem>
         <DataToolbarItem variant="pagination">
-          <Button onClick={() => globalContext.setDashboardView(DashboardViews.CARD)} className={'app-data-toolbar-button-control ' + (globalContext.store.dashboardView === DashboardViews.CARD ? "pf-m-selected" : "")} variant="plain">
+          <Button onClick={() => globalContext.setDashboardView(DashboardViews.card)} className={'app-data-toolbar-button-control ' + (globalContext.store.dashboardView === DashboardViews.card ? "pf-m-selected" : "")} variant="plain">
             <ThIcon/>
           </Button>
-          <Button onClick={() => globalContext.setDashboardView(DashboardViews.LIST)} className={'app-data-toolbar-button-control ' + (globalContext.store.dashboardView === DashboardViews.LIST ? "pf-m-selected" : "")} variant="plain">
+          <Button onClick={() => globalContext.setDashboardView(DashboardViews.list)} className={'app-data-toolbar-button-control ' + (globalContext.store.dashboardView === DashboardViews.list ? "pf-m-selected" : "")} variant="plain">
             <ListIcon/>
           </Button>
           <span className="app-toolbar-api-total">

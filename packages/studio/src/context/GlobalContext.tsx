@@ -12,13 +12,13 @@ export interface GlobalState {
  * List of views for the dashboard.
  */
 export enum DashboardViews {
-    LIST='list',
-    CARD='card'
+    list='list',
+    card='card'
 }
 
 const initialState: GlobalState = {
     apis: [],
-    dashboardView: DashboardViews.LIST,
+    dashboardView: DashboardViews.list,
     notificationDrawerExpanded: false,
     recentActivity: []
 };
