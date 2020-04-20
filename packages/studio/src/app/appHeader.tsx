@@ -28,7 +28,6 @@ export const AppHeader = () => {
   const setNotificationDrawerState = (notificationDrawerState: boolean) => {
     globalContext.setNotificationDrawerExpanded(!notificationDrawerState);
   }
-
   
     const [isKebabDropdownOpen, setKebabDropdown] = useState(false);
     const [isKebabDropdownMdOpen, setKebabDropdownMd] = useState(false);

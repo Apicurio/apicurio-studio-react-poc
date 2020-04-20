@@ -1,7 +1,21 @@
+div span {
+  padding-bottom: var(--pf-global--spacer--sm);
+  margin-left: 16px;
+}
+div h3 {
+  font-weight: bold;
+  margin-top: var(--pf-global--spacer--md);
+  margin-bottom: var(--pf-global--spacer--sm);
+}
+
 .api-details-content {
     padding-left: var(--pf-global--spacer--md); /* remove this when new drawer styles in pf are added */
   }
-  
+
+  .app-details-content.heading {
+    padding-bottom: var(--pf-global--spacer--sm);
+    margin-left: 16px;
+  }
   .api-details-content-body {
     padding: 0 !important;
   }
@@ -9,3 +23,8 @@
   .api-details-content-body .pf-c-drawer__panel-body {
     padding: 0;
   }
+
+  .app-details-content-icon-text {
+    padding-bottom: var(--pf-global--spacer--sm);
+    margin-left: 16px;
+}

@@ -25,6 +25,7 @@ export class ApiTabs extends React.Component<ApiTabsProps, ApiTabsState> {
 
   render() {
     const { createdOn, createdBy} = this.props;
+
     return (
       <React.Fragment>
         <Tabs isFilled={true} activeKey={this.state.activeTabKey} onSelect={this.handleTabClick}>
@@ -35,7 +36,7 @@ export class ApiTabs extends React.Component<ApiTabsProps, ApiTabsState> {
         <TabContent eventKey={0} id="apiDetails" ref={this.detailsContentRef} aria-label="API details tab">
           <Grid>
             <GridItem sm={12} md={12}>
-              <ApiDetailsView />
+              <ApiDetailsView createdBy={createdBy} createdOn={createdOn} />
             </GridItem>
           </Grid>
           </TabContent>

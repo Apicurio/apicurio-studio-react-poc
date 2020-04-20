@@ -21,8 +21,7 @@ function findId(array: any[], id: string) {
 
 export const ApiDrawerPanelContent: React.FunctionComponent<ApiDrawerPanelContentProps> = (props) => {
   const { apis } = {... useContext(GlobalContext).store};
-
-    const apiObject = findId(apis, props.currentApiId);
+  const apiObject = findId(apis, props.currentApiId);
 
     return (
       <Card>

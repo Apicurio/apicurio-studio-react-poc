@@ -6,7 +6,6 @@ export interface GlobalState {
     recentActivity: ApiDesignChange[],
     dashboardView: DashboardViews,
     notificationDrawerExpanded: boolean,
-    selectedApiId: string
 }
 
 /**
@@ -22,7 +21,6 @@ const initialState: GlobalState = {
     dashboardView: DashboardViews.list,
     notificationDrawerExpanded: false,
     recentActivity: [],
-    selectedApiId: ""
 };
 
 export interface GlobalContextObj {
@@ -31,7 +29,6 @@ export interface GlobalContextObj {
     setNotificationDrawerExpanded: (isExpanded: boolean) => void,
     updateApis: (apis: Api[]) => void,
     updateRecentActivity: (recentActivity: ApiDesignChange[]) => void,
-    setSelectedApiId: (selectedApiId: string) => void
 };
 
 export const GlobalContext = React.createContext({} as GlobalContextObj);
@@ -44,7 +41,6 @@ export class GlobalContextProvider extends React.Component<{}, GlobalState> {
             <GlobalContext.Provider value={{
                 setDashboardView: this.setDashboardView,
                 setNotificationDrawerExpanded: this.setNotificationDrawerExpanded,
-                setSelectedApiId: this.setSelectedApiId,
                 store: this.state,
                 updateApis: this.updateApis,
                 updateRecentActivity: this.updateRecentActivity
@@ -68,9 +64,5 @@ export class GlobalContextProvider extends React.Component<{}, GlobalState> {
 
     private updateRecentActivity = (recentActivity: ApiDesignChange[]) => {
         this.setState({recentActivity})
-    }
-
-    private setSelectedApiId = (selectedApiId: string) => {
-        this.setState({selectedApiId})
     }
 };

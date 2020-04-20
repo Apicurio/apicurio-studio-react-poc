@@ -1,38 +1,37 @@
 import React, { useContext } from 'react';
-import { Grid, GridItem } from '@patternfly/react-core';
-import {GlobalContext, GlobalContextObj, DashboardViews} from '../../../../context';
-import ApiDataListState from '../apiDataList/apiDataListItem';
+import { UserIcon, UsersIcon, OutlinedClockIcon } from '@patternfly/react-icons';
 import './apiDetailsView.css';
+import moment from "moment";
 
-export const ApiDetailsView: React.FunctionComponent = () => {
-
-  function findId(array: any[], id: string) {
-    const apiTemp = array.find(api => api.id === id);
-    if (apiTemp !== undefined) {
-      return apiTemp;
-    }
-    else {
-      return Error;
-    }
+export interface ApiDetailsViewProps {
+  createdBy: string,
+  createdOn: Date,
+}
+interface ApiDetailsViewState {
+  activeTabKey: number
+}
+export class ApiDetailsView extends React.Component<ApiDetailsViewProps, ApiDetailsViewState> {
+  constructor(props: ApiDetailsViewProps) {
+    super(props);
+    this.state = {
+      activeTabKey: 0
+    };
   }
-
-  const currentId = ApiDataListState;
-
-  const { apis } = {... useContext(GlobalContext).store}
-  // const apiObject = findId(apis, props.currentApiId);
-
-  // const globalContext: GlobalContextObj = useContext(GlobalContext);
-  
+  render() {
+    const { createdOn, createdBy} = this.props;
     return (
-    <div className="api-details-content">
-        <p><b>Details</b></p>
-        <p>Created on {}</p>
-        <p>Created by {}</p>
-        <p>{} Other collaborators</p>
-        <br />
-        <p><b>Collaborators</b></p>
-    </div>
-    );
+      <React.Fragment>
+      <div className="api-details-content">
+          <h3>Details</h3>
+          <p><OutlinedClockIcon /><span>Created on {moment(createdOn).format('MMM DD, YYYY')}</span></p>
+          <p><UserIcon /><span>Created by {createdBy}</span></p>
+          <p><UsersIcon /><span>Other collaborators {}</span></p>
+          <br />
+          <h3>Collaborators</h3>
+      </div>
+      </React.Fragment>
+      );
   }
+}
 
 export default ApiDetailsView;
