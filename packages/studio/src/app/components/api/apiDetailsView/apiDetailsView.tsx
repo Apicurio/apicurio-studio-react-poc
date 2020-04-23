@@ -5,7 +5,7 @@ import moment from "moment";
 
 export interface ApiDetailsViewProps {
   createdBy: string,
-  createdOn: Date,
+  createdOn: Date
 }
 interface ApiDetailsViewState {
   activeTabKey: number
@@ -25,7 +25,7 @@ export class ApiDetailsView extends React.Component<ApiDetailsViewProps, ApiDeta
           <h3>Details</h3>
           <p><OutlinedClockIcon /><span>Created on {moment(createdOn).format('MMM DD, YYYY')}</span></p>
           <p><UserIcon /><span>Created by {createdBy}</span></p>
-          <p><UsersIcon /><span>Other collaborators {}</span></p>
+          <p><UsersIcon /><span>? Other collaborators</span></p>
           <br />
           <h3>Collaborators</h3>
       </div>

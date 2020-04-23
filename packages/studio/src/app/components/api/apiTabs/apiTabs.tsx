@@ -1,11 +1,11 @@
 import React from 'react';
-import { Grid, GridItem, Tabs, Tab, TabContent } from '@patternfly/react-core';
+import { Tabs, Tab, TabContent } from '@patternfly/react-core';
 import { ApiDetailsView } from '../apiDetailsView';
 import { ApiActivityView } from '../apiActivityView';
 
 export interface ApiTabsProps {
   createdBy: string,
-  createdOn: Date,
+  createdOn: Date
 }
 
 interface ApiTabsState {
@@ -33,19 +33,11 @@ export class ApiTabs extends React.Component<ApiTabsProps, ApiTabsState> {
           <Tab eventKey={1} title="Activity" tabContentId="apiActivity" tabContentRef={this.activityContentRef}/>
         </Tabs>
         <div>
-        <TabContent eventKey={0} id="apiDetails" ref={this.detailsContentRef} aria-label="API details tab">
-          <Grid>
-            <GridItem sm={12} md={12}>
-              <ApiDetailsView createdBy={createdBy} createdOn={createdOn} />
-            </GridItem>
-          </Grid>
+          <TabContent eventKey={0} id="apiDetails" ref={this.detailsContentRef} aria-label="API details tab">
+            <ApiDetailsView createdBy={createdBy} createdOn={createdOn} />
           </TabContent>
           <TabContent eventKey={1} id="apiActivity" ref={this.activityContentRef} aria-label="API activity tab">
-          <Grid>
-            <GridItem sm={12} md={12}>
-              <ApiActivityView />
-            </GridItem>
-          </Grid>
+            <ApiActivityView />
           </TabContent>
         </div>
       </React.Fragment>

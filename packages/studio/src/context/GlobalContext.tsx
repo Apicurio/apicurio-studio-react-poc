@@ -20,7 +20,7 @@ const initialState: GlobalState = {
     apis: [],
     dashboardView: DashboardViews.list,
     notificationDrawerExpanded: false,
-    recentActivity: [],
+    recentActivity: []
 };
 
 export interface GlobalContextObj {

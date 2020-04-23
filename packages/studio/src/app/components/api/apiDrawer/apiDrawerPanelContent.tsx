@@ -4,6 +4,7 @@ import {TimesIcon, EyeIcon} from '@patternfly/react-icons';
 import ApicurioIcon from '../../../assets/apicurio-icon.png';
 import { ApiTabs } from '../apiTabs';
 import { GlobalContext } from '../../../../context';
+import './apiDrawer.css';
 
 export interface ApiDrawerPanelContentProps {
   currentApiId: string
@@ -40,8 +41,8 @@ export const ApiDrawerPanelContent: React.FunctionComponent<ApiDrawerPanelConten
         </CardHead>
         <CardBody>
           <div className="app-button-group-sm">
-            <Button variant="tertiary" className="pf-u-mr-sm">
-              <EyeIcon/>
+            <Button variant="tertiary">
+              <EyeIcon className='api-drawer-panel-button'/>
               Preview documentation
             </Button>
             <Button variant="secondary">

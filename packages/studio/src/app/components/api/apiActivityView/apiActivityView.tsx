@@ -1,51 +1,39 @@
 import React from 'react';
-import { Grid, GridItem } from '@patternfly/react-core';
+import { DataList, DataListItem, DataListItemRow, DataListItemCells, DataListCell } from '@patternfly/react-core';
+import { ApiActivityItem } from '../apiActivityItem/apiActivityItem';
+import { GlobalContext } from '../../../../context';
 
-export class ApiActivityView extends React.Component {
-
-  // private detailsContentRef = React.createRef();
-  // private activityContentRef = React.createRef();
-  constructor(props) {
-    super(props);
-    // this.state = {
-    //   activeTabKey: 0
-    };
-  
-  render() {
-    // const { createdOn, createdBy} = this.props;
+export const ApiActivityView = () => {
+  const { recentActivity } = { ... React.useContext(GlobalContext).store };
     return (
-    //   <React.Fragment>
-    //     <Tabs isFilled={true} activeKey={this.state.activeTabKey} onSelect={this.handleTabClick}>
-    //       <Tab eventKey={0} title="Details" tabContentId="apiDetails" tabContentRef={this.detailsContentRef}/>
-    //       <Tab eventKey={1} title="Activity" tabContentId="apiActivity" tabContentRef={this.activityContentRef}/>
-    //     </Tabs>
-    //     <div>
-    //       <TabContent eventKey={0} id="apiDetails" ref={this.detailsContentRef} aria-label="API details tab">
-    //       <Grid>
-    //               <GridItem sm={12} md={12}>
-    //                 <ApiDetailsView></ApiDetailsView>
-    //                 </GridItem>
-    //                 </Grid>
-
-    <div>
-        Activity
-            {/* {createdOn}
-            {createdBy} */}
-    </div>
-
-        //   </TabContent>
-        //   <TabContent eventKey={1} id="apiActivity" ref={this.activityContentRef} aria-label="API activity tab">
-        //     Activity
-        //   </TabContent>
-    //   </React.Fragment>
-    );
-  }
-
-//   private handleTabClick = (event: React.MouseEvent, tabIndex: any) => {
-//     this.setState({
-//       activeTabKey: tabIndex
-//     });
-//   };
+      <React.Fragment>
+      <div className="api-details-content">
+          <h3>Activity</h3>
+                   <DataList aria-label="app-data-list-api-activity" key="api-activity-list">
+                   <React.Fragment>
+                       { recentActivity.map((activity, index) =>
+                          <DataListItem aria-labelledby={`data-list-item-${index}`} key={index}>
+                              <DataListItemRow>
+                              <DataListItemCells
+                                  dataListCells={[
+                                      <DataListCell key="1">
+                                          <ApiActivityItem
+                                              activityApiName={activity.apiName}
+                                              activityType={activity.type}
+                                              activityOn={activity.on}
+                                              activityData={activity.data}
+                                          />
+                                      </DataListCell>
+                                  ]}
+                                  />
+                              </DataListItemRow>
+                          </DataListItem>
+                      )}
+                  </React.Fragment>
+              </DataList>
+      </div>
+      </React.Fragment>
+    )
 }
 
 export default ApiActivityView;
