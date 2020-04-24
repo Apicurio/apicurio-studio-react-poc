@@ -4,8 +4,9 @@ import { ApiDetailsView } from '../apiDetailsView';
 import { ApiActivityView } from '../apiActivityView';
 
 export interface ApiTabsProps {
-  createdBy: string,
-  createdOn: Date
+  // createdBy: string,
+  // createdOn: Date
+  currentApiObject: string
 }
 
 interface ApiTabsState {
@@ -24,7 +25,7 @@ export class ApiTabs extends React.Component<ApiTabsProps, ApiTabsState> {
   }
 
   render() {
-    const { createdOn, createdBy} = this.props;
+    // const { createdOn, createdBy} = this.props;
 
     return (
       <React.Fragment>
@@ -34,7 +35,7 @@ export class ApiTabs extends React.Component<ApiTabsProps, ApiTabsState> {
         </Tabs>
         <div>
           <TabContent eventKey={0} id="apiDetails" ref={this.detailsContentRef} aria-label="API details tab">
-            <ApiDetailsView createdBy={createdBy} createdOn={createdOn} />
+            <ApiDetailsView currentApi={this.props.currentApiObject} />
           </TabContent>
           <TabContent eventKey={1} id="apiActivity" ref={this.activityContentRef} aria-label="API activity tab">
             <ApiActivityView />

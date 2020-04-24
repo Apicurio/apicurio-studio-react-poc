@@ -6,6 +6,7 @@ export interface GlobalState {
     recentActivity: ApiDesignChange[],
     dashboardView: DashboardViews,
     notificationDrawerExpanded: boolean,
+    apiDrawerExpanded: boolean
 }
 
 /**
@@ -17,6 +18,7 @@ export enum DashboardViews {
 }
 
 const initialState: GlobalState = {
+    apiDrawerExpanded: false,
     apis: [],
     dashboardView: DashboardViews.list,
     notificationDrawerExpanded: false,
@@ -24,6 +26,7 @@ const initialState: GlobalState = {
 };
 
 export interface GlobalContextObj {
+    setApiDrawerExpanded: (isExpanded: boolean) => void,
     store: GlobalState,
     setDashboardView: (view: DashboardViews) => void,
     setNotificationDrawerExpanded: (isExpanded: boolean) => void,
@@ -39,6 +42,7 @@ export class GlobalContextProvider extends React.Component<{}, GlobalState> {
     render() {
         return (
             <GlobalContext.Provider value={{
+                setApiDrawerExpanded: this.setApiDrawerExpanded,
                 setDashboardView: this.setDashboardView,
                 setNotificationDrawerExpanded: this.setNotificationDrawerExpanded,
                 store: this.state,
@@ -48,6 +52,10 @@ export class GlobalContextProvider extends React.Component<{}, GlobalState> {
                 {this.props.children}
             </GlobalContext.Provider>
         );
+    }
+
+    private setApiDrawerExpanded = (apiDrawerExpanded: boolean) => {
+        this.setState({apiDrawerExpanded})
     }
 
     private setDashboardView = (dashboardView: DashboardViews) => {

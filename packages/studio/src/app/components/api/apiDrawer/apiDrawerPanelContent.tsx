@@ -7,7 +7,8 @@ import { GlobalContext } from '../../../../context';
 import './apiDrawer.css';
 
 export interface ApiDrawerPanelContentProps {
-  currentApiId: string
+  currentApiId: string,
+  apiDrawerExpanded: boolean
 }
 
 function findId(array: any[], id: string) {
@@ -23,6 +24,7 @@ function findId(array: any[], id: string) {
 export const ApiDrawerPanelContent: React.FunctionComponent<ApiDrawerPanelContentProps> = (props) => {
   const { apis } = {... useContext(GlobalContext).store};
   const apiObject = findId(apis, props.currentApiId);
+  console.log(`apiDrawerPanelContent props is: ${JSON.stringify(props)}`);
 
     return (
       <Card>
@@ -50,7 +52,7 @@ export const ApiDrawerPanelContent: React.FunctionComponent<ApiDrawerPanelConten
             </Button>
           </div>
         </CardBody>
-        <ApiTabs createdBy={apiObject.createdBy} createdOn={apiObject.createdOn}/>
+        <ApiTabs currentApiObject={apiObject}/>
       </Card>
     )
   }

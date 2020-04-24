@@ -3,22 +3,38 @@ import { UserIcon, UsersIcon, OutlinedClockIcon } from '@patternfly/react-icons'
 import './apiDetailsView.css';
 import moment from "moment";
 
+// export interface ApiDetailsViewProps {
+//   createdBy: string,
+//   createdOn: Date
+// }
+// interface ApiDetailsViewState {
+//   activeTabKey: number
+// }
+
 export interface ApiDetailsViewProps {
-  createdBy: string,
-  createdOn: Date
+  // createdBy: string,
+  // createdOn: Date
+  currentApi: any
 }
-interface ApiDetailsViewState {
-  activeTabKey: number
-}
-export class ApiDetailsView extends React.Component<ApiDetailsViewProps, ApiDetailsViewState> {
-  constructor(props: ApiDetailsViewProps) {
-    super(props);
-    this.state = {
-      activeTabKey: 0
-    };
-  }
-  render() {
-    const { createdOn, createdBy} = this.props;
+export const ApiDetailsView: React.FunctionComponent<ApiDetailsViewProps> = (props) => {
+
+  console.log(`apiDetailsView props is: ${JSON.stringify(props.currentApi)}`);
+  const createdOn = props.currentApi.createdOn;
+  const createdBy = props.currentApi.createdBy;
+
+
+// export class ApiDetailsView extends React.Component<ApiDetailsViewProps, ApiDetailsViewState> {
+//   constructor(props: ApiDetailsViewProps) {
+//     super(props);
+//     this.state = {
+//       activeTabKey: 0
+//     };
+//   }
+
+//   render() {
+//     // const { createdOn, createdBy} = this.props;
+//     console.log(`apiDetailsView props is: ${JSON.stringify(this.props)}`);
+
     return (
       <React.Fragment>
       <div className="api-details-content">
@@ -32,6 +48,6 @@ export class ApiDetailsView extends React.Component<ApiDetailsViewProps, ApiDeta
       </React.Fragment>
       );
   }
-}
 
+// }
 export default ApiDetailsView;

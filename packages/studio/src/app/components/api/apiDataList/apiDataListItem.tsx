@@ -4,11 +4,27 @@ import {ApiTag} from '../apiTag';
 import {ApiDropdownKebab} from '../apiDropDownKebab';
 import ApicurioIcon from '../../../assets/apicurio-icon.png';
 import './apiDataListItem.css';
-import { GlobalContext } from '../../../../context';
+import { GlobalContext, GlobalContextObj } from '../../../../context';
+import ApiDrawerPanelContentProps from '../apiDrawer/apiDrawerPanelContent'
+
+// export interface ApiDataListItemProps {
+//   currentApiId: string,
+//   apiDrawerExpanded: boolean
+// }
+// interface ApiDataListItemState {
+//   apiDrawerExpanded: boolean,
+// }
 
 export const ApiDataListItem = () => {
+  // console.log(`apiDataListItem props is: ${JSON.stringify(props)}`);
 
   const { apis } = {... useContext(GlobalContext).store}
+  const globalContext: GlobalContextObj = useContext(GlobalContext);
+
+  const setApiDrawerState = (apiDrawerState: boolean) => {
+    globalContext.setApiDrawerExpanded(!apiDrawerState);
+    console.log(`apiDataListItem: apiDrawerState is ${apiDrawerState}`);
+  }
 
     return (
       <React.Fragment>
@@ -37,7 +53,7 @@ export const ApiDataListItem = () => {
               ]}
               />
             <DataListAction aria-labelledby={`data-list-item-${api.id}`} id={`data-list-item-${api.id}`} aria-label="Actions">
-                <Button variant="link">View Details</Button>
+                <Button variant="link" onClick={() => setApiDrawerState(globalContext.store.apiDrawerExpanded)}>View Details</Button>
                 <Button variant="secondary">Edit API</Button>
                 <ApiDropdownKebab/>
             </DataListAction>

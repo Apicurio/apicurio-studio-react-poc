@@ -33,7 +33,7 @@ class ApiDataList extends React.Component<ApiDataListProps, ApiDataListState> {
         selectedDataListItemId={this.state.selectedDataListItemId}
         onSelectDataListItem={this.onSelectDataListItem}
       >
-        <ApiDataListItem/>
+        <ApiDataListItem />
       </DataList>
     );
   }

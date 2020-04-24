@@ -1,6 +1,6 @@
 import React from 'react';
 import { Drawer, DrawerPanelContent, DrawerContent } from '@patternfly/react-core/dist/esm/experimental';
-import AppDataList from '../apiDataList/apiDataList';
+import ApiDataList from '../apiDataList/apiDataList';
 import {ApiCardView} from '../..';
 import ApiDrawerPanelContent from './apiDrawerPanelContent';
 import './apiDrawer.css';
@@ -33,7 +33,7 @@ export class ApiDrawer extends React.Component<ApiDrawerProps, ApiDrawerState> {
           <div className="api-drawer-content">
             { 
             this.props.dashboardView === 'list' ? (
-              <AppDataList keyListItem={this.findKey} selectItem={this.openDrawer} viewDetails={this.openDrawer}/>
+              <ApiDataList keyListItem={this.findKey} selectItem={this.openDrawer} viewDetails={this.openDrawer}/>
              ) : (
             <ApiCardView/>
             )
