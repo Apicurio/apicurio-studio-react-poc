@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import {Api, ApiDesignChange} from "@apicurio/models";
 
 export interface GlobalState {
@@ -6,7 +6,8 @@ export interface GlobalState {
     recentActivity: ApiDesignChange[],
     dashboardView: DashboardViews,
     notificationDrawerExpanded: boolean,
-    apiDrawerExpanded: boolean
+    apiDrawerExpanded: boolean,
+    selectedApiId: string
 }
 
 /**
@@ -22,11 +23,13 @@ const initialState: GlobalState = {
     apis: [],
     dashboardView: DashboardViews.list,
     notificationDrawerExpanded: false,
-    recentActivity: []
+    recentActivity: [],
+    selectedApiId: ''
 };
 
 export interface GlobalContextObj {
     setApiDrawerExpanded: (isExpanded: boolean) => void,
+    setSelectedApiId: (selectedApiId: string) => void,
     store: GlobalState,
     setDashboardView: (view: DashboardViews) => void,
     setNotificationDrawerExpanded: (isExpanded: boolean) => void,
@@ -34,7 +37,7 @@ export interface GlobalContextObj {
     updateRecentActivity: (recentActivity: ApiDesignChange[]) => void,
 };
 
-export const GlobalContext = React.createContext({} as GlobalContextObj);
+export const GlobalContext = createContext({} as GlobalContextObj);
 
 export class GlobalContextProvider extends React.Component<{}, GlobalState> {
     state: GlobalState = initialState;
@@ -45,6 +48,7 @@ export class GlobalContextProvider extends React.Component<{}, GlobalState> {
                 setApiDrawerExpanded: this.setApiDrawerExpanded,
                 setDashboardView: this.setDashboardView,
                 setNotificationDrawerExpanded: this.setNotificationDrawerExpanded,
+                setSelectedApiId: this.setSelectedApiId,
                 store: this.state,
                 updateApis: this.updateApis,
                 updateRecentActivity: this.updateRecentActivity
@@ -56,6 +60,10 @@ export class GlobalContextProvider extends React.Component<{}, GlobalState> {
 
     private setApiDrawerExpanded = (apiDrawerExpanded: boolean) => {
         this.setState({apiDrawerExpanded})
+    }
+
+    private setSelectedApiId = (selectedApiId: string) => {
+        this.setState({selectedApiId})
     }
 
     private setDashboardView = (dashboardView: DashboardViews) => {

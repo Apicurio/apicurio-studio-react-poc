@@ -3,12 +3,11 @@ import { Button, Card, CardActions, CardHead, CardBody, Title } from '@patternfl
 import {TimesIcon, EyeIcon} from '@patternfly/react-icons';
 import ApicurioIcon from '../../../assets/apicurio-icon.png';
 import { ApiTabs } from '../apiTabs';
-import { GlobalContext } from '../../../../context';
+import { GlobalContext, GlobalContextObj } from '../../../../context';
 import './apiDrawer.css';
 
 export interface ApiDrawerPanelContentProps {
-  currentApiId: string,
-  apiDrawerExpanded: boolean
+  currentApiId: string
 }
 
 function findId(array: any[], id: string) {
@@ -22,9 +21,14 @@ function findId(array: any[], id: string) {
 }
 
 export const ApiDrawerPanelContent: React.FunctionComponent<ApiDrawerPanelContentProps> = (props) => {
-  const { apis } = {... useContext(GlobalContext).store};
+  const { apis,  apiDrawerExpanded } = {... useContext(GlobalContext).store};
+  const { store } = useContext(GlobalContext);
+  const globalContext: GlobalContextObj = useContext(GlobalContext);
+  const setApiDrawerState = (apiDrawerState: boolean) => {
+    globalContext.setApiDrawerExpanded(!apiDrawerState);
+  }
   const apiObject = findId(apis, props.currentApiId);
-  console.log(`apiDrawerPanelContent props is: ${JSON.stringify(props)}`);
+
 
     return (
       <Card>
@@ -36,7 +40,7 @@ export const ApiDrawerPanelContent: React.FunctionComponent<ApiDrawerPanelConten
             </Title>
           </span>
           <CardActions>
-            <Button variant="plain" aria-label="Action">
+            <Button onClick={() => setApiDrawerState(store.apiDrawerExpanded)} variant="plain" aria-label="Action">
               <TimesIcon/>
             </Button>
           </CardActions>

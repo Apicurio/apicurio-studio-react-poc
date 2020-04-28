@@ -1,29 +1,16 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Button, DataListItem, DataListItemCells, DataListItemRow, DataListCell, DataListCheck, DataListAction } from '@patternfly/react-core';
 import {ApiTag} from '../apiTag';
 import {ApiDropdownKebab} from '../apiDropDownKebab';
 import ApicurioIcon from '../../../assets/apicurio-icon.png';
 import './apiDataListItem.css';
 import { GlobalContext, GlobalContextObj } from '../../../../context';
-import ApiDrawerPanelContentProps from '../apiDrawer/apiDrawerPanelContent'
-
-// export interface ApiDataListItemProps {
-//   currentApiId: string,
-//   apiDrawerExpanded: boolean
-// }
-// interface ApiDataListItemState {
-//   apiDrawerExpanded: boolean,
-// }
 
 export const ApiDataListItem = () => {
-  // console.log(`apiDataListItem props is: ${JSON.stringify(props)}`);
-
   const { apis } = {... useContext(GlobalContext).store}
   const globalContext: GlobalContextObj = useContext(GlobalContext);
-
-  const setApiDrawerState = (apiDrawerState: boolean) => {
+  const setApiDrawerState = (apiDrawerState: boolean, currentApiId: string) => {
     globalContext.setApiDrawerExpanded(!apiDrawerState);
-    console.log(`apiDataListItem: apiDrawerState is ${apiDrawerState}`);
   }
 
     return (
