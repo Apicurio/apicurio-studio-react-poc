@@ -1,8 +1,9 @@
 import React, { createContext } from 'react';
-import {Api, ApiDesignChange} from "@apicurio/models";
+import {Api, ApiDesignChange, ApiCollaborator} from "@apicurio/models";
 
 export interface GlobalState {
     apis: Api[],
+    collaborators: ApiCollaborator[],
     recentActivity: ApiDesignChange[],
     dashboardView: DashboardViews,
     notificationDrawerExpanded: boolean,
@@ -21,6 +22,7 @@ export enum DashboardViews {
 const initialState: GlobalState = {
     apiDrawerExpanded: false,
     apis: [],
+    collaborators: [],
     dashboardView: DashboardViews.list,
     notificationDrawerExpanded: false,
     recentActivity: [],
@@ -34,6 +36,7 @@ export interface GlobalContextObj {
     setDashboardView: (view: DashboardViews) => void,
     setNotificationDrawerExpanded: (isExpanded: boolean) => void,
     updateApis: (apis: Api[]) => void,
+    updateCollaborators: (collaborators: ApiCollaborator[]) => void,
     updateRecentActivity: (recentActivity: ApiDesignChange[]) => void,
 };
 
@@ -51,6 +54,7 @@ export class GlobalContextProvider extends React.Component<{}, GlobalState> {
                 setSelectedApiId: this.setSelectedApiId,
                 store: this.state,
                 updateApis: this.updateApis,
+                updateCollaborators: this.updateCollaborators,
                 updateRecentActivity: this.updateRecentActivity
             }}>
                 {this.props.children}
@@ -76,6 +80,10 @@ export class GlobalContextProvider extends React.Component<{}, GlobalState> {
 
     private updateApis = (apis: Api[]) => {
         this.setState({apis})
+    }
+
+    private updateCollaborators = (collaborators: ApiCollaborator[]) => {
+        this.setState({collaborators})
     }
 
     private updateRecentActivity = (recentActivity: ApiDesignChange[]) => {

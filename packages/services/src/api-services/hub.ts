@@ -108,10 +108,10 @@ export abstract class AbstractHubService {
     return axios.request(config)
     .then(response => {
       if (successCallback) {
-       return successCallback(response);
+       return successCallback(response.data);
       }
       else {
-        return response;
+        return response.data;
      }
     })
     .catch(error => console.log(error)); // handle error state

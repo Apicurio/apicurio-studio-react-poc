@@ -6,10 +6,6 @@ import { ApiTabs } from '../apiTabs';
 import { GlobalContext, GlobalContextObj } from '../../../../context';
 import './apiDrawer.css';
 
-export interface ApiDrawerPanelContentProps {
-  currentApiId: string
-}
-
 function findId(array: any[], id: string) {
   const apiTemp = array.find(api => api.id === id);
   if (apiTemp !== undefined) {
@@ -20,15 +16,13 @@ function findId(array: any[], id: string) {
   }
 }
 
-export const ApiDrawerPanelContent: React.FunctionComponent<ApiDrawerPanelContentProps> = (props) => {
-  const { apis,  apiDrawerExpanded } = {... useContext(GlobalContext).store};
-  const { store } = useContext(GlobalContext);
+export const ApiDrawerPanelContent: React.FunctionComponent = () => {
+  const { apis,  apiDrawerExpanded, selectedApiId } = {... useContext(GlobalContext).store};
   const globalContext: GlobalContextObj = useContext(GlobalContext);
   const setApiDrawerState = (apiDrawerState: boolean) => {
     globalContext.setApiDrawerExpanded(!apiDrawerState);
   }
-  const apiObject = findId(apis, props.currentApiId);
-
+  const apiObject = findId(apis, selectedApiId);
 
     return (
       <Card>
@@ -40,7 +34,7 @@ export const ApiDrawerPanelContent: React.FunctionComponent<ApiDrawerPanelConten
             </Title>
           </span>
           <CardActions>
-            <Button onClick={() => setApiDrawerState(store.apiDrawerExpanded)} variant="plain" aria-label="Action">
+            <Button onClick={() => setApiDrawerState(apiDrawerExpanded)} variant="plain" aria-label="Action">
               <TimesIcon/>
             </Button>
           </CardActions>
@@ -56,7 +50,7 @@ export const ApiDrawerPanelContent: React.FunctionComponent<ApiDrawerPanelConten
             </Button>
           </div>
         </CardBody>
-        <ApiTabs currentApiObject={apiObject}/>
+        <ApiTabs currentApiObject={apiObject} />
       </Card>
     )
   }

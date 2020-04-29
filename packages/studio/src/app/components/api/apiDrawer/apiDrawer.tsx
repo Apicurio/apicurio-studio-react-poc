@@ -17,8 +17,7 @@ interface ApiDrawerState {
 
 export const ApiDrawer: React.FunctionComponent<ApiDrawerProps> = (props) => {
   const globalContext: GlobalContextObj = useContext(GlobalContext);
-  const { apis,  apiDrawerExpanded } = {... useContext(GlobalContext).store};
-  const { store } = useContext(GlobalContext);
+  const { apiDrawerExpanded } = {... useContext(GlobalContext).store};
   const setSelectedApiState = (selectedApiState: string) => {
     globalContext.setSelectedApiId(selectedApiState);
   }
@@ -39,7 +38,7 @@ export const ApiDrawer: React.FunctionComponent<ApiDrawerProps> = (props) => {
           <div className="api-drawer-content">
             { 
             props.dashboardView === 'list' ? (
-              <ApiDataList keyListItem={findKey} selectItem={openDrawer} viewDetails={openDrawer}/>
+              <ApiDataList keyListItem={findKey} selectItem={setSelectedApiState} viewDetails={openDrawer}/>
              ) : (
             <ApiCardView/>
             )
@@ -47,7 +46,7 @@ export const ApiDrawer: React.FunctionComponent<ApiDrawerProps> = (props) => {
           </div>
         </DrawerContent>
         <DrawerPanelContent className="api-drawer-panel-body">
-          <ApiDrawerPanelContent currentApiId={globalContext.store.selectedApiId}/>
+          <ApiDrawerPanelContent />
         </DrawerPanelContent>
       </Drawer>
     </React.Fragment>
