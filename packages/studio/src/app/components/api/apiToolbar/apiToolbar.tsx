@@ -139,8 +139,8 @@ export const ApiToolbar = () => {
         }
         isOpen={isLowerToolbarDropdownOpen}
         dropdownItems={[
-          <DropdownItem key="cat1">Name</DropdownItem>,
-          <DropdownItem key="cat2">Tag</DropdownItem>
+          <DropdownItem key="category-1">Name</DropdownItem>,
+          <DropdownItem key="category-2">Tag</DropdownItem>
         ]}
         style={{ width: "100%" }}
       />
@@ -179,7 +179,7 @@ export const ApiToolbar = () => {
           <DropdownItem key="item-1" onClick={selectNone}>
             Select none (0 items)
           </DropdownItem>,
-          <DropdownItem key="item-3" onClick={selectAll}>
+          <DropdownItem key="item-2" onClick={selectAll}>
             Select all ({globalContext.store.apis.length} items)
           </DropdownItem>
         ]}
@@ -199,11 +199,10 @@ export const ApiToolbar = () => {
               id="textInput1"
               type="search"
               aria-label="search input"
-              css=""
             />
             <Button
               variant={ButtonVariant.control}
-              aria-label="search button for search input"
+              aria-label="search"
             >
               <SearchIcon />
             </Button>
@@ -219,6 +218,7 @@ export const ApiToolbar = () => {
         </DataToolbarItem>
         <DataToolbarItem variant="pagination">
           <Button
+            aria-label="toggle card view"
             onClick={() => globalContext.setDashboardView(DashboardViews.card)}
             className={
               "app-data-toolbar-button-control " +
@@ -231,6 +231,7 @@ export const ApiToolbar = () => {
             <ThIcon />
           </Button>
           <Button
+            aria-label="toggle dashboard view"
             onClick={() => globalContext.setDashboardView(DashboardViews.list)}
             className={
               "app-data-toolbar-button-control " +

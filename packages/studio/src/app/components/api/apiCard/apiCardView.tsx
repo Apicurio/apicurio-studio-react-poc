@@ -77,8 +77,8 @@ export const ApiCardView: React.FunctionComponent<ApiCardProps> = ({
                   checked={globalContext.store.toolbarStatus.isChecked}
                   onChange={handleCheckboxClick}
                   aria-label="card checkbox"
-                  id="check-1"
-                  name="check1"
+                  id={"check " + api.id}
+                  name="check"
                 />
               </CardActions>
             </CardHead>
