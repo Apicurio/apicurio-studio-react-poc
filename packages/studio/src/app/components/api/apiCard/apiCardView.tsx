@@ -7,10 +7,6 @@ import {
   CardFooter,
   CardActions,
   Gallery,
-  Dropdown,
-  KebabToggle,
-  DropdownItem,
-  DropdownSeparator,
   Checkbox
 } from "@patternfly/react-core";
 import { ApiTag } from "../apiTag";
@@ -27,35 +23,13 @@ interface ApiCardProps {
   type?: string;
 }
 
-<<<<<<< HEAD
-
-
 export const ApiCardView: React.FunctionComponent<ApiCardProps> = ({
   name,
   description,
   tags = []
 }: ApiCardProps) => {
-  const {
-    apiData,
-    selectedItems,
-    isChecked,
-    res,
-    totalItemCount
-    } = useStoreContext();
-
-  const [state, setState] = useContext(StoreContext);
-
-  
-  // const card = useContext(AppCardContext);
-=======
-export const AppCardView: React.FunctionComponent<AppCardProps> = ({
-  name,
-  description,
-  tags = []
-}: AppCardProps) => {
   const globalContext: GlobalContextObj = useContext(GlobalContext);
   const { selectedItems } = { ...globalContext.store.toolbarStatus };
->>>>>>> 7f2fbd0... rebased with context changes
 
   const getAllItems = () => {
     const collection: number[] = [];
