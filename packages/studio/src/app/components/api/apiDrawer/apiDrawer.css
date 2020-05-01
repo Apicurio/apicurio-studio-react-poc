@@ -9,3 +9,7 @@
   .api-drawer-panel-body .pf-c-drawer__panel-body {
     padding: 0;
   }
+
+  .api-drawer-panel-button {
+    margin-right: 4px;
+  }

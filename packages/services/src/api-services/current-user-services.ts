@@ -36,7 +36,7 @@ export class CurrentUserService extends AbstractHubService {
 
         console.info("[CurrentUserService] Fetching user activity: %s", activityUrl);
         return this.httpGet<ApiDesignChange[]>(activityUrl, options, (resp) => {
-            return resp.data as ApiDesignChange[];
+            return resp as ApiDesignChange[];
         });
     }
 }

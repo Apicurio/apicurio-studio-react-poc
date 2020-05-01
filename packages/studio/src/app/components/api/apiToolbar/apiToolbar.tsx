@@ -8,6 +8,8 @@ export const ApiToolbar: React.FunctionComponent = () => {
 
   const globalContext: GlobalContextObj = useContext(GlobalContext);
 
+  const apiCount = globalContext.store.apis.length;
+
   return (
     <DataToolbar id="apiToolbar">
       <DataToolbarContent>
@@ -22,7 +24,7 @@ export const ApiToolbar: React.FunctionComponent = () => {
             <ListIcon/>
           </Button>
           <span className="app-toolbar-api-total">
-            4 APIs found
+            {apiCount} APIs found
           </span>
         </DataToolbarItem>
       </DataToolbarContent>

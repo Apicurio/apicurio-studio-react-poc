@@ -1,22 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, Card, CardActions, CardHead, CardBody, Title } from '@patternfly/react-core';
 import {TimesIcon, EyeIcon} from '@patternfly/react-icons';
 import ApicurioIcon from '../../../assets/apicurio-icon.png';
 import { ApiTabs } from '../apiTabs';
-import data from '../../../../api-data.json';
+import { GlobalContext, GlobalContextObj } from '../../../../context';
+import './apiDrawer.css';
 
-export interface ApiDrawerPanelContentProps {
-  currentApiId: string
+function findId(array: any[], id: string) {
+  const apiTemp = array.find(api => api.id === id);
+  if (apiTemp !== undefined) {
+    return apiTemp;
+  }
+  else {
+    return Error;
+  }
 }
 
-export class ApiDrawerPanelContent extends React.Component<ApiDrawerPanelContentProps> {
-;
-  constructor(props: ApiDrawerPanelContentProps) {
-    super(props);
+export const ApiDrawerPanelContent: React.FunctionComponent = () => {
+  const { apis,  apiDrawerExpanded, selectedApiId } = {... useContext(GlobalContext).store};
+  const globalContext: GlobalContextObj = useContext(GlobalContext);
+  const setApiDrawerState = (apiDrawerState: boolean) => {
+    globalContext.setApiDrawerExpanded(!apiDrawerState);
   }
-
-  render() {
-    const apiObject = this.findId(data.apis, this.props.currentApiId);
+  const apiObject = findId(apis, selectedApiId);
 
     return (
       <Card>
@@ -28,15 +34,15 @@ export class ApiDrawerPanelContent extends React.Component<ApiDrawerPanelContent
             </Title>
           </span>
           <CardActions>
-            <Button variant="plain" aria-label="Action">
+            <Button onClick={() => setApiDrawerState(apiDrawerExpanded)} variant="plain" aria-label="Action">
               <TimesIcon/>
             </Button>
           </CardActions>
         </CardHead>
         <CardBody>
           <div className="app-button-group-sm">
-            <Button variant="tertiary" className="pf-u-mr-sm">
-              <EyeIcon/>
+            <Button variant="tertiary">
+              <EyeIcon className='api-drawer-panel-button'/>
               Preview documentation
             </Button>
             <Button variant="secondary">
@@ -44,19 +50,9 @@ export class ApiDrawerPanelContent extends React.Component<ApiDrawerPanelContent
             </Button>
           </div>
         </CardBody>
-        <ApiTabs createdBy={apiObject.createdBy} createdOn={apiObject.createdOn}/>
+        <ApiTabs currentApiObject={apiObject} />
       </Card>
     )
   }
-   private findId = (array: any[], id: string): any => {
-    const apiTemp = array.find(api => api.id === id);
-    if (apiTemp !== undefined) {
-      return apiTemp;
-    }
-    else {
-      return Error;
-    }
-  }
-}
 
 export default ApiDrawerPanelContent;

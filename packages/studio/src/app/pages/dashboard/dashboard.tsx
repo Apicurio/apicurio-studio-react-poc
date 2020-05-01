@@ -23,7 +23,7 @@ export const Dashboard = () => {
         globalContext.updateApis(apis);
       })
       .catch(error => {
-        console.error("error getting API" + error);
+        console.error("error getting API " + error);
       });
 
     await userService.getActivity(activityStart, activityEnd)
@@ -36,9 +36,8 @@ export const Dashboard = () => {
         return activityData;
       })
       .catch(error => {
-        console.error("error getting API" + error);
+        console.error("error getting activities " + error);
       });
-
     }
 
   useEffect(() => {

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Drawer, DrawerPanelContent, DrawerContent } from '@patternfly/react-core/dist/esm/experimental';
-import AppDataList from '../apiDataList/apiDataList';
+import ApiDataList from '../apiDataList/apiDataList';
 import {ApiCardView} from '../..';
 import ApiDrawerPanelContent from './apiDrawerPanelContent';
+import { GlobalContext, GlobalContextObj } from '../../../../context';
 import './apiDrawer.css';
 
 export interface ApiDrawerProps {
@@ -14,26 +15,30 @@ interface ApiDrawerState {
   readonly isExpanded: boolean,
 }
 
-export class ApiDrawer extends React.Component<ApiDrawerProps, ApiDrawerState> {
-  constructor(props: ApiDrawerProps) {
-    super(props);
-    this.state = {
-      currentApiId: "",
-      isExpanded: false
-    };
+export const ApiDrawer: React.FunctionComponent<ApiDrawerProps> = (props) => {
+  const globalContext: GlobalContextObj = useContext(GlobalContext);
+  const { apiDrawerExpanded } = {... useContext(GlobalContext).store};
+  const setSelectedApiState = (selectedApiState: string) => {
+    globalContext.setSelectedApiId(selectedApiState);
   }
 
-  render() {
-   const { isExpanded, currentApiId } = this.state;
+  function openDrawer() {
+    const isExpanded = !apiDrawerExpanded;
+  };
+
+  function findKey(id: string) {
+    const keyListItem = id;
+    setSelectedApiState(keyListItem);
+  }  
 
    return (
     <React.Fragment>
-      <Drawer isExpanded={isExpanded} isInline className="app-drawer-drawer">
+      <Drawer isExpanded={apiDrawerExpanded} isInline className="app-drawer-drawer">
         <DrawerContent>
           <div className="api-drawer-content">
             { 
-            this.props.dashboardView === 'list' ? (
-              <AppDataList keyListItem={this.findKey} selectItem={this.openDrawer} viewDetails={this.openDrawer}/>
+            props.dashboardView === 'list' ? (
+              <ApiDataList keyListItem={findKey} selectItem={setSelectedApiState} viewDetails={openDrawer}/>
              ) : (
             <ApiCardView/>
             )
@@ -41,26 +46,11 @@ export class ApiDrawer extends React.Component<ApiDrawerProps, ApiDrawerState> {
           </div>
         </DrawerContent>
         <DrawerPanelContent className="api-drawer-panel-body">
-          <ApiDrawerPanelContent currentApiId={currentApiId}/>
+          <ApiDrawerPanelContent />
         </DrawerPanelContent>
       </Drawer>
     </React.Fragment>
     );
  }
-
-  private openDrawer = () => {
-    const isExpanded = !this.state.isExpanded;
-    this.setState({
-      isExpanded
-    });
-  };
-
-  private findKey = (id: string) => {
-    const keyListItem = id;
-    this.setState({
-      currentApiId: keyListItem
-    })
-  }
-}
 
 export default ApiDrawer;

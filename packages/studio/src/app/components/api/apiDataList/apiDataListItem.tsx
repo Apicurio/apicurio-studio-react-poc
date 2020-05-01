@@ -1,14 +1,17 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Button, DataListItem, DataListItemCells, DataListItemRow, DataListCell, DataListCheck, DataListAction } from '@patternfly/react-core';
 import {ApiTag} from '../apiTag';
 import {ApiDropdownKebab} from '../apiDropDownKebab';
 import ApicurioIcon from '../../../assets/apicurio-icon.png';
 import './apiDataListItem.css';
-import { GlobalContext } from '../../../../context';
+import { GlobalContext, GlobalContextObj } from '../../../../context';
 
 export const ApiDataListItem = () => {
-
   const { apis } = {... useContext(GlobalContext).store}
+  const globalContext: GlobalContextObj = useContext(GlobalContext);
+  const setApiDrawerState = (apiDrawerState: boolean, currentApiId: string) => {
+    globalContext.setApiDrawerExpanded(!apiDrawerState);
+  }
 
     return (
       <React.Fragment>
@@ -37,7 +40,7 @@ export const ApiDataListItem = () => {
               ]}
               />
             <DataListAction aria-labelledby={`data-list-item-${api.id}`} id={`data-list-item-${api.id}`} aria-label="Actions">
-                <Button variant="link">View Details</Button>
+                <Button variant="link" onClick={() => setApiDrawerState(globalContext.store.apiDrawerExpanded)}>View Details</Button>
                 <Button variant="secondary">Edit API</Button>
                 <ApiDropdownKebab/>
             </DataListAction>

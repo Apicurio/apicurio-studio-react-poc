@@ -2,18 +2,18 @@ import React from 'react';
 import {DataList} from '@patternfly/react-core';
 import ApiDataListItem from './apiDataListItem';
 
-interface AppDataListProps {
+interface ApiDataListProps {
   viewDetails: React.MouseEventHandler,
   selectItem: FunctionStringCallback,
   keyListItem: FunctionStringCallback
 }
 
-interface AppDataListState {
+interface ApiDataListState {
   selectedDataListItemId: string
 }
 
-class AppDataList extends React.Component<AppDataListProps, AppDataListState> {
-  constructor(props: AppDataListProps) {
+class ApiDataList extends React.Component<ApiDataListProps, ApiDataListState> {
+  constructor(props: ApiDataListProps) {
     super(props);
     this.state = {
       selectedDataListItemId: ''
@@ -33,10 +33,10 @@ class AppDataList extends React.Component<AppDataListProps, AppDataListState> {
         selectedDataListItemId={this.state.selectedDataListItemId}
         onSelectDataListItem={this.onSelectDataListItem}
       >
-        <ApiDataListItem/>
+        <ApiDataListItem />
       </DataList>
     );
   }
 }
 
-export default AppDataList;
+export default ApiDataList;

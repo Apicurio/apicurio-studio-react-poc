@@ -1,11 +1,14 @@
-import React from 'react';
-import {Api, ApiDesignChange} from "@apicurio/models";
+import React, { createContext } from 'react';
+import {Api, ApiDesignChange, ApiCollaborator} from "@apicurio/models";
 
 export interface GlobalState {
     apis: Api[],
+    collaborators: ApiCollaborator[],
     recentActivity: ApiDesignChange[],
     dashboardView: DashboardViews,
-    notificationDrawerExpanded: boolean
+    notificationDrawerExpanded: boolean,
+    apiDrawerExpanded: boolean,
+    selectedApiId: string
 }
 
 /**
@@ -17,22 +20,27 @@ export enum DashboardViews {
 }
 
 const initialState: GlobalState = {
+    apiDrawerExpanded: false,
     apis: [],
+    collaborators: [],
     dashboardView: DashboardViews.list,
     notificationDrawerExpanded: false,
-    recentActivity: []
+    recentActivity: [],
+    selectedApiId: ''
 };
 
 export interface GlobalContextObj {
+    setApiDrawerExpanded: (isExpanded: boolean) => void,
+    setSelectedApiId: (selectedApiId: string) => void,
     store: GlobalState,
     setDashboardView: (view: DashboardViews) => void,
     setNotificationDrawerExpanded: (isExpanded: boolean) => void,
     updateApis: (apis: Api[]) => void,
-    updateRecentActivity: (recentActivity: ApiDesignChange[]) => void
+    updateCollaborators: (collaborators: ApiCollaborator[]) => void,
+    updateRecentActivity: (recentActivity: ApiDesignChange[]) => void,
 };
 
-export const GlobalContext = React.createContext({} as GlobalContextObj);
-
+export const GlobalContext = createContext({} as GlobalContextObj);
 
 export class GlobalContextProvider extends React.Component<{}, GlobalState> {
     state: GlobalState = initialState;
@@ -40,15 +48,26 @@ export class GlobalContextProvider extends React.Component<{}, GlobalState> {
     render() {
         return (
             <GlobalContext.Provider value={{
+                setApiDrawerExpanded: this.setApiDrawerExpanded,
                 setDashboardView: this.setDashboardView,
                 setNotificationDrawerExpanded: this.setNotificationDrawerExpanded,
+                setSelectedApiId: this.setSelectedApiId,
                 store: this.state,
                 updateApis: this.updateApis,
+                updateCollaborators: this.updateCollaborators,
                 updateRecentActivity: this.updateRecentActivity
             }}>
                 {this.props.children}
             </GlobalContext.Provider>
         );
+    }
+
+    private setApiDrawerExpanded = (apiDrawerExpanded: boolean) => {
+        this.setState({apiDrawerExpanded})
+    }
+
+    private setSelectedApiId = (selectedApiId: string) => {
+        this.setState({selectedApiId})
     }
 
     private setDashboardView = (dashboardView: DashboardViews) => {
@@ -62,6 +81,11 @@ export class GlobalContextProvider extends React.Component<{}, GlobalState> {
     private updateApis = (apis: Api[]) => {
         this.setState({apis})
     }
+
+    private updateCollaborators = (collaborators: ApiCollaborator[]) => {
+        this.setState({collaborators})
+    }
+
     private updateRecentActivity = (recentActivity: ApiDesignChange[]) => {
         this.setState({recentActivity})
     }
