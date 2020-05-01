@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Drawer, DrawerPanelContent, DrawerContent } from '@patternfly/react-core/dist/esm/experimental';
 import ApiDataList from '../apiDataList/apiDataList';
-import {ApiCardView} from '../..';
+import {ApiCardView} from '../apiCard/apiCardView';
 import ApiDrawerPanelContent from './apiDrawerPanelContent';
 import { GlobalContext, GlobalContextObj } from '../../../../context';
 import './apiDrawer.css';

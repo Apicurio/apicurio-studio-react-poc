@@ -1,12 +1,13 @@
 import React, {useEffect, useContext, useState} from "react";
 import { Button, Drawer, DrawerContent, DrawerContentBody, DrawerPanelContent, Level, LevelItem, Title, PageSection, PageSectionVariants } from '@patternfly/react-core';
 import '../../app.css';
-import { ApiDrawer, ApiEmptyState, ApiToolbar } from '../../components';
+import { ApiDrawer, ApiEmptyState, AppToolbar } from '../../components';
 import {Link} from 'react-router-dom';
 import { GlobalContext, GlobalContextObj } from '../../../context';
 import { Services } from './../../common';
 import { ApiNotificationDrawer } from './../../components/api/apiNotificationDrawer/apiNotificationDrawer';
 import { ApiDesignChange } from "@apicurio/models";
+import ApiToolbar from "src/app/components/api/apiToolbar/apiToolbar";
 
 export const Dashboard = () => {
 
