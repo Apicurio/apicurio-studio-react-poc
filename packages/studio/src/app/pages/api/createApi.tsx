@@ -64,8 +64,7 @@ export const CreateApi = () => {
   }
 
   const onCreateApi = (eventData: CreateApiFormData) => {
-    console.log('what is all the data' + eventData.target.name.value + eventData.target.description.value);
-    if(!eventData.target.name.value) {
+    if(!eventData.target.template) {
       const newApi: NewApi = new NewApi();
       newApi.type = eventData.target.type.value;
       newApi.name = eventData.target.name.value;
@@ -74,26 +73,29 @@ export const CreateApi = () => {
       console.log("[CreateApiPageComponent] Creating a new (blank) API: " + JSON.stringify(newApi));
 
       apisService.createApi(newApi).then(api => {
-        console.log('did this work' + api.id);
+        // TO DO: Set up routes in the app to redirect here
         // let link: string[] = ["/", api.id];
         // console.info("[CreateApiPageComponent] Navigating to: %o", link);
         // this.router.navigate(link);
         }).catch(error => {
         console.error("[CreateApiPageComponent] Error creating an API");
+        // TO DO: Set up error handling
         //this.error(error);
     })
     } else {
       let importApi: ImportApi = new ImportApi();
-      let spec: any = JSON.parse(JSON.stringify(eventData.template.content));
+      let spec: any = JSON.parse(JSON.stringify(eventData.template.value));
       updateSpec(spec, eventData);
       importApi.data = Base64.encode(JSON.stringify(spec));
 
       apisService.importApi(importApi).then(updatedApi => {
+        // TO DO: Set up routes in the app to redirect here
         // let link: string[] = [ "/apis", updatedApi.id ];
         // console.info("[CreateApiPageComponent] Navigating to: %o", link);
         // this.router.navigate(link);
       }).catch( error => {
           console.error("[CreateApiPageComponent] Error creating API: %o", error);
+          // TO DO: Set up error handling
           // this.error(error);
       })
     }
@@ -192,13 +194,15 @@ export const CreateApi = () => {
               isRequired
               label="Template"
               fieldId="template-form-title"
+              name="template"
+              for="api-template"
             >
-              <div className="app-create-api__form-card-group">
+              <div className="app-create-api__form-card-group" id="api-template">
                 <Card id="card-blank-api" className="app-create-api__form-card" onClick={onClickCard} isSelected={cardSelected === 'card-blank-api'} isSelectable isCompact>
                   <CardBody>
-                    <div className="app-create-api__form-card-text" role="checkbox" tabindex="0" aria-labelledby="checkbox-label-1">
+                    <div className="app-create-api__form-card-text">
                       <PlusCircleIcon/>
-                      <span id="checkbox-label-1">
+                      <span>
                         Blank API
                       </span>
                     </div>
