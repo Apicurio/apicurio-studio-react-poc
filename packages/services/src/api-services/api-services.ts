@@ -32,8 +32,8 @@ export class ApisService extends AbstractHubService {
   public createApi(api: NewApi): Promise<Api> {
     console.info("[ApisService] Creating the API via the hub API");
 
-    let createApiUrl: string = this.endpoint("/designs");
-    let options: any = this.options({ "Accept": "application/json", "Content-Type": "application/json" });
+    const createApiUrl: string = this.endpoint("designs");
+    const options: AxiosRequestConfig = this.options({ "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" });
 
     console.info("[ApisService] Creating an API Design: %s", createApiUrl);
     return this.httpPostWithReturn<NewApi, Api>(createApiUrl, api, options);
@@ -42,8 +42,8 @@ export class ApisService extends AbstractHubService {
   public importApi(api: ImportApi): Promise<Api> {
     console.info("[ApisService] Importing an API design via the hub API");
 
-    let importApiUrl: string = this.endpoint("/designs");
-    let options: any = this.options({ "Accept": "application/json", "Content-Type": "application/json" });
+    const importApiUrl: string = this.endpoint("designs");
+    const options: AxiosRequestConfig = this.options({ "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" });
 
     console.info("[ApisService] Importing an API Design: %s", importApiUrl);
     return this.httpPutWithReturn<ImportApi, Api>(importApiUrl, api, options);

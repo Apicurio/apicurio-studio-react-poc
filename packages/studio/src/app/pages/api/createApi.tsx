@@ -36,8 +36,8 @@ export const CreateApi = () => {
 
   // TO DO: Add more options here
   const typeOptions = [
-    { value: "Open API 2.0 (Swagger)", label: "Open API 2.0 (Swagger)", disabled: false },
-    { value: 'Open API 3.0.2', label: 'Open API 3.0.2', disabled: false, isPlaceholder: true  }
+    { value: "OpenAPI20", label: "Open API 2.0 (Swagger)", disabled: false, isPlaceholder: false },
+    { value: 'OpenAPI30', label: 'Open API 3.0.2', disabled: false, isPlaceholder: true  }
   ];
 
   const onChange = (apiType: string) => {
@@ -64,18 +64,19 @@ export const CreateApi = () => {
   }
 
   const onCreateApi = (eventData: CreateApiFormData) => {
-    console.log('what is all the data' + eventData.target.type.value);
-    if(!eventData.target.template.value) {
-      let newApi: NewApi = new NewApi();
+    console.log('what is all the data' + eventData.target.name.value + eventData.target.description.value);
+    if(!eventData.target.name.value) {
+      const newApi: NewApi = new NewApi();
       newApi.type = eventData.target.type.value;
       newApi.name = eventData.target.name.value;
       newApi.description = eventData.target.description.value;
 
       console.log("[CreateApiPageComponent] Creating a new (blank) API: " + JSON.stringify(newApi));
-      
+
       apisService.createApi(newApi).then(api => {
-        let link: string[] = ["/apis", api.id];
-        console.info("[CreateApiPageComponent] Navigating to: %o", link);
+        console.log('did this work' + api.id);
+        // let link: string[] = ["/", api.id];
+        // console.info("[CreateApiPageComponent] Navigating to: %o", link);
         // this.router.navigate(link);
         }).catch(error => {
         console.error("[CreateApiPageComponent] Error creating an API");
@@ -88,9 +89,9 @@ export const CreateApi = () => {
       importApi.data = Base64.encode(JSON.stringify(spec));
 
       apisService.importApi(importApi).then(updatedApi => {
-          let link: string[] = [ "/apis", updatedApi.id ];
-          console.info("[CreateApiPageComponent] Navigating to: %o", link);
-          // this.router.navigate(link);
+        // let link: string[] = [ "/apis", updatedApi.id ];
+        // console.info("[CreateApiPageComponent] Navigating to: %o", link);
+        // this.router.navigate(link);
       }).catch( error => {
           console.error("[CreateApiPageComponent] Error creating API: %o", error);
           // this.error(error);
@@ -195,9 +196,9 @@ export const CreateApi = () => {
               <div className="app-create-api__form-card-group">
                 <Card id="card-blank-api" className="app-create-api__form-card" onClick={onClickCard} isSelected={cardSelected === 'card-blank-api'} isSelectable isCompact>
                   <CardBody>
-                    <div className="app-create-api__form-card-text">
+                    <div className="app-create-api__form-card-text" role="checkbox" tabindex="0" aria-labelledby="checkbox-label-1">
                       <PlusCircleIcon/>
-                      <span>
+                      <span id="checkbox-label-1">
                         Blank API
                       </span>
                     </div>

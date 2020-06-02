@@ -116,18 +116,23 @@ export abstract class AbstractHubService {
     })
     .catch(error => console.log(error)); // handle error state
   }
-
-    protected httpPostWithReturn<I, O>(url: string, body: I, options: AxiosRequestConfig, successCallback?: (data: any) => any): Promise<O> {
+  
+    // (createApiUrl, api, options);
+    protected httpPostWithReturn<I, O>(url: string, data: I, options: AxiosRequestConfig, successCallback?: (data: any) => any): Promise<O> {
         
+        const stringify = JSON.stringify(data);
         const config: AxiosRequestConfig = {...{
             method: 'post',
-            url,
-            body
+            url: url,
+            data: stringify
         }, ...options}
+
+        console.log('did it make it to the post');
 
         return axios.request(config)
         .then(response => {
             let data = response;
+            console.log('what is the response' + data)
             if(successCallback) {
                 return successCallback(data);
             }
@@ -138,12 +143,13 @@ export abstract class AbstractHubService {
         .catch(error => console.log(error));
     }
 
-    protected httpPutWithReturn<I, O>(url: string, body: I, options: any, successCallback?: (data: any) => any): Promise<O> {
+    protected httpPutWithReturn<I, O>(url: string, data: I, options: any, successCallback?: (data: any) => any): Promise<O> {
       
+        const stringify = JSON.stringify(data);
         const config: AxiosRequestConfig = {...{
             method: 'put',
-            url,
-            body
+            url: url,
+            data: stringify
         }, ...options}
 
         return axios.request(config)
