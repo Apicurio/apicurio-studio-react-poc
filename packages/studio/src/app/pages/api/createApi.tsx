@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -40,7 +40,7 @@ export const CreateApi = () => {
   const [description, setDescription] = useState('');
   const [cardSelected, setCardSelected] = useState('card-blank-api');
   const [isNameValid, setIsNameValid] = useState(true);
-
+  const [countSubmit, setCountSubmit] = useState(0);
   const [isFormValid, setIsFormValid] = useState(false);
 
   const onChange = (apiType: string) => {
@@ -48,6 +48,9 @@ export const CreateApi = () => {
   };
 
   const handleTextInputChangeName = (name: string) => {
+    if(name.length > 0) {
+      setIsNameValid(true);
+    }
     setName(name);
   };
 
@@ -60,31 +63,37 @@ export const CreateApi = () => {
     setCardSelected(newSelected);
   };
 
+  // On handle submit, check if the form is valid, and call the onCreateApi method
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('did it get here');
-    validateForm();
-    console.log('is form valid' + isFormValid);
-    if (isFormValid === true) {
-      console.log('did it make it to create api');
+    if (isFormValid) {
       onCreateApi(event);
     }
   }
 
-  const validateForm = () => {
-    console.log('did it get to form validation');
-    if(name.length === 0) {
-      setIsNameValid(false);
+  // Keep count of the first time the submit button is clicked
+  const updateButtonCount = () => {
+    setCountSubmit(countSubmit + 1);
+  }
+
+  // Every component render except the first button submit, set the validation states of the form
+  useEffect(() => {
+    if (countSubmit === 0) {
+      return;
     }
     else {
-      setIsNameValid(true);
-      setIsFormValid(true);
+      if (name === '') {
+        setIsNameValid(false);
+        setIsFormValid(false);
+      }
+      else {
+        setIsFormValid(true);
+      }
     }
-  }
+  });
 
   const onCreateApi = (eventData: CreateApiFormData) => {
     if(!eventData.target.template) {
-      console.log('there is no template');
       const newApi: NewApi = new NewApi();
       newApi.type = eventData.target.type.value;
       newApi.name = eventData.target.name.value;
@@ -103,7 +112,6 @@ export const CreateApi = () => {
         //this.error(error);
     })
     } else {
-      console.log('there is a template');
       let importApi: ImportApi = new ImportApi();
       let spec: any = JSON.parse(JSON.stringify(eventData.template.value));
       updateSpec(spec, eventData);
@@ -253,7 +261,7 @@ export const CreateApi = () => {
               </div>
             </FormGroup>
             <ActionGroup>
-              <Button type="submit" variant="primary">Create API</Button>
+              <Button type="submit" variant="primary" onClick={() => updateButtonCount()}>Create API</Button>
             </ActionGroup>
           </Form>
         </PageSection>

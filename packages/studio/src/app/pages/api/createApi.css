@@ -50,3 +50,8 @@
 .app-form-helper-text-asterisk {
   color: var(--pf-global--danger-color--100);
 }
+
+.app-form-helper-text span {
+  margin-left: 0 !important;
+  padding-bottom: 0 !important;
+}
