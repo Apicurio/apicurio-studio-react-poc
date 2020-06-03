@@ -81,7 +81,7 @@ export const Dashboard = () => {
                   <ApiToolbar/>
                 </PageSection>
               <PageSection noPadding={true} className="app-page-section-height">
-                {apiCount >= 8 ? (
+                {apiCount === 0 ? (
                   <ApiEmptyState />
                 ) : (
                   <ApiDrawer dashboardView={globalContext.store.dashboardView}/>

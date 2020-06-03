@@ -29,16 +29,19 @@ export const CreateApi = () => {
 
   const apisService = Services.getInstance().apisService;
 
-  const [apiType, setApiType] = useState('Please choose');
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [cardSelected, setCardSelected] = useState(null);
-
   // TO DO: Add more options here
   const typeOptions = [
-    { value: "OpenAPI20", label: "Open API 2.0 (Swagger)", disabled: false, isPlaceholder: false },
-    { value: 'OpenAPI30', label: 'Open API 3.0.2', disabled: false, isPlaceholder: true  }
+    { value: "OpenAPI20", label: "Open API 2.0 (Swagger)", disabled: false },
+    { value: 'OpenAPI30', label: 'Open API 3.0.2', disabled: false }
   ];
+
+  const [apiType, setApiType] = useState(typeOptions[1].value);
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [cardSelected, setCardSelected] = useState('card-blank-api');
+  const [isNameValid, setIsNameValid] = useState(true);
+
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const onChange = (apiType: string) => {
     setApiType(apiType);
@@ -60,11 +63,28 @@ export const CreateApi = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('did it get here');
-    onCreateApi(event);
+    validateForm();
+    console.log('is form valid' + isFormValid);
+    if (isFormValid === true) {
+      console.log('did it make it to create api');
+      onCreateApi(event);
+    }
+  }
+
+  const validateForm = () => {
+    console.log('did it get to form validation');
+    if(name.length === 0) {
+      setIsNameValid(false);
+    }
+    else {
+      setIsNameValid(true);
+      setIsFormValid(true);
+    }
   }
 
   const onCreateApi = (eventData: CreateApiFormData) => {
     if(!eventData.target.template) {
+      console.log('there is no template');
       const newApi: NewApi = new NewApi();
       newApi.type = eventData.target.type.value;
       newApi.name = eventData.target.name.value;
@@ -83,6 +103,7 @@ export const CreateApi = () => {
         //this.error(error);
     })
     } else {
+      console.log('there is a template');
       let importApi: ImportApi = new ImportApi();
       let spec: any = JSON.parse(JSON.stringify(eventData.template.value));
       updateSpec(spec, eventData);
@@ -146,6 +167,8 @@ export const CreateApi = () => {
               placeholder="Create the new API's name"
               isRequired
               fieldId="api-create-name"
+              helperTextInvalid="Please enter a name."
+              isValid={isNameValid}
             >
               <TextInput
                 isRequired
@@ -185,7 +208,6 @@ export const CreateApi = () => {
                     key={index}
                     value={option.value}
                     label={option.label}
-                    isPlaceholder={option.isPlaceholder}
                   />
                 ))}
               </FormSelect>
@@ -195,7 +217,7 @@ export const CreateApi = () => {
               label="Template"
               fieldId="template-form-title"
               name="template"
-              for="api-template"
+              value={cardSelected}
             >
               <div className="app-create-api__form-card-group" id="api-template">
                 <Card id="card-blank-api" className="app-create-api__form-card" onClick={onClickCard} isSelected={cardSelected === 'card-blank-api'} isSelectable isCompact>
