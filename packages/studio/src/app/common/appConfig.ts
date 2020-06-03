@@ -18,7 +18,7 @@ export class Services {
 
     private static singleton: Services;
     public configService: ConfigService = new ConfigService();
-    public autheticationService : KeycloakAuthenticationService = new KeycloakAuthenticationService(this.configService);
-    public apisService: ApisService = new ApisService(this.autheticationService, this.configService);
-    public currentUserService: CurrentUserService = new CurrentUserService(this.autheticationService, this.configService);
+    public authenticationService : KeycloakAuthenticationService = new KeycloakAuthenticationService(this.configService);
+    public apisService: ApisService = new ApisService(this.authenticationService, this.configService);
+    public currentUserService: CurrentUserService = new CurrentUserService(this.authenticationService, this.configService);
 }

@@ -35,6 +35,8 @@ export class CurrentUserService extends AbstractHubService {
         const options: AxiosRequestConfig = this.options({ "Accept": "application/json", 'Access-Control-Allow-Origin': '*' });
 
         console.info("[CurrentUserService] Fetching user activity: %s", activityUrl);
-        return this.httpGet<ApiDesignChange[]>(activityUrl, options);
+        return this.httpGet<ApiDesignChange[]>(activityUrl, options, (resp) => {
+            return resp as ApiDesignChange[];
+        });
     }
 }

@@ -1,10 +1,10 @@
-import React, { useEffect, useContext } from 'react';
+import React from 'react';
 import { DataList, DataListItem, DataListItemRow, DataListItemCells, DataListCell, DrawerHead, DrawerPanelBody, DrawerPanelContent, Title } from '@patternfly/react-core';
-import { useStoreContext } from './../../../../context/reducers';
+import { GlobalContext } from '../../../../context';
 import { ApiActivityItem } from '../apiActivityItem/apiActivityItem';
 
 export const ApiNotificationDrawer = () => {
-    const { recentActivityData } = useStoreContext();
+    const { recentActivity } = { ... React.useContext(GlobalContext).store }
 
     return (
         <DrawerPanelContent>
@@ -16,7 +16,7 @@ export const ApiNotificationDrawer = () => {
             <DrawerPanelBody noPadding>
                 <DataList aria-label="app-data-list-notification-drawer" key="notification-drawer">
                     <React.Fragment>
-                        { recentActivityData.map((activity, index) =>
+                        { recentActivity.map((activity, index) =>
                             <DataListItem aria-labelledby={`data-list-item-${index}`} key={index}>
                                 <DataListItemRow>
                                 <DataListItemCells
