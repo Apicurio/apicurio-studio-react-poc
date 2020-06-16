@@ -74,7 +74,7 @@ export const ApiToolbar = () => {
     // const { inputValue } = this.state;
     console.log("inputValue:", inputValue)
     const copy = globalContext.store.apis
-    const newApiList = globalContext.updateApis(they.filter(api => api.name.includes(inputValue)))
+    const newApiList = globalContext.updateApis(copy.filter(api => api.name.includes(inputValue)))
     console.log("copy", copy)
     console.log("all APIs", globalContext.store.apis)
     console.log("new", newApiList)
