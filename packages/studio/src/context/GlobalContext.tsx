@@ -5,11 +5,15 @@ export interface ToolbarStatus {
   areAllSelected: boolean;
   selectedItems: any[];
   isChecked?: boolean;
+  // inputValue?: string;
+  filters?: object
 }
 
 export interface GlobalState {
   apis: Api[];
   collaborators: ApiCollaborator[];
+  // filters: {};
+  // inputValue: string;
   recentActivity: ApiDesignChange[];
   notificationDrawerExpanded: boolean;
   dashboardView: DashboardViews;
@@ -31,11 +35,17 @@ const initialState: GlobalState = {
   apis: [],
   collaborators: [],
   dashboardView: DashboardViews.list,
+  // inputValue: '',
   notificationDrawerExpanded: false,
   recentActivity: [],
   selectedApiId: "",
   toolbarStatus: {
     areAllSelected: false,
+    filters: {
+      name: [],
+      tag: []
+    },
+    // inputValue: '',
     isChecked: false,
     selectedItems: []
   }

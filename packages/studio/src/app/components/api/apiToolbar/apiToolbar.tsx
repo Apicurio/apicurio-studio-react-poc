@@ -44,6 +44,8 @@ export const ApiToolbar = () => {
   );
   const [sortIconChanged, setSortIconChanged] = useState(false);
   const [currentCategory, setCurrentCategory] = useState("Name");
+  const [inputValue, setInputValue] = useState("");
+  const [apiList, setApiList] = useState(globalContext.store.apis)
 
   const compare = (direction: string) => {
     if (direction === "asc") {
@@ -52,6 +54,51 @@ export const ApiToolbar = () => {
       return (a: Api, b: Api) => (b.name > a.name ? 1 : -1);
     }
     return (a: Api, b: Api) => 0;
+  };
+
+  const onInputChange = (newInput: string) => {
+    const apiList = globalContext.store.apis
+    setInputValue(newInput);
+
+    if (inputValue === '') {
+      globalContext.updateApis(apiList)
+    }
+  }
+
+
+  const onNameInput = (event: any) => {
+    if (event.key && event.key !== 'Enter') {
+      return;
+    }
+
+    // const { inputValue } = this.state;
+    console.log("inputValue:", inputValue)
+    const copy = globalContext.store.apis
+    const newApiList = globalContext.updateApis(they.filter(api => api.name.includes(inputValue)))
+    console.log("copy", copy)
+    console.log("all APIs", globalContext.store.apis)
+    console.log("new", newApiList)
+
+    if (inputValue === '') {
+      return globalContext.store.apis;
+    }
+
+    else {
+      return newApiList;
+    }
+      
+    // console.log("the result", apiList.filter(api => api.name.includes(inputValue)))
+    // globalContext.updateApis(apiList.filter(api => api.name.includes(inputValue)))
+    // this.setState(prevState => {
+      // const prevFilters = prevState.filters['name'];
+    //   return {
+    //     filters: {
+    //       ...prevState.filters,
+    //       ['name']: prevFilters.includes(inputValue) ? prevFilters : [...prevFilters, inputValue]
+    //     },
+    //     inputValue: ''
+    //   };
+    // });
   };
 
   const sortAlphaDown = () => {
@@ -199,10 +246,13 @@ export const ApiToolbar = () => {
               id="textInput1"
               type="search"
               aria-label="search input"
+              onChange={onInputChange}
+              onKeyDown={onNameInput}
             />
             <Button
               variant={ButtonVariant.control}
               aria-label="search"
+              onClick={onNameInput}
             >
               <SearchIcon />
             </Button>
