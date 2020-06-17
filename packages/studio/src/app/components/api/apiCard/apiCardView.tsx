@@ -58,10 +58,13 @@ export const ApiCardView: React.FunctionComponent<ApiCardProps> = ({
   };
 
   const { apis } = { ...useContext(GlobalContext).store };
+  const filteredApis = apis.filter(api => {
+    return api.name.toLowerCase().indexOf(globalContext.store.inputValue.toLowerCase()) !== -1
+  })
 
   return (
     <Gallery gutter="md">
-      {apis.map((api, key) => (
+      {filteredApis.map((api, key) => (
         <React.Fragment>
           <Card key={key}>
             <CardHead>

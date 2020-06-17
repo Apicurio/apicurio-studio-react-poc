@@ -13,9 +13,13 @@ export const ApiDataListItem = () => {
     globalContext.setApiDrawerExpanded(!apiDrawerState);
   }
 
+  const filteredApis = apis.filter(api => {
+    return api.name.toLowerCase().indexOf(globalContext.store.inputValue.toLowerCase()) !== -1
+  })
+
     return (
       <React.Fragment>
-        {apis.map((api, index) => 
+        {filteredApis.map((api, index) => 
           <DataListItem id={api.id} key={index} aria-labelledby={`data-list-item-${api.id}`}>
           <DataListItemRow>
             <DataListCheck checked={false} aria-labelledby={`data-list-item-${api.id}`} name={`data-list-item-check-${api.id}`}/>

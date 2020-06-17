@@ -57,48 +57,13 @@ export const ApiToolbar = () => {
   };
 
   const onInputChange = (newInput: string) => {
-    const apiList = globalContext.store.apis
-    setInputValue(newInput);
-
-    if (inputValue === '') {
-      globalContext.updateApis(apiList)
-    }
+    return globalContext.setInputValue(newInput);
   }
-
 
   const onNameInput = (event: any) => {
     if (event.key && event.key !== 'Enter') {
       return;
     }
-
-    // const { inputValue } = this.state;
-    console.log("inputValue:", inputValue)
-    const copy = globalContext.store.apis
-    const newApiList = globalContext.updateApis(copy.filter(api => api.name.includes(inputValue)))
-    console.log("copy", copy)
-    console.log("all APIs", globalContext.store.apis)
-    console.log("new", newApiList)
-
-    if (inputValue === '') {
-      return globalContext.store.apis;
-    }
-
-    else {
-      return newApiList;
-    }
-      
-    // console.log("the result", apiList.filter(api => api.name.includes(inputValue)))
-    // globalContext.updateApis(apiList.filter(api => api.name.includes(inputValue)))
-    // this.setState(prevState => {
-      // const prevFilters = prevState.filters['name'];
-    //   return {
-    //     filters: {
-    //       ...prevState.filters,
-    //       ['name']: prevFilters.includes(inputValue) ? prevFilters : [...prevFilters, inputValue]
-    //     },
-    //     inputValue: ''
-    //   };
-    // });
   };
 
   const sortAlphaDown = () => {

@@ -5,15 +5,13 @@ export interface ToolbarStatus {
   areAllSelected: boolean;
   selectedItems: any[];
   isChecked?: boolean;
-  // inputValue?: string;
   filters?: object
 }
 
 export interface GlobalState {
   apis: Api[];
   collaborators: ApiCollaborator[];
-  // filters: {};
-  // inputValue: string;
+  inputValue: string;
   recentActivity: ApiDesignChange[];
   notificationDrawerExpanded: boolean;
   dashboardView: DashboardViews;
@@ -35,7 +33,7 @@ const initialState: GlobalState = {
   apis: [],
   collaborators: [],
   dashboardView: DashboardViews.list,
-  // inputValue: '',
+  inputValue: '',
   notificationDrawerExpanded: false,
   recentActivity: [],
   selectedApiId: "",
@@ -45,7 +43,6 @@ const initialState: GlobalState = {
       name: [],
       tag: []
     },
-    // inputValue: '',
     isChecked: false,
     selectedItems: []
   }
@@ -56,6 +53,7 @@ export interface GlobalContextObj {
   setSelectedApiId: (selectedApiId: string) => void;
   store: GlobalState;
   setDashboardView: (view: DashboardViews) => void;
+  setInputValue: (inputValue: string) => void;
   setNotificationDrawerExpanded: (isExpanded: boolean) => void;
   updateApis: (apis: Api[]) => void;
   updateCollaborators: (collaborators: ApiCollaborator[]) => void;
@@ -74,6 +72,7 @@ export class GlobalContextProvider extends React.Component<{}, GlobalState> {
         value={{
           setApiDrawerExpanded: this.setApiDrawerExpanded,
           setDashboardView: this.setDashboardView,
+          setInputValue: this.setInputValue,
           setNotificationDrawerExpanded: this.setNotificationDrawerExpanded,
           setSelectedApiId: this.setSelectedApiId,
           store: this.state,
@@ -98,6 +97,10 @@ export class GlobalContextProvider extends React.Component<{}, GlobalState> {
 
   private setDashboardView = (dashboardView: DashboardViews) => {
     this.setState({ dashboardView });
+  };
+
+  private setInputValue = (inputValue: string) => {
+    this.setState({ inputValue });
   };
 
   private setNotificationDrawerExpanded = (
