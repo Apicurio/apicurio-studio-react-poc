@@ -1,7 +1,15 @@
 .api-tag {
+    padding-top: var(--pf-global--spacer--xs);
+    padding-bottom: var(--pf-global--spacer--xs);
     padding-right: var(--pf-global--spacer--sm);
     padding-left: var(--pf-global--spacer--sm);
     background-color: var(--pf-global--BackgroundColor--300);
     font-size: var(--pf-global--FontSize--xs);
     border-radius: var(--pf-global--BorderRadius--lg);
   }
+
+  span.api-tag {
+    margin-right: var(--pf-global--spacer--sm);
+    margin-left: 0px;
+  }
+
