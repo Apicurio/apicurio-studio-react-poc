@@ -43,9 +43,6 @@ export const ApiToolbar = () => {
     false
   );
   const [sortIconChanged, setSortIconChanged] = useState(false);
-  const [currentCategory, setCurrentCategory] = useState("Name");
-  const [inputValue, setInputValue] = useState("");
-  const [apiList, setApiList] = useState(globalContext.store.apis)
 
   const compare = (direction: string) => {
     if (direction === "asc") {
@@ -62,7 +59,8 @@ export const ApiToolbar = () => {
 
   const onNameInput = (event: any) => {
     if (event.key && event.key !== 'Enter') {
-      return;
+      // return;
+      return globalContext.store.inputValue;
     }
   };
 
@@ -77,7 +75,7 @@ export const ApiToolbar = () => {
   };
 
   const onNameSelect = (event: any) => {
-    setCurrentCategory(event.target.innerText);
+    globalContext.setCurrentFilterCategory(event.target.innerText);
     setIsLowerToolbarDropdownOpen(!isLowerToolbarDropdownOpen);
   };
 
@@ -146,7 +144,7 @@ export const ApiToolbar = () => {
             onToggle={onToolbarDropdownToggle}
             style={{ width: "100%" }}
           >
-            <FilterIcon /> {currentCategory}
+            <FilterIcon /> {globalContext.store.currentFilterCategory}
           </DropdownToggle>
         }
         isOpen={isLowerToolbarDropdownOpen}
@@ -212,7 +210,7 @@ export const ApiToolbar = () => {
               type="search"
               aria-label="search input"
               onChange={onInputChange}
-              onKeyDown={onNameInput}
+              // onKeyDown={onNameInput}
             />
             <Button
               variant={ButtonVariant.control}
