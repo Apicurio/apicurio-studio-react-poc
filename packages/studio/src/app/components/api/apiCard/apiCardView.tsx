@@ -68,18 +68,18 @@ export const ApiCardView: React.FunctionComponent<ApiCardProps> = ({
           );
         })
       : apis.filter(api => {
-        console.log(globalContext.store.inputValue)
-        console.log(api.tags.includes(globalContext.store.inputValue))
-          if (api.tags.includes(globalContext.store.inputValue) && globalContext.store.inputValue !== '') {
-            return (
-              api.name
-                .toLowerCase()
-                // .indexOf(globalContext.store.inputValue.toLowerCase()) !== -1
-            );
+          for (let i = 0; i < api.tags.length; i++) {
+            if (
+              api.tags[i].indexOf(
+                globalContext.store.inputValue.toLowerCase()
+              ) !== -1
+            ) {
+              return api.name.toLowerCase();
+            } else if (globalContext.store.inputValue === "") {
+              return apis;
+            }
           }
-          else if (globalContext.store.inputValue === "") {
-            return apis;
-          }
+
           return;
         });
 

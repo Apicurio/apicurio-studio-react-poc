@@ -8,7 +8,6 @@ export interface ApiActivityViewProps {
   }
 
 function findId(apis: any[], id: string) {
-  // console.log(`array is ${JSON.stringify(apis)}, id is ${id}`);
     const apiTemp = apis.find(api => api.apiId === id);
     if (apiTemp !== undefined) {
       return apiTemp;
