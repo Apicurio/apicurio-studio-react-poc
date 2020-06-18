@@ -70,9 +70,9 @@ export const ApiCardView: React.FunctionComponent<ApiCardProps> = ({
       : apis.filter(api => {
           for (let i = 0; i < api.tags.length; i++) {
             if (
-              api.tags[i].indexOf(
-                globalContext.store.inputValue.toLowerCase()
-              ) !== -1
+              api.tags[i]
+                .toLowerCase()
+                .indexOf(globalContext.store.inputValue.toLowerCase()) !== -1
             ) {
               return api.name.toLowerCase();
             } else if (globalContext.store.inputValue === "") {

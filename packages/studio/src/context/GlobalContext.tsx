@@ -5,7 +5,6 @@ export interface ToolbarStatus {
   areAllSelected: boolean;
   selectedItems: any[];
   isChecked?: boolean;
-  filters?: object
 }
 
 export interface GlobalState {
@@ -41,10 +40,6 @@ const initialState: GlobalState = {
   selectedApiId: "",
   toolbarStatus: {
     areAllSelected: false,
-    filters: {
-      name: [],
-      tag: []
-    },
     isChecked: false,
     selectedItems: []
   }

@@ -55,13 +55,13 @@ export const ApiToolbar = () => {
 
   const onInputChange = (newInput: string) => {
     return globalContext.setInputValue(newInput);
-  }
+  };
 
   const onNameInput = (event: any) => {
-    if (event.key && event.key !== 'Enter') {
-      // return;
+    if (event.key && event.key !== "Enter") {
       return globalContext.store.inputValue;
     }
+    return;
   };
 
   const sortAlphaDown = () => {
@@ -210,7 +210,6 @@ export const ApiToolbar = () => {
               type="search"
               aria-label="search input"
               onChange={onInputChange}
-              // onKeyDown={onNameInput}
             />
             <Button
               variant={ButtonVariant.control}
@@ -256,9 +255,7 @@ export const ApiToolbar = () => {
           >
             <ListIcon />
           </Button>
-          <span className="app-toolbar-api-total">
-            {apiCount} APIs found
-          </span>
+          <span className="app-toolbar-api-total">{apiCount} APIs found</span>
         </DataToolbarItem>
       </DataToolbarContent>
     </DataToolbar>
