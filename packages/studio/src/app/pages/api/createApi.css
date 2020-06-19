@@ -1,0 +1,57 @@
+.app-create-api__form-card-text span {
+    margin-left: var(--pf-global--spacer--sm);
+}
+
+.app-create-api__form-card {
+  box-shadow: none !important;
+}
+
+.app-create-api__form-card:hover {
+  box-shadow: none !important;
+  color: var(--pf-global--primary-color--100);
+}
+
+
+.app-create-api__form-card::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  content: "";
+  border: var(--pf-global--BorderWidth--sm) solid var(--pf-global--BorderColor--100);
+}
+
+.app-create-api__form-card:hover::after {
+  border-color: var(--pf-global--primary-color--100);
+}
+
+.app-create-api__form-card-group {
+  display: grid;
+  grid-column-gap: var(--pf-global--spacer--sm);
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.app-create-api__form {
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .app-create-api__form {
+    width: 50%;
+  }
+}
+
+.app-form-helper-text {
+  font-size: var(--pf-global--FontSize--sm);
+  color: var(--pf-global--Color--200);
+}
+
+.app-form-helper-text-asterisk {
+  color: var(--pf-global--danger-color--100);
+}
+
+.app-form-helper-text span {
+  margin-left: 0 !important;
+  padding-bottom: 0 !important;
+}

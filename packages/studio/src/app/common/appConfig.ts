@@ -1,4 +1,9 @@
-import {ApisService, CurrentUserService, KeycloakAuthenticationService, ConfigService} from  '@apicurio/services';
+import {
+    ApisService,
+    CurrentUserService,
+    KeycloakAuthenticationService,
+    ConfigService
+} from  '@apicurio/services';
 
 // Initialize services.
 
