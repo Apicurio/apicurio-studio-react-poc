@@ -127,12 +127,9 @@ export abstract class AbstractHubService {
             data: stringify
         }, ...options}
 
-        console.log('did it make it to the post');
-
         return axios.request(config)
         .then(response => {
             let data = response;
-            console.log('what is the response' + data)
             if(successCallback) {
                 return successCallback(data);
             }
