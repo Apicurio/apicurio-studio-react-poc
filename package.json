@@ -18,7 +18,7 @@
     "prebuild": "./init-dev.sh",
     "build": "lerna run build",
     "lint": "lerna run lint",
-    "start:studio": "lerna run start --scope=@apicurio/studio",
+    "start:studio": "lerna run start --scope=@apicurio/studio --scope=@apicurio/models --scope=@apicurio/services",
     "test": "echo \"TODO: Add tests\" && exit 0 "
   },
   "devDependencies": {
