@@ -66,12 +66,12 @@ export const ApiToolbar = () => {
 
   const sortAlphaDown = () => {
     globalContext.updateApis(globalContext.store.apis.sort(compare("desc")));
-    setSortIconChanged(true);
+    setSortIconChanged(false);
   };
 
   const sortAlphaUp = () => {
     globalContext.updateApis(globalContext.store.apis.sort(compare("asc")));
-    setSortIconChanged(false);
+    setSortIconChanged(true);
   };
 
   const onNameSelect = (event: any) => {
@@ -223,7 +223,7 @@ export const ApiToolbar = () => {
         <DataToolbarItem>
           <Button
             variant="plain"
-            onClick={sortIconChanged ? sortAlphaUp : sortAlphaDown}
+            onClick={sortIconChanged ? sortAlphaDown : sortAlphaUp}
           >
             {sortIconChanged ? <SortAlphaDownIcon /> : <SortAlphaUpIcon />}
           </Button>
