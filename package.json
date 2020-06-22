@@ -23,7 +23,8 @@
     "prebuild": "./init-dev.sh",
     "build": "lerna run build",
     "lint": "lerna run lint",
-    "start:studio": "lerna run start --scope=@apicurio/studio --scope=@apicurio/models --scope=@apicurio/services",
+    "start:studio": "lerna run start --scope=@apicurio/studio",
+    "start:studio:watch": "concurrently \"lerna run watch\" \"yarn start:studio\"",
     "test": "echo \"TODO: Add tests\" && exit 0 "
   },
   "devDependencies": {
@@ -37,6 +38,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "babel-preset-es2015": "^6.24.1",
+    "concurrently": "^5.2.0",
     "js-base64": "2.5.2",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
