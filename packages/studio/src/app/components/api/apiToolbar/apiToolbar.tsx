@@ -46,9 +46,9 @@ export const ApiToolbar = () => {
 
   const compare = (direction: string) => {
     if (direction === "asc") {
-      return (a: Api, b: Api) => (a.name > b.name ? 1 : -1);
+      return (a: Api, b: Api) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1);
     } else if (direction === "desc") {
-      return (a: Api, b: Api) => (b.name > a.name ? 1 : -1);
+      return (a: Api, b: Api) => (b.name.toLowerCase() > a.name.toLowerCase() ? 1 : -1);
     }
     return (a: Api, b: Api) => 0;
   };
