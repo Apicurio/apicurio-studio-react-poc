@@ -15,7 +15,6 @@
  * limitations under the License.
  */
 
-
 export class ApiContributor {
     name: string;
     edits: number;
