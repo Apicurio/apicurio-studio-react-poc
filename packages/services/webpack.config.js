@@ -22,7 +22,7 @@ module.exports = {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist/umd'),
     libraryTarget: 'umd',
-    library: 'apicurio-models',
+    library: 'apicurio-services',
     umdNamedDefine: true
   }
 };
