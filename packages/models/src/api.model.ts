@@ -71,6 +71,7 @@ export class EditableApiDefinition extends ApiDefinition {
         super();
         this.editingSessionUuid = null;
         this.contentVersion = 0;
+        console.log("jahahhahah")
     }
 
     public static fromApi(api: Api): EditableApiDefinition {

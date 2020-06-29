@@ -21,11 +21,13 @@ export class ApiCollaborator {
     userId: string;
     userName: string;
     role: string;
+    beep: boolean;
 
     constructor() {
         this.userId = "";
         this.userName = "";
         this.role = "";
+        this.beep = false;
     }
 }
 

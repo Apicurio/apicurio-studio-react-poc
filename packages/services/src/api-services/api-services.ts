@@ -31,7 +31,7 @@ export class ApisService extends AbstractHubService {
 
     const importApiUrl: string = this.endpoint("designs");
     const options: AxiosRequestConfig = this.options({ "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" });
-
+    console.log("h")
     console.info("[ApisService] Importing an API Design: %s", importApiUrl);
     return this.httpPutWithReturn<ImportApi, Api>(importApiUrl, api, options);
   }

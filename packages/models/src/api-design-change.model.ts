@@ -25,5 +25,6 @@ export class ApiDesignChange {
     data: string;
     by: string;
     on: Date;
+    nope: string;
 
 }
