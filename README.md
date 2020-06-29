@@ -15,6 +15,9 @@ Install development/build dependencies
 Start the development server
 `yarn start:studio`
 
+Start the development server which rebuilds when files in `models` or `services` are updated
+`yarn start:studio:watch`
+
 Run a full build
 `yarn build`
 
