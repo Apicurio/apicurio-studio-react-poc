@@ -43,29 +43,39 @@ export const ApiToolbar = () => {
     false
   );
   const [sortIconChanged, setSortIconChanged] = useState(false);
-  const [currentCategory, setCurrentCategory] = useState("Name");
 
   const compare = (direction: string) => {
     if (direction === "asc") {
-      return (a: Api, b: Api) => (a.name > b.name ? 1 : -1);
+      return (a: Api, b: Api) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1);
     } else if (direction === "desc") {
-      return (a: Api, b: Api) => (b.name > a.name ? 1 : -1);
+      return (a: Api, b: Api) => (b.name.toLowerCase() > a.name.toLowerCase() ? 1 : -1);
     }
     return (a: Api, b: Api) => 0;
   };
 
+  const onInputChange = (newInput: string) => {
+    return globalContext.setInputValue(newInput);
+  };
+
+  const onNameInput = (event: any) => {
+    if (event.key && event.key !== "Enter") {
+      return globalContext.store.inputValue;
+    }
+    return;
+  };
+
   const sortAlphaDown = () => {
     globalContext.updateApis(globalContext.store.apis.sort(compare("desc")));
-    setSortIconChanged(true);
+    setSortIconChanged(false);
   };
 
   const sortAlphaUp = () => {
     globalContext.updateApis(globalContext.store.apis.sort(compare("asc")));
-    setSortIconChanged(false);
+    setSortIconChanged(true);
   };
 
   const onNameSelect = (event: any) => {
-    setCurrentCategory(event.target.innerText);
+    globalContext.setCurrentFilterCategory(event.target.innerText);
     setIsLowerToolbarDropdownOpen(!isLowerToolbarDropdownOpen);
   };
 
@@ -134,7 +144,7 @@ export const ApiToolbar = () => {
             onToggle={onToolbarDropdownToggle}
             style={{ width: "100%" }}
           >
-            <FilterIcon /> {currentCategory}
+            <FilterIcon /> {globalContext.store.currentFilterCategory}
           </DropdownToggle>
         }
         isOpen={isLowerToolbarDropdownOpen}
@@ -199,10 +209,12 @@ export const ApiToolbar = () => {
               id="textInput1"
               type="search"
               aria-label="search input"
+              onChange={onInputChange}
             />
             <Button
               variant={ButtonVariant.control}
               aria-label="search"
+              onClick={onNameInput}
             >
               <SearchIcon />
             </Button>
@@ -211,7 +223,7 @@ export const ApiToolbar = () => {
         <DataToolbarItem>
           <Button
             variant="plain"
-            onClick={sortIconChanged ? sortAlphaUp : sortAlphaDown}
+            onClick={sortIconChanged ? sortAlphaDown : sortAlphaUp}
           >
             {sortIconChanged ? <SortAlphaDownIcon /> : <SortAlphaUpIcon />}
           </Button>
@@ -243,9 +255,7 @@ export const ApiToolbar = () => {
           >
             <ListIcon />
           </Button>
-          <span className="app-toolbar-api-total">
-            {apiCount} APIs found
-          </span>
+          <span className="app-toolbar-api-total">{apiCount} APIs found</span>
         </DataToolbarItem>
       </DataToolbarContent>
     </DataToolbar>

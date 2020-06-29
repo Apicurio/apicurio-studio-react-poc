@@ -10,6 +10,8 @@ export interface ToolbarStatus {
 export interface GlobalState {
   apis: Api[];
   collaborators: ApiCollaborator[];
+  currentFilterCategory: string;
+  inputValue: string;
   recentActivity: ApiDesignChange[];
   notificationDrawerExpanded: boolean;
   dashboardView: DashboardViews;
@@ -31,7 +33,9 @@ const initialState: GlobalState = {
   apiDrawerExpanded: false,
   apis: [],
   collaborators: [],
+  currentFilterCategory: "Name",
   dashboardView: DashboardViews.list,
+  inputValue: '',
   lastCreatedApi: "",
   notificationDrawerExpanded: false,
   recentActivity: [],
@@ -45,9 +49,11 @@ const initialState: GlobalState = {
 
 export interface GlobalContextObj {
   setApiDrawerExpanded: (isExpanded: boolean) => void;
+  setCurrentFilterCategory: (currentFilterCategory: string) => void;
   setSelectedApiId: (selectedApiId: string) => void;
   store: GlobalState;
   setDashboardView: (view: DashboardViews) => void;
+  setInputValue: (inputValue: string) => void;
   setNotificationDrawerExpanded: (isExpanded: boolean) => void;
   setLastCreatedApi: (lastCreatedApi: string) => void;
   updateApis: (apis: Api[]) => void;
@@ -66,7 +72,9 @@ export class GlobalContextProvider extends React.Component<{}, GlobalState> {
       <GlobalContext.Provider
         value={{
           setApiDrawerExpanded: this.setApiDrawerExpanded,
+          setCurrentFilterCategory: this.setCurrentFilterCategory,
           setDashboardView: this.setDashboardView,
+          setInputValue: this.setInputValue,
           setLastCreatedApi: this.setLastCreatedApi,
           setNotificationDrawerExpanded: this.setNotificationDrawerExpanded,
           setSelectedApiId: this.setSelectedApiId,
@@ -93,9 +101,16 @@ export class GlobalContextProvider extends React.Component<{}, GlobalState> {
   private setLastCreatedApi = (lastCreatedApi: string) => {
     this.setState({ lastCreatedApi });
   }
+  private setCurrentFilterCategory = (currentFilterCategory: string) => {
+    this.setState({ currentFilterCategory });
+  };
 
   private setDashboardView = (dashboardView: DashboardViews) => {
     this.setState({ dashboardView });
+  };
+
+  private setInputValue = (inputValue: string) => {
+    this.setState({ inputValue });
   };
 
   private setNotificationDrawerExpanded = (
