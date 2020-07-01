@@ -23,6 +23,7 @@ import {
   PageSection,
   PageSectionVariants } from '@patternfly/react-core';
 import './importApi.css';
+import MonacoEditor from 'react-monaco-editor';
 
 
 export const ImportApi = () => {
@@ -83,6 +84,19 @@ export const ImportApi = () => {
   const handleTextInputChange3 = (textInputClipboard: string) => {
     setTextInputClipboard(textInputClipboard);
   }
+
+  const monacoOnChange = (newValue, e) => {
+    console.log('onChange', newValue, e);
+  }
+
+  const editorDidMount = (editor, monaco) => {
+    console.log('editorDidMount', editor);
+    editor.focus();
+  }
+
+  const monacoOptions = {
+    selectOnLineNumbers: true
+  };
 
   const validateURL = (url: string) => {
     const regexp = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
@@ -181,13 +195,23 @@ export const ImportApi = () => {
                   isRequired
                   fieldId="import-clipboard"
                 >
-                <TextInput
+                {/* <TextInput
                   isRequired
                   type="text"
                   id="import-clipboard"
                   name="import-clipboard"
                   value={textInputClipboard}
                   onChange={handleTextInputChange3}
+                /> */}
+                <MonacoEditor
+                  width="800"
+                  height="600"
+                  language="javascript"
+                  theme="vs-dark"
+                  value={textInputClipboard}
+                  options={monacoOptions}
+                  onChange={monacoOnChange}
+                  editorDidMount={editorDidMount}
                 />
               </FormGroup>
               )}
