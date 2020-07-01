@@ -10,7 +10,8 @@
     "nohoist": [
       "**/@patternfly/react-core",
       "**/@patternfly/react-core/**",
-      "**/patternfly"
+      "**/patternfly",
+      "**/monaco-editor"
     ]
   },
   "scripts": {
