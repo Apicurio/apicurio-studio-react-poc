@@ -15,7 +15,8 @@
       "**/@rh-uxd/integration-core/**",
       "**/@rh-uxd/integration-react",
       "**/@rh-uxd/integration-react/**",
-      "**/rh-uxd"
+      "**/rh-uxd",
+      "**/react-monaco-editor"
     ]
   },
   "scripts": {
