@@ -28,7 +28,14 @@ module.exports = merge(common, {
           path.resolve(__dirname, 'node_modules/@patternfly/patternfly'),
           path.resolve(__dirname, 'node_modules/@patternfly/react-core/dist/styles/base.css'),
           path.resolve(__dirname, 'node_modules/@patternfly/react-core/dist/esm/@patternfly/patternfly'),
-          path.resolve(__dirname, 'node_modules/@patternfly/react-styles/css')
+          path.resolve(__dirname, 'node_modules/@patternfly/react-styles/css'),
+          path.resolve(__dirname, 'node_modules/rh-uxd'),
+          path.resolve(__dirname, 'node_modules/@rh-uxd/rh-uxd'),
+          path.resolve(__dirname, 'node_modules/@rh-uxd/integration-react/node_modules/@patternfly/patternfly'),
+          path.resolve(__dirname, 'node_modules/@rh-uxd/integration-react/node_modules/@patternfly/react-core/dist/styles/base.css'),
+          path.resolve(__dirname, 'node_modules/@rh-uxd/integration-react/node_modules/@patternfly/react-styles/css'),
+          path.resolve(__dirname, 'node_modules/@rh-uxd/integration-react/node_modules/@patternfly/react-core/dist/esm/@patternfly/patternfly'),
+          path.resolve(__dirname, 'node_modules/@rh-uxd/integration-react/dist/esm/@patternfly/patternfly'),
         ],
         use: [MiniCssExtractPlugin.loader, 'css-loader']
       }
