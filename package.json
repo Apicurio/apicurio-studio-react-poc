@@ -11,7 +11,11 @@
       "**/@patternfly/react-core",
       "**/@patternfly/react-core/**",
       "**/patternfly",
-      "**/monaco-editor"
+      "**/@rh-uxd/integration-core",
+      "**/@rh-uxd/integration-core/**",
+      "**/@rh-uxd/integration-react",
+      "**/@rh-uxd/integration-react/**",
+      "**/rh-uxd"
     ]
   },
   "scripts": {
