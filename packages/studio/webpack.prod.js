@@ -36,7 +36,7 @@ module.exports = merge(common, {
           path.resolve(__dirname, 'node_modules/@rh-uxd/integration-react/node_modules/@patternfly/react-styles/css'),
           path.resolve(__dirname, 'node_modules/@rh-uxd/integration-react/node_modules/@patternfly/react-core/dist/esm/@patternfly/patternfly'),
           path.resolve(__dirname, 'node_modules/@rh-uxd/integration-react/dist/esm/@patternfly/patternfly'),
-          path.resolve(__dirname, 'node_modules/monaco-editor),
+          path.resolve(__dirname, 'node_modules/monaco-editor'),
           path.resolve(__dirname, 'node_modules/monaco-editor/esm/vs/base/browser/ui/**/*.css'),
           path.resolve(__dirname, 'node_modules/monaco-editor/esm/vs/base/browser/ui/**/**/*.css'),
           path.resolve(__dirname, 'node_modules/monaco-editor/esm/vs/editor/browser/**/*.css'),
