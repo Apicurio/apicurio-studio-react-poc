@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useContext} from 'react';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -24,9 +24,15 @@ import {
   PageSectionVariants } from '@patternfly/react-core';
 import './importApi.css';
 import MonacoEditor from 'react-monaco-editor';
-
+import { Services } from './../../common';
+import {ImportApi} from "@apicurio/models";
+import { GlobalContext, GlobalContextObj } from '../../../context';
+import { Redirect } from "react-router-dom";
 
 export const ImportApi = () => {
+
+  const apisService = Services.getInstance().apisService;
+  const globalContext: GlobalContextObj = useContext(GlobalContext);
 
   const options = [
     { value: 'URL', label: 'Import from URL', disabled: false },
@@ -42,6 +48,9 @@ export const ImportApi = () => {
   const [isValidTextInput2, setIsValidTextInput2] = React.useState(true);
   const [helperTextInvalid1, setHelperTextInvalid1] = React.useState('');
   const [helperTextInvalid2, setHelperTextInvalid2] = React.useState('');
+  const [importing, setImporting] = useState(false);
+  const [importError, setImportError] = useState(null);
+  const [redirect, setRedirect] = useState(''); 
 
   const onSelectChange = (importType: string) => {
     setImportType(importType);
@@ -64,6 +73,9 @@ export const ImportApi = () => {
     }
   };
 
+  console.log('is text 1 valid' + isValidTextInput1);
+  console.log('is text 2 valid' + isValidTextInput2)
+
   const handleTextInputChange2 = (textInputUrl2: string) => {
     setTextInputUrl2(textInputUrl2);
     if (textInputUrl2 === '') {
@@ -85,6 +97,7 @@ export const ImportApi = () => {
     setTextInputClipboard(textInputClipboard);
   }
 
+  // Text Editor
   const monacoOnChange = (newValue, e) => {
     console.log('onChange', newValue, e);
   }
@@ -107,6 +120,63 @@ export const ImportApi = () => {
       return false;
     }
   }
+
+  // On handle submit, check if the form is valid, and call the onCreateApi method
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('does the submit work');
+    if(importType === options[0].value) {
+      if (isValidTextInput1) {
+        console.log('does it try to call the first api');
+        onImportApi(e);
+      }
+    }
+    else if(importType === options[1].value) {
+      if (isValidTextInput2) {
+        console.log('does it try to call the second api');
+        onImportApi(e);
+      }
+    }
+  };
+
+  const onImportApi = (api: ImportApi) => {
+    console.log('does it get inside import api');
+    // setImporting(true);
+    // setImportError(null);
+    // console.log("[ImportApiPageComponent] onImportApi(): " + JSON.stringify(api));
+    apisService.importApi(api).then(api => {
+      console.info("[ImportApiPageComponent] Navigating to: Apis");
+      // setRedirect('/');
+    }).catch(error => {
+      console.error("[CreateApiPageComponent] Error creating an API");
+      setImporting(false);
+      if (error.status === 404) {
+        setImportError(error);
+      }
+      else {
+        setImportError(error);
+      }
+    })
+  };
+
+//   public onImportApi(api: ImportApi) {
+//     this.importing = true;
+//     this.importError = null;
+//     console.log("[ImportApiPageComponent] onImportApi(): " + JSON.stringify(api))
+//     this.apis.importApi(api).then(importedApi => {
+//         let link: string[] = [ "/apis", importedApi.id ];
+//         console.info("[ImportApiPageComponent] Navigating to: %o", link);
+//         this.router.navigate(link);
+//     }).catch( error => {
+//         console.error("[ImportApiPageComponent] Error importing API: %o", error);
+//         this.importing = false;
+//         if (error.status === 404) {
+//             this.importError = error;
+//         } else {
+//             this.error(error);
+//         }
+//     });
+// }
 
   return (
     <React.Fragment>
@@ -216,7 +286,7 @@ export const ImportApi = () => {
               </FormGroup>
               )}
               <ActionGroup>
-                <Button variant="primary">Import API</Button>
+                <Button type="submit" variant="primary" onClick={handleSubmit}>Import API</Button>
               </ActionGroup>
             </Form>
           </SplitItem>
