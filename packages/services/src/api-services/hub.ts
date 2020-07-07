@@ -153,12 +153,12 @@ export abstract class AbstractHubService {
 
         return axios.request(config)
         .then(response => {
-            // let data = response;
+            let data = response;
             if(successCallback) {
-                return successCallback(response);
+                return successCallback(data);
             }
             else {
-                return response;
+                return data;
             }
         })
         .catch(error => console.log(error));
