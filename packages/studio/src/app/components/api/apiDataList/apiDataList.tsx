@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {DataList} from '@patternfly/react-core';
 import ApiDataListItem from './apiDataListItem';
+import { GlobalContext, GlobalContextObj } from '../../../../context';
 
 interface ApiDataListProps {
   viewDetails: React.MouseEventHandler,
@@ -8,35 +9,33 @@ interface ApiDataListProps {
   keyListItem: FunctionStringCallback
 }
 
-interface ApiDataListState {
-  selectedDataListItemId: string
-}
+export const ApiDataList: React.FunctionComponent<ApiDataListProps> = () => {
 
-class ApiDataList extends React.Component<ApiDataListProps, ApiDataListState> {
-  constructor(props: ApiDataListProps) {
-    super(props);
-    this.state = {
-      selectedDataListItemId: ''
-    };
+  const globalContext: GlobalContextObj = useContext(GlobalContext);
+  const [selectedDataListItemId, setSelectedDataListItemId] = useState('');
+
+  const onSelectDataListItem = (id: string) => {
+    if (globalContext.store.lastCreatedApi !== '') {
+      globalContext.setLastCreatedApi('');
+    }
+    setSelectedDataListItemId(id);
   }
 
-  onSelectDataListItem = (id: string) => {
-    this.setState({ selectedDataListItemId: id });
-    this.props.selectItem(id);
-    this.props.keyListItem(id);
-  }
+  useEffect(() => {
+    if (globalContext.store.lastCreatedApi !== '') {
+      setSelectedDataListItemId(globalContext.store.lastCreatedApi);
+    }
+  });
 
-  render() {
-    return (
-      <DataList 
-        aria-label="selectable data list"
-        selectedDataListItemId={this.state.selectedDataListItemId}
-        onSelectDataListItem={this.onSelectDataListItem}
-      >
-        <ApiDataListItem />
-      </DataList>
-    );
-  }
-}
+  return (
+    <DataList 
+      aria-label="Selectable data list"
+      selectedDataListItemId={selectedDataListItemId}
+      onSelectDataListItem={onSelectDataListItem}
+    >
+      <ApiDataListItem />
+    </DataList>
+  );
+};
 
 export default ApiDataList;
