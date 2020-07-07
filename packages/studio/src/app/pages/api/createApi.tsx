@@ -117,6 +117,8 @@ export const CreateApi = () => {
       updateSpec(spec, eventData);
       importApi.data = Base64.encode(JSON.stringify(spec));
 
+      console.log("[CreateApiPageComponent] Importing a new (blank) API: " + JSON.stringify(importApi));
+
       apisService.importApi(importApi).then(updatedApi => {
         // TO DO: Set up routes in the app to redirect here
         // let link: string[] = [ "/apis", updatedApi.id ];

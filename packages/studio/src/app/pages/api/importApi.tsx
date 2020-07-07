@@ -28,6 +28,7 @@ import { Services } from './../../common';
 import {ImportApi} from "@apicurio/models";
 import { GlobalContext, GlobalContextObj } from '../../../context';
 import { Redirect } from "react-router-dom";
+import {parse, stringify} from 'flatted';
 
 export const ImportApi = () => {
 
@@ -122,28 +123,30 @@ export const ImportApi = () => {
   }
 
   // On handle submit, check if the form is valid, and call the onCreateApi method
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.persist();
+    event.preventDefault();
     console.log('does the submit work');
     if(importType === options[0].value) {
       if (isValidTextInput1) {
         console.log('does it try to call the first api');
-        onImportApi(e);
+        onImportApi(event);
       }
     }
     else if(importType === options[1].value) {
       if (isValidTextInput2) {
         console.log('does it try to call the second api');
-        onImportApi(e);
+        onImportApi(event);
       }
     }
   };
 
   const onImportApi = (api: ImportApi) => {
-    console.log('does it get inside import api');
+    console.log('does it get inside import api' + api);
+    console.log(stringify(api));
     // setImporting(true);
     // setImportError(null);
-    // console.log("[ImportApiPageComponent] onImportApi(): " + JSON.stringify(api));
+    console.log("[ImportApiPageComponent] onImportApi(): " + stringify(api));
     apisService.importApi(api).then(api => {
       console.info("[ImportApiPageComponent] Navigating to: Apis");
       // setRedirect('/');
@@ -158,25 +161,6 @@ export const ImportApi = () => {
       }
     })
   };
-
-//   public onImportApi(api: ImportApi) {
-//     this.importing = true;
-//     this.importError = null;
-//     console.log("[ImportApiPageComponent] onImportApi(): " + JSON.stringify(api))
-//     this.apis.importApi(api).then(importedApi => {
-//         let link: string[] = [ "/apis", importedApi.id ];
-//         console.info("[ImportApiPageComponent] Navigating to: %o", link);
-//         this.router.navigate(link);
-//     }).catch( error => {
-//         console.error("[ImportApiPageComponent] Error importing API: %o", error);
-//         this.importing = false;
-//         if (error.status === 404) {
-//             this.importError = error;
-//         } else {
-//             this.error(error);
-//         }
-//     });
-// }
 
   return (
     <React.Fragment>
@@ -198,7 +182,7 @@ export const ImportApi = () => {
       <PageSection>
         <Split className="app-import-api-split-layout">
           <SplitItem>
-            <Form>
+            <Form onSubmit={handleSubmit}>
               <p className="app-form-helper-text">Fields marked with <span className="app-form-helper-text-asterisk">*</span> are required.</p>
               <FormGroup
                 label="Import Type"
@@ -286,7 +270,7 @@ export const ImportApi = () => {
               </FormGroup>
               )}
               <ActionGroup>
-                <Button type="submit" variant="primary" onClick={handleSubmit}>Import API</Button>
+                <Button type="submit" variant="primary">Import API</Button>
               </ActionGroup>
             </Form>
           </SplitItem>
