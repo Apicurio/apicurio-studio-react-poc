@@ -2,7 +2,6 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import {IAuthenticationService} from "../authentication/auth.service";
 import {ConfigService} from "../config/config.service";
 import {User} from '@apicurio/models';
-import {parse, stringify} from 'flatted';
 
 /**
  * Base class for all Hub-API based services.
@@ -145,11 +144,11 @@ export abstract class AbstractHubService {
       
         console.log('does it make it to the put with return');
         console.log('what is data' + data);
-        const stringify = stringify(data);
+        const stringify = JSON.stringify(data);
         const config: AxiosRequestConfig = {...{
             method: 'put',
             url: url,
-            data: data
+            data: stringify
         }, ...options}
 
         return axios.request(config)

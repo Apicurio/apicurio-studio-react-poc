@@ -28,7 +28,7 @@ import { Services } from './../../common';
 import {ImportApi} from "@apicurio/models";
 import { GlobalContext, GlobalContextObj } from '../../../context';
 import { Redirect } from "react-router-dom";
-import {parse, stringify} from 'flatted';
+import {Base64} from "js-base64";
 
 export const ImportApi = () => {
 
@@ -51,7 +51,8 @@ export const ImportApi = () => {
   const [helperTextInvalid2, setHelperTextInvalid2] = React.useState('');
   const [importing, setImporting] = useState(false);
   const [importError, setImportError] = useState(null);
-  const [redirect, setRedirect] = useState(''); 
+  const [redirect, setRedirect] = useState('');
+  const [importError2, setImportError2] = React.useState(null);
 
   const onSelectChange = (importType: string) => {
     setImportType(importType);
@@ -75,7 +76,7 @@ export const ImportApi = () => {
   };
 
   console.log('is text 1 valid' + isValidTextInput1);
-  console.log('is text 2 valid' + isValidTextInput2)
+  console.log('is text 2 valid' + isValidTextInput2);
 
   const handleTextInputChange2 = (textInputUrl2: string) => {
     setTextInputUrl2(textInputUrl2);
@@ -124,31 +125,42 @@ export const ImportApi = () => {
 
   // On handle submit, check if the form is valid, and call the onCreateApi method
   const handleSubmit = (event) => {
-    event.persist();
     event.preventDefault();
-    console.log('does the submit work');
+    const urlValue = event.target.importurl.value;
+    console.log('what is event' + urlValue);
     if(importType === options[0].value) {
       if (isValidTextInput1) {
         console.log('does it try to call the first api');
-        onImportApi(event);
+        onImportApi(urlValue);
       }
     }
-    else if(importType === options[1].value) {
+    else if (importType === options[1].value) {
       if (isValidTextInput2) {
         console.log('does it try to call the second api');
-        onImportApi(event);
+        onImportApi(urlValue);
       }
     }
   };
 
-  const onImportApi = (api: ImportApi) => {
-    console.log('does it get inside import api' + api);
-    console.log(stringify(api));
+  const onImportApi = (api) => {
+
+  const importApiObject: ImportApi = { url: "", data: "" };
+
+    if(api) {
+      importApiObject.url = JSON.stringify(api);
+    }
+    try {
+      importApiObject.data = Base64.encode(api);
+    }
+    catch (e) {
+      console.error(e);
+    }
+
     // setImporting(true);
     // setImportError(null);
-    console.log("[ImportApiPageComponent] onImportApi(): " + stringify(api));
-    apisService.importApi(api).then(api => {
-      console.info("[ImportApiPageComponent] Navigating to: Apis");
+    console.log("[ImportApiPageComponent] onImportApi(): " + JSON.stringify(importApiObject));
+    apisService.importApi(importApiObject).then(api => {
+      console.info("[ImportApiPageComponent] Navigating to: Apis" + api);
       // setRedirect('/');
     }).catch(error => {
       console.error("[CreateApiPageComponent] Error creating an API");
@@ -182,10 +194,11 @@ export const ImportApi = () => {
       <PageSection>
         <Split className="app-import-api-split-layout">
           <SplitItem>
+            {/* <Form onSubmit={(event) => {event.persist();handleSubmit(event)}}> */}
             <Form onSubmit={handleSubmit}>
               <p className="app-form-helper-text">Fields marked with <span className="app-form-helper-text-asterisk">*</span> are required.</p>
               <FormGroup
-                label="Import Type"
+                label="ImportType"
                 isRequired
                 fieldId="import-type"
               >
@@ -217,55 +230,10 @@ export const ImportApi = () => {
                   isRequired
                   type="text"
                   id="import-url"
-                  name="import-url"
+                  name="importurl"
                   value={textInputUrl1}
                   onChange={handleTextInputChange1}
                   placeholder="https://gist.githubusercontent.com/Tim/94445d/raw/5dba00/oai-import.json"
-                />
-              </FormGroup>
-              )}
-              { importType === options[1].value && (
-                <FormGroup
-                  label="Source Control"
-                  isRequired
-                  fieldId="import-url-source-control"
-                  helperTextInvalid={helperTextInvalid2}
-                  isValid={isValidTextInput2}
-                >
-                <TextInput
-                  isRequired
-                  type="text"
-                  id="import-url-source-control"
-                  name="import-url-source-control"
-                  value={textInputUrl2}
-                  onChange={handleTextInputChange2}
-                  placeholder="https://github.com/ORG/REPO/blob/master/path/to/open-api-doc.json"
-                />
-              </FormGroup>
-              )}
-              { importType === options[2].value && (
-                <FormGroup
-                  label="Clipboard"
-                  isRequired
-                  fieldId="import-clipboard"
-                >
-                {/* <TextInput
-                  isRequired
-                  type="text"
-                  id="import-clipboard"
-                  name="import-clipboard"
-                  value={textInputClipboard}
-                  onChange={handleTextInputChange3}
-                /> */}
-                <MonacoEditor
-                  width="800"
-                  height="600"
-                  language="javascript"
-                  theme="vs-dark"
-                  value={textInputClipboard}
-                  options={monacoOptions}
-                  onChange={monacoOnChange}
-                  editorDidMount={editorDidMount}
                 />
               </FormGroup>
               )}
