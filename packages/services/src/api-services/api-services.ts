@@ -1,4 +1,4 @@
-import {Api, ApiCollaborator} from "@apicurio/models";
+import {Api, NewApi, ImportApi, ApiCollaborator} from "@apicurio/models";
 import {AbstractHubService} from "./hub";
 import {ConfigService} from "../config/config.service";
 import {IAuthenticationService} from "../authentication/auth.service";
@@ -12,15 +12,29 @@ export class ApisService extends AbstractHubService {
     private cachedApis: Api[] = null;
     private cachedCollaborators: ApiCollaborator[] = null;
 
-    /**
-     * Constructor.
-     * @param authService
-     * @param config
-     */
     constructor(authService: IAuthenticationService, config: ConfigService) {
         super(authService, config);
     }
 
+  public createApi(api: NewApi): Promise<Api> {
+    console.info("[ApisService] Creating the API via the hub API");
+
+    const createApiUrl: string = this.endpoint("designs");
+    const options: AxiosRequestConfig = this.options({ "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" });
+
+    console.info("[ApisService] Creating an API Design: %s", createApiUrl);
+    return this.httpPostWithReturn<NewApi, Api>(createApiUrl, api, options);
+  }
+
+  public importApi(api: ImportApi): Promise<Api> {
+    console.info("[ApisService] Importing an API design via the hub API");
+
+    const importApiUrl: string = this.endpoint("designs");
+    const options: AxiosRequestConfig = this.options({ "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" });
+
+    console.info("[ApisService] Importing an API Design: %s", importApiUrl);
+    return this.httpPutWithReturn<ImportApi, Api>(importApiUrl, api, options);
+  }
               /**
      * @see ApisService.getCollaborators
      */

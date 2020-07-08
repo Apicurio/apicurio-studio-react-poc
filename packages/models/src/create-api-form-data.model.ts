@@ -14,17 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import {ApiDesignTemplate} from './api-design-template.model';
 
-export class NewApi {
+export class CreateApiFormData {
 
     type: string;
     name: string;
     description: string;
+    template?: ApiDesignTemplate
 
     constructor() {
-        this.type = null;
-        this.name = "";
-        this.description = "";
+        this.type = "OpenAPI30";
+        this.name = null;
+        this.description = null;
+        this.template = null
     }
-
 }

@@ -9,6 +9,7 @@ export * from './bitbucket-team.model';
 export * from './codegen-project.model';
 export * from './complete-linked-account.model';
 export * from './create-linked-account.model';
+export * from './create-api-form-data.model';
 export * from './deferred.model';
 export * from './editor-user.model';
 export * from './github-organization.model';

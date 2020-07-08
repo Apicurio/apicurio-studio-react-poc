@@ -116,5 +116,50 @@ export abstract class AbstractHubService {
     })
     .catch(error => console.log(error)); // handle error state
   }
+  
+    // (createApiUrl, api, options);
+    protected httpPostWithReturn<I, O>(url: string, data: I, options: AxiosRequestConfig, successCallback?: (data: any) => any): Promise<O> {
+        
+        const stringify = JSON.stringify(data);
+        const config: AxiosRequestConfig = {...{
+            method: 'post',
+            url: url,
+            data: stringify
+        }, ...options}
+
+        return axios.request(config)
+        .then(response => {
+            let data = response;
+            if(successCallback) {
+                return successCallback(data);
+            }
+            else {
+                return data;
+            }
+        })
+        .catch(error => console.log(error));
+    }
+
+    protected httpPutWithReturn<I, O>(url: string, data: I, options: any, successCallback?: (data: any) => any): Promise<O> {
+      
+        const stringify = JSON.stringify(data);
+        const config: AxiosRequestConfig = {...{
+            method: 'put',
+            url: url,
+            data: stringify
+        }, ...options}
+
+        return axios.request(config)
+        .then(response => {
+            let data = response;
+            if(successCallback) {
+                return successCallback(data);
+            }
+            else {
+                return response;
+            }
+        })
+        .catch(error => console.log(error));
+    }
 
 }
