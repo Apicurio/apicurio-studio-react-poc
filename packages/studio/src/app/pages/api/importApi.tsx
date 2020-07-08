@@ -26,7 +26,7 @@ import {
 import './importApi.css';
 import MonacoEditor from 'react-monaco-editor';
 import { Services } from './../../common';
-import {ImportApi} from "@apicurio/models";
+import { ImportApi } from "@apicurio/models";
 import { GlobalContext, GlobalContextObj } from '../../../context';
 import { Redirect } from "react-router-dom";
 import {Base64} from "js-base64";
@@ -45,7 +45,6 @@ export const ImportApi = () => {
   const [importType, setImportType] = React.useState(options[0].value);
   const [textInputUrl1, setTextInputUrl1] = React.useState('');
   const [textInputUrl2, setTextInputUrl2] = React.useState('');
-  const [textInputClipboard, setTextInputClipboard] = React.useState('');
   const [isValidTextInput1, setIsValidTextInput1] = React.useState(true);
   const [isValidTextInput2, setIsValidTextInput2] = React.useState(true);
   const [helperTextInvalid1, setHelperTextInvalid1] = React.useState('');
@@ -93,11 +92,8 @@ export const ImportApi = () => {
     }
   }
 
-  const handleTextInputChange3 = (textInputClipboard: string) => {
-    setTextInputClipboard(textInputClipboard);
-  }
-
   // Text Editor
+  // TO DO: Add functionality for importing an API using the Monaco Editor / Drag + Drop Functionality
   const monacoOnChange = (newValue, e) => {
     console.log('onChange', newValue, e);
   }
@@ -111,6 +107,7 @@ export const ImportApi = () => {
     selectOnLineNumbers: true
   };
 
+  // Validate the URL to determine if it is a valid HTML
   const validateURL = (url: string) => {
     const regexp = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
     if (regexp.test(url)) {
