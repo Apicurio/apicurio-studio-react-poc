@@ -1,4 +1,4 @@
-# Apicurio React PoC
+# Apicurio React Version
 
 Apicurio React based Single Page Application based of Patternfly 4
 
