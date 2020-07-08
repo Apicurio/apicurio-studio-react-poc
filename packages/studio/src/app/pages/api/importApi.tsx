@@ -5,6 +5,7 @@ import {
   Button,
   Card,
   CardBody,
+  FileUpload,
   Form,
   FormGroup,
   Split,
@@ -153,12 +154,11 @@ export const ImportApi = () => {
       }
     }
 
-    // setImporting(true);
-    // setImportError(null);
     console.log("[ImportApiPageComponent] onImportApi(): " + JSON.stringify(importApiObject));
     apisService.importApi(importApiObject).then(api => {
+      globalContext.setLastCreatedApi(api.data.id);
       console.info("[ImportApiPageComponent] Navigating to: Apis" + api);
-      // setRedirect('/');
+      setRedirect('/');
     }).catch(error => {
       console.error("[CreateApiPageComponent] Error creating an API");
       setImporting(false);
@@ -173,6 +173,7 @@ export const ImportApi = () => {
 
   return (
     <React.Fragment>
+      {redirect && <Redirect to={redirect}/>}
       <PageSection variant={PageSectionVariants.light} className="app-page-section-breadcrumb">
         <Breadcrumb>
           <BreadcrumbItem to="/">
@@ -259,19 +260,11 @@ export const ImportApi = () => {
                   isRequired
                   fieldId="import-clipboard"
                 >
-                  <TextInput
-                    isRequired
-                    type="text"
-                    id="import-clipboard"
-                    name="import-clipboard"
-                    value={textInputClipboard}
-                    onChange={handleTextInputChange3}
-                  />
                   <MonacoEditor
-                    width="800"
-                    height="600"
+                    width="100%"
+                    height="450"
                     language="javascript"
-                    theme="vs-dark"
+                    theme="vs-light"
                     value={textInputClipboard}
                     options={monacoOptions}
                     onChange={monacoOnChange}
