@@ -15,7 +15,7 @@ export const ApiDetailsView: React.FunctionComponent<ApiDetailsViewProps> = (pro
       <React.Fragment>
       <div className="api-details-content">
           <h3>Details</h3>
-          <p><OutlinedClockIcon /><span>Created on {moment(createdOn).format('MMM DD, YYYY')}</span></p>
+          <p><OutlinedClockIcon /><span>Created on {moment(createdOn).format('MMM DD, YYYY -- hh:mm A')}</span></p>
           <p><UserIcon /><span>Created by {createdBy}</span></p>
           <p><UsersIcon /><span>? Other collaborators</span></p>
           <br />

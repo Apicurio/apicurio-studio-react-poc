@@ -83,9 +83,12 @@ export const ApiCardView: React.FunctionComponent<ApiCardProps> = ({
           return;
         });
 
+  // tslint:disable-next-line: radix
+  const sortedByTimestamp = filteredApis.sort((a , b) => Number(b.createdOn) - Number(a.createdOn));
+
   return (
     <Gallery gutter="md">
-      {filteredApis.map((api, key) => (
+      {sortedByTimestamp.map((api, key) => (
         <React.Fragment>
           <Card key={key}>
             <CardHead>
