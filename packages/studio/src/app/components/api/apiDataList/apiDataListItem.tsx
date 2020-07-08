@@ -22,8 +22,8 @@ export const ApiDataListItem = () => {
   };
 
   const filteredApis =
-    globalContext.store.currentFilterCategory === "Name"
-      ? apis.filter(api => {
+    globalContext.store.currentFilterCategory === "Name" ? 
+    apis.filter(api => {
           return (
             api.name
               .toLowerCase()
@@ -46,9 +46,11 @@ export const ApiDataListItem = () => {
           return;
         });
 
+  const sortedByTimestamp = filteredApis.sort((a , b) => Number(b.createdOn) - Number(a.createdOn));
+
   return (
     <React.Fragment>
-      {filteredApis.map((api, index) => (
+      {sortedByTimestamp.map((api, index) => (
         <DataListItem
           id={api.id}
           key={index}
