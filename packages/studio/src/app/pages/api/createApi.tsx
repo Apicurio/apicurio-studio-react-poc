@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -24,10 +24,13 @@ import './createApi.css';
 import { NewApi, ImportApi} from "@apicurio/models";
 import { CreateApiFormData } from '../../../../../models/src/create-api-form-data.model';
 import {Base64} from "js-base64";
+import { GlobalContext, GlobalContextObj } from '../../../context';
+import { Redirect } from "react-router-dom";
 
 export const CreateApi = () => {
 
   const apisService = Services.getInstance().apisService;
+  const globalContext: GlobalContextObj = useContext(GlobalContext);
 
   // TO DO: Add more options here
   const typeOptions = [
@@ -42,6 +45,7 @@ export const CreateApi = () => {
   const [isNameValid, setIsNameValid] = useState(true);
   const [countSubmit, setCountSubmit] = useState(0);
   const [isFormValid, setIsFormValid] = useState(false);
+  const [redirect, setRedirect] = useState(''); 
 
   const onChange = (apiType: string) => {
     setApiType(apiType);
@@ -102,10 +106,9 @@ export const CreateApi = () => {
       console.log("[CreateApiPageComponent] Creating a new (blank) API: " + JSON.stringify(newApi));
 
       apisService.createApi(newApi).then(api => {
-        // TO DO: Set up routes in the app to redirect here
-        // let link: string[] = ["/", api.id];
-        // console.info("[CreateApiPageComponent] Navigating to: %o", link);
-        // this.router.navigate(link);
+        globalContext.setLastCreatedApi(api.data.id);
+        console.info("[CreateApiPageComponent] Navigating to: Apis");
+        setRedirect('/');
         }).catch(error => {
         console.error("[CreateApiPageComponent] Error creating an API");
         // TO DO: Set up error handling
@@ -154,6 +157,7 @@ export const CreateApi = () => {
 
   return (
       <React.Fragment>
+        {redirect && <Redirect to={redirect}/>}
         <PageSection variant={PageSectionVariants.light} className="app-page-section-breadcrumb">
           <Breadcrumb>
             <BreadcrumbItem to="/">

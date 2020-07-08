@@ -15,6 +15,7 @@ export interface GlobalState {
   recentActivity: ApiDesignChange[];
   notificationDrawerExpanded: boolean;
   dashboardView: DashboardViews;
+  lastCreatedApi: string;
   toolbarStatus: ToolbarStatus;
   apiDrawerExpanded: boolean;
   selectedApiId: string;
@@ -35,6 +36,7 @@ const initialState: GlobalState = {
   currentFilterCategory: "Name",
   dashboardView: DashboardViews.list,
   inputValue: '',
+  lastCreatedApi: "",
   notificationDrawerExpanded: false,
   recentActivity: [],
   selectedApiId: "",
@@ -53,6 +55,7 @@ export interface GlobalContextObj {
   setDashboardView: (view: DashboardViews) => void;
   setInputValue: (inputValue: string) => void;
   setNotificationDrawerExpanded: (isExpanded: boolean) => void;
+  setLastCreatedApi: (lastCreatedApi: string) => void;
   updateApis: (apis: Api[]) => void;
   updateCollaborators: (collaborators: ApiCollaborator[]) => void;
   updateRecentActivity: (recentActivity: ApiDesignChange[]) => void;
@@ -72,6 +75,7 @@ export class GlobalContextProvider extends React.Component<{}, GlobalState> {
           setCurrentFilterCategory: this.setCurrentFilterCategory,
           setDashboardView: this.setDashboardView,
           setInputValue: this.setInputValue,
+          setLastCreatedApi: this.setLastCreatedApi,
           setNotificationDrawerExpanded: this.setNotificationDrawerExpanded,
           setSelectedApiId: this.setSelectedApiId,
           store: this.state,
@@ -94,6 +98,9 @@ export class GlobalContextProvider extends React.Component<{}, GlobalState> {
     this.setState({ selectedApiId });
   };
 
+  private setLastCreatedApi = (lastCreatedApi: string) => {
+    this.setState({ lastCreatedApi });
+  }
   private setCurrentFilterCategory = (currentFilterCategory: string) => {
     this.setState({ currentFilterCategory });
   };
