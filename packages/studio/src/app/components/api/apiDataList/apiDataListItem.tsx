@@ -31,7 +31,6 @@ export const ApiDataListItem = () => {
           );
         })
       : apis.filter(api => {
-          // tslint:disable-next-line: prefer-for-of
           for (let i = 0; i < api.tags.length; i++) {
             if (
               api.tags[i]
@@ -47,7 +46,6 @@ export const ApiDataListItem = () => {
           return;
         });
 
-  // tslint:disable-next-line: radix
   const sortedByTimestamp = filteredApis.sort((a , b) => Number(b.createdOn) - Number(a.createdOn));
 
   return (
