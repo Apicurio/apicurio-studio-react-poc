@@ -75,9 +75,6 @@ export const ImportApi = () => {
     }
   };
 
-  console.log('is text 1 valid' + isValidTextInput1);
-  console.log('is text 2 valid' + isValidTextInput2);
-
   const handleTextInputChange2 = (textInputUrl2: string) => {
     setTextInputUrl2(textInputUrl2);
     if (textInputUrl2 === '') {
@@ -126,34 +123,34 @@ export const ImportApi = () => {
   // On handle submit, check if the form is valid, and call the onCreateApi method
   const handleSubmit = (event) => {
     event.preventDefault();
-    const urlValue = event.target.importurl.value;
-    console.log('what is event' + urlValue);
     if(importType === options[0].value) {
+      const urlValue = event.target.importurl.value;
+      console.log('what is event' + urlValue);
       if (isValidTextInput1) {
-        console.log('does it try to call the first api');
         onImportApi(urlValue);
       }
     }
     else if (importType === options[1].value) {
+      const sourceControlUrlValue = event.target.importsourcecontrolurl.value;
+      console.log('what is event' + sourceControlUrlValue);
       if (isValidTextInput2) {
-        console.log('does it try to call the second api');
-        onImportApi(urlValue);
+        onImportApi(sourceControlUrlValue);
       }
     }
   };
 
   const onImportApi = (api) => {
-
-  const importApiObject: ImportApi = { url: "", data: "" };
-
+    const importApiObject: ImportApi = { url: null, data: null };
     if(api) {
-      importApiObject.url = JSON.stringify(api);
+      importApiObject.url = api;
     }
-    try {
-      importApiObject.data = Base64.encode(api);
-    }
-    catch (e) {
-      console.error(e);
+    else {
+      try {
+        importApiObject.data = Base64.encode(api);
+      }
+      catch (e) {
+        console.error(e);
+      }
     }
 
     // setImporting(true);
@@ -236,6 +233,51 @@ export const ImportApi = () => {
                   placeholder="https://gist.githubusercontent.com/Tim/94445d/raw/5dba00/oai-import.json"
                 />
               </FormGroup>
+              )}
+              { importType === options[1].value && (
+                <FormGroup
+                  label="Source Control"
+                  isRequired
+                  fieldId="import-url-source-control"
+                  helperTextInvalid={helperTextInvalid2}
+                  isValid={isValidTextInput2}
+                >
+                <TextInput
+                  isRequired
+                  type="text"
+                  id="import-url-source-control"
+                  name="importsourcecontrolurl"
+                  value={textInputUrl2}
+                  onChange={handleTextInputChange2}
+                  placeholder="https://github.com/ORG/REPO/blob/master/path/to/open-api-doc.json"
+                />
+              </FormGroup>
+              )}
+              { importType === options[2].value && (
+                <FormGroup
+                  label="Clipboard"
+                  isRequired
+                  fieldId="import-clipboard"
+                >
+                  <TextInput
+                    isRequired
+                    type="text"
+                    id="import-clipboard"
+                    name="import-clipboard"
+                    value={textInputClipboard}
+                    onChange={handleTextInputChange3}
+                  />
+                  <MonacoEditor
+                    width="800"
+                    height="600"
+                    language="javascript"
+                    theme="vs-dark"
+                    value={textInputClipboard}
+                    options={monacoOptions}
+                    onChange={monacoOnChange}
+                    editorDidMount={editorDidMount}
+                  />
+                </FormGroup>
               )}
               <ActionGroup>
                 <Button type="submit" variant="primary">Import API</Button>
