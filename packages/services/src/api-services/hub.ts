@@ -141,7 +141,7 @@ export abstract class AbstractHubService {
     }
 
     protected httpPutWithReturn<I, O>(url: string, data: I, options: any, successCallback?: (data: any) => any): Promise<O> {
-      
+
         const stringify = JSON.stringify(data);
         const config: AxiosRequestConfig = {...{
             method: 'put',
@@ -156,10 +156,9 @@ export abstract class AbstractHubService {
                 return successCallback(data);
             }
             else {
-                return response;
+                return data;
             }
         })
         .catch(error => console.log(error));
     }
-
 }
