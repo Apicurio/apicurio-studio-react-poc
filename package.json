@@ -24,7 +24,7 @@
     "build": "lerna run build",
     "lint": "lerna run lint",
     "start:studio": "lerna run start --scope=@apicurio/studio",
-    "start:studio:watch": "lerna run watch",
+    "start:studio:watch": "concurrently \"lerna run watch\" \"yarn start:studio\" ",
     "test": "echo \"TODO: Add tests\" && exit 0 "
   },
   "devDependencies": {
