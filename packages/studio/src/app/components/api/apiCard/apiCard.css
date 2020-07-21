@@ -4,4 +4,5 @@
   
 .api-card-view-card-header {
     font-weight: var(--pf-global--FontWeight--normal) !important;
+    color: var(--pf-global--primary-color--100);
 }
