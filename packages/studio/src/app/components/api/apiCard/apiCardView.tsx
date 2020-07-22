@@ -7,7 +7,7 @@ import {
   CardFooter,
   CardActions,
   Gallery,
-  Checkbox
+  Checkbox,
 } from "@patternfly/react-core";
 import { ApiTag } from "../apiTag";
 import ApicurioIcon from "./../../../assets/apicurio-icon.png";
@@ -31,15 +31,6 @@ export const ApiCardView: React.FunctionComponent<ApiCardProps> = ({
   const globalContext: GlobalContextObj = useContext(GlobalContext);
   const { selectedItems } = { ...globalContext.store.toolbarStatus };
 
-  const getAllItems = () => {
-    const collection: number[] = [];
-    for (const items of selectedItems) {
-      // tslint:disable-next-line: radix
-      collection.push(parseInt(items.id));
-    }
-    return collection;
-  };
-
   const handleCheckboxClick = (checked: boolean, e: any) => {
     const { value } = e.target;
 
@@ -52,7 +43,7 @@ export const ApiCardView: React.FunctionComponent<ApiCardProps> = ({
     } else {
       globalContext.updateToolbarStatus({
         areAllSelected: false,
-        selectedItems: selectedItems.filter(item => item !== Number(value))
+        selectedItems: selectedItems.filter((item) => item !== Number(value)),
       });
     }
   };
@@ -60,14 +51,14 @@ export const ApiCardView: React.FunctionComponent<ApiCardProps> = ({
   const { apis } = { ...useContext(GlobalContext).store };
   const filteredApis =
     globalContext.store.currentFilterCategory === "Name"
-      ? apis.filter(api => {
+      ? apis.filter((api) => {
           return (
             api.name
               .toLowerCase()
               .indexOf(globalContext.store.inputValue.toLowerCase()) !== -1
           );
         })
-      : apis.filter(api => {
+      : apis.filter((api) => {
           for (let i = 0; i < api.tags.length; i++) {
             if (
               api.tags[i]
@@ -83,13 +74,21 @@ export const ApiCardView: React.FunctionComponent<ApiCardProps> = ({
           return;
         });
 
-  const sortedByTimestamp = filteredApis.sort((a , b) => Number(b.createdOn) - Number(a.createdOn));
+  const sortedByTimestamp = filteredApis.sort(
+    (a, b) => Number(b.createdOn) - Number(a.createdOn)
+  );
 
   return (
     <Gallery gutter="md">
       {sortedByTimestamp.map((api, key) => (
         <React.Fragment>
-          <Card key={key}>
+          <Card
+            isSelectable={true}
+            isSelected={globalContext.store.toolbarStatus.selectedItems.includes(
+              parseInt(api.id)
+            )}
+            key={key}
+          >
             <CardHead>
               <img src={ApicurioIcon} />
               <CardActions>
