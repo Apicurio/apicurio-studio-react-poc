@@ -6,13 +6,14 @@ import {
   DataListItemRow,
   DataListCell,
   DataListCheck,
-  DataListAction
+  DataListAction,
 } from "@patternfly/react-core";
 import { ApiTag } from "../apiTag";
 import { ApiDropdownKebab } from "../apiDropDownKebab";
 import ApicurioIcon from "../../../assets/apicurio-icon.png";
 import "./apiDataListItem.css";
 import { GlobalContext, GlobalContextObj } from "../../../../context";
+import { Link } from "react-router-dom";
 
 export const ApiDataListItem = () => {
   const { apis } = { ...useContext(GlobalContext).store };
@@ -20,17 +21,20 @@ export const ApiDataListItem = () => {
   const setApiDrawerState = (apiDrawerState: boolean, currentApiId: string) => {
     globalContext.setApiDrawerExpanded(!apiDrawerState);
   };
+  // const setCurrentApiState = (currentApiEdited: string, currentApiId: string) => {
+  //   globalContext.setCurrentApiEdited(currentApiEdited);
+  // };
 
   const filteredApis =
-    globalContext.store.currentFilterCategory === "Name" ? 
-    apis.filter(api => {
+    globalContext.store.currentFilterCategory === "Name"
+      ? apis.filter((api) => {
           return (
             api.name
               .toLowerCase()
               .indexOf(globalContext.store.inputValue.toLowerCase()) !== -1
           );
         })
-      : apis.filter(api => {
+      : apis.filter((api) => {
           for (let i = 0; i < api.tags.length; i++) {
             if (
               api.tags[i]
@@ -46,7 +50,9 @@ export const ApiDataListItem = () => {
           return;
         });
 
-  const sortedByTimestamp = filteredApis.sort((a , b) => Number(b.createdOn) - Number(a.createdOn));
+  const sortedByTimestamp = filteredApis.sort(
+    (a, b) => Number(b.createdOn) - Number(a.createdOn)
+  );
 
   return (
     <React.Fragment>
@@ -79,7 +85,7 @@ export const ApiDataListItem = () => {
                       <ApiTag key={index} text={tag} />
                     ))}
                   </div>
-                </DataListCell>
+                </DataListCell>,
               ]}
             />
             <DataListAction
@@ -95,7 +101,13 @@ export const ApiDataListItem = () => {
               >
                 View Details
               </Button>
-              <Button variant="secondary">Edit API</Button>
+              <Link to={`/edit-api/apiID=${api.id}`}>
+                <Button 
+                // onClick={setCurrentApiState(globalContext.store.currentApiEdited)}
+                 variant="secondary">Edit API</Button>
+              </Link>
+              {/* <Button variant="secondary">Edit API</Button> */}
+
               <ApiDropdownKebab />
             </DataListAction>
           </DataListItemRow>

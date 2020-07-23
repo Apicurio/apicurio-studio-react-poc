@@ -1,4 +1,4 @@
-import {Api, NewApi, ImportApi, ApiCollaborator} from "@apicurio/models";
+import {Api, NewApi, EditApi, ImportApi, ApiCollaborator} from "@apicurio/models";
 import {AbstractHubService} from "./hub";
 import {ConfigService} from "../config/config.service";
 import {IAuthenticationService} from "../authentication/auth.service";
@@ -34,6 +34,16 @@ export class ApisService extends AbstractHubService {
 
     console.info("[ApisService] Importing an API Design: %s", importApiUrl);
     return this.httpPutWithReturn<ImportApi, Api>(importApiUrl, api, options);
+  }
+
+  public editApi(api: EditApi): Promise<Api> {
+    // console.info("[ApisService] Editing %s API", api.name);
+
+    const importApiUrl: string = this.endpoint("designs");
+    const options: AxiosRequestConfig = this.options({ "Accept": "application/json", "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" });
+
+    console.info("[ApisService] Editing an API Design: %s", api.name);
+    return this.httpPutWithReturn<EditApi, Api>(importApiUrl, api, options);
   }
               /**
      * @see ApisService.getCollaborators
