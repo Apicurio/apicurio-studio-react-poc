@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
 import {
+  Brand,
   Card,
-  CardHead,
   CardHeader,
+  CardHeaderMain,
   CardBody,
   CardFooter,
   CardActions,
@@ -90,8 +91,10 @@ export const ApiCardView: React.FunctionComponent<ApiCardProps> = ({
       {sortedByTimestamp.map((api, key) => (
         <React.Fragment>
           <Card key={key}>
-            <CardHead>
-              <img src={ApicurioIcon} />
+            <CardHeader>
+            <CardHeaderMain>
+              <Brand src={ApicurioIcon} />
+            </CardHeaderMain>
               <CardActions>
                 <AppDropdownKebab />
                 <Checkbox
@@ -107,7 +110,7 @@ export const ApiCardView: React.FunctionComponent<ApiCardProps> = ({
                   name="check"
                 />
               </CardActions>
-            </CardHead>
+              </CardHeader>
             <CardHeader className="api-card-view-card-header">
               {api.name}
             </CardHeader>

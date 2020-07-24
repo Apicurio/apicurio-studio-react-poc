@@ -1238,31 +1238,23 @@
     focus-trap-react "^4.0.1"
     tippy.js "5.1.2"
 
-"@patternfly/react-core@^3.146.0":
-  version "3.146.0"
-  resolved "https://registry.yarnpkg.com/@patternfly/react-core/-/react-core-3.146.0.tgz#81f06d6f0e0c122e93e303aa469befed47a767ee"
-  integrity sha512-uzzTmOMnvbmpFOjUFqQn2PHPVKvpgbqePrNutPHCHbYcTXXF16t4YABk9S5POpeEqs9ETIRrkLnNa8e9mKYGog==
+"@patternfly/react-core@^4.32.1":
+  version "4.32.1"
+  resolved "https://registry.npmjs.org/@patternfly/react-core/-/react-core-4.32.1.tgz#9fd2dc024eda51b8d8e58d014cbb9d69c3a78604"
+  integrity sha512-4FrKJvMfjHjWtmvGu1QVxo/nCdUgePlkdNzMs91r0wdL16CpfoQVtZcfZe4343fRAQ2ObeYfZ2GuiwvS1sw8Og==
   dependencies:
-    "@patternfly/react-icons" "^3.15.11"
-    "@patternfly/react-styles" "^3.7.8"
-    "@patternfly/react-tokens" "^2.8.8"
-    emotion "^9.2.9"
-    exenv "^1.2.2"
-    focus-trap-react "^4.0.1"
+    "@patternfly/react-icons" "^4.5.0"
+    "@patternfly/react-styles" "^4.5.0"
+    "@patternfly/react-tokens" "^4.6.0"
+    focus-trap "4.0.2"
     react-dropzone "9.0.0"
     tippy.js "5.1.2"
+    tslib "^1.11.1"
 
 "@patternfly/react-icons@3.14.30":
   version "3.14.30"
   resolved "https://registry.yarnpkg.com/@patternfly/react-icons/-/react-icons-3.14.30.tgz#86ee33f47cac6cab0b4ee39a29ab782f9dde6491"
   integrity sha512-HGtdsht66XKExZ4ew5ZWMXEvDAxQwQxW6sjX8h1diya1VDPpeKU6S1jclDPciSForsNMtfsXoku/jE2N3rUCwg==
-  dependencies:
-    "@fortawesome/free-brands-svg-icons" "^5.8.1"
-
-"@patternfly/react-icons@^3.10.6":
-  version "3.14.39"
-  resolved "https://registry.yarnpkg.com/@patternfly/react-icons/-/react-icons-3.14.39.tgz#38e43781ff2c4550814208c68a68681b807270aa"
-  integrity sha512-/1hhKEFRtvBYNa8BFRurqHdlUYYzdovmllwtEWcxye5lffDC1Ghco1NGQzjm0FtzkxX1hPFvw04HRR2jBBG8xQ==
   dependencies:
     "@fortawesome/free-brands-svg-icons" "^5.8.1"
 
@@ -1273,12 +1265,10 @@
   dependencies:
     "@fortawesome/free-brands-svg-icons" "^5.8.1"
 
-"@patternfly/react-icons@^3.15.11":
-  version "3.15.13"
-  resolved "https://registry.yarnpkg.com/@patternfly/react-icons/-/react-icons-3.15.13.tgz#845f9f98684b718810b115fcc32983ae94cc5201"
-  integrity sha512-uEzKC9NwpZamCW00mZIxZ5AslFPXVZ+4ThBUOTYSliZUS1DwOKe0549qrAP1vCpz9vCeTR4jyOXBe/kS9IoXpg==
-  dependencies:
-    "@fortawesome/free-brands-svg-icons" "^5.8.1"
+"@patternfly/react-icons@^4.5.0":
+  version "4.5.0"
+  resolved "https://registry.npmjs.org/@patternfly/react-icons/-/react-icons-4.5.0.tgz#9c0c74348aa2b4c83765b743022f92d45fd762dc"
+  integrity sha512-wXAENYa6nST4D8DBkiCrZXf4aRTmVQNA4cyImMJ3aQWAzwJ7Xc1zIBBuYSX5EP0JOuf9DzWVCrzvgfQz1Fcx8g==
 
 "@patternfly/react-styles@^3.6.21":
   version "3.7.14"
@@ -1291,26 +1281,20 @@
     emotion "^9.2.9"
     emotion-server "^9.2.9"
 
-"@patternfly/react-styles@^3.7.8":
-  version "3.7.8"
-  resolved "https://registry.yarnpkg.com/@patternfly/react-styles/-/react-styles-3.7.8.tgz#6cfac5a7e7c8c49520f0f9276734036ceece9b85"
-  integrity sha512-9LxcVVQdYEN7SJz3nwvrK4W9rci2c74DDyCbMJb2rC3VAOKKHb7We9iDn+2vxHV43Oskc2vfRoKjPEdVJcXYAA==
-  dependencies:
-    camel-case "^3.0.0"
-    css "^2.2.3"
-    cssstyle "^0.3.1"
-    emotion "^9.2.9"
-    emotion-server "^9.2.9"
+"@patternfly/react-styles@^4.5.0":
+  version "4.5.0"
+  resolved "https://registry.npmjs.org/@patternfly/react-styles/-/react-styles-4.5.0.tgz#d40c9d1e4b4898cb26ec8dd0aa56e89fce9ba2a9"
+  integrity sha512-6w8mvxx/cC+yUzBKlWY8YRnavlWCTLWly1si0skleYPF1t69f3P+jeXNy39kH6+o2vXJR5MeecLrnuMV0XtKvg==
 
 "@patternfly/react-tokens@^2.7.20":
   version "2.8.14"
   resolved "https://registry.yarnpkg.com/@patternfly/react-tokens/-/react-tokens-2.8.14.tgz#30b8bd90763fd2a443a875dee4d1d948928f32a1"
   integrity sha512-pha0XyZ3ZiXuQoKstuFsiEHARFQKUFsS6WxVuRSEyNbGTToRNJkKR9cW5swzHgXK6Fuw5EA2XFHLuu8osj52KA==
 
-"@patternfly/react-tokens@^2.8.8":
-  version "2.8.8"
-  resolved "https://registry.yarnpkg.com/@patternfly/react-tokens/-/react-tokens-2.8.8.tgz#25edde60501708b8fe821f69ab1f284ac1b81814"
-  integrity sha512-W3Kx2zlbfFtcjL9mYpjWNU9RfNrFpfXI6zC8qQTuaDwhV3IHCWt5HCkcf9oIW2aCtEjC0EkI67Wbz0BcmdYGJA==
+"@patternfly/react-tokens@^4.6.0":
+  version "4.6.0"
+  resolved "https://registry.npmjs.org/@patternfly/react-tokens/-/react-tokens-4.6.0.tgz#1a9648537e3a7f0202663af49cba4ceda5886dfd"
+  integrity sha512-zpA4AlYqJNJm5aqsarBVjod1gjP9muJ5oWI2ZwGUFiw4YNRn8eY7QKQ1VvNZxqwI+WSXl98jTqJiKuJGF3DEvw==
 
 "@rh-uxd/integration-core@1.0.4", "@rh-uxd/integration-core@^1.0.3":
   version "1.0.4"
@@ -5069,6 +5053,14 @@ focus-trap-react@^4.0.1:
   integrity sha512-UUZKVEn5cFbF6yUnW7lbXNW0iqN617ShSqYKgxctUvWw1wuylLtyVmC0RmPQNnJ/U+zoKc/djb0tZMs0uN/0QQ==
   dependencies:
     focus-trap "^3.0.0"
+
+focus-trap@4.0.2:
+  version "4.0.2"
+  resolved "https://registry.npmjs.org/focus-trap/-/focus-trap-4.0.2.tgz#4ee2b96547c9ea0e4252a2d4b2cca68944194663"
+  integrity sha512-HtLjfAK7Hp2qbBtLS6wEznID1mPT+48ZnP2nkHzgjpL4kroYHg0CdqJ5cTXk+UO5znAxF5fRUkhdyfgrhh8Lzw==
+  dependencies:
+    tabbable "^3.1.2"
+    xtend "^4.0.1"
 
 focus-trap@^3.0.0:
   version "3.0.0"
@@ -10511,7 +10503,7 @@ symbol-tree@^3.2.2:
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.4.tgz#430637d248ba77e078883951fb9aa0eed7c63fa2"
   integrity sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==
 
-tabbable@^3.1.0:
+tabbable@^3.1.0, tabbable@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-3.1.2.tgz#f2d16cccd01f400e38635c7181adfe0ad965a4a2"
   integrity sha512-wjB6puVXTYO0BSFtCmWQubA/KIn7Xvajw0x0l6eJUudMG/EAiJvIUnyNX6xO4NpGrJ16lbD0eUseB9WxW0vlpQ==
@@ -10851,6 +10843,11 @@ tslib@1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.0.tgz#e37a86fda8cbbaf23a057f473c9f4dc64e5fc2e8"
   integrity sha512-f/qGG2tUkrISBlQZEjEqoZ3B2+npJjIf04H1wuAv9iA8i04Icp+61KRXxFdha22670NJopsZCIjhC3SnjPRKrQ==
+
+tslib@^1.11.1:
+  version "1.13.0"
+  resolved "https://registry.npmjs.org/tslib/-/tslib-1.13.0.tgz#c881e13cc7015894ed914862d276436fa9a47043"
+  integrity sha512-i/6DQjL8Xf3be4K/E6Wgpekn5Qasl1usyw++dAA35Ue5orEn65VIxOA+YvNNl9HV3qv70T7CNwjODHZrLwvd1Q==
 
 tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
   version "1.10.0"

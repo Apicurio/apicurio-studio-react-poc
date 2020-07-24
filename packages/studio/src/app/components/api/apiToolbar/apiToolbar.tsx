@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react";
-import {
-  DataToolbar,
-  DataToolbarItem,
-  DataToolbarContent
-} from "@patternfly/react-core/dist/esm/experimental";
+// import {
+//   DataToolbar,
+//   DataToolbarItem,
+//   DataToolbarContent,
+//   DataToolbarGroup
+// } from "@patternfly/react-core/dist/esm/components/DataToolbar";
 import {
   Button,
   Dropdown,
@@ -14,7 +15,10 @@ import {
   InputGroup,
   TextInput,
   ButtonVariant,
-  DataToolbarGroup
+  Toolbar,
+  ToolbarItem,
+  ToolbarContent,
+  ToolbarGroup
 } from "@patternfly/react-core";
 import {
   ThIcon,
@@ -135,7 +139,7 @@ export const ApiToolbar = () => {
   };
 
   const buildFilterDropdown = () => (
-    <DataToolbarItem>
+    <ToolbarItem>
       <Dropdown
         onSelect={onNameSelect}
         position={DropdownPosition.left}
@@ -154,7 +158,7 @@ export const ApiToolbar = () => {
         ]}
         style={{ width: "100%" }}
       />
-    </DataToolbarItem>
+    </ToolbarItem>
   );
 
   const buildSelectDropdown = () => {
@@ -198,10 +202,10 @@ export const ApiToolbar = () => {
   };
 
   return (
-    <DataToolbar id="apiToolbar">
-      <DataToolbarContent>
-        <DataToolbarItem>{buildSelectDropdown()}</DataToolbarItem>
-        <DataToolbarGroup variant="filter-group">
+    <Toolbar id="apiToolbar">
+      <ToolbarContent>
+        <ToolbarItem>{buildSelectDropdown()}</ToolbarItem>
+        <ToolbarGroup variant="filter-group">
           {buildFilterDropdown()}
           <InputGroup>
             <TextInput
@@ -219,16 +223,16 @@ export const ApiToolbar = () => {
               <SearchIcon />
             </Button>
           </InputGroup>
-        </DataToolbarGroup>
-        <DataToolbarItem>
+        </ToolbarGroup>
+        <ToolbarItem>
           <Button
             variant="plain"
             onClick={sortIconChanged ? sortAlphaDown : sortAlphaUp}
           >
             {sortIconChanged ? <SortAlphaDownIcon /> : <SortAlphaUpIcon />}
           </Button>
-        </DataToolbarItem>
-        <DataToolbarItem variant="pagination">
+        </ToolbarItem>
+        <ToolbarItem variant="pagination">
           <Button
             aria-label="toggle card view"
             onClick={() => globalContext.setDashboardView(DashboardViews.card)}
@@ -256,9 +260,9 @@ export const ApiToolbar = () => {
             <ListIcon />
           </Button>
           <span className="app-toolbar-api-total">{apiCount} APIs found</span>
-        </DataToolbarItem>
-      </DataToolbarContent>
-    </DataToolbar>
+        </ToolbarItem>
+      </ToolbarContent>
+    </Toolbar>
   );
 };
 

@@ -6,7 +6,7 @@ import {
 export default class ApiEditor extends Component {
 
   public render() {
-      return (<Grid gutter={GutterSize.md}>
+      return (<Grid gutter={"md"}>
           <GridItem span={12}>API Title</GridItem>
           <GridItem span={4}>
               Left Pane
