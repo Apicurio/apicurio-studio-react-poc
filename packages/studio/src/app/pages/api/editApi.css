@@ -1,0 +1,11 @@
+.pf-c-data-toolbar__content {
+    padding-left: unset;
+}
+
+.pf-c-data-toolbar {
+    padding-top: 0;
+}
+
+.pf-c-title.pf-m-md {
+    margin-bottom: var(--pf-global--spacer--sm);
+}
