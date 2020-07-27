@@ -77,7 +77,7 @@ export const Dashboard = () => {
                     </LevelItem>
                   </Level>
                 </PageSection>
-                <PageSection variant={PageSectionVariants.light} noPadding={true} className="app-page-section-border-bottom">
+                <PageSection variant={PageSectionVariants.light} padding={{ default: 'noPadding'}} className="app-page-section-border-bottom">
                   <ApiToolbar/>
                 </PageSection>
               <PageSection noPadding={true} className="app-page-section-height">
