@@ -87,7 +87,7 @@ export const ApiCardView: React.FunctionComponent<ApiCardProps> = ({
   const sortedByTimestamp = filteredApis.sort((a , b) => Number(b.createdOn) - Number(a.createdOn));
 
   return (
-    <Gallery gutter="md">
+    <Gallery hasGutter={true}>
       {sortedByTimestamp.map((api, key) => (
         <React.Fragment>
           <Card key={key}>

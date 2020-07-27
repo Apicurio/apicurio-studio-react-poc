@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {
-  Grid, GridItem, GutterSize
+  Grid, GridItem
 } from "@patternfly/react-core";
 
 export default class ApiEditor extends Component {
 
   public render() {
-      return (<Grid gutter={"md"}>
+      return (<Grid hasGutter={true}>
           <GridItem span={12}>API Title</GridItem>
           <GridItem span={4}>
               Left Pane
