@@ -3,80 +3,55 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   Button,
-  Card,
-  CardBody,
-  DataToolbar,
-  DataToolbarItem,
-  DataToolbarGroup,
-  DataToolbarContent,
   Dropdown,
   DropdownToggle,
   DropdownItem,
   DropdownPosition,
-  TextItem,
   InputGroup,
   TextInput,
-  FileUpload,
-  Form,
-  FormGroup,
-  Grid,
-  GridItem,
-  GutterSize,
-  Split,
-  SplitItem,
-  TextArea,
-  TextContent,
-  Text,
-  TextVariants,
-  TextList,
-  TextListItem,
-  FormSelectOption,
-  FormSelect,
-  ActionGroup,
   Title,
-  Expandable,
+  ExpandableSection,
   PageSection,
   PageSectionVariants,
   Badge,
   Divider,
   Tabs,
   Tab,
+  Toolbar,
+  ToolbarGroup,
+  ToolbarItem,
+  ToolbarContent,
+  FlexItem,
+  Flex,
 } from "@patternfly/react-core";
 import {
   SearchIcon,
-  FilterIcon,
   CheckCircleIcon,
   ExternalLinkAltIcon,
   RedoIcon,
+  UndoIcon,
 } from "@patternfly/react-icons";
-import "./importApi.css";
-import MonacoEditor from "react-monaco-editor";
-import { Services } from "./../../common";
-import { ImportApi } from "@apicurio/models";
 import "./editApi.css";
 import { GlobalContext, GlobalContextObj } from "../../../context";
-import { Redirect } from "react-router-dom";
-import { Base64 } from "js-base64";
 
 export const EditApi = () => {
-  const apisService = Services.getInstance().apisService;
   const globalContext: GlobalContextObj = useContext(GlobalContext);
 
-  const options = [
-    { value: "URL", label: "Import from URL", disabled: false },
-    {
-      value: "SourceControl",
-      label: "Import from Source Control",
-      disabled: false,
-    },
-    {
-      value: "Clipboard",
-      label: "Import from File/Clipboard",
-      disabled: false,
-    },
-  ];
+  const [
+    isSidebarToolbarDropdownOpen,
+    setSidebarToolbarDropdownOpen,
+  ] = useState(false);
+  const [currentCategory, setCurrentCategory] = useState("All");
 
-  const [redirect, setRedirect] = useState("");
+  const onNameSelect = (event: any) => {
+    const currentCategory = event.target.innerText;
+    setCurrentCategory(currentCategory);
+    setSidebarToolbarDropdownOpen(!isSidebarToolbarDropdownOpen);
+  };
+
+  const onSidebarDropdownToggle = (event: any) => {
+    setSidebarToolbarDropdownOpen(!isSidebarToolbarDropdownOpen);
+  };
 
   const getApiName = () => {
     const url = window.location.href;
@@ -93,32 +68,33 @@ export const EditApi = () => {
   };
 
   const buildFilterDropdown = () => (
-    <DataToolbarItem>
+    <ToolbarItem>
       <Dropdown
-        // onSelect={onNameSelect}
+        onSelect={onNameSelect}
         position={DropdownPosition.left}
         toggle={
           <DropdownToggle
-            // onToggle={onToolbarDropdownToggle}
+            onToggle={onSidebarDropdownToggle}
             style={{ width: "100%" }}
           >
-            All
+            {currentCategory}
           </DropdownToggle>
         }
-        // isOpen={isLowerToolbarDropdownOpen}
+        isOpen={isSidebarToolbarDropdownOpen}
         dropdownItems={[
           <DropdownItem key="category-1">All</DropdownItem>,
-          <DropdownItem key="category-2">TBD ???</DropdownItem>,
+          <DropdownItem key="category-2">Paths</DropdownItem>,
+          <DropdownItem key="category-3">Data types</DropdownItem>,
+          <DropdownItem key="category-4">Responses</DropdownItem>,
         ]}
         style={{ width: "100%" }}
       />
-    </DataToolbarItem>
+    </ToolbarItem>
   );
 
   const [isExpanded, setIsExpanded] = useState(false);
   return (
     <React.Fragment>
-      {redirect && <Redirect to={redirect} />}
       <PageSection
         variant={PageSectionVariants.light}
         className="app-page-section-breadcrumb"
@@ -129,15 +105,23 @@ export const EditApi = () => {
         </Breadcrumb>
       </PageSection>
       <PageSection variant={PageSectionVariants.light}>
-        <DataToolbar id="apiToolbar">
-          <DataToolbarGroup>
-            <DataToolbarItem>
+        <Toolbar id="editApiToolbar">
+          <ToolbarGroup>
+            <ToolbarItem>
               <Title headingLevel="h1" size="3xl">
                 {getApiName()}
               </Title>
-            </DataToolbarItem>
-            <DataToolbarItem variant="pagination">
-              <Button variant="link" isDisabled={true} icon={<CheckCircleIcon />}> All changes saved </Button>
+            </ToolbarItem>
+
+            <ToolbarItem variant="pagination">
+              <Button
+                variant="link"
+                isDisabled={true}
+                icon={<CheckCircleIcon className="success-icon" />}
+              >
+                {" "}
+                All changes saved{" "}
+              </Button>
               <Button
                 variant="link"
                 iconPosition="left"
@@ -160,67 +144,97 @@ export const EditApi = () => {
               </Button>
               <Button variant="primary" isDisabled={true} isInline={true}>
                 {" "}
+                <UndoIcon />{" "}
+              </Button>{" "}
+              <Button variant="primary" isDisabled={true} isInline={true}>
+                {" "}
                 <RedoIcon />{" "}
               </Button>
-            </DataToolbarItem>
-          </DataToolbarGroup>
-        </DataToolbar>
+            </ToolbarItem>
+          </ToolbarGroup>
+        </Toolbar>
       </PageSection>
       <Divider />
 
       <PageSection variant={PageSectionVariants.light}>
         {/* <Split className="app-edit-api-split-layout"> */}
-          {/* <SplitItem> */}
-            {/* <Form onSubmit={(event) => {event.persist();handleSubmit(event)}}> */}
-            <Grid gutter={"md"}>
-              <GridItem span={3} style={{backgroundColor: 'white'}}>
-                {/* Left Pane */}
-                <DataToolbar id="leftPaneToolbar">
-                  <DataToolbarContent>
-                    {/* <DataToolbarItem>{buildSelectDropdown()}</DataToolbarItem> */}
-                    <DataToolbarGroup variant="filter-group">
-                      {buildFilterDropdown()}
-                      <InputGroup>
-                        <TextInput
-                          name="textInput1"
-                          id="textInput1"
-                          type="search"
-                          aria-label="search input"
-                          // onChange={onInputChange}
-                        />
-                        <Button
-                          variant="control"
-                          aria-label="search"
-                          // onClick={onNameInput}
-                        >
-                          <SearchIcon />
-                        </Button>
-                      </InputGroup>
-                    </DataToolbarGroup>
-                  </DataToolbarContent>
-                </DataToolbar>
-                <Title size={"md"}>API Summary</Title>
-                <Divider />
-                <Expandable
-                  toggleText={"Paths (19)"}
-                  onToggle={() => setIsExpanded(!isExpanded)}
-                  isExpanded={isExpanded}
-                >
-                  This content is visible only when the component is expanded.
-                </Expandable>
-              </GridItem>
-              <GridItem span={9}>
-                <Title size={"lg"}>API Summary</Title>
-                <Divider />
-                <Tabs>
-                  <Tab eventKey={0} title="Design">Design</Tab>
-                  <Tab eventKey={1} title="Source">Source</Tab>
-
-                  </Tabs>
-              </GridItem>
-            </Grid>
-          {/* </SplitItem>
-        </Split> */}
+        {/* <SplitItem> */}
+        {/* <Form onSubmit={(event) => {event.persist();handleSubmit(event)}}> */}
+        <Flex>
+          {/* <Grid hasGutter={true}> */}
+          <FlexItem flex={{ default: "flex_1" }} className="test1">
+            <Toolbar id="leftPaneToolbar">
+              <ToolbarContent id="leftPaneToolbarContent">
+                {/* <DataToolbarItem>{buildSelectDropdown()}</DataToolbarItem> */}
+                <ToolbarGroup className="api-search-bar" variant="filter-group">
+                  {buildFilterDropdown()}
+                  <InputGroup>
+                    <TextInput
+                      name="textInput1"
+                      id="textInput1"
+                      type="search"
+                      aria-label="search input"
+                      // onChange={onInputChange}
+                    />
+                    <Button
+                      variant="control"
+                      aria-label="search"
+                      // onClick={onNameInput}
+                    >
+                      <SearchIcon />
+                    </Button>
+                  </InputGroup>
+                </ToolbarGroup>
+              </ToolbarContent>
+            </Toolbar>
+            <Title id="apiSummary" headingLevel="h2">
+              API Summary
+            </Title>
+            <Divider />
+            <ExpandableSection
+              toggleText={"Paths (19)"}
+              onToggle={() => setIsExpanded(!isExpanded)}
+              isExpanded={isExpanded}
+            >
+              This content is visible only when the component is expanded.
+            </ExpandableSection>
+          </FlexItem>
+          <Divider isVertical={true} />
+          <FlexItem flex={{ default: "flex_3" }}>
+            <Title id="apiSummary" headingLevel="h2">
+              API Summary
+            </Title>
+            <Divider />
+            <Tabs>
+              <Tab eventKey={0} title="Design" />
+              <Tab eventKey={1} title="Source" />
+            </Tabs>
+            <Toolbar>
+              <ToolbarGroup alignment={{ default: "alignRight" }}>
+                <ToolbarItem>
+                  <Button variant="secondary"> Format </Button>
+                </ToolbarItem>
+                <ToolbarItem>
+                  <Button isDisabled={true} variant="secondary">
+                    {" "}
+                    Revert{" "}
+                  </Button>
+                </ToolbarItem>
+                <ToolbarItem>
+                  <Button isDisabled={true} variant="secondary">
+                    {" "}
+                    Save{" "}
+                  </Button>
+                </ToolbarItem>
+                <ToolbarItem>
+                  <Button variant="secondary"> As JSON </Button>
+                </ToolbarItem>
+              </ToolbarGroup>
+            </Toolbar>
+            <Divider />
+            Editor
+          </FlexItem>
+        </Flex>
       </PageSection>
     </React.Fragment>
   );
