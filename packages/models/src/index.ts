@@ -11,6 +11,7 @@ export * from './complete-linked-account.model';
 export * from './create-linked-account.model';
 export * from './create-api-form-data.model';
 export * from './deferred.model';
+export * from './edit-api.model';
 export * from './editor-user.model';
 export * from './github-organization.model';
 export * from './github-repository.model';

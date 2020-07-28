@@ -10,7 +10,8 @@ import {
   KebabToggle,
   ToolbarItem,
   ToolbarGroup,
-  PageHeader
+  PageHeader,
+  PageHeaderTools
 } from '@patternfly/react-core';
 import { HistoryIcon, CogIcon } from '@patternfly/react-icons';
 import brandImg from '../../assets/images/apicurio_logo_darkbkg_200px.png';
@@ -73,7 +74,7 @@ export const AppHeader = () => {
     ];
 
     const PageToolbar = (
-      <Toolbar>
+      <React.Fragment>
         <ToolbarGroup className={css(accessibleStyles.screenReader, accessibleStyles.visibleOnLg)}>
           <ToolbarItem>
             <Button id="" aria-label="" variant={ButtonVariant.plain} onClick={() => setNotificationDrawerState(globalContext.store.notificationDrawerExpanded)}>
@@ -111,15 +112,15 @@ export const AppHeader = () => {
             <ApiUserDropdown/>
           </ToolbarItem>
         </ToolbarGroup>
-      </Toolbar>
+        </React.Fragment>
     );
 
     return (
       <PageHeader
         logo={<Brand src={ brandImg } alt="Apicurio" />}
-        avatar={ <Avatar src={imgAvatar} alt="user image"/>}
-        toolbar={PageToolbar}
-      />
+        // avatar={ <Avatar src={imgAvatar} alt="user image"/>}
+        headerTools={<PageHeaderTools>{PageToolbar}</PageHeaderTools>}
+        />
     );
 }
 

@@ -1,0 +1,25 @@
+#leftPaneToolbarContent.pf-c-toolbar__content {
+    padding-left: unset;
+}
+
+#leftPaneToolbar.pf-c-toolbar {
+    padding-top: 0;
+}
+
+.pf-c-title.pf-m-md {
+    margin-bottom: var(--pf-global--spacer--sm);
+}
+
+.pf-c-toolbar__group.pf-m-filter-group.api-search-bar {
+    width: 100%;
+}
+
+.success-icon {
+
+    color: var(--pf-global--success-color--100);
+
+}
+
+#editApiToolbar {
+    padding: unset
+}

@@ -81,3 +81,7 @@
   display: flex;
   flex-direction: row;
 }
+
+.pf-c-page__main-section.app-page-section-height {
+  padding: unset;
+}

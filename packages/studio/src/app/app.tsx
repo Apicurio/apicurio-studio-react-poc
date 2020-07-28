@@ -18,6 +18,7 @@ export const App: React.FunctionComponent = () => {
         <Route path='/dashboard' exact={true} component={Pages.Dashboard}/>
         <Route path='/create-api' exact={true} component={Pages.CreateApi}/>
         <Route path='/import-api' exact={true} component={Pages.ImportApi}/>
+        <Route path='/edit-api' exact={false} component={Pages.EditApi}/>
       </Page>
       </Router>
   );
